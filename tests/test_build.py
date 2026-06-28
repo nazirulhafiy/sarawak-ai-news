@@ -22,7 +22,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn("Built", result.stdout)
         html = (ROOT / "dist" / "index.html").read_text()
         self.assertIn("Sarawak.News", html)
-        self.assertIn("SUNDAY, JUNE 28, 2026 — UPDATED 11:05 AM", html)
+        self.assertIn("LAST UPDATED — SUNDAY, JUNE 28, 2026, 11:05 AM", html)
         self.assertIn("Tracking Sarawak’s AI, news, policy, and future economy.", html)
         self.assertIn("An independent news aggregator collecting important AI updates from Sarawak’s government, universities, businesses, and tech ecosystem.", html)
         self.assertIn("Latest intelligence signals", html)
