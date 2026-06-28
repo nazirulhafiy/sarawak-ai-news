@@ -32,9 +32,12 @@ The ingestion command discovers candidates only. It now checks candidate article
 ```bash
 python3 -m unittest discover -s tests -v
 python3 scripts/audit_dates.py
+python3 scripts/audit_summaries.py
 ```
 
 `audit_dates.py` compares every feed item date against the source article's own published metadata (`article:published_time`, `datePublished`, or byline date). Do not use site header dates, related-news dates, extractor summaries, URL guesses, or crawl dates as publication dates.
+
+`audit_summaries.py` checks that each public one-line explanation is a single strategic signal, avoids generic/hype phrasing, and stays within the 22–38 word target.
 
 ## Project rules
 

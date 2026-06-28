@@ -27,6 +27,8 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Audit source dates
         run: python scripts/audit_dates.py
+      - name: Audit one-line signals
+        run: python scripts/audit_summaries.py
       - name: Build static site
         run: python scripts/build.py
       - name: Upload Pages artifact
