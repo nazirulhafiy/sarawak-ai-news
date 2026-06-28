@@ -83,7 +83,7 @@ def render_index(items: list[dict]) -> str:
   <main class="page">
     <p class="live-line">SUNDAY, JUNE 28, 2026 — UPDATED 11:05 AM</p>
     <header class="lede">
-      <h1>Tracking Sarawak’s AI, technology, and future economy.</h1>
+      <h1>Tracking Sarawak’s AI, news, policy, and future economy.</h1>
       <p>An independent news aggregator collecting important AI updates from Sarawak’s government, universities, businesses, and tech ecosystem.</p>
     </header>
 
