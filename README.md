@@ -27,6 +27,30 @@ python3 scripts/ingest.py --limit-per-source 5
 
 The ingestion command discovers candidates only. It now checks candidate article pages and keeps only items with both Sarawak relevance and concrete AI/digital-economy terms. Read the source article before adding anything to `data/items.json`.
 
+## Weekly update flow
+
+1. Run candidate discovery:
+   ```bash
+   python3 scripts/ingest.py --limit-per-source 5
+   ```
+2. Review candidate articles manually.
+3. Add approved items to `data/items.json`.
+4. Rebuild the site:
+   ```bash
+   python3 scripts/build.py
+   ```
+5. Run checks:
+   ```bash
+   python3 -m unittest discover -s tests -v
+   python3 scripts/audit_dates.py
+   python3 scripts/audit_summaries.py
+   ```
+6. Preview locally if needed:
+   ```bash
+   python3 -m http.server 4173 -d dist
+   ```
+7. Push to `main` so GitHub Pages redeploys.
+
 ## Test
 
 ```bash

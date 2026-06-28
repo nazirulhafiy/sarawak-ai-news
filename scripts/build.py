@@ -64,7 +64,7 @@ def render_index(items: list[dict]) -> str:
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#">Sarawak.News</a>
+    <a class="brand" href="#">AI.SARAWAK.NEWS</a>
   </header>
 
   <main class="page">
@@ -81,7 +81,6 @@ def render_index(items: list[dict]) -> str:
 
   <footer>
     <p>Sarawak.News is an independent publication and is not affiliated with the Sarawak Government unless explicitly stated.</p>
-    <p>Prototype feed. Placeholder summaries only until each source item is manually reviewed.</p>
   </footer>
 </body>
 </html>
