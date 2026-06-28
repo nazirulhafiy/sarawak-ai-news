@@ -1,0 +1,54 @@
+[
+  {
+    "id": "the-edge-sarawak-adopts-ai-2026-04",
+    "date": "2026-04-13",
+    "source": "The Edge Malaysia",
+    "url": "https://theedgemalaysia.com/node/799399",
+    "title": "Digital State: Sarawak adopts AI to address citizen needs",
+    "section": "Government & Policy",
+    "tags": ["SAIC", "Dayang", "public-sector AI", "SDEB 2030"],
+    "summary": "Sarawak is moving from digitalisation into early AI adoption across public services, with Dayang as a citizen-facing AI assistant and SAIC coordinating policy and adoption. The article frames AI as a way to improve services, productivity, inclusion, and data-driven governance while noting readiness gaps.",
+    "why_it_matters": "This is the strongest baseline context item for the brief: it explains the institutions, policy frame, and adoption barriers behind Sarawak's AI push.",
+    "confidence": "high",
+    "caveat": "Use as background analysis; verify article date/access before quoting."
+  },
+  {
+    "id": "dayakdaily-quantum-ai-cambridge-2026-05",
+    "date": "2026-05-18",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/sarawak-establishing-quantum-ai-research-economics-collaboration-with-cambridge-university-uk",
+    "title": "Sarawak establishing Quantum AI research, economics collaboration with Cambridge University, UK",
+    "section": "Research & Universities",
+    "tags": ["Quantum AI", "Cambridge", "Sarawak Cloud", "Sovereign AI", "AI Grid", "SAIC"],
+    "summary": "Sarawak is positioning AI as a strategic capability through research collaboration, sovereign infrastructure, and applied AI projects across government-linked institutions. The report cites Sarawak Cloud, a sovereign AI platform, AI Grid work with SAINS, and sector applications in biodiversity, forestry, agriculture, energy, and finance.",
+    "why_it_matters": "This moves Sarawak AI from generic adoption talk into a concrete institutional roadmap: research partnerships plus local AI infrastructure plus applied projects.",
+    "confidence": "high",
+    "caveat": "Official-speech context; follow-up sources should check implementation progress."
+  },
+  {
+    "id": "sarawaktribune-ai-productivity-2026-06",
+    "date": "2026-06-28",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/ai-to-transform-sarawaks-economy-services-workforce-productivity",
+    "title": "AI to transform Sarawak's economy, services, workforce productivity",
+    "section": "Education & Workforce",
+    "tags": ["DeepSAR", "workforce productivity", "public services", "SwinTalk"],
+    "summary": "Professor Patrick Then of the Sarawak AI Centre frames AI as a productivity multiplier for public services, business operations, and administrative workflows. The article uses DeepSAR and SKAS eligibility/form-filling as examples while flagging digital divide and implementation-readiness concerns.",
+    "why_it_matters": "This provides the public-facing adoption story: AI as service acceleration and workforce capacity expansion, not just infrastructure strategy.",
+    "confidence": "high",
+    "caveat": "Extractor summary was truncated; revisit source before direct quotation."
+  },
+  {
+    "id": "sdec-news-watch-2026-06",
+    "date": "2026-06-10",
+    "source": "SDEC",
+    "url": "https://sdec.com.my/web/sdecnews",
+    "title": "SDEC News listing shows AI, deep-tech, IoT and startup pipeline items",
+    "section": "Business & Startups",
+    "tags": ["SDEC", "deep-tech", "IoT", "startups", "demo day"],
+    "summary": "SDEC's news listing includes recurring digital-economy programme announcements, including a TFI demo day with AI, cybersecurity and IoT teams, startup showcases, and digital entrepreneurship programmes. This makes SDEC a core recurring source for the watchlist.",
+    "why_it_matters": "A recurring official source is needed for a sustainable brief; SDEC appears to be one of the highest-yield institutional feeds.",
+    "confidence": "medium",
+    "caveat": "Listing page only; individual articles need extraction before inclusion in a published brief."
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {"name":"SDEC News","url":"https://sdec.com.my/web/sdecnews","tier":1,"category":"institution","expected_yield":"medium-high"},
+  {"name":"The Borneo Post — Sarawak AI search","url":"https://www.theborneopost.com/?s=Sarawak+AI","tier":1,"category":"news","expected_yield":"high"},
+  {"name":"DayakDaily — Sarawak AI search","url":"https://dayakdaily.com/?s=Sarawak+AI","tier":1,"category":"news","expected_yield":"high"},
+  {"name":"Sarawak Tribune — Sarawak AI search","url":"https://www.sarawaktribune.com/?s=Sarawak+AI","tier":1,"category":"news","expected_yield":"medium-high"},
+  {"name":"The Edge Malaysia — Sarawak AI search","url":"https://theedgemalaysia.com/search-results?keywords=Sarawak%20AI","tier":1,"category":"business news","expected_yield":"medium"},
+  {"name":"UKAS","url":"https://ukas.sarawak.gov.my/","tier":2,"category":"government comms","expected_yield":"medium"},
+  {"name":"Sarawak Multimedia Authority","url":"https://www.sma.gov.my/","tier":2,"category":"institution","expected_yield":"medium"},
+  {"name":"SAINS","url":"https://www.sains.com.my/","tier":2,"category":"institution","expected_yield":"medium"},
+  {"name":"Swinburne Sarawak News","url":"https://www.swinburne.edu.my/news/","tier":3,"category":"university","expected_yield":"medium"},
+  {"name":"UNIMAS","url":"https://www.unimas.my/","tier":3,"category":"university","expected_yield":"medium"}
+]
