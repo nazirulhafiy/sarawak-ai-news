@@ -18,6 +18,14 @@ python3 -m http.server 4173 -d dist
 # open http://127.0.0.1:4173
 ```
 
+The build keeps the current homepage unchanged and also writes a compact design candidate at:
+
+```text
+http://127.0.0.1:4173/alternative/
+```
+
+The alternative uses the reference site's measured 680 px page shell, 640 px content column, 48 px lead headline, and compact 14 px card padding. It keeps the approved live-page content hierarchy, while confidence, caveats, and why-it-matters fields remain preserved in the generated item data.
+
 ## Candidate ingestion
 
 ```bash
