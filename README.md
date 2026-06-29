@@ -18,23 +18,16 @@ python3 -m http.server 4173 -d dist
 # open http://127.0.0.1:4173
 ```
 
-The compact 680 px design is the production homepage. A `noindex` comparison copy also remains at:
-
-```text
-http://127.0.0.1:4173/alternative/
-```
-
 The design uses the reference site's measured 680 px page shell, 640 px content column, 48 px lead headline, and compact 14 px card padding. It keeps the approved content hierarchy, while confidence, caveats, and why-it-matters fields remain preserved in the generated item data.
 
 ## Production design source files
 
-The production homepage and comparison copy share:
+The production homepage uses:
 
-- `site/alternative.css`
-- `scripts/build.py` (shared compact renderer)
+- `site/style.css`
+- `scripts/build.py` (compact renderer)
 - `tests/test_build.py` (production SEO and layout checks)
 - generated homepage output under `dist/`
-- generated output under `dist/alternative/`
 
 ## Candidate ingestion
 

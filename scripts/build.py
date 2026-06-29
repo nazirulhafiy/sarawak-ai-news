@@ -3,6 +3,7 @@ from __future__ import annotations
 import html
 import json
 import re
+import shutil
 from datetime import datetime
 from pathlib import Path
 
@@ -118,23 +119,6 @@ def render_compact_body(items: list[dict]) -> str:
 </body>"""
 
 
-def render_alternative_index(items: list[dict]) -> str:
-    return f"""<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="An alternative compact layout for AI.Sarawak.News, a source-attributed regional AI intelligence brief." />
-  <meta name="robots" content="noindex,follow" />
-  <title>AI.Sarawak.News — Compact brief</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
-  <link rel="stylesheet" href="alternative.css" />
-</head>
-{render_compact_body(items)}
-</html>
-"""
-
-
 def render_index(items: list[dict]) -> str:
     return f"""<!doctype html>
 <html lang="en">
@@ -166,14 +150,12 @@ def build() -> None:
     items = load_feed_items()
     DIST.mkdir(exist_ok=True)
     alternative_dir = DIST / "alternative"
-    alternative_dir.mkdir(exist_ok=True)
+    if alternative_dir.exists():
+        shutil.rmtree(alternative_dir)
     (DIST / "index.html").write_text(render_index(items), encoding="utf-8")
-    compact_css = (ROOT / "site" / "alternative.css").read_text(encoding="utf-8")
+    compact_css = (ROOT / "site" / "style.css").read_text(encoding="utf-8")
     (DIST / "style.css").write_text(compact_css, encoding="utf-8")
     (DIST / "items.json").write_text(json.dumps(items, indent=2), encoding="utf-8")
-    (alternative_dir / "index.html").write_text(render_alternative_index(items), encoding="utf-8")
-    (alternative_dir / "alternative.css").write_text(compact_css, encoding="utf-8")
-    (alternative_dir / "items.json").write_text(json.dumps(items, indent=2), encoding="utf-8")
     (DIST / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://ai.sarawak.news/sitemap.xml\n", encoding="utf-8")
     (DIST / "sitemap.xml").write_text("""<?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
@@ -182,7 +164,7 @@ def build() -> None:
   </url>
 </urlset>
 """, encoding="utf-8")
-    print(f"Built {DIST / 'index.html'} and {alternative_dir / 'index.html'} with {len(items)} feed items")
+    print(f"Built {DIST / 'index.html'} with {len(items)} feed items")
 
 
 if __name__ == "__main__":
