@@ -64,25 +64,11 @@ def load_feed_items() -> list[dict]:
     return reviewed_items()
 
 
-def render_signal(item: dict, index: int) -> str:
-    date = f'<span class="date">{esc(item["date"])}</span>' if item.get("date") else ""
-    return f"""
-    <article class="signal-card">
-      <div class="rank">{index}</div>
-      <div class="signal-body">
-        <p class="meta">{date}<span>{esc(item['source'])}</span></p>
-        <h2><a href="{esc(item['url'])}" target="_blank" rel="noopener noreferrer">{esc(item['title'])}</a></h2>
-        <p>{esc(item['note'])}</p>
-      </div>
-    </article>
-    """
-
-
 def slug(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
 
 
-def render_alternative_signal(item: dict, index: int) -> str:
+def render_compact_signal(item: dict, index: int) -> str:
     caveat = ""
     if str(item["confidence"]).lower() != "high":
         caveat = f'<p class="story-caveat"><strong>Source note:</strong> {esc(item["caveat"])}</p>'
@@ -102,22 +88,11 @@ def render_alternative_signal(item: dict, index: int) -> str:
     """
 
 
-def render_alternative_index(items: list[dict]) -> str:
-    feed = "\n".join(render_alternative_signal(item, index) for index, item in enumerate(items, 1))
+def render_compact_body(items: list[dict]) -> str:
+    feed = "\n".join(render_compact_signal(item, index) for index, item in enumerate(items, 1))
     updated_iso, _, updated_compact = last_updated()
 
-    return f"""<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="An alternative compact layout for AI.Sarawak.News, a source-attributed regional AI intelligence brief." />
-  <meta name="robots" content="noindex,follow" />
-  <title>AI.Sarawak.News — Compact brief</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
-  <link rel="stylesheet" href="alternative.css" />
-</head>
-<body>
+    return f"""<body>
   <a class="skip-link" href="#content">Skip to content</a>
 
   <header class="bar">
@@ -140,14 +115,27 @@ def render_alternative_index(items: list[dict]) -> str:
   <footer>
     <p>Sarawak.News is an independent publication and is not affiliated with the Sarawak Government unless explicitly stated.</p>
   </footer>
-</body>
+</body>"""
+
+
+def render_alternative_index(items: list[dict]) -> str:
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="An alternative compact layout for AI.Sarawak.News, a source-attributed regional AI intelligence brief." />
+  <meta name="robots" content="noindex,follow" />
+  <title>AI.Sarawak.News — Compact brief</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+  <link rel="stylesheet" href="alternative.css" />
+</head>
+{render_compact_body(items)}
 </html>
 """
 
 
 def render_index(items: list[dict]) -> str:
-    feed = "\n".join(render_signal(item, index) for index, item in enumerate(items, 1))
-    _, updated_current, _ = last_updated()
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -169,27 +157,7 @@ def render_index(items: list[dict]) -> str:
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <header class="topbar">
-    <a class="brand" href="#">AI.SARAWAK.NEWS</a>
-  </header>
-
-  <main class="page">
-    <p class="live-line">LAST UPDATED — {esc(updated_current)}</p>
-    <header class="lede">
-      <h1>Tracking Sarawak’s AI, news, policy, and future economy.</h1>
-      <p>An independent news aggregator collecting important AI updates from Sarawak’s government, universities, businesses, and tech ecosystem.</p>
-    </header>
-
-    <section class="feed" aria-label="Latest intelligence signals">
-      {feed}
-    </section>
-  </main>
-
-  <footer>
-    <p>Sarawak.News is an independent publication and is not affiliated with the Sarawak Government unless explicitly stated.</p>
-  </footer>
-</body>
+{render_compact_body(items)}
 </html>
 """
 
@@ -200,10 +168,11 @@ def build() -> None:
     alternative_dir = DIST / "alternative"
     alternative_dir.mkdir(exist_ok=True)
     (DIST / "index.html").write_text(render_index(items), encoding="utf-8")
-    (DIST / "style.css").write_text((ROOT / "site" / "style.css").read_text(encoding="utf-8"), encoding="utf-8")
+    compact_css = (ROOT / "site" / "alternative.css").read_text(encoding="utf-8")
+    (DIST / "style.css").write_text(compact_css, encoding="utf-8")
     (DIST / "items.json").write_text(json.dumps(items, indent=2), encoding="utf-8")
     (alternative_dir / "index.html").write_text(render_alternative_index(items), encoding="utf-8")
-    (alternative_dir / "alternative.css").write_text((ROOT / "site" / "alternative.css").read_text(encoding="utf-8"), encoding="utf-8")
+    (alternative_dir / "alternative.css").write_text(compact_css, encoding="utf-8")
     (alternative_dir / "items.json").write_text(json.dumps(items, indent=2), encoding="utf-8")
     (DIST / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://ai.sarawak.news/sitemap.xml\n", encoding="utf-8")
     (DIST / "sitemap.xml").write_text("""<?xml version='1.0' encoding='UTF-8'?>
