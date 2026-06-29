@@ -3,6 +3,7 @@ from __future__ import annotations
 import html
 import json
 import re
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,6 +17,24 @@ def load_json(path: Path):
 
 def esc(value: object) -> str:
     return html.escape(str(value), quote=True)
+
+
+def parse_datetime(value: str) -> datetime:
+    return datetime.fromisoformat(value)
+
+
+def format_story_date(value: str) -> str:
+    date = datetime.strptime(value, "%Y-%m-%d")
+    return f"{date.day} {date.strftime('%b %Y')}"
+
+
+def last_updated() -> tuple[str, str, str]:
+    value = load_json(DATA / "site.json")["last_updated"]
+    updated = parse_datetime(value)
+    time = updated.strftime("%I:%M %p").lstrip("0")
+    current = f"{updated.strftime('%A, %B')} {updated.day}, {updated.year}, {time}".upper()
+    compact = f"{updated.day} {updated.strftime('%b %Y').upper()} · {time} MYT"
+    return value, current, compact
 
 
 def reviewed_items() -> list[dict]:
@@ -64,16 +83,20 @@ def slug(value: str) -> str:
 
 
 def render_alternative_signal(item: dict, index: int) -> str:
+    caveat = ""
+    if str(item["confidence"]).lower() != "high":
+        caveat = f'<p class="story-caveat"><strong>Source note:</strong> {esc(item["caveat"])}</p>'
     return f"""
     <article class="story-card" id="{slug(item['id'])}">
-      <div class="story-rank">{index}</div>
+      <div class="story-rank" aria-label="Chronological item {index}">{index}</div>
       <div class="story-body">
         <p class="story-meta-row">
-          <time datetime="{esc(item['date'])}">{esc(item['date'])}</time>
+          <time datetime="{esc(item['date'])}">{esc(format_story_date(item['date']))}</time>
           <span>{esc(item['source'])}</span>
         </p>
         <h2><a href="{esc(item['url'])}" target="_blank" rel="noopener noreferrer">{esc(item['title'])}</a></h2>
         <p class="story-summary">{esc(item['note'])}</p>
+        {caveat}
       </div>
     </article>
     """
@@ -81,6 +104,7 @@ def render_alternative_signal(item: dict, index: int) -> str:
 
 def render_alternative_index(items: list[dict]) -> str:
     feed = "\n".join(render_alternative_signal(item, index) for index, item in enumerate(items, 1))
+    updated_iso, _, updated_compact = last_updated()
 
     return f"""<!doctype html>
 <html lang="en">
@@ -88,7 +112,7 @@ def render_alternative_index(items: list[dict]) -> str:
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="An alternative compact layout for AI.Sarawak.News, a source-attributed regional AI intelligence brief." />
-  <meta name="robots" content="noindex,nofollow" />
+  <meta name="robots" content="noindex,follow" />
   <title>AI.Sarawak.News — Compact brief</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
   <link rel="stylesheet" href="alternative.css" />
@@ -97,11 +121,11 @@ def render_alternative_index(items: list[dict]) -> str:
   <a class="skip-link" href="#content">Skip to content</a>
 
   <header class="bar">
-    <a class="brand" href="#">AI.SARAWAK.NEWS</a>
+    <a class="brand" href="/">AI.SARAWAK.NEWS</a>
   </header>
 
   <main id="content">
-    <p class="updated">LAST UPDATED — SUNDAY, JUNE 28, 2026, 11:05 AM</p>
+    <p class="updated">LAST UPDATED — <time datetime="{esc(updated_iso)}">{esc(updated_compact)}</time></p>
 
     <header class="brief">
       <h1 id="brief-title">Tracking Sarawak’s AI, news, policy, and future economy.</h1>
@@ -123,6 +147,7 @@ def render_alternative_index(items: list[dict]) -> str:
 
 def render_index(items: list[dict]) -> str:
     feed = "\n".join(render_signal(item, index) for index, item in enumerate(items, 1))
+    _, updated_current, _ = last_updated()
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -150,7 +175,7 @@ def render_index(items: list[dict]) -> str:
   </header>
 
   <main class="page">
-    <p class="live-line">LAST UPDATED — SUNDAY, JUNE 28, 2026, 11:05 AM</p>
+    <p class="live-line">LAST UPDATED — {esc(updated_current)}</p>
     <header class="lede">
       <h1>Tracking Sarawak’s AI, news, policy, and future economy.</h1>
       <p>An independent news aggregator collecting important AI updates from Sarawak’s government, universities, businesses, and tech ecosystem.</p>

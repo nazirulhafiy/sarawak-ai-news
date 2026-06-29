@@ -26,6 +26,17 @@ http://127.0.0.1:4173/alternative/
 
 The alternative uses the reference site's measured 680 px page shell, 640 px content column, 48 px lead headline, and compact 14 px card padding. It keeps the approved live-page content hierarchy, while confidence, caveats, and why-it-matters fields remain preserved in the generated item data.
 
+## Alternative design source files
+
+The Codex-built alternative lives in the repo at:
+
+- `site/alternative.css`
+- `scripts/build.py` (alternative renderer)
+- `tests/test_build.py` (alternative checks)
+- generated output under `dist/alternative/`
+
+This is the reference design direction to use going forward; do not rely on Athena’s earlier local prototype.
+
 ## Candidate ingestion
 
 ```bash

@@ -2,12 +2,22 @@ import json
 import subprocess
 import sys
 import unittest
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 class BuildTest(unittest.TestCase):
+    @staticmethod
+    def updated_labels():
+        value = json.loads((ROOT / "data" / "site.json").read_text())["last_updated"]
+        updated = datetime.fromisoformat(value)
+        time = updated.strftime("%I:%M %p").lstrip("0")
+        current = f"{updated.strftime('%A, %B')} {updated.day}, {updated.year}, {time}".upper()
+        compact = f"{updated.day} {updated.strftime('%b %Y').upper()} · {time} MYT"
+        return value, current, compact
+
     def test_seed_data_has_required_fields(self):
         items = json.loads((ROOT / "data" / "items.json").read_text())
         required = {"id", "date", "source", "url", "title", "section", "tags", "summary", "why_it_matters", "confidence", "caveat"}
@@ -22,7 +32,8 @@ class BuildTest(unittest.TestCase):
         self.assertIn("Built", result.stdout)
         html = (ROOT / "dist" / "index.html").read_text()
         self.assertIn("Sarawak.News", html)
-        self.assertIn("LAST UPDATED — SUNDAY, JUNE 28, 2026, 11:05 AM", html)
+        _, current_updated, _ = self.updated_labels()
+        self.assertIn(f"LAST UPDATED — {current_updated}", html)
         self.assertIn("Tracking Sarawak’s AI, news, policy, and future economy.", html)
         self.assertIn("An independent news aggregator collecting important AI updates from Sarawak’s government, universities, businesses, and tech ecosystem.", html)
         self.assertIn("Latest intelligence signals", html)
@@ -57,9 +68,13 @@ class BuildTest(unittest.TestCase):
 
         self.assertIn("AI.Sarawak.News — Compact brief", alternative)
         self.assertEqual(alternative.count('class="story-card"'), 15)
-        self.assertIn("LAST UPDATED — SUNDAY, JUNE 28, 2026, 11:05 AM", alternative)
+        updated_iso, _, compact_updated = self.updated_labels()
+        self.assertIn(f'LAST UPDATED — <time datetime="{updated_iso}">{compact_updated}</time>', alternative)
         self.assertIn("Tracking Sarawak’s AI, news, policy, and future economy.", alternative)
         self.assertIn("Sarawak.News is an independent publication", alternative)
+        self.assertIn('<a class="brand" href="/">AI.SARAWAK.NEWS</a>', alternative)
+        self.assertIn('<meta name="robots" content="noindex,follow" />', alternative)
+        self.assertIn('<time datetime="2026-06-24">24 Jun 2026</time>', alternative)
         self.assertNotIn("<nav", alternative)
         self.assertNotIn("Current version", alternative)
         self.assertNotIn("Signal categories", alternative)
@@ -72,6 +87,13 @@ class BuildTest(unittest.TestCase):
         self.assertIn("--canvas: #ffffff", css)
         self.assertIn("--card: #ffffff", css)
         self.assertIn("background: var(--card)", css)
+        self.assertNotIn("-webkit-line-clamp", css)
+        self.assertIn("--sarawak-red: #d22630", css)
+        self.assertIn("--sarawak-yellow: #f7c948", css)
+        self.assertIn("--sarawak-black: #111111", css)
+        self.assertIn('class="story-rank" aria-label="Chronological item 1">1</div>', alternative)
+        self.assertNotIn(".story-rank::after", css)
+        self.assertIn("background: var(--sarawak-black)", css)
         self.assertTrue(all(item.get("url") for item in items))
         self.assertTrue(all(item.get("why_it_matters") for item in items))
         self.assertTrue(all(item.get("confidence") for item in items))

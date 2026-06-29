@@ -6,7 +6,11 @@
   --ink: #111827;
   --muted: #6b7280;
   --line: #e2e4e9;
-  --accent: #a16207;
+  --sarawak-red: #d22630;
+  --sarawak-red-ink: #9f1d26;
+  --sarawak-yellow: #f7c948;
+  --sarawak-yellow-soft: #fffbea;
+  --sarawak-black: #111111;
 }
 
 * { box-sizing: border-box; }
@@ -60,9 +64,19 @@ a:focus-visible {
   min-height: 61px;
   margin: 0 0 30px;
   padding: 18px 0 14px;
-  border-bottom: 1px solid var(--line);
+  position: relative;
   display: flex;
   align-items: center;
+}
+
+.bar::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--sarawak-red) 0 48%, var(--sarawak-yellow) 48% 68%, var(--sarawak-black) 68% 100%);
 }
 
 .brand {
@@ -86,8 +100,8 @@ a:focus-visible {
 .brief {
   margin: 0 0 30px;
   padding: 32px 28px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
+  border: 0;
+  border-radius: 0;
   background: var(--card);
 }
 
@@ -126,12 +140,13 @@ h1 {
 .story-rank {
   width: 34px;
   height: 34px;
+  border: 1px solid var(--sarawak-black);
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  background: var(--accent);
+  background: var(--sarawak-black);
   font-size: 14px;
   font-weight: 900;
   line-height: 1;
@@ -168,7 +183,10 @@ h1 {
 }
 
 .story-card h2 a { text-decoration: none; }
-.story-card h2 a:hover { text-decoration: underline; }
+.story-card h2 a:hover {
+  color: var(--sarawak-red-ink);
+  text-decoration: underline;
+}
 
 .story-summary {
   margin: 6px 0 0;
@@ -177,10 +195,18 @@ h1 {
   line-height: 1.55;
 }
 
+.story-caveat {
+  margin: 8px 0 0;
+  color: #7c5c19;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
 footer {
   margin-top: 48px;
   padding: 22px 14px 0;
-  border-top: 1px solid var(--line);
+  border-top: 2px solid;
+  border-image: linear-gradient(90deg, var(--sarawak-black), var(--sarawak-yellow), var(--sarawak-red)) 1;
   color: var(--muted);
   font-size: 12px;
   line-height: 1.55;
@@ -194,9 +220,9 @@ footer p { margin: 0; }
 
   .brief { padding: 24px 20px; }
   h1 {
-    font-size: clamp(2.35rem, 11vw, 2.75rem);
-    line-height: 1.02;
-    letter-spacing: -.035em;
+    font-size: clamp(2.25rem, 10vw, 2.5rem);
+    line-height: 1.04;
+    letter-spacing: -.025em;
   }
   .brief-deck { font-size: 16px; }
 
