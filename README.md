@@ -1,96 +1,132 @@
-# Sarawak AI News PoC
+# Sarawak AI News
 
-Proof-of-concept for an AI-assisted regional intelligence brief tracking Sarawak-relevant AI, automation, digital economy, public-sector digital services, infrastructure, education, research, and workforce signals.
+An independent, source-linked briefing about how artificial intelligence and
+digital change are affecting Sarawak.
 
-## What this project proves
+**Read the live briefing:** [ai.sarawak.news](https://ai.sarawak.news/)
 
-- A small curated dataset can render into an Aligned-News-inspired briefing page: live line, sparse prose, large lead headline, short sections, and source links.
-- Source attribution, caveats, and tags are first-class fields.
-- A lightweight ingestion command can scan watched source pages, fetch candidate article pages, and produce candidate URLs for manual review.
-- The project is hosted as a dependency-free static site on GitHub Pages at `https://ai.sarawak.news/`.
-- Summarization/publication automation is intentionally deferred until source signal is validated.
+This repository is a proof of concept, which means it is a small working
+version used to test the idea before building a larger publication.
 
-## Run locally
+## What You Will Find
+
+Sarawak AI News turns scattered public information into a short, easy-to-scan
+brief. Each published item includes:
+
+- a link to the original source;
+- a concise, original summary;
+- an explanation of why it matters to Sarawak;
+- a confidence level; and
+- a caveat when the available information is incomplete or uncertain.
+
+The brief covers areas such as government and policy, public services,
+infrastructure, education, research, and the workforce.
+
+## Who It Is For
+
+The brief is designed for anyone who wants to understand Sarawak's changing AI
+and digital landscape, including members of the public, policymakers,
+researchers, educators, journalists, community leaders, and business owners.
+No technical knowledge is required to read it.
+
+## How It Works
+
+1. A lightweight script checks selected public websites for possible stories.
+2. A person opens and reviews each candidate at its original source.
+3. Approved stories receive a short, source-attributed summary, context,
+   confidence level, and caveat.
+4. The reviewed data is turned into a static website and published through
+   GitHub Pages.
+
+Story discovery is partly automated, but publication is not. Nothing becomes
+public until it has been manually reviewed. The project does not copy or
+republish full articles.
+
+## Current Status
+
+This is a working public prototype, not a fully automated news service. As of
+the latest content audit on 8 July 2026, it contains 20 reviewed stories.
+Candidate discovery and website building work, while editorial review and
+publishing remain human-controlled.
+
+## Editorial Principles
+
+- **Show the source.** Every story links back to the original publication.
+- **Add context.** Each item explains why the development may matter locally.
+- **Be transparent.** Confidence and caveats are kept with every item.
+- **Keep it concise.** Summaries are original and intentionally short.
+- **Require human review.** Discovery results stay private until approved.
+
+## For Contributors and Developers
+
+The project is deliberately small and dependency-free. You only need Python 3
+to build and test it.
+
+### Run It Locally
+
+Build the site:
 
 ```bash
 python3 scripts/build.py
-python3 -m http.server 4173 -d dist
-# open http://127.0.0.1:4173
 ```
 
-The design uses the reference site's measured 680 px page shell, 640 px content column, 48 px lead headline, and compact 14 px card padding. It keeps the approved content hierarchy, while confidence, caveats, and why-it-matters fields remain preserved in the generated item data.
+Start a local preview:
 
-## Production design source files
+```bash
+python3 -m http.server 4173 -d dist
+```
 
-The production homepage uses:
+Then open [http://127.0.0.1:4173](http://127.0.0.1:4173).
 
-- `site/style.css`
-- `scripts/build.py` (compact renderer)
-- `tests/test_build.py` (production SEO and layout checks)
-- generated homepage output under `dist/`
+### Project Map
 
-## Live site
+```text
+data/items.json       Reviewed stories shown on the public site
+data/sources.json     Public pages checked for possible stories
+data/site.json        Site information, including the update time
+scripts/build.py      Builds the website in dist/
+scripts/ingest.py     Finds candidates for manual review
+site/style.css        Production visual design
+site/app.js           Category filtering
+tests/                Automated checks
+design-variants/      Design experiments, not production pages
+```
 
-- Production URL: https://ai.sarawak.news/
-- Hosting: GitHub Pages from `main`, generated files in `dist/`
-- Custom-domain SEO is generated in `scripts/build.py` (`canonical`, Open Graph URL, robots, sitemap)
-- Current public feed: 15 reviewed source-attributed stories with category filtering
-
-## Candidate ingestion
+### Find Candidate Stories
 
 ```bash
 python3 scripts/ingest.py --limit-per-source 5
-# writes dist/candidates.json and dist/candidates.md
 ```
 
-The ingestion command discovers candidates only. It now checks candidate article pages and keeps only items with both Sarawak relevance and concrete AI/digital-economy terms. Read the source article before adding anything to `data/items.json`.
+This creates `dist/candidates.json` and `dist/candidates.md` for internal
+review. It does not publish or summarize anything. Read the original source
+before adding a story to `data/items.json`.
 
-## Weekly update flow
+### Update the Brief
 
-1. Run candidate discovery:
-   ```bash
-   python3 scripts/ingest.py --limit-per-source 5
-   ```
-2. Review candidate articles manually.
-3. Add approved items to `data/items.json`.
-4. Rebuild the site:
-   ```bash
-   python3 scripts/build.py
-   ```
-5. Run checks:
-   ```bash
-   python3 -m unittest discover -s tests -v
-   python3 scripts/audit_dates.py
-   python3 scripts/audit_summaries.py
-   ```
-6. Preview locally if needed:
-   ```bash
-   python3 -m http.server 4173 -d dist
-   ```
-7. Push to `main` so GitHub Pages redeploys.
+1. Run candidate discovery.
+2. Review the original sources manually.
+3. Add approved stories to `data/items.json`.
+4. Update `last_updated` in `data/site.json`.
+5. Run the checks below.
+6. Build and preview the site.
+7. Push the approved update to `main` for GitHub Pages to deploy it.
 
-## Test
+### Check Your Changes
 
 ```bash
 python3 -m unittest discover -s tests -v
 python3 scripts/audit_dates.py
 python3 scripts/audit_summaries.py
+python3 scripts/build.py
 ```
 
-`audit_dates.py` compares every feed item date against the source article's own published metadata (`article:published_time`, `datePublished`, or byline date). Do not use site header dates, related-news dates, extractor summaries, URL guesses, or crawl dates as publication dates.
+The date audit checks story dates against source-page metadata. It may warn if
+a source page is temporarily unavailable. The summary audit checks for clear,
+concise, non-hyped explanations.
 
-`audit_summaries.py` checks that each public one-line explanation is a single strategic signal, avoids generic/hype phrasing, and stays within the 22–38 word target.
+GitHub Actions runs the tests, audits, and site build before deploying `dist/`
+to GitHub Pages from `main`.
 
-## Project rules
-
-- Do not republish full articles.
-- Link prominently to original sources.
-- Use original summaries and analysis.
-- Mark caveats and confidence.
-- Treat current data as PoC seed data, not a finished publication.
-
-## Current status
-
-Live public static brief. Candidate discovery exists, but public publishing remains manually reviewed: raw candidates, scoring, confidence notes, and summary decisions stay internal until approved and moved into `data/items.json`.
-
-No scraper-to-summary pipeline, newsletter publishing, or external automation is live yet.
+Public publishing, newsletter sending, domain setup, or outreach requires
+Hafiy's explicit approval.
