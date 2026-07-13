@@ -132,7 +132,7 @@ def render_compact_body(items: list[dict]) -> str:
   <a class="skip-link" href="#content">Skip to content</a>
 
   <header class="bar">
-    <a class="brand" href="/">AI.SARAWAK.NEWS</a>
+    <a class="brand" href="/">SARAWAK AI NEWS</a>
   </header>
 
   <main id="content">
@@ -165,15 +165,15 @@ def render_index(items: list[dict]) -> str:
   <meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />
   <meta name="robots" content="index,follow" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="AI.Sarawak.News" />
+  <meta property="og:title" content="Sarawak AI News" />
   <meta property="og:description" content="A curated Sarawak AI intelligence brief tracking government, universities, businesses, infrastructure, and future-economy signals." />
   <meta property="og:url" content="https://ai.sarawak.news/" />
-  <meta property="og:site_name" content="AI.Sarawak.News" />
+  <meta property="og:site_name" content="Sarawak AI News" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AI.Sarawak.News" />
+  <meta name="twitter:title" content="Sarawak AI News" />
   <meta name="twitter:description" content="A curated Sarawak AI intelligence brief tracking government, universities, businesses, infrastructure, and future-economy signals." />
   <link rel="canonical" href="https://ai.sarawak.news/" />
-  <title>AI.Sarawak.News</title>
+  <title>Sarawak AI News</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
