@@ -75,7 +75,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn('target="_blank"', html)
         self.assertIn("max-width: 680px", css)
         self.assertIn("grid-template-columns: 40px minmax(0, 1fr)", css)
-        self.assertIn("font-size: 48px", css)
+        self.assertIn("font-size: 42px", css)
         self.assertIn("--canvas: #ffffff", css)
         self.assertIn("--card: #ffffff", css)
         self.assertIn("background: var(--card)", css)

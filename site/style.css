@@ -63,7 +63,7 @@ a:focus-visible {
 
 .bar {
   min-height: 61px;
-  margin: 0 0 30px;
+  margin: 0;
   padding: 18px 0 14px;
   position: relative;
   display: flex;
@@ -89,9 +89,10 @@ a:focus-visible {
 }
 
 .updated {
-  margin: 0 0 18px;
+  margin: 0 0 14px;
   display: flex;
   align-items: baseline;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 7px;
   font-size: 10px;
@@ -111,27 +112,31 @@ a:focus-visible {
 }
 
 .brief {
-  margin: 0 0 30px;
-  padding: 32px 28px;
+  margin: 0 0 24px;
+  padding: 40px 0 34px;
   border: 0;
+  border-bottom: 1px solid var(--line);
   border-radius: 0;
   background: var(--card);
+  text-align: center;
 }
 
 h1 {
-  margin: 0 0 16px;
-  font-size: 48px;
+  max-width: 620px;
+  margin: 0 auto 14px;
+  font-size: 42px;
   font-weight: 900;
-  letter-spacing: -1.5px;
-  line-height: 1.08;
+  letter-spacing: -1.25px;
+  line-height: 1.1;
+  text-wrap: balance;
 }
 
 .brief-deck {
-  max-width: 540px;
-  margin: 0;
+  max-width: 520px;
+  margin: 0 auto;
   color: #374151;
-  font-size: 17px;
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.7;
 }
 
 .category-filter {
@@ -327,12 +332,12 @@ footer p { margin: 0; }
 
 @media (max-width: 560px) {
   body { padding: 0 15px 64px; }
-  .bar { min-height: 59px; margin-bottom: 24px; }
+  .bar { min-height: 59px; }
 
-  .brief { padding: 24px 20px; }
+  .brief { padding: 32px 0 28px; }
   h1 {
-    font-size: clamp(2.25rem, 10vw, 2.5rem);
-    line-height: 1.04;
+    font-size: clamp(2.125rem, 9vw, 2.25rem);
+    line-height: 1.08;
     letter-spacing: -.025em;
   }
   .brief-deck { font-size: 16px; }
