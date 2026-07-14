@@ -76,13 +76,16 @@ Required item fields:
 - `confidence`: confidence level for the reviewed item.
 - `caveat`: source or verification caveat.
 
-Production filter sections are defined in `scripts/build.py`:
+Production filter sections are defined in `scripts/build.py`. The same
+canonical label is shown in both the category filter and its story cards:
 
-- Government & Policy
-- Education & Workforce
-- Infrastructure
-- Research & Universities
+- Policy
 - Public Services
+- Education
+- Workforce
+- Research
+- Infrastructure
+- Business
 
 ## Editorial Workflow
 

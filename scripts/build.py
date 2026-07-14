@@ -12,11 +12,13 @@ DATA = ROOT / "data"
 DIST = ROOT / "dist"
 
 SECTION_FILTERS = (
-    ("Government & Policy", "Policy"),
-    ("Education & Workforce", "Education"),
-    ("Infrastructure", "Infrastructure"),
-    ("Research & Universities", "Research"),
-    ("Public Services", "Public Services"),
+    "Policy",
+    "Public Services",
+    "Education",
+    "Workforce",
+    "Research",
+    "Infrastructure",
+    "Business",
 )
 
 
@@ -95,7 +97,7 @@ def render_compact_signal(item: dict, index: int) -> str:
 
 
 def render_category_filter(items: list[dict]) -> str:
-    counts = {section: sum(item["section"] == section for item in items) for section, _ in SECTION_FILTERS}
+    counts = {section: sum(item["section"] == section for item in items) for section in SECTION_FILTERS}
     buttons = [
         f'<button type="button" class="category-filter-button is-active" data-section-filter="all" '
         f'data-filter-label="All stories" aria-pressed="true">All '
@@ -103,9 +105,9 @@ def render_category_filter(items: list[dict]) -> str:
     ]
     buttons.extend(
         f'<button type="button" class="category-filter-button" data-section-filter="{slug(section)}" '
-        f'data-filter-label="{esc(section)}" aria-pressed="false">{esc(label)} '
+        f'data-filter-label="{esc(section)}" aria-pressed="false">{esc(section)} '
         f'<span class="category-filter-count" aria-hidden="true">{counts[section]}</span></button>'
-        for section, label in SECTION_FILTERS
+        for section in SECTION_FILTERS
         if counts[section]
     )
     return f"""

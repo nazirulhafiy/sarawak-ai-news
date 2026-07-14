@@ -21,11 +21,13 @@ class BuildTest(unittest.TestCase):
     def test_seed_data_has_required_fields(self):
         items = json.loads((ROOT / "data" / "items.json").read_text())
         required = {"id", "date", "source", "url", "title", "section", "tags", "summary", "why_it_matters", "confidence", "caveat"}
+        categories = {"Policy", "Public Services", "Education", "Workforce", "Research", "Infrastructure", "Business"}
         self.assertGreaterEqual(len(items), 4)
         for item in items:
             self.assertTrue(required.issubset(item), item.get("id"))
             self.assertTrue(item["url"].startswith("https://"))
             self.assertLess(len(item["summary"]), 700)
+            self.assertIn(item["section"], categories)
 
     def test_build_outputs_aligned_style_static_site(self):
         result = subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT, text=True, capture_output=True, check=True)
@@ -45,11 +47,14 @@ class BuildTest(unittest.TestCase):
         self.assertEqual(html.count('class="story-card"'), expected_items)
         self.assertEqual(html.count('class="story-section"'), expected_items)
         self.assertEqual(html.count('class="story-source-label"'), expected_items)
-        self.assertEqual(html.count('class="category-filter-button'), 6)
+        self.assertEqual(html.count('class="category-filter-button'), 8)
         self.assertIn('data-category-filter hidden', html)
         self.assertIn('data-section="infrastructure"', html)
         self.assertIn('data-section-filter="all"', html)
-        self.assertIn('data-section-filter="government-policy"', html)
+        self.assertIn('data-section-filter="policy"', html)
+        for category in ["Policy", "Public Services", "Education", "Workforce", "Research", "Infrastructure", "Business"]:
+            self.assertIn(f'data-filter-label="{category}"', html)
+            self.assertIn(f'class="story-section">{category}</span>', html)
         self.assertIn('<script src="app.js" defer></script>', html)
         self.assertIn('class="story-rank" aria-label="Chronological item 1">1</div>', html)
         self.assertIn('<time datetime="2026-06-24">24 Jun 2026</time>', html)
@@ -98,7 +103,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn("color: var(--sarawak-black)", css)
         self.assertIn('applyFilter("all")', js)
         self.assertIn("story.hidden = !isVisible", js)
-        for label in [">AI<", ">Tech<", ">PCDS 2030<", ">Policy<", ">Startups<", ">Energy<", ">Events<"]:
+        for label in [">AI<", ">Tech<", ">PCDS 2030<", ">Startups<", ">Energy<", ">Events<"]:
             self.assertNotIn(label, html)
         public_items = json.loads((ROOT / "dist" / "items.json").read_text())
         self.assertEqual(len(public_items), expected_items)
