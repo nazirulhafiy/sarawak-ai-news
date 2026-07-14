@@ -366,5 +366,138 @@
     "why_it_matters": "This is one of the strongest productisation examples in the feed: Sarawak is presenting a locally developed AI-enabled device, not only policy ambition.",
     "confidence": "high",
     "caveat": "Publication date verified against source metadata; visible article text references the Cardiff visit on Apr 29 local time."
+  },
+  {
+    "id": "borneopost-smart-bin-2026-07-11",
+    "date": "2026-07-11",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/07/11/smk-sacred-heart-students-showcase-ai-powered-smart-bin-to-abang-johari/",
+    "title": "SMK Sacred Heart students showcase AI-powered Smart Bin to Abang Johari",
+    "section": "Education & Workforce",
+    "tags": [
+      "Smart Bin",
+      "SMK Sacred Heart",
+      "waste management",
+      "student innovation",
+      "AI education"
+    ],
+    "summary": "An AI-powered Smart Bin prototype built by SMK Sacred Heart students signals practical AI learning tied to waste management and community use.",
+    "why_it_matters": "The project turns school-level AI education into a working local prototype, showing how young Sarawakians can connect technical learning with an everyday environmental problem.",
+    "confidence": "medium",
+    "caveat": "The article confirms a working prototype and student showcase but does not describe the AI model, testing results, or implementation timeline."
+  },
+  {
+    "id": "borneopost-responsible-ai-civil-service-2026-07-09",
+    "date": "2026-07-09",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/07/09/sarawak-civil-service-officers-trained-to-lead-responsible-ai-adoption/",
+    "title": "Sarawak civil service officers trained to lead responsible AI adoption",
+    "section": "Public Services",
+    "tags": [
+      "civil service",
+      "responsible AI",
+      "Adam AI",
+      "AI governance",
+      "public-sector workforce"
+    ],
+    "summary": "Training 80 digital officers on responsible AI adoption signals a shift from public-sector experimentation toward governed use in routine decisions and service delivery.",
+    "why_it_matters": "This moves AI capacity-building into operational government roles and pairs hands-on use with professional judgment, validation, ethics, fairness, and accountability.",
+    "confidence": "high",
+    "caveat": "This was an initial two-day cohort; the planned wider rollout and its effect on public-service outcomes have not yet been reported."
+  },
+  {
+    "id": "sarawaktribune-smes-ai-2026-07-09",
+    "date": "2026-07-09",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/abang-jo-to-smes-go-ai-to-boost-competitiveness/",
+    "title": "Abang Jo to SMEs: Go AI to boost competitiveness",
+    "section": "Government & Policy",
+    "tags": [
+      "SMEs",
+      "AI adoption",
+      "PCDS 2030",
+      "vendor capability",
+      "business productivity"
+    ],
+    "summary": "Sarawak's call for SMEs to build AI readiness links the PCDS 2030 agenda to business productivity, vendor capability, and future regional supply chains.",
+    "why_it_matters": "This extends the AI agenda beyond government and research institutions to the local firms expected to participate in Sarawak's infrastructure and energy growth.",
+    "confidence": "high",
+    "caveat": "The source reports a policy and capability-building call, not measured AI adoption rates or a new SME funding programme."
+  },
+  {
+    "id": "borneopost-sains-infinitix-sovereign-ai-2026-07-08",
+    "date": "2026-07-08",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/07/08/sains-taiwan-firm-ink-mou-to-advance-sarawaks-sovereign-ai-infrastructure/",
+    "title": "SAINS, Taiwan firm ink MoU to advance Sarawak's sovereign AI infrastructure",
+    "section": "Infrastructure",
+    "tags": [
+      "SAINS",
+      "Infinitix",
+      "Taiwan",
+      "sovereign AI",
+      "AI infrastructure"
+    ],
+    "summary": "The SAINS-Infinitix agreement gives Sarawak's sovereign AI agenda a collaboration path for infrastructure, knowledge transfer, and services spanning government and industry.",
+    "why_it_matters": "This adds an identified technical partner to Sarawak's sovereign AI plans and links infrastructure development with local capability and institutional knowledge exchange.",
+    "confidence": "high",
+    "caveat": "The agreement is an MoU framework; project scope, investment, delivery milestones, and operational outcomes have not yet been announced."
+  },
+  {
+    "id": "borneopost-data-governance-ai-2026-07-08",
+    "date": "2026-07-08",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/07/08/sarawak-strengthens-digital-agenda-with-data-governance-ai-push/",
+    "title": "Sarawak strengthens digital agenda with data governance, AI push",
+    "section": "Government & Policy",
+    "tags": [
+      "Sarawak Data Governance Framework",
+      "government data",
+      "responsible AI",
+      "digital sovereignty",
+      "public services"
+    ],
+    "summary": "Launching the Sarawak Data Governance Framework gives agencies shared rules for secure, reliable data, creating a foundation for responsible AI adoption and smarter public services.",
+    "why_it_matters": "Trusted government data is a prerequisite for useful AI, so the framework addresses governance, ownership, sharing, quality, and accountability before wider deployment.",
+    "confidence": "high",
+    "caveat": "The framework has launched, but agency-level implementation, compliance measures, and service-delivery results have not yet been reported."
+  },
+  {
+    "id": "dayakdaily-miri-ai-surveillance-grid-2026-07-04",
+    "date": "2026-07-04",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/public-safety-not-privacy-invasion-premier-backs-miris-24-hour-ai-tracking-grid/",
+    "title": "'Public safety, not privacy invasion': Premier backs Miri's 24-hour AI tracking grid",
+    "section": "Public Services",
+    "tags": [
+      "Miri Smart City Command Center",
+      "AI surveillance",
+      "facial tracking",
+      "licence-plate tracking",
+      "privacy"
+    ],
+    "summary": "Miri's 77-kilometre AI surveillance grid moves smart-city adoption into live public-safety operations while raising governance questions around facial and licence-plate tracking.",
+    "why_it_matters": "This is a live, high-impact public-sector AI deployment whose safety benefits need to be assessed alongside privacy, accuracy, access, retention, and oversight safeguards.",
+    "confidence": "medium",
+    "caveat": "The report records official privacy assurances but provides no independent detail on data retention, access controls, consent, oversight, or system accuracy."
+  },
+  {
+    "id": "sarawaktribune-azam-youth-ai-training-2026-07-03",
+    "date": "2026-07-03",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/azam-sarawak-joel-yi-foundation-train-youths-in-ai/",
+    "title": "AZAM Sarawak, Joel Yi Foundation train youths in AI",
+    "section": "Education & Workforce",
+    "tags": [
+      "AZAM Sarawak",
+      "Joel Yi Foundation",
+      "AI bots",
+      "digital literacy",
+      "youth training"
+    ],
+    "summary": "A 12-week programme that taught 20 participants to build AI bots signals a small but practical route from digital literacy to local problem-solving skills.",
+    "why_it_matters": "This provides a concrete grassroots training example, with participants moving beyond basic AI awareness into responsible use and hands-on bot development.",
+    "confidence": "high",
+    "caveat": "The first cohort was small, and the source does not report follow-up projects, participant outcomes, or plans for a larger intake."
   }
 ]

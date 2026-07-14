@@ -45,7 +45,7 @@ republish full articles.
 ## Current Status
 
 This is a working public prototype, not a fully automated news service. As of
-the latest content audit on 8 July 2026, it contains 20 reviewed stories.
+the latest content audit on 14 July 2026, it contains 27 reviewed stories.
 Candidate discovery and website building work, while editorial review and
 publishing remain human-controlled.
 
