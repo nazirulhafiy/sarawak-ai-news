@@ -15,14 +15,15 @@ brief. Each public story card includes:
 
 - a link to the original source;
 - a concise, original summary; and
-- its date, source, and section.
+- its date, source, and category.
 
 The reviewed data behind each story also keeps an explanation of why it matters
 to Sarawak, a confidence level, and a caveat for editorial review. These fields
 are not displayed on the public story cards.
 
-The brief covers areas such as government and policy, public services,
-infrastructure, education, research, and the workforce.
+The production categories are Policy, Public Services, Education, Workforce,
+Research, Infrastructure, and Business. The same category label appears in the
+browse filter and on every matching story card.
 
 ## Who It Is For
 

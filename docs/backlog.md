@@ -40,14 +40,13 @@ This backlog documents recommended next tasks from the project audit on
 - Decide whether `why_it_matters` should appear publicly on story cards or be
   reserved for JSON/API consumers.
 - Add a simple duplicate URL check for reviewed items.
-- Add validation for allowed `section` values.
 - Keep source tier, confidence, caveat, and why-it-matters metadata internal
   unless a future editorial decision explicitly approves public display.
 
 ## Next Engineering Tasks
 
-- Add a data validation command for required fields, allowed sections, unique
-  IDs, unique URLs, HTTPS URLs, and summary length.
+- Extend the existing test validation into a standalone data command that also
+  checks unique IDs and unique URLs.
 - Update ingestion to suppress already-reviewed URLs.
 - Add an optional `--since` or date-window mode to candidate discovery.
 - Split renderer helpers into smaller functions only if build complexity grows.

@@ -12,7 +12,7 @@ The current direction is intentionally restrained:
 - Centered editorial headline at `42px` on desktop with balanced wrapping.
 - Sarawak red, yellow, and black accents.
 - Thin top brand bar with a Sarawak-color rule.
-- Horizontal category filter.
+- Horizontal category filter using the seven canonical production labels.
 - Ranked story cards with compact metadata.
 - Source name highlighted in yellow.
 - Minimal footer with independence note.
@@ -29,6 +29,9 @@ without dependencies.
 Behavior:
 
 - Filter starts hidden in HTML and appears when JavaScript loads.
+- Filter buttons and story cards use the same canonical category labels:
+  Policy, Public Services, Education, Workforce, Research, Infrastructure, and
+  Business.
 - Buttons use `aria-pressed`.
 - Hidden story cards use the `hidden` attribute.
 - Story ranks are renumbered after filtering.
@@ -62,7 +65,8 @@ Current hierarchy:
 6. Ranked story cards.
 7. Independent-publication footer note.
 
-Each story card currently shows date, source, section, title, and summary. It
+Each story card currently shows date, source, category, title, and summary. Its
+category label exactly matches the corresponding browse filter. The card
 does not expose tags, confidence, caveat, or why-it-matters copy in the HTML,
 although those fields are preserved in generated JSON for editorial review.
 
