@@ -15,7 +15,7 @@ class BuildTest(unittest.TestCase):
         updated = datetime.fromisoformat(value)
         time = updated.strftime("%I:%M %p").lstrip("0")
         current = f"{updated.strftime('%A, %B')} {updated.day}, {updated.year}, {time}".upper()
-        compact = f"{updated.day} {updated.strftime('%b %Y').upper()} · {time} MYT"
+        compact = f"{updated.strftime('%A').upper()}, {updated.day} {updated.strftime('%b %Y').upper()} · {time} MYT"
         return value, current, compact
 
     def test_seed_data_has_required_fields(self):
@@ -39,6 +39,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<a class="brand" href="/">AI.Sarawak.News</a>', html)
         updated_iso, _, compact_updated = self.updated_labels()
         self.assertIn(f'<span class="updated-label">Last updated</span><time datetime="{updated_iso}">{compact_updated}</time>', html)
+        self.assertIn("TUESDAY, 14 JUL 2026 · 9:00 AM MYT", html)
         self.assertLess(html.index('class="updated"'), html.index('id="brief-title"'))
         self.assertIn("Tracking Sarawak’s AI, news, policy, and future economy.", html)
         self.assertIn("An independent news aggregator collecting important AI updates from Sarawak’s government, universities, businesses, and tech ecosystem.", html)

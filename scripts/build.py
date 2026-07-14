@@ -44,7 +44,7 @@ def last_updated() -> tuple[str, str, str]:
     updated = parse_datetime(value)
     time = updated.strftime("%I:%M %p").lstrip("0")
     current = f"{updated.strftime('%A, %B')} {updated.day}, {updated.year}, {time}".upper()
-    compact = f"{updated.day} {updated.strftime('%b %Y').upper()} · {time} MYT"
+    compact = f"{updated.strftime('%A').upper()}, {updated.day} {updated.strftime('%b %Y').upper()} · {time} MYT"
     return value, current, compact
 
 

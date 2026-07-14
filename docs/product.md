@@ -28,7 +28,7 @@ The current interface favors fast scanning over deep reading.
 The homepage shows:
 
 - Brand bar: `AI.Sarawak.News`.
-- Manual last-updated timestamp from `data/site.json`.
+- Manual last-updated weekday, date, and time from `data/site.json`.
 - Editorial headline and deck.
 - Client-side category filters.
 - Ranked story cards ordered newest first.

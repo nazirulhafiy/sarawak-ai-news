@@ -9,7 +9,7 @@ The current direction is intentionally restrained:
 
 - White page and white cards.
 - Narrow `680px` maximum body width.
-- Large editorial headline at `48px` on desktop.
+- Centered editorial headline at `42px` on desktop with balanced wrapping.
 - Sarawak red, yellow, and black accents.
 - Thin top brand bar with a Sarawak-color rule.
 - Horizontal category filter.
@@ -55,7 +55,7 @@ decoration and keeps density high enough for repeated scanning.
 Current hierarchy:
 
 1. Brand.
-2. Last updated timestamp.
+2. Last updated weekday, date, and time.
 3. Large thesis headline.
 4. Short deck.
 5. Category filters.
