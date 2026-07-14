@@ -11,13 +11,15 @@ version used to test the idea before building a larger publication.
 ## What You Will Find
 
 Sarawak AI News turns scattered public information into a short, easy-to-scan
-brief. Each published item includes:
+brief. Each public story card includes:
 
 - a link to the original source;
-- a concise, original summary;
-- an explanation of why it matters to Sarawak;
-- a confidence level; and
-- a caveat when the available information is incomplete or uncertain.
+- a concise, original summary; and
+- its date, source, and section.
+
+The reviewed data behind each story also keeps an explanation of why it matters
+to Sarawak, a confidence level, and a caveat for editorial review. These fields
+are not displayed on the public story cards.
 
 The brief covers areas such as government and policy, public services,
 infrastructure, education, research, and the workforce.

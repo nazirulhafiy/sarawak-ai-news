@@ -78,9 +78,6 @@ def slug(value: str) -> str:
 
 
 def render_compact_signal(item: dict, index: int) -> str:
-    caveat = ""
-    if str(item["confidence"]).lower() != "high":
-        caveat = f'<p class="story-caveat"><strong>Source note:</strong> {esc(item["caveat"])}</p>'
     return f"""
     <article class="story-card" id="{slug(item['id'])}" data-section="{slug(item['section'])}">
       <div class="story-rank" aria-label="Chronological item {index}">{index}</div>
@@ -92,7 +89,6 @@ def render_compact_signal(item: dict, index: int) -> str:
         </p>
         <h2><a href="{esc(item['url'])}" target="_blank" rel="noopener noreferrer">{esc(item['title'])}</a></h2>
         <p class="story-summary">{esc(item['note'])}</p>
-        {caveat}
       </div>
     </article>
     """
@@ -132,7 +128,7 @@ def render_compact_body(items: list[dict]) -> str:
   <a class="skip-link" href="#content">Skip to content</a>
 
   <header class="bar">
-    <a class="brand" href="/">SARAWAK AI NEWS</a>
+    <a class="brand" href="/">AI.Sarawak.News</a>
   </header>
 
   <main id="content">
@@ -165,15 +161,15 @@ def render_index(items: list[dict]) -> str:
   <meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />
   <meta name="robots" content="index,follow" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Sarawak AI News" />
+  <meta property="og:title" content="AI.Sarawak.News" />
   <meta property="og:description" content="A curated Sarawak AI intelligence brief tracking government, universities, businesses, infrastructure, and future-economy signals." />
   <meta property="og:url" content="https://ai.sarawak.news/" />
-  <meta property="og:site_name" content="Sarawak AI News" />
+  <meta property="og:site_name" content="AI.Sarawak.News" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Sarawak AI News" />
+  <meta name="twitter:title" content="AI.Sarawak.News" />
   <meta name="twitter:description" content="A curated Sarawak AI intelligence brief tracking government, universities, businesses, infrastructure, and future-economy signals." />
   <link rel="canonical" href="https://ai.sarawak.news/" />
-  <title>Sarawak AI News</title>
+  <title>AI.Sarawak.News</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
