@@ -165,6 +165,19 @@ def relevance_score(matched: list[str]) -> int:
     return max(score, 0)
 
 
+def should_fetch_candidate(score: int, matched: list[str], min_score: int) -> bool:
+    """Allow strong links and AI-led headlines through to strict body review.
+
+    A headline can be locally relevant even when "Sarawak" appears only in the
+    article body. The body check remains the publication gate and still requires
+    both a Sarawak reference and a supported technology focus.
+    """
+    if score >= min_score:
+        return True
+    has_ai_focus = any(kw in matched for kw in ["ai", "artificial intelligence", "machine learning"])
+    return has_ai_focus and score >= max(min_score - 1, 1)
+
+
 def is_article_relevant(body: str, min_score: int) -> tuple[bool, int, list[str]]:
     text = clean_text(body).lower()
     matched = keyword_matches(text)
@@ -222,11 +235,14 @@ def discover(limit_per_source: int, min_score: int = 4) -> list[Candidate]:
             if url in seen_urls or url in source_seen:
                 continue
             score, matched = score_candidate(source_name, url, title)
-            if score >= min_score:
+            if should_fetch_candidate(score, matched, min_score):
                 source_seen.add(url)
                 source_candidates.append(Candidate(source_name, source_url, url, title, score, matched, status=f"source http {status}"))
 
-        for candidate in sorted(source_candidates, key=lambda c: (-c.score, c.title))[:limit_per_source]:
+        # Source and tag pages usually put their newest stories first. Preserve
+        # that order so recent lower-title-score items are not displaced by old,
+        # keyword-dense headlines before their article bodies can be reviewed.
+        for candidate in source_candidates[:limit_per_source]:
             if candidate.url in seen_urls:
                 continue
             seen_urls.add(candidate.url)

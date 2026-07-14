@@ -19,6 +19,28 @@ class IngestTest(unittest.TestCase):
         self.assertIn("sarawak", matched)
         self.assertIn("ai", matched)
 
+    def test_ai_led_headline_reaches_body_review_in_source_order(self):
+        url = "https://example.com/2026/07/12/managing-transition-to-ai-native-economy/"
+        title = "Managing transition to AI-native economy"
+        score, matched = ingest.score_candidate("Mock Source", url, title)
+        self.assertEqual(score, 3)
+        self.assertTrue(ingest.should_fetch_candidate(score, matched, min_score=4))
+
+        landing = f"""
+        <html>
+        <a href="{url}">{title}</a>
+        <a href="/sarawak-ai-grid">Sarawak explores AI Grid networks</a>
+        </html>
+        """
+        article = "<html><article>Sarawak is preparing an artificial intelligence economy through talent and compute.</article></html>"
+        with mock.patch.object(ingest, "fetch", side_effect=[(200, landing), (200, article)]), mock.patch.object(
+            ingest, "load_sources", return_value=[{"name": "Mock Source", "url": "https://example.com", "tier": 1}]
+        ), mock.patch.object(ingest.time, "sleep"):
+            candidates = ingest.discover(limit_per_source=1)
+
+        self.assertEqual([candidate.url for candidate in candidates], [url])
+        self.assertEqual(candidates[0].status, "article http 200")
+
     def test_ingest_cli_writes_candidates_from_mocked_page(self):
         html = """
         <html><title>Sarawak AI source</title>

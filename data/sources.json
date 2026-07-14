@@ -1,6 +1,7 @@
 [
   {"name":"SDEC News","url":"https://sdec.com.my/web/sdecnews","tier":1,"category":"institution","expected_yield":"medium-high"},
   {"name":"The Borneo Post — Sarawak AI search","url":"https://www.theborneopost.com/?s=Sarawak+AI","tier":1,"category":"news","expected_yield":"high"},
+  {"name":"The Borneo Post — AI tag","url":"https://www.theborneopost.com/tag/ai/","tier":1,"category":"news","expected_yield":"high"},
   {"name":"DayakDaily — Sarawak AI search","url":"https://dayakdaily.com/?s=Sarawak+AI","tier":1,"category":"news","expected_yield":"high"},
   {"name":"Sarawak Tribune — Sarawak AI search","url":"https://www.sarawaktribune.com/?s=Sarawak+AI","tier":1,"category":"news","expected_yield":"medium-high"},
   {"name":"The Edge Malaysia — Sarawak AI search","url":"https://theedgemalaysia.com/search-results?keywords=Sarawak%20AI","tier":1,"category":"business news","expected_yield":"medium"},

@@ -499,5 +499,24 @@
     "why_it_matters": "This provides a concrete grassroots training example, with participants moving beyond basic AI awareness into responsible use and hands-on bot development.",
     "confidence": "high",
     "caveat": "The first cohort was small, and the source does not report follow-up projects, participant outcomes, or plans for a larger intake."
+  },
+  {
+    "id": "borneopost-ai-native-economy-2026-07-12",
+    "date": "2026-07-12",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/07/12/managing-transition-to-ai-native-economy/",
+    "title": "Managing transition to AI-native economy",
+    "section": "Policy",
+    "tags": [
+      "AI-native economy",
+      "economic transition",
+      "human capital",
+      "digital infrastructure",
+      "AI governance"
+    ],
+    "summary": "Sarawak's transition toward an AI-native economy rests on cybersecurity, talent, compute and connectivity, alongside stronger governance, sustainable energy and digital inclusion.",
+    "why_it_matters": "The column connects Sarawak's AI ambitions to the practical capabilities and safeguards needed for economy-wide adoption, giving readers a useful synthesis of the transition beyond individual projects.",
+    "confidence": "medium",
+    "caveat": "This is an analysis column synthesising existing policy direction; it does not announce a new programme, budget or implementation milestone."
   }
 ]

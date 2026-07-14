@@ -48,6 +48,8 @@ In scope:
 - Universities, research collaborations, talent, and workforce readiness.
 - Smart city, IoT, automation, robotics, and sector adoption.
 - Sarawak-linked national or international partnerships.
+- Contextual analysis or commentary that synthesises a clearly Sarawak-specific
+  AI signal and is identified as analysis in its caveat.
 
 Out of scope for the public feed unless a reviewed source makes the Sarawak AI
 link clear:
@@ -89,19 +91,30 @@ canonical label is shown in both the category filter and its story cards:
 
 ## Editorial Workflow
 
-1. Run `python3 scripts/ingest.py --limit-per-source 5`.
-2. Review `dist/candidates.md` and source articles manually.
+1. Run `python3 scripts/ingest.py --limit-per-source 5` and check any directly
+   supplied source URLs; candidate discovery is an aid, not an editorial gate.
+2. Review `dist/candidates.md` and source articles manually, including whether
+   each source is reporting, analysis, commentary, or an announcement.
 3. Add only approved items to `data/items.json`.
-4. Keep summaries short, original, and strategic.
-5. Keep source URL, confidence, caveat, and why-it-matters fields.
-6. Run build, unit tests, date audit, and summary audit.
-7. Push to `main` only when the public feed is ready to redeploy.
+4. Keep summaries short, original, strategic, and focused on the Sarawak signal
+   rather than phrases such as "the publication reports" or "the article says".
+5. Keep source URL, confidence, caveat, and why-it-matters fields. Use the caveat
+   to distinguish analysis from new programmes or implementation milestones.
+6. Update `data/site.json` whenever an article is added.
+7. Run build, unit tests, date audit, and summary audit.
+8. Push to `main` only when the public feed is ready to redeploy.
 
 ## Source Policy
 
 `data/sources.json` currently watches a mix of media, institutional, government,
-and university pages, including SDEC, The Borneo Post, DayakDaily, Sarawak
-Tribune, The Edge Malaysia, UKAS, SMA, SAINS, Swinburne Sarawak, and UNIMAS.
+university, search, and focused topic pages, including SDEC, The Borneo Post,
+DayakDaily, Sarawak Tribune, The Edge Malaysia, UKAS, SMA, SAINS, Swinburne
+Sarawak, and UNIMAS.
+
+Link scoring is a discovery prefilter. AI-led headlines that omit Sarawak may be
+opened for body validation, but the article-body check still requires both a
+Sarawak reference and a supported AI or future-economy focus. Source-page order
+is preserved so recent items are reviewed before older keyword-dense links.
 
 The source list is discovery infrastructure, not an endorsement list. Candidate
 URLs must still be manually checked for article date, relevance, publication

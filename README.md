@@ -34,7 +34,7 @@ No technical knowledge is required to read it.
 
 ## How It Works
 
-1. A lightweight script checks selected public websites for possible stories.
+1. A lightweight script checks selected public search and topic pages for possible stories.
 2. A person opens and reviews each candidate at its original source.
 3. Approved stories receive a short, source-attributed summary, context,
    confidence level, and caveat.
@@ -45,10 +45,15 @@ Story discovery is partly automated, but publication is not. Nothing becomes
 public until it has been manually reviewed. The project does not copy or
 republish full articles.
 
+Discovery is an aid rather than an editorial gate. A directly supplied source
+can also be reviewed, and AI-led headlines may proceed to article-body checks
+when the headline itself does not mention Sarawak. The body must still make the
+Sarawak and technology relevance clear before the item is considered.
+
 ## Current Status
 
 This is a working public prototype, not a fully automated news service. As of
-the latest content audit on 14 July 2026, it contains 27 reviewed stories.
+the latest content audit on 15 July 2026, it contains 28 reviewed stories.
 Candidate discovery and website building work, while editorial review and
 publishing remain human-controlled.
 
@@ -56,6 +61,8 @@ publishing remain human-controlled.
 
 - **Show the source.** Every story links back to the original publication.
 - **Add context.** Each item explains why the development may matter locally.
+- **Lead with the signal.** Summaries describe the Sarawak development directly;
+  publication attribution stays in the source label.
 - **Be transparent.** Confidence and caveats are kept with every item.
 - **Keep it concise.** Summaries are original and intentionally short.
 - **Require human review.** Discovery results stay private until approved.
@@ -107,10 +114,10 @@ before adding a story to `data/items.json`.
 
 ### Update the Brief
 
-1. Run candidate discovery.
-2. Review the original sources manually.
+1. Run candidate discovery and check any directly supplied source URLs.
+2. Review the original sources manually, including their publication context.
 3. Add approved stories to `data/items.json`.
-4. Update `last_updated` in `data/site.json`.
+4. Update `last_updated` in `data/site.json` whenever an article is added.
 5. Run the checks below.
 6. Build and preview the site.
 7. Push the approved update to `main` for GitHub Pages to deploy it.

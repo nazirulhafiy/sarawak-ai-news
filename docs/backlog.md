@@ -1,12 +1,25 @@
 # Backlog
 
 This backlog documents recommended next tasks from the project audit on
-2026-07-08. It is not a commitment to rewrite the app yet.
+2026-07-08, updated for the 2026-07-15 content and discovery review. It is not a
+commitment to rewrite the app yet.
+
+## Recent Changes
+
+- Added a reviewed policy-context item on Sarawak's transition toward an
+  AI-native economy, with a caveat distinguishing analysis from a new programme
+  or implementation milestone.
+- Added The Borneo Post AI tag page to the discovery watchlist.
+- Allowed AI-led headlines without "Sarawak" in the title to reach strict
+  article-body validation, which still requires both Sarawak and a supported
+  technology focus.
+- Preserved source-page order during candidate selection so recent links are
+  checked before older, keyword-dense headlines.
+- Clarified that public summaries lead with the Sarawak signal while source type
+  and limitations belong in the attribution and caveat fields.
 
 ## Known Issues
 
-- `README.md` previously reported a stale public item count; the current seed
-  dataset has 27 reviewed items.
 - `data/site.json` uses a manual `last_updated` timestamp, so it can drift from
   the newest reviewed item if not updated during the weekly flow.
 - The production HTML does not show `why_it_matters`, `tags`, or confidence for
@@ -14,8 +27,8 @@ This backlog documents recommended next tasks from the project audit on
 - Some item caveats still say the source should be revisited before direct
   quotation. This is acceptable for a PoC but should be tightened before a more
   formal publication cadence.
-- `scripts/ingest.py` is keyword-based and can miss relevant stories with
-  indirect wording or include weak candidates that need manual rejection.
+- `scripts/ingest.py` remains keyword-based and can still miss relevant stories
+  that are absent from watched landing pages or beyond the first result page.
 - Candidate discovery does not exclude URLs already present in `data/items.json`.
 - `scripts/audit_dates.py` depends on live source availability, so CI can warn
   or fail because of external site outages or markup changes.
@@ -49,6 +62,8 @@ This backlog documents recommended next tasks from the project audit on
   checks unique IDs and unique URLs.
 - Update ingestion to suppress already-reviewed URLs.
 - Add an optional `--since` or date-window mode to candidate discovery.
+- Add bounded pagination for source search and tag pages where first-page
+  coverage is insufficient.
 - Split renderer helpers into smaller functions only if build complexity grows.
 - Decide whether generated `dist/candidates.*` should stay in `dist/` or move to
   a non-public review directory.
