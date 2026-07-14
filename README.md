@@ -126,14 +126,17 @@ before adding a story to `data/items.json`.
 
 ```bash
 python3 -m unittest discover -s tests -v
-python3 scripts/audit_dates.py
+python3 scripts/audit_dates.py --item-id <added-or-edited-item-id>
 python3 scripts/audit_summaries.py
 python3 scripts/build.py
 ```
 
-The date audit checks story dates against source-page metadata. It may warn if
-a source page is temporarily unavailable. The summary audit checks for clear,
-concise, non-hyped explanations.
+Repeat `--item-id` for multiple additions. The targeted date audit checks only
+those stories against source-page metadata and may warn if a selected page is
+temporarily unavailable. Run `python3 scripts/audit_dates.py` without a selector
+for a deliberate full audit. CI automatically checks records changed from the
+previous commit, while a manual workflow run performs the full audit. The
+summary audit checks for clear, concise, non-hyped explanations.
 
 GitHub Actions runs the tests, audits, and site build before deploying `dist/`
 to GitHub Pages from `main`.

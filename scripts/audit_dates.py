@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 import sys
 import urllib.request
 from dataclasses import dataclass
@@ -126,6 +127,45 @@ def load_items(path: Path = DATA) -> list[dict]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def select_items(items: list[dict], item_ids: list[str]) -> list[dict]:
+    requested = set(item_ids)
+    selected = [item for item in items if item.get("id") in requested]
+    found = {str(item.get("id")) for item in selected}
+    missing = sorted(requested - found)
+    if missing:
+        raise ValueError(f"Unknown item id(s): {', '.join(missing)}")
+    return selected
+
+
+def changed_items(items: list[dict], baseline_items: list[dict]) -> list[dict]:
+    """Return new items and records whose date-relevant source fields changed."""
+    baseline = {str(item.get("id")): item for item in baseline_items}
+    relevant_fields = ("title", "url", "date")
+    return [
+        item
+        for item in items
+        if str(item.get("id")) not in baseline
+        or any(item.get(field) != baseline[str(item.get("id"))].get(field) for field in relevant_fields)
+    ]
+
+
+def load_items_from_git(ref: str, path: Path = DATA) -> list[dict]:
+    try:
+        relative_path = path.resolve().relative_to(ROOT).as_posix()
+    except ValueError as exc:
+        raise ValueError("--changed-from requires --items to be inside the repository") from exc
+    result = subprocess.run(
+        ["git", "show", f"{ref}:{relative_path}"],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        reason = result.stderr.strip() or f"unable to read {relative_path}"
+        raise ValueError(f"Could not load date-audit baseline {ref}: {reason}")
+    return json.loads(result.stdout)
+
+
 def find_date_mismatches(
     items: Iterable[dict], html_loader: Callable[[str], str] = fetch_html
 ) -> tuple[list[DateMismatch], list[UnavailableSource]]:
@@ -143,9 +183,11 @@ def find_date_mismatches(
     return mismatches, unavailable
 
 
-def audit(path: Path = DATA) -> int:
-    items = load_items(path)
-    mismatches, unavailable = find_date_mismatches(items)
+def audit_items(items: list[dict], html_loader: Callable[[str], str] = fetch_html) -> int:
+    if not items:
+        print("Date audit skipped: no new or date-relevant item changes")
+        return 0
+    mismatches, unavailable = find_date_mismatches(items, html_loader)
     if unavailable:
         print("Date audit warning: skipped temporarily unavailable sources:", file=sys.stderr)
         for source in unavailable:
@@ -166,11 +208,35 @@ def audit(path: Path = DATA) -> int:
     return 1
 
 
-def main() -> int:
+def audit(path: Path = DATA) -> int:
+    return audit_items(load_items(path))
+
+
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Verify feed dates against article published metadata.")
     parser.add_argument("--items", type=Path, default=DATA, help="Path to items.json")
-    args = parser.parse_args()
-    return audit(args.items)
+    selectors = parser.add_mutually_exclusive_group()
+    selectors.add_argument(
+        "--item-id",
+        action="append",
+        dest="item_ids",
+        help="Audit one item by id; repeat for multiple added or edited items",
+    )
+    selectors.add_argument(
+        "--changed-from",
+        metavar="GIT_REF",
+        help="Audit only new items or records with changed title, URL, or date relative to a Git ref",
+    )
+    args = parser.parse_args(argv)
+    items = load_items(args.items)
+    try:
+        if args.item_ids:
+            items = select_items(items, args.item_ids)
+        elif args.changed_from:
+            items = changed_items(items, load_items_from_git(args.changed_from, args.items))
+    except (ValueError, json.JSONDecodeError) as exc:
+        parser.error(str(exc))
+    return audit_items(items)
 
 
 if __name__ == "__main__":

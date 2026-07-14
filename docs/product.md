@@ -101,7 +101,8 @@ canonical label is shown in both the category filter and its story cards:
 5. Keep source URL, confidence, caveat, and why-it-matters fields. Use the caveat
    to distinguish analysis from new programmes or implementation milestones.
 6. Update `data/site.json` whenever an article is added.
-7. Run build, unit tests, date audit, and summary audit.
+7. Run build, unit tests, summary audit, and a targeted date audit using
+   `python3 scripts/audit_dates.py --item-id <id>` for each added or edited item.
 8. Push to `main` only when the public feed is ready to redeploy.
 
 ## Source Policy
@@ -119,6 +120,11 @@ is preserved so recent items are reviewed before older keyword-dense links.
 The source list is discovery infrastructure, not an endorsement list. Candidate
 URLs must still be manually checked for article date, relevance, publication
 context, and whether the source supports the summary.
+
+Date validation is incremental during normal content work. Local updates select
+the added or edited item IDs, and CI compares date-relevant fields with the
+previous Git revision. Running `audit_dates.py` without a selector remains the
+explicit full-audit option.
 
 ## Product Constraints
 

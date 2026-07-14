@@ -17,6 +17,8 @@ commitment to rewrite the app yet.
   checked before older, keyword-dense headlines.
 - Clarified that public summaries lead with the Sarawak signal while source type
   and limitations belong in the attribution and caveat fields.
+- Added incremental date auditing by item ID for local updates and by Git diff
+  for ordinary CI runs; manual workflow runs retain the full audit.
 
 ## Known Issues
 
@@ -30,8 +32,8 @@ commitment to rewrite the app yet.
 - `scripts/ingest.py` remains keyword-based and can still miss relevant stories
   that are absent from watched landing pages or beyond the first result page.
 - Candidate discovery does not exclude URLs already present in `data/items.json`.
-- `scripts/audit_dates.py` depends on live source availability, so CI can warn
-  or fail because of external site outages or markup changes.
+- `scripts/audit_dates.py` depends on live source availability, so targeted CI
+  checks can still warn or fail because of external outages or markup changes.
 - Variant D is a static prototype with placeholder content and feature promises
   that are not production-backed.
 - `scripts/generate_design_variants.py` does not regenerate Variant D.
@@ -90,7 +92,8 @@ Before claiming a change is ready:
 
 - Run `python3 scripts/build.py`.
 - Run `python3 -m unittest discover -s tests -v`.
-- For content changes, run `python3 scripts/audit_dates.py`.
+- For content changes, run `python3 scripts/audit_dates.py --item-id <id>` for
+  every added or date-relevant edited item.
 - For content changes, run `python3 scripts/audit_summaries.py`.
 - Preview `dist/index.html` locally.
 - Confirm no full article bodies have been copied into the repo.

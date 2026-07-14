@@ -1,6 +1,13 @@
 import unittest
 
-from scripts.audit_dates import DateFetchError, extract_published_date, find_date_mismatches
+from scripts.audit_dates import (
+    DateFetchError,
+    audit_items,
+    changed_items,
+    extract_published_date,
+    find_date_mismatches,
+    select_items,
+)
 
 
 class AuditDatesTest(unittest.TestCase):
@@ -52,6 +59,40 @@ class AuditDatesTest(unittest.TestCase):
         self.assertEqual(mismatches, [])
         self.assertEqual(len(unavailable), 1)
         self.assertEqual(unavailable[0].reason, "HTTP 500")
+
+    def test_selects_only_requested_item_ids(self):
+        items = [
+            {"id": "old", "title": "Old", "url": "https://example.test/old", "date": "2026-07-01"},
+            {"id": "new", "title": "New", "url": "https://example.test/new", "date": "2026-07-12"},
+        ]
+        self.assertEqual([item["id"] for item in select_items(items, ["new"])], ["new"])
+        with self.assertRaisesRegex(ValueError, "Unknown item id"):
+            select_items(items, ["missing"])
+
+    def test_changed_items_include_only_new_or_date_relevant_edits(self):
+        baseline = [
+            {"id": "same", "title": "Same", "url": "https://example.test/same", "date": "2026-07-01", "summary": "Before"},
+            {"id": "edited", "title": "Before", "url": "https://example.test/edited", "date": "2026-07-02"},
+        ]
+        current = [
+            {"id": "same", "title": "Same", "url": "https://example.test/same", "date": "2026-07-01", "summary": "After"},
+            {"id": "edited", "title": "After", "url": "https://example.test/edited", "date": "2026-07-02"},
+            {"id": "new", "title": "New", "url": "https://example.test/new", "date": "2026-07-12"},
+        ]
+        self.assertEqual([item["id"] for item in changed_items(current, baseline)], ["edited", "new"])
+
+    def test_incremental_audit_fetches_only_selected_items(self):
+        items = [
+            {"id": "new", "title": "New", "url": "https://example.test/new", "date": "2026-07-12"},
+        ]
+        fetched = []
+
+        def load_html(url):
+            fetched.append(url)
+            return '<meta property="article:published_time" content="2026-07-12T06:01:00+08:00">'
+
+        self.assertEqual(audit_items(items, load_html), 0)
+        self.assertEqual(fetched, ["https://example.test/new"])
 
 
 if __name__ == "__main__":

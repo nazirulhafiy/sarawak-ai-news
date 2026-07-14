@@ -33,18 +33,23 @@ python3 -m unittest discover -s tests -v
 For content/data changes, also run:
 
 ```bash
-python3 scripts/audit_dates.py
+python3 scripts/audit_dates.py --item-id <added-or-edited-item-id>
 python3 scripts/audit_summaries.py
 python3 scripts/build.py
 ```
 
-`audit_dates.py` fetches live source pages and may warn when a source is temporarily unavailable.
+Repeat `--item-id` when a change contains more than one added or edited item.
+Omit the selector only for a deliberate full audit. CI uses `--changed-from` to
+check new or date-relevant records on ordinary pushes and pull requests, while a
+manual workflow run keeps the full-audit path. Live source checks may warn when
+a selected source is temporarily unavailable.
 
 ## Useful Commands
 
 ```bash
 python3 scripts/build.py
 python3 scripts/ingest.py --limit-per-source 5
+python3 scripts/audit_dates.py --item-id <item-id>
 python3 -m unittest discover -s tests -v
 python3 -m http.server 4173 -d dist
 ```
