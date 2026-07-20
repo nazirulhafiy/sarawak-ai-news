@@ -518,5 +518,43 @@
     "why_it_matters": "The column connects Sarawak's AI ambitions to the practical capabilities and safeguards needed for economy-wide adoption, giving readers a useful synthesis of the transition beyond individual projects.",
     "confidence": "medium",
     "caveat": "This is an analysis column synthesising existing policy direction; it does not announce a new programme, budget or implementation milestone."
+  },
+  {
+    "id": "ukas-adam-ai-civil-service-2026-07-15",
+    "date": "2026-07-15",
+    "source": "UKAS",
+    "url": "https://ukas.sarawak.gov.my/web/subpage/news_view/44575",
+    "title": "ADAM AI Rakan Digital Pertama Perkhidmatan Awam Sarawak",
+    "section": "Public Services",
+    "tags": [
+      "ADAM AI",
+      "Sarawak Civil Service",
+      "on-premises AI",
+      "data sovereignty",
+      "public-sector knowledge management"
+    ],
+    "summary": "ADAM AI's on-premises rollout gives Sarawak civil servants a governed assistant for authorised documents, signalling production use of sovereign public-sector AI.",
+    "why_it_matters": "The launch turns earlier civil-service AI training and data-governance work into an internal tool for document search, policy reference, fact-checking, and institutional knowledge retrieval.",
+    "confidence": "high",
+    "caveat": "UKAS reports the official launch and intended civil-service use; independent performance, usage, security controls, and citizen-service outcomes have not yet been reported."
+  },
+  {
+    "id": "borneopost-smec-ai-guardrails-2026-07-16",
+    "date": "2026-07-16",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/07/16/ai-guardrails-fake-news-monitoring-unit-among-smec-panellists-proposals-to-safeguard-public-trust/",
+    "title": "AI guardrails, fake news monitoring unit among SMeC panellists' proposals to safeguard public trust",
+    "section": "Policy",
+    "tags": [
+      "AI guardrails",
+      "fake news monitoring",
+      "Sarawak Media Conference",
+      "public trust",
+      "synthetic media"
+    ],
+    "summary": "SMeC proposals for AI guardrails and a fake-news monitoring unit signal rising local pressure to govern synthetic media and public-trust risks.",
+    "why_it_matters": "The discussion connects Sarawak's AI agenda to media governance, human editorial oversight, misinformation monitoring, and localised safeguards for deepfakes and AI-generated content.",
+    "confidence": "medium",
+    "caveat": "The article reports panellist recommendations from a media conference; it does not confirm that the Sarawak government or media organisations have adopted the proposals."
   }
 ]

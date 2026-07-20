@@ -53,7 +53,7 @@ Sarawak and technology relevance clear before the item is considered.
 ## Current Status
 
 This is a working public prototype, not a fully automated news service. As of
-the latest content audit on 15 July 2026, it contains 28 reviewed stories.
+the latest content audit on 20 July 2026, it contains 30 reviewed stories.
 Candidate discovery and website building work, while editorial review and
 publishing remain human-controlled.
 
