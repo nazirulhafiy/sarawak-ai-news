@@ -80,16 +80,35 @@ a:focus-visible {
   background: var(--line);
 }
 
-.bar::before {
+.brand-lockup,
+.bar-rule-tail {
+  align-self: stretch;
+  position: relative;
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+}
+
+.bar-rule-tail {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.brand-lockup::after,
+.bar-rule-tail::after {
   content: "";
   position: absolute;
   z-index: 1;
-  bottom: -1px;
+  right: 0;
+  bottom: -17px;
   left: 0;
-  width: 112px;
   height: 3px;
-  background: linear-gradient(90deg, var(--sarawak-red) 0 48%, var(--sarawak-yellow) 48% 68%, var(--sarawak-black) 68% 100%);
 }
+
+.brand-lockup::after { background: var(--sarawak-red); }
+.bar-rule-tail::after { background: linear-gradient(90deg, var(--sarawak-yellow) 0 50%, var(--sarawak-black) 50% 100%); }
 
 .brand {
   color: var(--ink);
@@ -348,6 +367,8 @@ footer p { margin: 0; }
     min-height: 62px;
     padding: 18px 0 14px;
   }
+  .brand-lockup::after,
+  .bar-rule-tail::after { bottom: -15px; }
   .brand { font-size: 16px; }
 
   .brief { padding: 32px 0 28px; }

@@ -6,9 +6,10 @@ commitment to rewrite the app yet.
 
 ## Recent Changes
 
-- Refined the production masthead with a larger wordmark, neutral divider, and
-  short Sarawak-color signature while keeping the first screen free of extra
-  descriptive copy.
+- Refined the production masthead with a larger wordmark and full-width
+  Sarawak-color rule, aligning red to the wordmark and splitting the remaining
+  space evenly between yellow and black while keeping the first screen free of
+  extra descriptive copy.
 - Added a reviewed policy-context item on Sarawak's transition toward an
   AI-native economy, with a caveat distinguishing analysis from a new programme
   or implementation milestone.

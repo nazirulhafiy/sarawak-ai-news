@@ -11,8 +11,9 @@ The current direction is intentionally restrained:
 - Narrow `680px` maximum body width.
 - Centered editorial headline at `42px` on desktop with balanced wrapping.
 - Sarawak red, yellow, and black accents.
-- Refined top brand bar with an `18px` desktop wordmark, subtle neutral divider,
-  and a short Sarawak-color signature.
+- Refined top brand bar with an `18px` desktop wordmark and a full-width
+  Sarawak-color rule. The red segment matches the rendered wordmark width;
+  yellow and black divide the remaining space equally.
 - Horizontal category filter using the seven canonical production labels.
 - Ranked story cards with compact metadata.
 - Source name highlighted in yellow.

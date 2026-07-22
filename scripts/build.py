@@ -130,7 +130,8 @@ def render_compact_body(items: list[dict]) -> str:
   <a class="skip-link" href="#content">Skip to content</a>
 
   <header class="bar">
-    <a class="brand" href="/">AI.Sarawak.News</a>
+    <span class="brand-lockup"><a class="brand" href="/">AI.Sarawak.News</a></span>
+    <span class="bar-rule-tail" aria-hidden="true"></span>
   </header>
 
   <main id="content">
