@@ -11,7 +11,8 @@ The current direction is intentionally restrained:
 - Narrow `680px` maximum body width.
 - Centered editorial headline at `42px` on desktop with balanced wrapping.
 - Sarawak red, yellow, and black accents.
-- Thin top brand bar with a Sarawak-color rule.
+- Refined top brand bar with an `18px` desktop wordmark, subtle neutral divider,
+  and a short Sarawak-color signature.
 - Horizontal category filter using the seven canonical production labels.
 - Ranked story cards with compact metadata.
 - Source name highlighted in yellow.
@@ -64,6 +65,10 @@ Current hierarchy:
 5. Category filters.
 6. Ranked story cards.
 7. Independent-publication footer note.
+
+The masthead intentionally contains only the brand for now. A reviewed About
+page and outlined About link remain a future enhancement rather than a current
+production route.
 
 Each story card currently shows date, source, category, title, and summary. Its
 category label exactly matches the corresponding browse filter. The card

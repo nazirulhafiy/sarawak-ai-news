@@ -62,9 +62,9 @@ a:focus-visible {
 .skip-link:focus { transform: translateY(0); }
 
 .bar {
-  min-height: 61px;
+  min-height: 66px;
   margin: 0;
-  padding: 18px 0 14px;
+  padding: 20px 0 16px;
   position: relative;
   display: flex;
   align-items: center;
@@ -76,15 +76,27 @@ a:focus-visible {
   right: 0;
   bottom: 0;
   left: 0;
-  height: 2px;
+  height: 1px;
+  background: var(--line);
+}
+
+.bar::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: -1px;
+  left: 0;
+  width: 112px;
+  height: 3px;
   background: linear-gradient(90deg, var(--sarawak-red) 0 48%, var(--sarawak-yellow) 48% 68%, var(--sarawak-black) 68% 100%);
 }
 
 .brand {
   color: var(--ink);
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 900;
-  letter-spacing: .04em;
+  letter-spacing: .01em;
+  line-height: 1.15;
   text-decoration: none;
 }
 
@@ -332,7 +344,11 @@ footer p { margin: 0; }
 
 @media (max-width: 560px) {
   body { padding: 0 15px 64px; }
-  .bar { min-height: 59px; }
+  .bar {
+    min-height: 62px;
+    padding: 18px 0 14px;
+  }
+  .brand { font-size: 16px; }
 
   .brief { padding: 32px 0 28px; }
   h1 {

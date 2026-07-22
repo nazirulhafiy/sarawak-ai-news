@@ -75,6 +75,7 @@ class BuildTest(unittest.TestCase):
         self.assertNotIn("Get this delivered to your inbox weekly", html)
         self.assertNotIn("Signal categories", html)
         self.assertNotIn("<nav", html)
+        self.assertNotIn("Independent AI brief", html)
         self.assertNotIn("Matched signal terms", html)
         self.assertNotIn('class="story-caveat"', html)
         self.assertNotIn("Source note:", html)
@@ -127,9 +128,12 @@ class BuildTest(unittest.TestCase):
         alternative_dir = ROOT / "dist" / "alternative"
         alternative_dir.mkdir(parents=True, exist_ok=True)
         (alternative_dir / "legacy.html").write_text("stale alternative")
+        deferred_about = ROOT / "dist" / "about.html"
+        deferred_about.write_text("future about page")
 
         subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT, text=True, capture_output=True, check=True)
         self.assertFalse(alternative_dir.exists())
+        self.assertFalse(deferred_about.exists())
 
 
 if __name__ == "__main__":

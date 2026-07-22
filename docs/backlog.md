@@ -1,11 +1,14 @@
 # Backlog
 
 This backlog documents recommended next tasks from the project audit on
-2026-07-08, updated for the 2026-07-15 content and discovery review. It is not a
+2026-07-08, updated for the 2026-07-22 masthead review. It is not a
 commitment to rewrite the app yet.
 
 ## Recent Changes
 
+- Refined the production masthead with a larger wordmark, neutral divider, and
+  short Sarawak-color signature while keeping the first screen free of extra
+  descriptive copy.
 - Added a reviewed policy-context item on Sarawak's transition toward an
   AI-native economy, with a caveat distinguishing analysis from a new programme
   or implementation milestone.
@@ -78,6 +81,9 @@ commitment to rewrite the app yet.
 
 - Keep production on the compact editorial layout until content operations are
   reliable.
+- Revisit the reviewed About-page concept later, using a restrained outlined
+  About link in the masthead and moving fuller publication context off the
+  already wordy homepage.
 - Prototype a data-backed version of Variant D using real reviewed items.
 - Remove or disable unapproved newsletter, sponsor, custom-report, and daily
   update affordances from any productionized Variant D work.

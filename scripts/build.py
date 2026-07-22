@@ -187,6 +187,9 @@ def build() -> None:
     alternative_dir = DIST / "alternative"
     if alternative_dir.exists():
         shutil.rmtree(alternative_dir)
+    deferred_about = DIST / "about.html"
+    if deferred_about.exists():
+        deferred_about.unlink()
     (DIST / "index.html").write_text(render_index(items), encoding="utf-8")
     compact_css = (ROOT / "site" / "style.css").read_text(encoding="utf-8")
     (DIST / "style.css").write_text(compact_css, encoding="utf-8")
