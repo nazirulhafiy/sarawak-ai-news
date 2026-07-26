@@ -556,5 +556,62 @@
     "why_it_matters": "The discussion connects Sarawak's AI agenda to media governance, human editorial oversight, misinformation monitoring, and localised safeguards for deepfakes and AI-generated content.",
     "confidence": "medium",
     "caveat": "The article reports panellist recommendations from a media conference; it does not confirm that the Sarawak government or media organisations have adopted the proposals."
+  },
+  {
+    "id": "sarawaktribune-data-centre-economic-value-2026-07-19",
+    "date": "2026-07-19",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/premier-data-centre-approvals-to-hinge-on-economic-value/",
+    "title": "Premier: Data centre approvals to hinge on economic value",
+    "section": "Infrastructure",
+    "tags": [
+      "data centres",
+      "investment policy",
+      "economic value",
+      "skilled jobs",
+      "AI infrastructure"
+    ],
+    "summary": "Sarawak's move toward more selective data-centre approvals signals that future projects will be judged on economic value, skilled jobs and links to advanced industries.",
+    "why_it_matters": "The position connects AI infrastructure planning to local value creation rather than accepting energy-intensive capacity with limited employment benefits.",
+    "confidence": "medium",
+    "caveat": "The Premier announced no formal approval criteria, process, rejected proposal or timeline; his five-to-ten-year forecast about conventional data centres was explicitly a personal view."
+  },
+  {
+    "id": "borneopost-dubs-ai-business-workshop-2026-07-23",
+    "date": "2026-07-23",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/07/23/dubs-workshop-equips-bumiputera-entrepreneurs-with-ai-skills/",
+    "title": "DUBS workshop equips Bumiputera entrepreneurs with AI skills",
+    "section": "Business",
+    "tags": [
+      "DUBS",
+      "Bumiputera entrepreneurs",
+      "AI coding",
+      "AI video",
+      "SME skills"
+    ],
+    "summary": "A hands-on DUBS workshop that produced AI-generated marketing videos and prototype applications signals practical adoption among Sarawak's Bumiputera entrepreneurs.",
+    "why_it_matters": "Participants moved beyond awareness into usable business outputs, showing how local SMEs can apply generative media and AI-assisted coding without extensive programming expertise.",
+    "confidence": "high",
+    "caveat": "The source reports more than 50 entrepreneurs and AI enthusiasts attended; it does not separate those groups or report post-workshop business outcomes, and the cited national adoption figure has not been independently checked."
+  },
+  {
+    "id": "sarawaktribune-local-governance-ai-2026-07-16",
+    "date": "2026-07-16",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/ai-sustainability-and-innovation-key-to-modern-local-governance/",
+    "title": "AI, sustainability and innovation key to modern local governance",
+    "section": "Public Services",
+    "tags": [
+      "local authorities",
+      "public services",
+      "data governance",
+      "PCDS 2030",
+      "digital transformation"
+    ],
+    "summary": "Sarawak's call for local authorities to adopt AI and data-driven decision-making signals a governance agenda focused on efficiency, planning and public-service delivery.",
+    "why_it_matters": "Municipal adoption would extend the state's AI agenda into local planning, infrastructure management and everyday services closest to residents.",
+    "confidence": "medium",
+    "caveat": "The source reports a policy direction from the Premier, not a new local-authority AI programme, budget, platform, implementation schedule or measured service outcome."
   }
 ]
