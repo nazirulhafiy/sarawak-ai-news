@@ -9,7 +9,9 @@ why it matters, where the signal came from, and how confident the brief is.
 
 Current production is a single static homepage generated from reviewed JSON.
 There is no CMS, database, scraper-to-summary pipeline, account system,
-newsletter sender, or paid product surface.
+newsletter sender, or paid product surface. A scheduled weekly workflow can
+publish qualifying feed updates after source verification and all required
+checks pass.
 
 ## Audience
 
@@ -105,6 +107,23 @@ canonical label is shown in both the category filter and its story cards:
    `python3 scripts/audit_dates.py --item-id <id>` for each added or edited item.
 8. Push to `main` only when the public feed is ready to redeploy.
 
+The scheduled weekly auto-publish path applies the same editorial gate. It may
+use the separate Sarawak AI News Watch conversation as supplementary discovery
+input, but extracts only candidate URLs, headlines, dates, and source names.
+Its summaries, recommendations, and caveats are not authoritative. Watch leads
+are screened against existing items, known URLs, related developments, and an
+internal screened-URL ledger. Every surviving lead is opened and checked at its
+original public source before it can be considered for publication.
+
+With Hafiy's recurring approval, the workflow may commit and push qualifying
+updates to `origin/main` after JSON validation, tests, date and summary audits,
+the static build, local browser preview, `git diff --check`, and final scope
+inspection all pass. It makes no content commit or push when there are no
+qualifying stories, when the Watch handoff is unavailable, or when any required
+check fails. The automation may publish only `README.md`, `data/items.json`,
+and `data/site.json`; it does not modify docs, assets, scripts, tests, or
+unrelated local changes.
+
 ## Source Policy
 
 `data/sources.json` currently watches a mix of media, institutional, government,
@@ -132,7 +151,8 @@ explicit full-audit option.
 - Treat `dist/` as generated output.
 - Treat candidate files as internal review material.
 - Do not send newsletters or publish new public surfaces without explicit
-  approval.
+  approval. The recurring feed publisher is separately pre-authorized by Hafiy
+  and remains limited to the verified publication paths described above.
 - Prefer auditable source attribution over speed.
 
 ## Success Signals

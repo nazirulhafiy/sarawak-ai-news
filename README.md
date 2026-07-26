@@ -34,16 +34,21 @@ No technical knowledge is required to read it.
 
 ## How It Works
 
-1. A lightweight script checks selected public search and topic pages for possible stories.
-2. A person opens and reviews each candidate at its original source.
-3. Approved stories receive a short, source-attributed summary, context,
+1. Lightweight discovery checks selected public search and topic pages for
+   possible stories.
+2. The publishing workflow opens each surviving candidate at its original
+   source, checks its date and Sarawak relevance, and screens for duplicates.
+3. Qualifying stories receive a short, source-attributed summary, context,
    confidence level, and caveat.
-4. The reviewed data is turned into a static website and published through
-   GitHub Pages.
+4. After the required tests, audits, build, preview, and scope checks pass, the
+   reviewed data is committed to `main` and published through GitHub Pages.
 
-Story discovery is partly automated, but publication is not. Nothing becomes
-public until it has been manually reviewed. The project does not copy or
-republish full articles.
+Discovery and the weekly publishing checks are partly automated, but the
+workflow is not a blind publisher. Every candidate still requires original
+source verification and editorial qualification. With Hafiy's recurring
+approval, the workflow may commit and push qualifying feed updates; if no
+story qualifies or any required check fails, it makes no publication commit.
+The project does not copy or republish full articles.
 
 Discovery is an aid rather than an editorial gate. A directly supplied source
 can also be reviewed, and AI-led headlines may proceed to article-body checks
@@ -54,8 +59,9 @@ Sarawak and technology relevance clear before the item is considered.
 
 This is a working public prototype, not a fully automated news service. As of
 the latest content audit on 26 July 2026, it contains 33 reviewed stories.
-Candidate discovery and website building work, while editorial review and
-publishing remain human-controlled.
+Candidate discovery, source checks, and website building are supported by
+automation, while the editorial criteria and recurring publishing approval
+remain explicitly controlled by Hafiy.
 
 ## Editorial Principles
 
@@ -65,7 +71,8 @@ publishing remain human-controlled.
   publication attribution stays in the source label.
 - **Be transparent.** Confidence and caveats are kept with every item.
 - **Keep it concise.** Summaries are original and intentionally short.
-- **Require human review.** Discovery results stay private until approved.
+- **Require source review.** Discovery results stay private until the original
+  source has been checked and the item passes the editorial criteria.
 
 ## For Contributors and Developers
 
@@ -121,6 +128,12 @@ before adding a story to `data/items.json`.
 5. Run the checks below.
 6. Build and preview the site.
 7. Push the approved update to `main` for GitHub Pages to deploy it.
+
+The scheduled weekly workflow follows the same editorial gate. It can also use
+the separate Sarawak AI News Watch conversation as a supplementary source of
+candidate URLs. Watch recommendations and summaries are treated as provisional
+leads only: each surviving URL is deduplicated, opened at its original source,
+and independently verified before it can be published.
 
 ### Check Your Changes
 
