@@ -613,5 +613,24 @@
     "why_it_matters": "Municipal adoption would extend the state's AI agenda into local planning, infrastructure management and everyday services closest to residents.",
     "confidence": "medium",
     "caveat": "The source reports a policy direction from the Premier, not a new local-authority AI programme, budget, platform, implementation schedule or measured service outcome."
+  },
+  {
+    "id": "borneopost-batu-kitang-ai-training-2026-07-27",
+    "date": "2026-07-27",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/07/27/batu-kitang-rep-ai-a-tool-to-boost-skills-productivity-not-something-to-be-feared/",
+    "title": "Batu Kitang rep: AI a tool to boost skills, productivity, not something to be feared",
+    "section": "Workforce",
+    "tags": [
+      "Batu Kitang",
+      "AI training",
+      "digital literacy",
+      "community skills",
+      "productivity"
+    ],
+    "summary": "A Batu Kitang community programme signals broader AI-skills adoption by giving participants hands-on practice with smartphone tools for writing, images, short videos and productivity.",
+    "why_it_matters": "It shows Sarawak's AI-skills agenda reaching neighbourhood-level digital literacy beyond formal enterprise and civil-service training.",
+    "confidence": "high",
+    "caveat": "The article does not report attendance or follow-up outcomes, and the assemblyman's comments are advocacy rather than evidence of broader community adoption."
   }
 ]
