@@ -632,5 +632,44 @@
     "why_it_matters": "It shows Sarawak's AI-skills agenda reaching neighbourhood-level digital literacy beyond formal enterprise and civil-service training.",
     "confidence": "high",
     "caveat": "The article does not report attendance or follow-up outcomes, and the assemblyman's comments are advocacy rather than evidence of broader community adoption."
+  },
+  {
+    "id": "ukas-sarawak-ai-blueprint-kickoff-2026-07-27",
+    "date": "2026-07-27",
+    "source": "UKAS",
+    "url": "https://ukas.sarawak.gov.my/web/subpage/news_view/45255",
+    "title": "Sarawak AI Blueprint Perkukuh Hala Tuju Pembangunan AI Negeri",
+    "section": "Policy",
+    "tags": [
+      "Sarawak AI Blueprint",
+      "SAIC",
+      "SCSDU",
+      "AI governance",
+      "PCDS 2030",
+      "AI readiness"
+    ],
+    "summary": "Sarawak has begun developing a five-pillar AI Blueprint to coordinate government transformation, digital foundations, governance, economic adoption and long-term capability building.",
+    "why_it_matters": "The kick-off moves Sarawak's AI agenda from earlier blueprint plans toward a cross-sector process with named priorities and a statewide planning mandate.",
+    "confidence": "high",
+    "caveat": "The Blueprint is still being developed; UKAS reports a kick-off and consultation process, not a final policy, funded programme or implementation timetable."
+  },
+  {
+    "id": "dayakdaily-sarawak-aerospace-agency-2026-07-27",
+    "date": "2026-07-27",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/sarawak-aerospace-agency-formed-ceo-expected-by-year-end/",
+    "title": "Sarawak Aerospace Agency formed, CEO expected by year-end",
+    "section": "Infrastructure",
+    "tags": [
+      "Sarawak Aerospace Agency",
+      "satellite communications",
+      "Earth observation",
+      "AI infrastructure",
+      "digital connectivity"
+    ],
+    "summary": "Sarawak's newly formed Aerospace Agency adds a state coordination body for satellite communications, Earth observation, AI solutions and related digital infrastructure, with a CEO expected by year-end.",
+    "why_it_matters": "The agency makes the state's aerospace and AI ambitions more concrete by creating an institution to coordinate satellite, geospatial and public-service applications across Sarawak's large territory.",
+    "confidence": "medium",
+    "caveat": "The agency is still being established, and the article reports no operational AI or satellite deployment, budget or implementation schedule."
   }
 ]
