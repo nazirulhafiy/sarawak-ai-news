@@ -652,5 +652,62 @@
     "why_it_matters": "The kick-off moves Sarawak's AI agenda from earlier blueprint plans toward a cross-sector process with named priorities and a statewide planning mandate.",
     "confidence": "high",
     "caveat": "The Blueprint is still being developed; UKAS reports a kick-off and consultation process, not a final policy, funded programme or implementation timetable."
+  },
+  {
+    "id": "sarawaktribune-ai-satellite-ambitions-2026-07-28",
+    "date": "2026-07-28",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/sarawak-pushes-ai-satellite-ambitions/",
+    "title": "Sarawak pushes AI, satellite ambitions",
+    "section": "Infrastructure",
+    "tags": [
+      "AI infrastructure",
+      "satellite communications",
+      "digital transformation",
+      "connectivity",
+      "AI governance"
+    ],
+    "summary": "Sarawak's more-than-RM2-billion connectivity build-out and planned satellite capabilities signal an infrastructure foundation for AI solutions in utilities, smart cities and public services.",
+    "why_it_matters": "This turns the state's AI ambition into a concrete infrastructure and collaboration agenda, linking connectivity, satellite systems and sector applications rather than treating AI as a standalone software programme.",
+    "confidence": "high",
+    "caveat": "The minister invited collaboration but announced no specific AI partnership, funding, procurement or delivery timetable; the satellite agency details describe policy direction, not a deployed AI system."
+  },
+  {
+    "id": "dayakdaily-ibm-singapore-ai-collaboration-2026-07-29",
+    "date": "2026-07-29",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/sarawak-ibm-singapore-explore-strategic-collaboration-in-ai-quantum-computing-cybersecurity/",
+    "title": "Sarawak, IBM Singapore explore strategic collaboration in AI, quantum computing, cybersecurity",
+    "section": "Business",
+    "tags": [
+      "IBM Singapore",
+      "AI strategy",
+      "quantum computing",
+      "cybersecurity",
+      "technology transfer"
+    ],
+    "summary": "The proposed Sarawak-IBM Singapore collaboration signals a capability-building route for AI, quantum computing and cybersecurity across public services, investment and digital transformation.",
+    "why_it_matters": "The meeting connects Sarawak's AI institutions and agencies with a major technology company and gives the state's capability agenda a potential route into knowledge exchange and technology transfer.",
+    "confidence": "medium",
+    "caveat": "The UKAS page linked by Watch redirects repeatedly; DayakDaily and Sarawak Tribune report the meeting, but no signed agreement, funding, project or timetable was announced."
+  },
+  {
+    "id": "sarawaktribune-tsi-ai-community-2026-07-29",
+    "date": "2026-07-29",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/tsi-launches-initiatives-to-drive-integrity-and-innovation/",
+    "title": "TSI launches initiatives to drive integrity and innovation",
+    "section": "Workforce",
+    "tags": [
+      "TSI Artificial Intelligence Community",
+      "AI literacy",
+      "agricultural automation",
+      "smart manufacturing",
+      "digital innovation"
+    ],
+    "summary": "TSI's proposed AI community signals a workforce and adoption channel for building literacy among Sarawakians, especially youths, and applying AI in entrepreneurship, agriculture and manufacturing.",
+    "why_it_matters": "The proposed community gives Sarawak's AI agenda a civil-society delivery channel that could extend practical skills beyond government, universities and urban centres.",
+    "confidence": "medium",
+    "caveat": "The report is an organisational announcement; no launch date, funding, partners, curriculum, participation target or delivered outcomes were given."
   }
 ]
