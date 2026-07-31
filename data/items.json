@@ -709,5 +709,24 @@
     "why_it_matters": "The proposed community gives Sarawak's AI agenda a civil-society delivery channel that could extend practical skills beyond government, universities and urban centres.",
     "confidence": "medium",
     "caveat": "The report is an organisational announcement; no launch date, funding, partners, curriculum, participation target or delivered outcomes were given."
+  },
+  {
+    "id": "ukas-sarawak-education-reform-ai-stem-2026-07-30",
+    "date": "2026-07-30",
+    "source": "UKAS",
+    "url": "https://ukas.sarawak.gov.my/web/subpage/news_view/45391",
+    "title": "Sarawak Education Reform Must Be Driven By STEM To Produce World-Class Human Capital",
+    "section": "Education",
+    "tags": [
+      "AI literacy",
+      "STEM education",
+      "education reform",
+      "talent development",
+      "Sarawak schools"
+    ],
+    "summary": "Sarawak's call for students to understand how AI works and create new solutions links STEM-focused education reform to the state's long-term talent pipeline.",
+    "why_it_matters": "It moves the AI education discussion from general digital literacy toward building students' ability to understand and create with AI, while tying that goal to statewide STEM capacity.",
+    "confidence": "medium",
+    "caveat": "The UKAS page currently redirects repeatedly; the date and substance are corroborated by Utusan Borneo's 30 July report, but no curriculum change, teacher training, funding or timetable was announced."
   }
 ]
