@@ -728,5 +728,62 @@
     "why_it_matters": "It moves the AI education discussion from general digital literacy toward building students' ability to understand and create with AI, while tying that goal to statewide STEM capacity.",
     "confidence": "medium",
     "caveat": "The UKAS page currently redirects repeatedly; the date and substance are corroborated by Utusan Borneo's 30 July report, but no curriculum change, teacher training, funding or timetable was announced."
+  },
+  {
+    "id": "tvs-sarawak-health-data-privacy-ai-2026-08-01",
+    "date": "2026-08-01",
+    "source": "TVS",
+    "url": "https://www.tvsarawak.my/2026/08/01/sarawak-mulls-law-to-protect-health-data-privacy/",
+    "title": "Sarawak mulls new law to protect health data privacy",
+    "section": "Policy",
+    "tags": [
+      "health data",
+      "AI governance",
+      "healthcare privacy",
+      "digital health"
+    ],
+    "summary": "Sarawak's study of a dedicated health-data privacy law signals how AI and digital healthcare may be governed across the state's extensive medical-record and clinic-connectivity base.",
+    "why_it_matters": "A dedicated framework could shape how Sarawak's extensive clinical data is governed for AI-assisted care and research, making privacy a foundation for digital-health adoption.",
+    "confidence": "high",
+    "caveat": "The proposal is at the drafting stage; no bill, public consultation, legislative timetable, or relationship with federal data-protection law was announced."
+  },
+  {
+    "id": "dayakdaily-ai-sarawak-healthcare-gaps-2026-08-01",
+    "date": "2026-08-01",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/deputy-premier-ai-can-bridge-sarawaks-healthcare-gaps-but-human-compassion-comes-first/",
+    "title": "Deputy Premier: AI can bridge Sarawak's healthcare gaps, but human compassion comes first",
+    "section": "Public Services",
+    "tags": [
+      "AI healthcare",
+      "telehealth",
+      "rural healthcare",
+      "diagnostics",
+      "biotechnology"
+    ],
+    "summary": "Sarawak's Deputy Premier's healthcare speech signals proposed uses for diagnostic AI, predictive analytics, connected devices and telehealth across remote communities while keeping clinicians accountable.",
+    "why_it_matters": "These proposed use cases map AI adoption to Sarawak's geography and rural-service constraints, while the emphasis on human oversight sets an important implementation guardrail.",
+    "confidence": "medium",
+    "caveat": "The speech describes potential applications; it does not identify deployed systems, vendors, budgets, or implementation deadlines."
+  },
+  {
+    "id": "ukas-serian-ai-automation-course-2026-08-01",
+    "date": "2026-08-01",
+    "source": "UKAS",
+    "url": "https://ukas.sarawak.gov.my/web/subpage/news_view/45538",
+    "title": "Sarawak entrepreneurs urged to use AI ethically in business",
+    "section": "Business",
+    "tags": [
+      "AI automation",
+      "Serian",
+      "entrepreneurs",
+      "MINTRED",
+      "SDEC",
+      "business skills"
+    ],
+    "summary": "A two-day Serian course signals growing business adoption by encouraging Sarawak entrepreneurs to use AI ethically for marketing, packaging design, content creation and market research.",
+    "why_it_matters": "The course shows Sarawak's AI-adoption agenda reaching entrepreneurs outside Kuching with practical business use cases, although the source does not report participant outcomes or repeat sessions.",
+    "confidence": "high",
+    "caveat": "The course ran from 1 to 2 August 2026, but UKAS reports no participant count, detailed curriculum, or follow-up outcomes; the RM35 million figure refers to WhatsApp and social-media transactions generally, not AI-generated revenue."
   }
 ]
