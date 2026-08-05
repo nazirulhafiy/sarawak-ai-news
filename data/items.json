@@ -861,5 +861,24 @@
     "why_it_matters": "The designation places Sarawak inside the national AI implementation geography and could connect its renewable-energy, data-centre and state-blueprint work to federal support mechanisms.",
     "confidence": "medium",
     "caveat": "The source is an analysis citing an MBSB Research note on the National AI Action Plan; the support package is planned rather than delivered, and this review did not independently verify the underlying official plan document."
+  },
+  {
+    "id": "sarawaktribune-azam-future-skills-week-ai-2026-07-24",
+    "date": "2026-07-24",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/azam-future-skills-week-spotlights-ai/",
+    "title": "AZAM Future Skills Week spotlights AI",
+    "section": "Workforce",
+    "tags": [
+      "AZAM Future Skills Week",
+      "AI skills",
+      "workforce readiness",
+      "HRD Corp",
+      "digital productivity"
+    ],
+    "summary": "AZAM Future Skills Week drew more than 150 participants to AI career-readiness and productivity sessions, signalling local demand for practical workforce preparation.",
+    "why_it_matters": "The completed Kuching programme connected Sarawak participants with practical AI use and regional workforce perspectives while widening access to industry-aligned digital training.",
+    "confidence": "high",
+    "caveat": "The attendance figure and programme details come from an organiser statement; the report does not identify participant demographics, completed projects, skills assessments or follow-up outcomes."
   }
 ]

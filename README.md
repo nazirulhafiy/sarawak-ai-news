@@ -58,7 +58,7 @@ technology relevance clear before the item is considered.
 ## Current Status
 
 This is a working public prototype, not a fully automated news service. As of
-the latest content audit on 5 August 2026, it contains 46 reviewed stories.
+the latest content audit on 5 August 2026, it contains 47 reviewed stories.
 Candidate discovery, source checks, and website building are supported by
 automation, while the editorial criteria and recurring publishing approval
 remain explicitly controlled by Hafiy.
@@ -130,12 +130,13 @@ before adding a story to `data/items.json`.
 7. Push the approved update to `main` for GitHub Pages to deploy it.
 
 The scheduled daily workflow follows the same editorial gate. It uses the
-separate Codex-native Sarawak AI News Watch task as the sole candidate-discovery
-source and refreshes that task live on every run. Watch recommendations
-and summaries are treated as provisional leads only: each surviving URL is
-deduplicated, opened at its original source, and independently verified before
-it can be published. A failed or incomplete Watch refresh blocks publication;
-there is no independent discovery fallback.
+linked ChatGPT Sarawak AI News Watch conversation as the sole
+candidate-discovery source and reads that conversation live on every run. Watch
+recommendations and summaries are treated as provisional leads only: each
+surviving URL is deduplicated, opened at its original source, and independently
+verified before it can be published. Only verified English source pages qualify.
+A failed or incomplete Watch read blocks publication; there is no independent
+discovery fallback.
 
 ### Check Your Changes
 
