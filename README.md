@@ -34,8 +34,8 @@ No technical knowledge is required to read it.
 
 ## How It Works
 
-1. Lightweight discovery checks selected public search and topic pages for
-   possible stories.
+1. The daily Sarawak AI News Watch task searches public sources and hands off
+   verified candidate headlines, dates, sources, and URLs.
 2. The publishing workflow opens each surviving candidate at its original
    source, checks its date and Sarawak relevance, and screens for duplicates.
 3. Qualifying stories receive a short, source-attributed summary, context,
@@ -43,22 +43,22 @@ No technical knowledge is required to read it.
 4. After the required tests, audits, build, preview, and scope checks pass, the
    reviewed data is committed to `main` and published through GitHub Pages.
 
-Discovery and the weekly publishing checks are partly automated, but the
+Discovery and the daily publishing checks are partly automated, but the
 workflow is not a blind publisher. Every candidate still requires original
 source verification and editorial qualification. With Hafiy's recurring
 approval, the workflow may commit and push qualifying feed updates; if no
 story qualifies or any required check fails, it makes no publication commit.
 The project does not copy or republish full articles.
 
-Discovery is an aid rather than an editorial gate. A directly supplied source
-can also be reviewed, and AI-led headlines may proceed to article-body checks
-when the headline itself does not mention Sarawak. The body must still make the
-Sarawak and technology relevance clear before the item is considered.
+For the scheduled publisher, the Watch handoff is the sole discovery gate.
+AI-led headlines may proceed to article-body checks when the headline itself
+does not mention Sarawak, but the body must still make the Sarawak and
+technology relevance clear before the item is considered.
 
 ## Current Status
 
 This is a working public prototype, not a fully automated news service. As of
-the latest content audit on 3 August 2026, it contains 42 reviewed stories.
+the latest content audit on 5 August 2026, it contains 46 reviewed stories.
 Candidate discovery, source checks, and website building are supported by
 automation, while the editorial criteria and recurring publishing approval
 remain explicitly controlled by Hafiy.
@@ -130,8 +130,8 @@ before adding a story to `data/items.json`.
 7. Push the approved update to `main` for GitHub Pages to deploy it.
 
 The scheduled daily workflow follows the same editorial gate. It uses the
-separate Sarawak AI News Watch conversation as the sole candidate-discovery
-source and refreshes that conversation live on every run. Watch recommendations
+separate Codex-native Sarawak AI News Watch task as the sole candidate-discovery
+source and refreshes that task live on every run. Watch recommendations
 and summaries are treated as provisional leads only: each surviving URL is
 deduplicated, opened at its original source, and independently verified before
 it can be published. A failed or incomplete Watch refresh blocks publication;

@@ -785,5 +785,81 @@
     "why_it_matters": "The course shows Sarawak's AI-adoption agenda reaching entrepreneurs outside Kuching with practical business use cases, although the source does not report participant outcomes or repeat sessions.",
     "confidence": "high",
     "caveat": "The course ran from 1 to 2 August 2026, but UKAS reports no participant count, detailed curriculum, or follow-up outcomes; the RM35 million figure refers to WhatsApp and social-media transactions generally, not AI-generated revenue."
+  },
+  {
+    "id": "tvs-ipd-simunjan-ai-training-2026-08-05",
+    "date": "2026-08-05",
+    "source": "TVS",
+    "url": "https://www.tvsarawak.my/2026/08/05/ipd-simunjan-tingkat-kemahiran-ai-warga-polis/",
+    "title": "IPD Simunjan tingkat kemahiran AI warga polis",
+    "section": "Public Services",
+    "tags": [
+      "police training",
+      "AI literacy",
+      "PDRM",
+      "Simunjan",
+      "digital transformation"
+    ],
+    "summary": "IPD Simunjan has begun phased AI training for police personnel, linking ethical technology skills to more efficient and innovative public-service delivery.",
+    "why_it_matters": "The completed first phase is a concrete local capacity-building step for Sarawak's police service and connects AI literacy with day-to-day public-sector transformation.",
+    "confidence": "high",
+    "caveat": "The source reports an internal training session and a planned second phase, but gives no participant count, detailed curriculum, deployed tools or operational outcomes; no English equivalent was located at the time of review."
+  },
+  {
+    "id": "borneopost-sg-sarawak-ai-hackathon-2026-08-03",
+    "date": "2026-08-03",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/08/03/cross-border-ai-hackathon-returns-to-kuching-next-month/",
+    "title": "Cross-border AI hackathon returns to Kuching next month",
+    "section": "Workforce",
+    "tags": [
+      "AI hackathon",
+      "Singapore-Sarawak",
+      "business innovation",
+      "youth talent",
+      "AI skills"
+    ],
+    "summary": "The second Singapore-Sarawak AI Business Design Hackathon will select 40 participants, linking practical business solutions with a new cross-border youth ambassador network in Kuching.",
+    "why_it_matters": "The programme gives Sarawak participants practical AI and business-design experience while creating a longer-term talent link with Singapore's innovation ecosystem.",
+    "confidence": "high",
+    "caveat": "Registration is open for an event scheduled on 3 and 4 September 2026; participant selection, project quality, the ambassador network launch and resulting partnerships have not yet occurred."
+  },
+  {
+    "id": "borneopost-sustainable-agrifood-ai-2026-08-03",
+    "date": "2026-08-03",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/08/03/abang-johari-sarawak-targeting-regional-leadership-in-sustainable-agri-food-innovation/",
+    "title": "Abang Johari: Sarawak targeting regional leadership in sustainable agri-food innovation",
+    "section": "Business",
+    "tags": [
+      "agri-food",
+      "agricultural AI",
+      "automation",
+      "precision agriculture",
+      "PCDS 2030"
+    ],
+    "summary": "Sarawak's planned agri-food modernisation signals adoption of AI, automation, precision agriculture and data-driven production alongside expanded technology-backed hubs and research partnerships.",
+    "why_it_matters": "Agriculture is a major rural and food-security priority, so linking AI and automation to the state's existing AgriHub expansion gives sector adoption a clear Sarawak development context.",
+    "confidence": "medium",
+    "caveat": "The report describes the Premier's policy direction and existing AgriHub expansion, but identifies no dedicated agricultural AI deployment, budget, implementation timetable or measured outcome."
+  },
+  {
+    "id": "borneopost-sarawak-ai-growth-zone-2026-07-30",
+    "date": "2026-07-30",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/07/30/analysis-sabah-sarawak-key-nodes-for-malaysias-ai-action-plan/",
+    "title": "Analysis: Sabah, Sarawak key nodes for Malaysia's AI Action Plan",
+    "section": "Policy",
+    "tags": [
+      "AI Nation 2030",
+      "AI Growth Zone",
+      "SCORE",
+      "compute infrastructure",
+      "regulatory sandbox"
+    ],
+    "summary": "Sarawak's SCORE region has been designated one of six federal AI Growth Zones, linking the state to planned compute access, talent, incentives, research and regulatory support.",
+    "why_it_matters": "The designation places Sarawak inside the national AI implementation geography and could connect its renewable-energy, data-centre and state-blueprint work to federal support mechanisms.",
+    "confidence": "medium",
+    "caveat": "The source is an analysis citing an MBSB Research note on the National AI Action Plan; the support package is planned rather than delivered, and this review did not independently verify the underlying official plan document."
   }
 ]
