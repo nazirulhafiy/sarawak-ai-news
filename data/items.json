@@ -520,25 +520,6 @@
     "caveat": "This is an analysis column synthesising existing policy direction; it does not announce a new programme, budget or implementation milestone."
   },
   {
-    "id": "ukas-adam-ai-civil-service-2026-07-15",
-    "date": "2026-07-15",
-    "source": "UKAS",
-    "url": "https://ukas.sarawak.gov.my/web/subpage/news_view/44575",
-    "title": "ADAM AI Rakan Digital Pertama Perkhidmatan Awam Sarawak",
-    "section": "Public Services",
-    "tags": [
-      "ADAM AI",
-      "Sarawak Civil Service",
-      "on-premises AI",
-      "data sovereignty",
-      "public-sector knowledge management"
-    ],
-    "summary": "ADAM AI's on-premises rollout gives Sarawak civil servants a governed assistant for authorised documents, signalling production use of sovereign public-sector AI.",
-    "why_it_matters": "The launch turns earlier civil-service AI training and data-governance work into an internal tool for document search, policy reference, fact-checking, and institutional knowledge retrieval.",
-    "confidence": "high",
-    "caveat": "UKAS reports the official launch and intended civil-service use; independent performance, usage, security controls, and citizen-service outcomes have not yet been reported."
-  },
-  {
     "id": "borneopost-smec-ai-guardrails-2026-07-16",
     "date": "2026-07-16",
     "source": "The Borneo Post",
@@ -765,45 +746,6 @@
     "why_it_matters": "These proposed use cases map AI adoption to Sarawak's geography and rural-service constraints, while the emphasis on human oversight sets an important implementation guardrail.",
     "confidence": "medium",
     "caveat": "The speech describes potential applications; it does not identify deployed systems, vendors, budgets, or implementation deadlines."
-  },
-  {
-    "id": "ukas-serian-ai-automation-course-2026-08-01",
-    "date": "2026-08-01",
-    "source": "UKAS",
-    "url": "https://ukas.sarawak.gov.my/web/subpage/news_view/45538",
-    "title": "Sarawak entrepreneurs urged to use AI ethically in business",
-    "section": "Business",
-    "tags": [
-      "AI automation",
-      "Serian",
-      "entrepreneurs",
-      "MINTRED",
-      "SDEC",
-      "business skills"
-    ],
-    "summary": "A two-day Serian course signals growing business adoption by encouraging Sarawak entrepreneurs to use AI ethically for marketing, packaging design, content creation and market research.",
-    "why_it_matters": "The course shows Sarawak's AI-adoption agenda reaching entrepreneurs outside Kuching with practical business use cases, although the source does not report participant outcomes or repeat sessions.",
-    "confidence": "high",
-    "caveat": "The course ran from 1 to 2 August 2026, but UKAS reports no participant count, detailed curriculum, or follow-up outcomes; the RM35 million figure refers to WhatsApp and social-media transactions generally, not AI-generated revenue."
-  },
-  {
-    "id": "tvs-ipd-simunjan-ai-training-2026-08-05",
-    "date": "2026-08-05",
-    "source": "TVS",
-    "url": "https://www.tvsarawak.my/2026/08/05/ipd-simunjan-tingkat-kemahiran-ai-warga-polis/",
-    "title": "IPD Simunjan tingkat kemahiran AI warga polis",
-    "section": "Public Services",
-    "tags": [
-      "police training",
-      "AI literacy",
-      "PDRM",
-      "Simunjan",
-      "digital transformation"
-    ],
-    "summary": "IPD Simunjan has begun phased AI training for police personnel, linking ethical technology skills to more efficient and innovative public-service delivery.",
-    "why_it_matters": "The completed first phase is a concrete local capacity-building step for Sarawak's police service and connects AI literacy with day-to-day public-sector transformation.",
-    "confidence": "high",
-    "caveat": "The source reports an internal training session and a planned second phase, but gives no participant count, detailed curriculum, deployed tools or operational outcomes; no English equivalent was located at the time of review."
   },
   {
     "id": "borneopost-sg-sarawak-ai-hackathon-2026-08-03",
