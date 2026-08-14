@@ -822,5 +822,45 @@
     "why_it_matters": "The completed Kuching programme connected Sarawak participants with practical AI use and regional workforce perspectives while widening access to industry-aligned digital training.",
     "confidence": "high",
     "caveat": "The attendance figure and programme details come from an organiser statement; the report does not identify participant demographics, completed projects, skills assessments or follow-up outcomes."
+  },
+  {
+    "id": "aiformakers-borneo-makers-festival-2026-08-13",
+    "date": "2026-08-13",
+    "source": "TEGAS / AI For Makers",
+    "url": "https://aiformakers.my/",
+    "title": "AI For Makers - Borneo Makers Festival 2026",
+    "section": "Education",
+    "tags": [
+      "AI For Makers",
+      "Borneo Makers Festival",
+      "AI workshops",
+      "AI education",
+      "TEGAS",
+      "Sarawak AI Blueprint"
+    ],
+    "summary": "AI For Makers' Kuching festival signals a shift from AI awareness to hands-on capability through workshops, showcases, coding challenges and public demonstrations for Sarawak's wider maker community.",
+    "why_it_matters": "The programme gives students, educators, businesses and public agencies a local setting to practise AI tools and see how the Sarawak AI Blueprint translates into skills, prototypes and public participation.",
+    "confidence": "medium",
+    "caveat": "The official programme page confirms the 23–24 August 2026 dates, TEGAS Digital Village venue and detailed schedule; its visitor and exhibitor figures are targets, and it does not expose a separate publication timestamp, so the feed date follows Watch's 13 August handoff."
+  },
+  {
+    "id": "sec-global-engine-angkasa-x-space-to-ai-sarawak-2026-08-11",
+    "date": "2026-08-11",
+    "source": "Global Engine Group / SEC filing",
+    "url": "https://www.sec.gov/Archives/edgar/data/1908705/000121390026087533/ea029824601ex99-1.htm",
+    "title": "Global Engine Group Holding Limited and Angkasa-X Holdings Corp. Enter into Strategic Collaboration to Advance Space-to-AI Edge Infrastructure Platform, Accelerating GLE’s Expansion into Next-Generation AI-Powered Digital Infrastructure",
+    "section": "Infrastructure",
+    "tags": [
+      "Space-to-AI",
+      "edge computing",
+      "satellite infrastructure",
+      "Angkasa-X",
+      "SDEC",
+      "Sarawak"
+    ],
+    "summary": "A planned Sarawak Space-to-AI proof of concept signals a new infrastructure layer combining satellite ground stations, edge data processing and local AI services for agriculture, resources and disaster resilience.",
+    "why_it_matters": "If delivered, the project would bring satellite data processing into Sarawak rather than relying entirely on remote infrastructure, linking digital sovereignty to practical applications in plantations, maritime security, carbon intelligence and disaster response.",
+    "confidence": "medium",
+    "caveat": "The SEC-filed release reports an agreement signed 15 July 2026 and a proof-of-concept target in October 2027, but the site, capacity, investment and funding are undisclosed; the announcement is company-reported and describes a forward-looking plan, while SDEC's exact operational role needs direct confirmation."
   }
 ]
