@@ -842,5 +842,45 @@
     "why_it_matters": "The programme gives students, educators, businesses and public agencies a local setting to practise AI tools and see how the Sarawak AI Blueprint translates into skills, prototypes and public participation.",
     "confidence": "medium",
     "caveat": "The official programme page confirms the 23–24 August 2026 dates, TEGAS Digital Village venue and detailed schedule; its visitor and exhibitor figures are targets, and it does not expose a separate publication timestamp, so the feed date follows Watch's 13 August handoff."
+  },
+  {
+    "id": "sarawaktribune-mpob-biodiversity-ai-2026-08-13",
+    "date": "2026-08-13",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/mpob-expands-biodiversity-research-with-ai-and-bioacoustics/",
+    "title": "MPOB expands biodiversity research with AI and bioacoustics",
+    "section": "Research",
+    "tags": [
+      "MPOB",
+      "BioPALS 2026",
+      "biodiversity",
+      "bioacoustics",
+      "oil palm",
+      "AI research"
+    ],
+    "summary": "MPOB's plan to integrate AI and bioacoustics into biodiversity research signals a more data-driven approach to sustainability in Sarawak's oil-palm landscapes.",
+    "why_it_matters": "The initiative links AI-supported ecological monitoring to Sarawak's leading plantation sector and a research collaboration involving MPOB, UNIMAS, SALCRA and Sarawak Oil Palms.",
+    "confidence": "medium",
+    "caveat": "The report announces an intended research direction at BioPALS 2026, but identifies no AI model, dataset, research site, budget, deployment partner or implementation timetable."
+  },
+  {
+    "id": "sarawaktribune-community-colleges-lean-ai-2026-08-14",
+    "date": "2026-08-14",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/community-colleges-turn-to-lean-ai-to-ease-educators-workload/",
+    "title": "Community colleges turn to Lean, AI to ease educators' workload",
+    "section": "Education",
+    "tags": [
+      "community colleges",
+      "TVET",
+      "AI education",
+      "Lean management",
+      "educator training",
+      "UNIMAS"
+    ],
+    "summary": "A Sarawak community-college workshop signals practical AI adoption by using Lean methods and AI tools to help 20 educators simplify teaching processes and reduce repetitive work.",
+    "why_it_matters": "It is a concrete example of AI adoption inside Sarawak's TVET system, with educators from six community colleges preparing to extend the practices across the state.",
+    "confidence": "high",
+    "caveat": "The workshop reports training and planned extension, not measured improvements in teaching or a statewide usage policy; the article does not set out safeguards for student data or third-party AI tools."
   }
 ]
