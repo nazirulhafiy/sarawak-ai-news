@@ -882,5 +882,25 @@
     "why_it_matters": "It is a concrete example of AI adoption inside Sarawak's TVET system, with educators from six community colleges preparing to extend the practices across the state.",
     "confidence": "high",
     "caveat": "The workshop reports training and planned extension, not measured improvements in teaching or a statewide usage policy; the article does not set out safeguards for student data or third-party AI tools."
+  },
+  {
+    "id": "borneopost-sovereign-ai-platform-2026-08-17",
+    "date": "2026-08-17",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/08/17/new-platform-launched-to-boost-sarawaks-sovereign-ai-capabilities/",
+    "title": "New platform launched to boost Sarawak’s sovereign AI capabilities",
+    "section": "Infrastructure",
+    "tags": [
+      "sovereign AI",
+      "SAINS",
+      "data residency",
+      "high-performance computing",
+      "Sarawak Energy",
+      "AI infrastructure"
+    ],
+    "summary": "Sarawak's new sovereign AI platform gives state agencies locally hosted compute for secure model development, inference and public-service applications.",
+    "why_it_matters": "The launch turns Sarawak's sovereign-AI agenda into an operated infrastructure platform, linking local data residency and high-performance computing with government and utility-sector adoption.",
+    "confidence": "high",
+    "caveat": "The platform has launched, but its hardware capacity, operating budget, participating agencies, implementation timetable and production use cases were not disclosed; the SAINS-Sarawak Energy collaboration is exploratory."
   }
 ]
