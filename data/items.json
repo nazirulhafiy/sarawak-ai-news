@@ -902,5 +902,45 @@
     "why_it_matters": "The launch turns Sarawak's sovereign-AI agenda into an operated infrastructure platform, linking local data residency and high-performance computing with government and utility-sector adoption.",
     "confidence": "high",
     "caveat": "The platform has launched, but its hardware capacity, operating budget, participating agencies, implementation timetable and production use cases were not disclosed; the SAINS-Sarawak Energy collaboration is exploratory."
+  },
+  {
+    "id": "sarawaktribune-smk-baleh-ai-rural-education-2026-08-18",
+    "date": "2026-08-18",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/smk-baleh-leads-ai-use-in-rural-education/",
+    "title": "SMK Baleh leads AI use in rural education",
+    "section": "Education",
+    "tags": [
+      "SMK Baleh",
+      "Kapit",
+      "rural education",
+      "Prime AI Pilot",
+      "Alibaba Cloud",
+      "AI tools"
+    ],
+    "summary": "SMK Baleh's Prime AI Pilot signals a practical extension of AI-enabled learning, with Alibaba Cloud tools reaching schools across Kapit Division.",
+    "why_it_matters": "The deployment brings AI resources into rural secondary schools, showing how Sarawak's education digitisation agenda is reaching beyond major urban centres.",
+    "confidence": "high",
+    "caveat": "The report confirms the pilot launch and equipment distribution, but does not specify the Prime AI Pilot's curriculum, duration, user count or success measures; the RM200,000 contribution was general education support, not confirmed AI-project funding."
+  },
+  {
+    "id": "sarawaktribune-trifold-x-ai-filmmaking-2026-08-18",
+    "date": "2026-08-18",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/trifold-x-takes-top-spot-in-national-ai-filmmaking-hackathon/",
+    "title": "TRIFOLD X takes top spot in national AI filmmaking hackathon",
+    "section": "Business",
+    "tags": [
+      "TRIFOLD X",
+      "KAABS",
+      "Bukit Saban",
+      "AI filmmaking",
+      "creative technology",
+      "ATF 2026"
+    ],
+    "summary": "Sarawak-linked TRIFOLD X's national AI filmmaking win signals local creative-technology capability and an opportunity to represent Malaysia at Singapore's ATF 2026.",
+    "why_it_matters": "The result demonstrates Sarawak-linked creative-technology capability and gives Bukit Saban talent an international platform for AI-assisted storytelling.",
+    "confidence": "medium",
+    "caveat": "The Sarawak Tribune report supports the gold award and stated December ATF opportunity, but does not provide the organiser's final event schedule or selection terms."
   }
 ]
