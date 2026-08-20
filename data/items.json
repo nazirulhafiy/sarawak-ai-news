@@ -942,5 +942,24 @@
     "why_it_matters": "The result demonstrates Sarawak-linked creative-technology capability and gives Bukit Saban talent an international platform for AI-assisted storytelling.",
     "confidence": "medium",
     "caveat": "The Sarawak Tribune report supports the gold award and stated December ATF opportunity, but does not provide the organiser's final event schedule or selection terms."
+  },
+  {
+    "id": "sarawaktribune-human-creativity-ai-2026-08-20",
+    "date": "2026-08-20",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/human-creativity-must-guide-ai-use-say-experts/",
+    "title": "Human creativity must guide AI use, say experts",
+    "section": "Business",
+    "tags": [
+      "BAGFEST 2026",
+      "animation",
+      "games",
+      "creative AI",
+      "human oversight"
+    ],
+    "summary": "BAGFEST 2026 panelists' guidance signals a responsible path for Sarawak's animation and games sector to adopt AI while preserving human authorship and creative control.",
+    "why_it_matters": "The panel grounds AI adoption in Sarawak's growing creative sector, where efficiency gains need to coexist with local creative identity, artist development and accountable authorship.",
+    "confidence": "high",
+    "caveat": "The article reports panel perspectives from BAGFEST 2026 rather than new policy or a measured production study; it provides no data quantifying AI's effect on costs, employment or creative output."
   }
 ]
