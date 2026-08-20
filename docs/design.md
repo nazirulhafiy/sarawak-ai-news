@@ -35,9 +35,19 @@ Behavior:
   Policy, Public Services, Education, Workforce, Research, Infrastructure, and
   Business.
 - Buttons use `aria-pressed`.
+- Hovering a category temporarily previews the selected treatment and returns
+  the current selection to its resting appearance without changing results or
+  `aria-pressed`; moving away restores the actual selection.
+- Clicking an already-selected category resets the feed to `All`; clicking the
+  active `All` button leaves the full feed unchanged.
 - Hidden story cards use the `hidden` attribute.
 - Story ranks are renumbered after filtering.
 - A visually hidden live region reports the current result count.
+- Reloading the page resets the viewport to the top, while ordinary history
+  navigation can preserve the reader's position.
+- A compact fixed `Back to top` control appears after 600 px of scrolling and
+  respects the reader's reduced-motion preference. Its hover treatment mirrors
+  an active category filter, with a black surface, white label, and yellow arrow.
 
 The page still works as a readable feed without JavaScript.
 
@@ -60,9 +70,9 @@ decoration and keeps density high enough for repeated scanning.
 Current hierarchy:
 
 1. Brand.
-2. Last updated weekday, date, and time.
-3. Large thesis headline.
-4. Short deck.
+2. Large thesis headline.
+3. Short deck.
+4. Last updated weekday and date.
 5. Category filters.
 6. Ranked story cards.
 7. Independent-publication footer note.

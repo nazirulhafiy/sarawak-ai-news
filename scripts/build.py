@@ -44,7 +44,7 @@ def last_updated() -> tuple[str, str, str]:
     updated = parse_datetime(value)
     time = updated.strftime("%I:%M %p").lstrip("0")
     current = f"{updated.strftime('%A, %B')} {updated.day}, {updated.year}, {time}".upper()
-    compact = f"{updated.strftime('%A').upper()}, {updated.day} {updated.strftime('%b %Y').upper()} · {time} MYT"
+    compact = f"{updated.strftime('%A').upper()}, {updated.day} {updated.strftime('%b %Y').upper()}"
     return value, current, compact
 
 
@@ -136,9 +136,9 @@ def render_compact_body(items: list[dict]) -> str:
 
   <main id="content">
     <header class="brief">
-      <p class="updated"><span class="updated-label">Last updated</span><time datetime="{esc(updated_iso)}">{esc(updated_compact)}</time></p>
       <h1 id="brief-title">Tracking Sarawak’s AI, news, policy, and future economy.</h1>
       <p class="brief-deck">An independent news aggregator collecting important AI updates from Sarawak’s government, universities, businesses, and tech ecosystem.</p>
+      <p class="updated"><span class="updated-label">Last updated</span><time datetime="{esc(updated_iso)}">{esc(updated_compact)}</time></p>
     </header>
 
     {category_filter}
@@ -147,6 +147,8 @@ def render_compact_body(items: list[dict]) -> str:
       {feed}
     </section>
   </main>
+
+  <button class="back-to-top" type="button" data-back-to-top hidden>Back to top <span aria-hidden="true">↑</span></button>
 
   <footer>
     <p>Sarawak.News is an independent publication and is not affiliated with the Sarawak Government unless explicitly stated.</p>

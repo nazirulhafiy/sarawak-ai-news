@@ -120,7 +120,7 @@ a:focus-visible {
 }
 
 .updated {
-  margin: 0 0 14px;
+  margin: 18px 0 0;
   display: flex;
   align-items: baseline;
   justify-content: center;
@@ -213,11 +213,7 @@ h1 {
   letter-spacing: .02em;
   line-height: 1.4;
   text-transform: uppercase;
-}
-
-.category-filter-button:hover {
-  border-color: #9ca3af;
-  color: var(--ink);
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
 }
 
 .category-filter-button:focus-visible {
@@ -240,6 +236,32 @@ h1 {
 .category-filter-button.is-active .category-filter-count {
   color: var(--sarawak-yellow);
   opacity: 1;
+}
+
+@media (hover: hover) {
+  .category-filter-button:hover {
+    border-color: var(--sarawak-black);
+    background: var(--sarawak-black);
+    color: #fff;
+  }
+
+  .category-filter-button:hover .category-filter-count {
+    color: var(--sarawak-yellow);
+    opacity: 1;
+  }
+
+  .category-filter-options:has(.category-filter-button:hover)
+    .category-filter-button.is-active:not(:hover) {
+    border-color: var(--line);
+    background: var(--card);
+    color: #4b5563;
+  }
+
+  .category-filter-options:has(.category-filter-button:hover)
+    .category-filter-button.is-active:not(:hover) .category-filter-count {
+    color: inherit;
+    opacity: .6;
+  }
 }
 
 .visually-hidden {
@@ -348,6 +370,40 @@ h1 {
   font-size: 13px;
   line-height: 1.55;
 }
+
+.back-to-top {
+  position: fixed;
+  right: max(16px, calc((100vw - 680px) / 2 - 116px));
+  bottom: 20px;
+  z-index: 5;
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 850;
+  line-height: 1.3;
+  box-shadow: 0 4px 14px rgb(17 24 39 / 10%);
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+
+.back-to-top:hover {
+  border-color: var(--sarawak-black);
+  background: var(--sarawak-black);
+  color: #fff;
+}
+
+.back-to-top:hover span { color: var(--sarawak-yellow); }
+
+.back-to-top:focus-visible {
+  outline: 3px solid var(--sarawak-yellow);
+  outline-offset: 2px;
+}
+
+.back-to-top[hidden] { display: none; }
 
 footer {
   margin-top: 48px;

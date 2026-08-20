@@ -1,4 +1,32 @@
 (() => {
+  const navigation = performance.getEntriesByType?.("navigation")[0];
+  const isReload = navigation?.type === "reload";
+
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
+  function resetReloadPosition() {
+    if (isReload) requestAnimationFrame(() => window.scrollTo(0, 0));
+  }
+
+  resetReloadPosition();
+  window.addEventListener("pageshow", resetReloadPosition);
+
+  const backToTop = document.querySelector("[data-back-to-top]");
+  if (backToTop) {
+    function updateBackToTop() {
+      backToTop.hidden = window.scrollY < 600;
+    }
+
+    backToTop.addEventListener("click", () => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    });
+    window.addEventListener("scroll", updateBackToTop, { passive: true });
+    updateBackToTop();
+  }
+
   const filter = document.querySelector("[data-category-filter]");
   const storyList = document.querySelector("[data-story-list]");
 
@@ -43,7 +71,10 @@
   filter.hidden = false;
   filter.addEventListener("click", (event) => {
     const button = event.target.closest("[data-section-filter]");
-    if (button && filter.contains(button)) applyFilter(button.dataset.sectionFilter);
+    if (button && filter.contains(button)) {
+      const resetToAll = button.classList.contains("is-active") && button.dataset.sectionFilter !== "all";
+      applyFilter(resetToAll ? "all" : button.dataset.sectionFilter);
+    }
   });
   applyFilter("all");
 })();

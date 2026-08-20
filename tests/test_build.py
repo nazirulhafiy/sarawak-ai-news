@@ -15,7 +15,7 @@ class BuildTest(unittest.TestCase):
         updated = datetime.fromisoformat(value)
         time = updated.strftime("%I:%M %p").lstrip("0")
         current = f"{updated.strftime('%A, %B')} {updated.day}, {updated.year}, {time}".upper()
-        compact = f"{updated.strftime('%A').upper()}, {updated.day} {updated.strftime('%b %Y').upper()} · {time} MYT"
+        compact = f"{updated.strftime('%A').upper()}, {updated.day} {updated.strftime('%b %Y').upper()}"
         return value, current, compact
 
     def test_seed_data_has_required_fields(self):
@@ -41,11 +41,12 @@ class BuildTest(unittest.TestCase):
         updated_iso, _, compact_updated = self.updated_labels()
         self.assertIn(f'<span class="updated-label">Last updated</span><time datetime="{updated_iso}">{compact_updated}</time>', html)
         self.assertIn(compact_updated, html)
-        self.assertLess(html.index('class="updated"'), html.index('id="brief-title"'))
+        self.assertLess(html.index('class="brief-deck"'), html.index('class="updated"'))
         self.assertIn("Tracking Sarawak’s AI, news, policy, and future economy.", html)
         self.assertIn("An independent news aggregator collecting important AI updates from Sarawak’s government, universities, businesses, and tech ecosystem.", html)
         self.assertIn("Latest intelligence signals", html)
         self.assertIn("Sarawak.News is an independent publication", html)
+        self.assertIn('class="back-to-top" type="button" data-back-to-top hidden', html)
         self.assertEqual(html.count('class="story-card"'), expected_items)
         self.assertEqual(html.count('class="story-section"'), expected_items)
         self.assertEqual(html.count('class="story-source-label"'), expected_items)
@@ -88,12 +89,16 @@ class BuildTest(unittest.TestCase):
         self.assertIn("--card: #ffffff", css)
         self.assertIn("background: var(--card)", css)
         self.assertIn("background: var(--sarawak-black)", css)
+        self.assertIn(".back-to-top:hover", css)
+        self.assertIn(".back-to-top:hover span", css)
         self.assertNotIn("-webkit-line-clamp", css)
         self.assertIn("--sarawak-red: #d22630", css)
         self.assertIn("--sarawak-yellow: #f7c948", css)
         self.assertIn("--sarawak-black: #111111", css)
         self.assertNotIn(".story-rank::after", css)
         self.assertIn(".category-filter-button.is-active", css)
+        self.assertIn(".category-filter-options:has(.category-filter-button:hover)", css)
+        self.assertIn(".category-filter-button.is-active:not(:hover)", css)
         self.assertIn(".updated-label", css)
         self.assertIn(".updated time", css)
         self.assertIn("padding: 0 0 14px", css)
@@ -106,6 +111,12 @@ class BuildTest(unittest.TestCase):
         self.assertIn("color: var(--sarawak-black)", css)
         self.assertIn('applyFilter("all")', js)
         self.assertIn("story.hidden = !isVisible", js)
+        self.assertIn('button.dataset.sectionFilter !== "all"', js)
+        self.assertIn('applyFilter(resetToAll ? "all"', js)
+        self.assertIn('history.scrollRestoration = "manual"', js)
+        self.assertIn('navigation?.type === "reload"', js)
+        self.assertIn('window.scrollY < 600', js)
+        self.assertIn('window.scrollTo({ top: 0', js)
         for label in [">AI<", ">Tech<", ">PCDS 2030<", ">Startups<", ">Energy<", ">Events<"]:
             self.assertNotIn(label, html)
         public_items = json.loads((ROOT / "dist" / "items.json").read_text())
