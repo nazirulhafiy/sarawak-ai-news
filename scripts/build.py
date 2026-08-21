@@ -136,8 +136,8 @@ def render_compact_body(items: list[dict]) -> str:
 
   <main id="content">
     <header class="brief">
-      <h1 id="brief-title">Tracking Sarawak’s AI, news, policy, and future economy.</h1>
-      <p class="brief-deck">An independent news aggregator collecting important AI updates from Sarawak’s government, universities, businesses, and tech ecosystem.</p>
+      <h1 id="brief-title">Sarawak’s AI news, in one place.</h1>
+      <p class="brief-deck">An independent news aggregator collecting source-linked AI updates.</p>
       <p class="updated"><span class="updated-label">Last updated</span><time datetime="{esc(updated_iso)}">{esc(updated_compact)}</time></p>
     </header>
 
@@ -162,17 +162,17 @@ def render_index(items: list[dict]) -> str:
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="AI Sarawak and Sarawak AI news, curated from Sarawak government, universities, businesses, infrastructure, and future-economy signals." />
+  <meta name="description" content="AI Sarawak news, collected from source-linked updates." />
   <meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />
   <meta name="robots" content="index,follow" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="AI.Sarawak.News" />
-  <meta property="og:description" content="A curated Sarawak AI intelligence brief tracking government, universities, businesses, infrastructure, and future-economy signals." />
+  <meta property="og:description" content="An independent news aggregator collecting source-linked AI updates." />
   <meta property="og:url" content="https://ai.sarawak.news/" />
   <meta property="og:site_name" content="AI.Sarawak.News" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AI.Sarawak.News" />
-  <meta name="twitter:description" content="A curated Sarawak AI intelligence brief tracking government, universities, businesses, infrastructure, and future-economy signals." />
+  <meta name="twitter:description" content="An independent news aggregator collecting source-linked AI updates." />
   <link rel="canonical" href="https://ai.sarawak.news/" />
   <title>AI.Sarawak.News</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />

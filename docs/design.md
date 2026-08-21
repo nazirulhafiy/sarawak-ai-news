@@ -9,9 +9,10 @@ The current direction is intentionally restrained:
 
 - White page and white cards.
 - Narrow `680px` maximum body width.
-- Centered editorial headline at `42px` on desktop with balanced wrapping.
+- Centered editorial headline at a tighter `34px` to `36px` responsive scale with balanced wrapping.
+- Supporting hero deck at `15px`, matching the compact hierarchy of the reference while keeping the current copy.
 - Sarawak red, yellow, and black accents.
-- Refined top brand bar with an `18px` desktop wordmark and a full-width
+- Refined top brand bar with a `16px` desktop wordmark and a full-width
   Sarawak-color rule. The red segment matches the rendered wordmark width;
   yellow and black divide the remaining space equally.
 - Horizontal category filter using the seven canonical production labels.

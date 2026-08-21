@@ -112,7 +112,7 @@ a:focus-visible {
 
 .brand {
   color: var(--ink);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 900;
   letter-spacing: .01em;
   line-height: 1.15;
@@ -155,7 +155,7 @@ a:focus-visible {
 h1 {
   max-width: 620px;
   margin: 0 auto 14px;
-  font-size: 42px;
+  font-size: clamp(34px, 5.2vw, 36px);
   font-weight: 900;
   letter-spacing: -1.25px;
   line-height: 1.1;
@@ -166,8 +166,8 @@ h1 {
   max-width: 520px;
   margin: 0 auto;
   color: #374151;
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.65;
 }
 
 .category-filter {
@@ -434,7 +434,6 @@ footer p { margin: 0; }
     letter-spacing: -.025em;
   }
   .brief-deck { font-size: 16px; }
-
   .back-to-top {
     right: 14px;
     bottom: 14px;
