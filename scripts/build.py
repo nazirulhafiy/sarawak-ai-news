@@ -148,7 +148,7 @@ def render_compact_body(items: list[dict]) -> str:
     </section>
   </main>
 
-  <button class="back-to-top" type="button" data-back-to-top hidden>Back to top <span aria-hidden="true">↑</span></button>
+  <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden><span class="back-to-top-label">Back to top</span> <span class="back-to-top-arrow" aria-hidden="true">↑</span></button>
 
   <footer>
     <p>Sarawak.News is an independent publication and is not affiliated with the Sarawak Government unless explicitly stated.</p>

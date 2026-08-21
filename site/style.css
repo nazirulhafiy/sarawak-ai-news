@@ -396,7 +396,7 @@ h1 {
   color: #fff;
 }
 
-.back-to-top:hover span { color: var(--sarawak-yellow); }
+.back-to-top:hover .back-to-top-arrow { color: var(--sarawak-yellow); }
 
 .back-to-top:focus-visible {
   outline: 3px solid var(--sarawak-yellow);
@@ -434,6 +434,19 @@ footer p { margin: 0; }
     letter-spacing: -.025em;
   }
   .brief-deck { font-size: 16px; }
+
+  .back-to-top {
+    right: 14px;
+    bottom: 14px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-color: var(--sarawak-black);
+    background: var(--sarawak-black);
+    color: var(--sarawak-yellow);
+    font-size: 18px;
+  }
+  .back-to-top-label { display: none; }
 
   .story-card {
     grid-template-columns: 34px minmax(0, 1fr);

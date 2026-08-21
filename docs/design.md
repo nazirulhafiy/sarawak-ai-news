@@ -48,6 +48,9 @@ Behavior:
 - A compact fixed `Back to top` control appears after 600 px of scrolling and
   respects the reader's reduced-motion preference. Its hover treatment mirrors
   an active category filter, with a black surface, white label, and yellow arrow.
+  On screens up to 560 px wide it becomes a 40 px arrow-only control, using the
+  active filter's black surface and yellow accent while retaining its accessible
+  `Back to top` name.
 
 The page still works as a readable feed without JavaScript.
 
