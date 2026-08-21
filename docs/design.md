@@ -10,7 +10,7 @@ The current direction is intentionally restrained:
 - White page and white cards.
 - Narrow `680px` maximum body width.
 - Centered editorial headline at a tighter `34px` to `36px` responsive scale with balanced wrapping.
-- Supporting hero deck at `15px`, matching the compact hierarchy of the reference while keeping the current copy.
+- Supporting introduction at `15px`, giving search engines and readers concise context about the brief's Sarawak AI coverage.
 - Sarawak red, yellow, and black accents.
 - Refined top brand bar with a `16px` desktop wordmark and a full-width
   Sarawak-color rule. The red segment matches the rendered wordmark width;
@@ -74,8 +74,8 @@ decoration and keeps density high enough for repeated scanning.
 Current hierarchy:
 
 1. Brand.
-2. Large thesis headline.
-3. Short deck.
+2. Search-focused `Sarawak AI news` headline.
+3. Short introduction covering Sarawak AI policy, projects, research, and adoption.
 4. Last updated weekday and date.
 5. Category filters.
 6. Ranked story cards.

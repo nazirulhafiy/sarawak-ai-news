@@ -2,6 +2,7 @@ import json
 import subprocess
 import sys
 import unittest
+import xml.etree.ElementTree as ET
 from datetime import datetime
 from pathlib import Path
 
@@ -42,8 +43,9 @@ class BuildTest(unittest.TestCase):
         self.assertIn(f'<span class="updated-label">Last updated</span><time datetime="{updated_iso}">{compact_updated}</time>', html)
         self.assertIn(compact_updated, html)
         self.assertLess(html.index('class="brief-deck"'), html.index('class="updated"'))
-        self.assertIn("Sarawak’s AI news, in one place.", html)
-        self.assertIn("An independent news aggregator collecting source-linked AI updates.", html)
+        self.assertIn("Sarawak AI news, in one place.", html)
+        self.assertIn("AI.Sarawak.News tracks artificial intelligence developments across Sarawak", html)
+        self.assertIn("bringing Sarawak AI policy, projects, research and adoption", html)
         self.assertIn("Latest intelligence signals", html)
         self.assertIn("Sarawak.News is an independent publication", html)
         self.assertIn('class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden', html)
@@ -63,16 +65,26 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<script src="app.js" defer></script>', html)
         self.assertIn('class="story-rank" aria-label="Chronological item 1">1</div>', html)
         self.assertIn('<time datetime="2026-06-24">24 Jun 2026</time>', html)
-        self.assertIn('<meta name="description" content="AI Sarawak news, collected from source-linked updates." />', html)
+        description = "Follow Sarawak AI news across policy, public services, education, workforce, research, infrastructure and business."
+        self.assertIn(f'<meta name="description" content="{description}" />', html)
         self.assertIn('<meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />', html)
         self.assertIn('<meta name="robots" content="index,follow" />', html)
-        self.assertIn('<meta property="og:title" content="AI.Sarawak.News" />', html)
+        self.assertIn('<meta property="og:title" content="Sarawak AI News | AI.Sarawak.News" />', html)
         self.assertIn('<meta property="og:site_name" content="AI.Sarawak.News" />', html)
         self.assertIn('<meta property="og:url" content="https://ai.sarawak.news/" />', html)
         self.assertIn('<meta name="twitter:card" content="summary_large_image" />', html)
         self.assertIn('<link rel="canonical" href="https://ai.sarawak.news/" />', html)
-        self.assertIn('<meta name="twitter:title" content="AI.Sarawak.News" />', html)
-        self.assertIn('<title>AI.Sarawak.News</title>', html)
+        self.assertIn('<meta name="twitter:title" content="Sarawak AI News | AI.Sarawak.News" />', html)
+        self.assertIn('<title>Sarawak AI News | AI.Sarawak.News</title>', html)
+        self.assertIn('<script type="application/ld+json">', html)
+        self.assertIn('"@type":"WebSite"', html)
+        self.assertIn('"@type":"CollectionPage"', html)
+        structured_data = html.split('<script type="application/ld+json">', 1)[1].split("</script>", 1)[0]
+        schema = json.loads(structured_data)
+        self.assertEqual([node["@type"] for node in schema["@graph"]], ["WebSite", "CollectionPage"])
+        sitemap = (ROOT / "dist" / "sitemap.xml").read_text()
+        self.assertIn(f"<lastmod>{updated_iso[:10]}</lastmod>", sitemap)
+        ET.fromstring(sitemap)
         self.assertNotIn("How This Is Built", html)
         self.assertNotIn("Sponsor This Brief", html)
         self.assertNotIn("Make This Brief Shorter", html)

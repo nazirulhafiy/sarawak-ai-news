@@ -30,6 +30,8 @@ The current interface favors fast scanning over deep reading.
 The homepage shows:
 
 - Brand bar: `AI.Sarawak.News`.
+- Search title: `Sarawak AI News | AI.Sarawak.News`.
+- Introductory copy describing the source-linked Sarawak AI coverage.
 - Manual last-updated weekday and date from `data/site.json`.
 - Editorial headline and deck.
 - Client-side category filters.

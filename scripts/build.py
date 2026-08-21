@@ -21,6 +21,18 @@ SECTION_FILTERS = (
     "Business",
 )
 
+SITE_URL = "https://ai.sarawak.news/"
+SITE_NAME = "AI.Sarawak.News"
+SEO_TITLE = "Sarawak AI News | AI.Sarawak.News"
+SEO_DESCRIPTION = (
+    "Follow Sarawak AI news across policy, public services, education, workforce, "
+    "research, infrastructure and business."
+)
+SITE_INTRODUCTION = (
+    "AI.Sarawak.News tracks artificial intelligence developments across Sarawak, "
+    "bringing Sarawak AI policy, projects, research and adoption into one source-linked brief."
+)
+
 
 def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
@@ -136,8 +148,8 @@ def render_compact_body(items: list[dict]) -> str:
 
   <main id="content">
     <header class="brief">
-      <h1 id="brief-title">Sarawak’s AI news, in one place.</h1>
-      <p class="brief-deck">An independent news aggregator collecting source-linked AI updates.</p>
+      <h1 id="brief-title">Sarawak AI news, in one place.</h1>
+      <p class="brief-deck">{esc(SITE_INTRODUCTION)}</p>
       <p class="updated"><span class="updated-label">Last updated</span><time datetime="{esc(updated_iso)}">{esc(updated_compact)}</time></p>
     </header>
 
@@ -157,24 +169,51 @@ def render_compact_body(items: list[dict]) -> str:
 
 
 def render_index(items: list[dict]) -> str:
+    structured_data = json.dumps(
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "WebSite",
+                    "@id": f"{SITE_URL}#website",
+                    "url": SITE_URL,
+                    "name": SITE_NAME,
+                    "description": SEO_DESCRIPTION,
+                    "inLanguage": "en",
+                },
+                {
+                    "@type": "CollectionPage",
+                    "@id": f"{SITE_URL}#collection",
+                    "url": SITE_URL,
+                    "name": SEO_TITLE,
+                    "description": SEO_DESCRIPTION,
+                    "isPartOf": {"@id": f"{SITE_URL}#website"},
+                    "inLanguage": "en",
+                },
+            ],
+        },
+        ensure_ascii=False,
+        separators=(",", ":"),
+    ).replace("</", "<\\/")
     return f"""<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="AI Sarawak news, collected from source-linked updates." />
+  <meta name="description" content="{esc(SEO_DESCRIPTION)}" />
   <meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />
   <meta name="robots" content="index,follow" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="AI.Sarawak.News" />
-  <meta property="og:description" content="An independent news aggregator collecting source-linked AI updates." />
-  <meta property="og:url" content="https://ai.sarawak.news/" />
-  <meta property="og:site_name" content="AI.Sarawak.News" />
+  <meta property="og:title" content="{esc(SEO_TITLE)}" />
+  <meta property="og:description" content="{esc(SEO_DESCRIPTION)}" />
+  <meta property="og:url" content="{esc(SITE_URL)}" />
+  <meta property="og:site_name" content="{esc(SITE_NAME)}" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AI.Sarawak.News" />
-  <meta name="twitter:description" content="An independent news aggregator collecting source-linked AI updates." />
-  <link rel="canonical" href="https://ai.sarawak.news/" />
-  <title>AI.Sarawak.News</title>
+  <meta name="twitter:title" content="{esc(SEO_TITLE)}" />
+  <meta name="twitter:description" content="{esc(SEO_DESCRIPTION)}" />
+  <link rel="canonical" href="{esc(SITE_URL)}" />
+  <title>{esc(SEO_TITLE)}</title>
+  <script type="application/ld+json">{structured_data}</script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
@@ -186,6 +225,7 @@ def render_index(items: list[dict]) -> str:
 
 def build() -> None:
     items = load_feed_items()
+    sitemap_lastmod = last_updated()[0][:10]
     DIST.mkdir(exist_ok=True)
     alternative_dir = DIST / "alternative"
     if alternative_dir.exists():
@@ -199,10 +239,11 @@ def build() -> None:
     (DIST / "app.js").write_text((ROOT / "site" / "app.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "items.json").write_text(json.dumps(items, indent=2), encoding="utf-8")
     (DIST / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://ai.sarawak.news/sitemap.xml\n", encoding="utf-8")
-    (DIST / "sitemap.xml").write_text("""<?xml version='1.0' encoding='UTF-8'?>
+    (DIST / "sitemap.xml").write_text(f"""<?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
   <url>
     <loc>https://ai.sarawak.news/</loc>
+    <lastmod>{sitemap_lastmod}</lastmod>
   </url>
 </urlset>
 """, encoding="utf-8")
