@@ -36,6 +36,21 @@
   const stories = Array.from(storyList.querySelectorAll(".story-card"));
   const status = filter.querySelector("[data-filter-status]");
 
+  stories.forEach((story) => {
+    const link = story.querySelector("h2 a");
+    if (!link) return;
+
+    story.addEventListener("click", (event) => {
+      if (event.target.closest("a, button, input, select, textarea")) return;
+      link.click();
+    });
+    story.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      link.click();
+    });
+  });
+
   function applyFilter(section) {
     const activeButton = buttons.find((button) => button.dataset.sectionFilter === section);
     if (!activeButton) return;

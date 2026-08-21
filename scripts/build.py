@@ -93,7 +93,7 @@ def slug(value: str) -> str:
 
 def render_compact_signal(item: dict, index: int) -> str:
     return f"""
-    <article class="story-card" id="{slug(item['id'])}" data-section="{slug(item['section'])}">
+    <article class="story-card" id="{slug(item['id'])}" data-section="{slug(item['section'])}" tabindex="0" aria-label="Open story: {esc(item['title'])}">
       <div class="story-rank" aria-label="Chronological item {index}">{index}</div>
       <div class="story-body">
         <p class="story-meta-row">

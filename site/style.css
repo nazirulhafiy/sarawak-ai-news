@@ -290,6 +290,25 @@ h1 {
   grid-template-columns: 40px minmax(0, 1fr);
   gap: 14px;
   background: var(--card);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  cursor: pointer;
+}
+
+.story-card:focus-visible {
+  outline: 3px solid var(--sarawak-yellow);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) {
+  .story-card:hover {
+    border-color: #cbd1da;
+    box-shadow: 0 8px 20px rgb(17 24 39 / 8%);
+    transform: translateY(-3px) rotate(-.25deg);
+  }
+
+  .story-card:nth-child(even):hover {
+    transform: translateY(-3px) rotate(.25deg);
+  }
 }
 
 .story-rank {
@@ -359,8 +378,16 @@ h1 {
 }
 
 .story-card h2 a { text-decoration: none; }
+
+.story-card:hover h2 a,
+.story-card:focus-visible h2 a,
+.story-card:focus-within h2 a {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
 .story-card h2 a:hover {
-  color: var(--sarawak-red-ink);
+  color: var(--ink);
   text-decoration: underline;
 }
 
@@ -377,10 +404,10 @@ h1 {
   bottom: 20px;
   z-index: 5;
   padding: 8px 11px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--sarawak-black);
   border-radius: 6px;
-  background: var(--card);
-  color: var(--ink);
+  background: var(--sarawak-black);
+  color: #fff;
   cursor: pointer;
   font: inherit;
   font-size: 11px;
@@ -389,6 +416,8 @@ h1 {
   box-shadow: 0 4px 14px rgb(17 24 39 / 10%);
   transition: background-color .15s ease, border-color .15s ease, color .15s ease;
 }
+
+.back-to-top .back-to-top-arrow { color: var(--sarawak-yellow); }
 
 .back-to-top:hover {
   border-color: var(--sarawak-black);
@@ -460,4 +489,7 @@ footer p { margin: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .story-card { transition: none; }
+  .story-card:hover,
+  .story-card:nth-child(even):hover { transform: none; }
 }

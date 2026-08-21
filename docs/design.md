@@ -42,13 +42,15 @@ Behavior:
 - Clicking an already-selected category resets the feed to `All`; clicking the
   active `All` button leaves the full feed unchanged.
 - Hidden story cards use the `hidden` attribute.
+- Story cards lift slightly and tilt by a quarter-degree on hover, alternating
+  direction for a tactile browsing cue; the effect is disabled for reduced-motion users.
 - Story ranks are renumbered after filtering.
 - A visually hidden live region reports the current result count.
 - Reloading the page resets the viewport to the top, while ordinary history
   navigation can preserve the reader's position.
 - A compact fixed `Back to top` control appears after 600 px of scrolling and
-  respects the reader's reduced-motion preference. Its hover treatment mirrors
-  an active category filter, with a black surface, white label, and yellow arrow.
+  uses the active category filter palette permanently: black surface, white label,
+  and yellow arrow. It respects the reader's reduced-motion preference.
   On screens up to 560 px wide it becomes a 40 px arrow-only control, using the
   active filter's black surface and yellow accent while retaining its accessible
   `Back to top` name.
