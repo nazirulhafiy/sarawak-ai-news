@@ -875,6 +875,7 @@ html[data-theme="dark"] .site-footer {
   }
   .brand-lockup::after,
   .bar-rule-tail::after { bottom: -15px; }
+  .bar-rule-tail::after { right: -78px; }
   .brand { font-size: 16px; }
 
   .bar-rule-tail { order: 2; }
