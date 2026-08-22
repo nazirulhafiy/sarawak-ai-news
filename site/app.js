@@ -14,6 +14,23 @@
   window.addEventListener("pageshow", resetReloadPosition);
 
   const themeToggle = document.querySelector("[data-theme-toggle]");
+  const navToggle = document.querySelector("[data-nav-toggle]");
+  const siteNav = document.querySelector(".site-nav");
+  navToggle?.addEventListener("click", () => {
+    const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+    navToggle.setAttribute("aria-expanded", String(!isOpen));
+    navToggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+    navToggle.setAttribute("title", isOpen ? "Open navigation" : "Close navigation");
+    siteNav?.classList.toggle("is-open", !isOpen);
+  });
+  siteNav?.addEventListener("click", (event) => {
+    if (event.target.closest("a")) {
+      navToggle?.setAttribute("aria-expanded", "false");
+      navToggle?.setAttribute("aria-label", "Open navigation");
+      navToggle?.setAttribute("title", "Open navigation");
+      siteNav.classList.remove("is-open");
+    }
+  });
   const themeMedia = window.matchMedia?.("(prefers-color-scheme: dark)");
   let storedTheme = null;
   try {

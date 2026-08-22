@@ -154,6 +154,8 @@ Recommended adjustments before moving Variant D into production:
 
 ## Design Risks
 
+- On narrow screens, Home and About collapse into an accessible hamburger beside the theme toggle; desktop keeps the inline links.
+
 - The production UI hides some useful editorial metadata.
 - Variant D is more polished but may imply product features that do not exist
   yet, such as newsletter signup, custom reports, topic counts, and daily

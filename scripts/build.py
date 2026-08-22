@@ -163,6 +163,9 @@ def render_site_header(active_page: str) -> str:
         </g>
       </svg>
     </button>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation" title="Open navigation">
+      <span></span><span></span><span></span>
+    </button>
   </header>"""
 
 
