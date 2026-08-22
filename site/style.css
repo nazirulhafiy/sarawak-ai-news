@@ -742,20 +742,91 @@ html[data-theme="dark"] .back-to-top:hover {
 .back-to-top[hidden] { display: none; }
 
 footer {
-  margin-top: 48px;
-  padding: 22px 14px 0;
-  border-top: 2px solid;
-  border-image: linear-gradient(90deg, var(--sarawak-black), var(--sarawak-yellow), var(--sarawak-red)) 1;
+  margin-top: 56px;
+}
+
+.site-footer {
+  overflow: hidden;
+  border: 1px solid #eef2f7;
+  border-radius: 10px;
+  background: #f8fafc;
   color: var(--muted);
+}
+
+html[data-theme="dark"] .site-footer {
+  border-color: var(--line);
+  background: #161c24;
+}
+
+.site-footer-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(180px, 1fr);
+  align-items: stretch;
+  padding: 0;
+}
+
+.site-footer-summary { padding: 28px; }
+
+.site-footer-brand,
+.site-footer-note,
+.site-footer-bottom p { margin: 0; }
+
+.site-footer-brand {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  line-height: 1.65;
+}
+
+.site-footer-note {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.site-footer-nav {
+  padding: 28px;
+  border-left: 1px solid var(--line);
+}
+
+.site-footer-nav h2 {
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  line-height: 1.4;
+  padding-top: 2px;
+  text-transform: uppercase;
+}
+
+.site-footer-nav ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer-link {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  text-underline-offset: .2em;
+}
+
+.site-footer-credit-link {
+  color: var(--sarawak-red);
+  font-weight: 650;
+}
+
+.site-footer-bottom {
+  padding: 16px 28px;
+  border-top: 1px solid var(--line);
   font-size: 12px;
-  line-height: 1.55;
+  line-height: 1.65;
 }
-
-html[data-theme="dark"] footer {
-  border-image: linear-gradient(90deg, var(--ink), var(--sarawak-yellow), var(--sarawak-red)) 1;
-}
-
-footer p { margin: 0; }
 
 @media (max-width: 560px) {
   body { padding: 0 15px 64px; }
@@ -788,6 +859,11 @@ footer p { margin: 0; }
   .about-section h2 { font-size: 23px; }
   .about-section p,
   .about-steps li { font-size: 15px; }
+
+  .site-footer-main { grid-template-columns: 1fr; gap: 0; }
+  .site-footer-summary { padding: 24px 20px; }
+  .site-footer-nav { padding: 24px 20px; border-top: 1px solid var(--line); border-left: 0; }
+  .site-footer-bottom { padding: 16px 20px; }
   .back-to-top {
     right: 14px;
     bottom: 14px;

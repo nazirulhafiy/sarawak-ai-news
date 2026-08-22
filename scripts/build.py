@@ -166,6 +166,30 @@ def render_site_header(active_page: str) -> str:
   </header>"""
 
 
+def render_site_footer(active_page: str) -> str:
+    home_current = ' aria-current="page"' if active_page == "home" else ""
+    about_current = ' aria-current="page"' if active_page == "about" else ""
+    return f"""
+  <footer class="site-footer">
+    <div class="site-footer-main">
+      <div class="site-footer-summary">
+        <p class="site-footer-brand">AI.Sarawak.News</p>
+        <p class="site-footer-note">AI news updates are sourced from public reports, news outlets, and official announcements.<br class="site-footer-note-break" />Each item links to its source and includes a concise editorial summary.</p>
+      </div>
+      <nav aria-label="Explore" class="site-footer-nav">
+        <h2>Explore</h2>
+        <ul>
+          <li><a class="site-footer-link" href="/"{home_current}>Home</a></li>
+          <li><a class="site-footer-link" href="about.html"{about_current}>About</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="site-footer-bottom">
+      <p>Built by <a class="site-footer-link site-footer-credit-link" href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>, an independent publication. Not affiliated with the Sarawak Government.</p>
+    </div>
+  </footer>"""
+
+
 def render_compact_body(items: list[dict]) -> str:
     feed = "\n".join(render_compact_signal(item, index) for index, item in enumerate(items, 1))
     category_filter = render_category_filter(items)
@@ -192,9 +216,7 @@ def render_compact_body(items: list[dict]) -> str:
 
   <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden><span class="back-to-top-label">Back to top</span> <span class="back-to-top-arrow" aria-hidden="true">↑</span></button>
 
-  <footer>
-    <p>Sarawak.News is an independent publication and is not affiliated with the Sarawak Government unless explicitly stated.</p>
-  </footer>
+{render_site_footer("home")}
 </body>"""
 
 
@@ -232,9 +254,7 @@ def render_about_body() -> str:
 
   </main>
 
-  <footer>
-    <p>Sarawak.News is an independent publication and is not affiliated with the Sarawak Government unless explicitly stated.</p>
-  </footer>
+{render_site_footer("about")}
 </body>"""
 
 

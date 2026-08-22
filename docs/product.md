@@ -39,7 +39,9 @@ The homepage shows:
 - Client-side category filters.
 - Ranked story cards ordered newest first.
 - Source links opening in new tabs.
-- Independent-publication footer note.
+- Structured footer with source context, a separated Explore column with
+  vertical Home/About links, and a builder and independent-publication
+  attribution row.
 
 The About page explains the site's purpose, coverage categories, and
 source-review workflow without adding signup, newsletter, or other product

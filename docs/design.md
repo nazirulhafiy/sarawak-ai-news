@@ -18,7 +18,9 @@ The current direction is intentionally restrained:
 - Horizontal category filter using the seven canonical production labels.
 - Ranked story cards with compact metadata.
 - Source name highlighted in yellow.
-- Minimal footer with independence note.
+- Structured, contained footer with a source summary, a subtle desktop divider,
+  vertical Home/About links, and a full-width builder and independence
+  attribution row.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark
   cards, softened borders, brighter text, and preserved Sarawak yellow/red
   accents.

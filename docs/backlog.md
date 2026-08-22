@@ -21,6 +21,8 @@ commitment to rewrite the app yet.
   checked before older, keyword-dense headlines.
 - Added a simple generated About page with Home/About masthead navigation,
   source-review context, and coverage categories.
+- Added a structured footer inspired by the PCDS2030 reference, limited to
+  existing Home/About routes, source context, and builder attribution.
 - Clarified that public summaries lead with the Sarawak signal while source type
   and limitations belong in the attribution and caveat fields.
 - Added incremental date auditing by item ID for local updates and by Git diff
