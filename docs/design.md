@@ -154,7 +154,8 @@ Recommended adjustments before moving Variant D into production:
 
 ## Design Risks
 
-- On narrow screens, the inline Home and About links are hidden and remain available in an accessible hamburger menu immediately to the left of the theme toggle; desktop keeps the inline links. The mobile menu closes after a link selection, an outside tap, or Escape, and touch devices do not retain hover styling after tapping the controls.
+- On narrow screens, the inline Home and About links are hidden and remain available in an accessible hamburger menu at the far right, immediately after the theme toggle; desktop keeps the inline links. The mobile menu closes after a link selection, an outside tap, or Escape, and touch devices do not retain hover styling after tapping the controls.
+- The hamburger and theme icons use equal 36px icon-only touch targets at every breakpoint, with an 18px, 1.6px-stroke hamburger mark inspired by OpenClaw’s compact header treatment and no circular outlines. Keyboard focus remains visibly indicated.
 - The masthead, hero, category filter, story list, and footer share a 760px desktop content rail so their outer edges align; the three-colour rule follows the same rail.
 
 - The production UI hides some useful editorial metadata.
