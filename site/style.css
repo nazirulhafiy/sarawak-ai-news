@@ -95,8 +95,9 @@ html[data-theme="dark"] .skip-link {
 }
 
 .bar {
+  max-width: 760px;
   min-height: 66px;
-  margin: 0;
+  margin: 0 auto;
   padding: 20px 0 16px;
   position: relative;
   display: flex;
@@ -324,7 +325,7 @@ html[data-theme="dark"] .site-nav-link:hover {
 }
 
 .brief {
-  max-width: 840px;
+  max-width: 760px;
   margin: 32px auto 28px;
   padding: 58px 44px 46px;
   border: 0;
@@ -453,7 +454,8 @@ html[data-theme="dark"] .brief { background: var(--page); }
 .about-steps strong { color: var(--ink); }
 
 .category-filter {
-  margin: 0 0 16px;
+  max-width: 760px;
+  margin: 0 auto 16px;
   padding: 0 0 14px;
   border-bottom: 1px solid var(--line);
 }
@@ -772,6 +774,9 @@ footer {
 }
 
 .site-footer {
+  max-width: 760px;
+  margin-right: auto;
+  margin-left: auto;
   overflow: hidden;
   border: 1px solid #eef2f7;
   border-radius: 10px;

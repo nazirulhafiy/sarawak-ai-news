@@ -114,6 +114,8 @@ class BuildTest(unittest.TestCase):
         self.assertIn('theme-icon-morph', html)
         self.assertIn('localStorage.getItem("sarawak-theme")', html)
         self.assertIn("max-width: 840px", css)
+        self.assertIn("max-width: 760px", css)
+        self.assertIn(".site-footer", css)
         self.assertIn("grid-template-columns: 40px minmax(0, 1fr)", css)
         self.assertIn('font-family: "Geist"', css)
         self.assertIn('Geist_Variable-s.p.0mrjj4bg00-he.woff2', css)

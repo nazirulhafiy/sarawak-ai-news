@@ -155,6 +155,7 @@ Recommended adjustments before moving Variant D into production:
 ## Design Risks
 
 - On narrow screens, the inline Home and About links are hidden and remain available in an accessible hamburger menu immediately to the left of the theme toggle; desktop keeps the inline links. The mobile menu closes after a link selection, an outside tap, or Escape, and touch devices do not retain hover styling after tapping the controls.
+- The masthead, hero, category filter, story list, and footer share a 760px desktop content rail so their outer edges align; the three-colour rule follows the same rail.
 
 - The production UI hides some useful editorial metadata.
 - Variant D is more polished but may imply product features that do not exist
