@@ -1,4 +1,12 @@
 /* Production compact layout */
+@font-face {
+  font-family: "Geist";
+  src: url("https://www.shadcn.io/_next/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
   --canvas: #ffffff;
@@ -44,11 +52,13 @@ body {
   padding: 0 20px 80px;
   background: var(--page);
   color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   transition: background-color .22s ease, color .22s ease;
 }
+
+button { font: inherit; }
 
 a {
   color: inherit;
@@ -258,20 +268,30 @@ html[data-theme="dark"] .theme-icon-rays {
   transition: background-color .22s ease, border-color .22s ease, color .22s ease, transform .18s ease;
 }
 
-.site-nav-link:hover,
 .site-nav-link.is-active {
-  border-color: var(--line);
-  background: var(--card);
+  border-color: transparent;
+  background: transparent;
   color: var(--ink);
   text-decoration: none;
 }
 
-.site-nav-link:hover { transform: translateY(-1px); }
+.site-nav-link:hover {
+  border-color: var(--sarawak-black);
+  background: var(--sarawak-black);
+  color: #fff;
+  transform: translateY(-1px);
+}
 
-html[data-theme="dark"] .site-nav-link:hover,
 html[data-theme="dark"] .site-nav-link.is-active {
-  border-color: #46515e;
-  background: var(--card);
+  border-color: transparent;
+  background: transparent;
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .site-nav-link:hover {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--page);
 }
 
 .updated {
@@ -330,10 +350,10 @@ html[data-theme="dark"] .site-nav-link.is-active {
 h1 {
   max-width: 760px;
   margin: 0 auto 18px;
-  font-size: clamp(40px, 6.8vw, 52px);
-  font-weight: 900;
-  letter-spacing: -2.25px;
-  line-height: .98;
+  font-size: clamp(40px, 6vw, 48px);
+  font-weight: 700;
+  letter-spacing: -1.2px;
+  line-height: 1;
   text-wrap: balance;
 }
 
@@ -813,12 +833,23 @@ html[data-theme="dark"] .site-footer {
   color: var(--muted);
   font-size: 13px;
   font-weight: 500;
+  text-decoration: none;
   text-underline-offset: .2em;
+}
+
+.site-footer-nav .site-footer-link:hover,
+.site-footer-nav .site-footer-link:focus-visible {
+  color: var(--sarawak-red);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--sarawak-red);
 }
 
 .site-footer-credit-link {
   color: var(--sarawak-red);
   font-weight: 650;
+  text-decoration: underline;
+  text-decoration-color: var(--sarawak-red);
 }
 
 .site-footer-bottom {

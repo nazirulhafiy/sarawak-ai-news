@@ -23,6 +23,8 @@ commitment to rewrite the app yet.
   source-review context, and coverage categories.
 - Added a structured footer inspired by the PCDS2030 reference, limited to
   existing Home/About routes, source context, and builder attribution.
+- Applied Geist typography site-wide and refined masthead and footer link hover
+  states to use the selected-filter and Sarawak-red treatments consistently.
 - Clarified that public summaries lead with the Sarawak signal while source type
   and limitations belong in the attribution and caveat fields.
 - Added incremental date auditing by item ID for local updates and by Git diff

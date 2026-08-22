@@ -10,6 +10,7 @@ The current direction is intentionally restrained:
 - White page and white cards.
 - Broad `840px` maximum body width with a restrained `760px` reading column for the feed.
 - A borderless masthead panel with a centered editorial headline at a `40px` to `52px` responsive scale and balanced wrapping.
+- Geist Sans typography, with the hero headline aligned to the reference `48px` desktop scale and a responsive `40px` mobile floor.
 - Supporting introduction at `18px`, giving the hero more generous rhythm while keeping the brief's Sarawak AI coverage concise.
 - Sarawak red, yellow, and black accents.
 - Refined top brand bar with a `16px` wordmark, compact `Home` and `About`
@@ -57,6 +58,12 @@ Behavior:
 - The masthead theme toggle is a 36px circular control with a morphing moon/sun
   icon. It follows the system theme by default, persists an explicit choice in
   local storage, and updates its accessible label for the next mode.
+- Home and About links are borderless at rest and use the selected-filter
+  treatment on hover: black surface, white text, and a visible border. Footer
+  links turn Sarawak red and bold on hover, with the same red underline as the
+  builder credit.
+- Geist is inherited by the body and controls, including buttons, so the
+  typography remains consistent across navigation, filters, cards, and footer.
 - Story ranks are renumbered after filtering.
 - A visually hidden live region reports the current result count.
 - Reloading the page resets the viewport to the top, while ordinary history
