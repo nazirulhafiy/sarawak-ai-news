@@ -145,11 +145,14 @@ def render_site_header(active_page: str) -> str:
     return f"""
   <header class="bar">
     <span class="brand-lockup"><a class="brand" href="/">AI.Sarawak.News</a></span>
-    <nav class="site-nav" aria-label="Primary">
+    <nav class="site-nav" id="primary-navigation" aria-label="Primary">
       <a{home_current} href="/">Home</a>
       <a{about_current} href="about.html">About</a>
     </nav>
     <span class="bar-rule-tail" aria-hidden="true"></span>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation" title="Open navigation">
+      <span></span><span></span><span></span>
+    </button>
     <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode">
       <svg class="theme-icon-morph" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
         <mask id="theme-toggle-moon-mask"><rect width="24" height="24" fill="#fff"></rect><circle cx="17" cy="7" r="7" fill="#000"></circle></mask>
@@ -162,9 +165,6 @@ def render_site_header(active_page: str) -> str:
           <line x1="4.6" y1="19.4" x2="6.2" y2="17.8"></line><line x1="17.8" y1="6.2" x2="19.4" y2="4.6"></line>
         </g>
       </svg>
-    </button>
-    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation" title="Open navigation">
-      <span></span><span></span><span></span>
     </button>
   </header>"""
 

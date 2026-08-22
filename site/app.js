@@ -16,6 +16,12 @@
   const themeToggle = document.querySelector("[data-theme-toggle]");
   const navToggle = document.querySelector("[data-nav-toggle]");
   const siteNav = document.querySelector(".site-nav");
+  function closeNavigation() {
+    navToggle?.setAttribute("aria-expanded", "false");
+    navToggle?.setAttribute("aria-label", "Open navigation");
+    navToggle?.setAttribute("title", "Open navigation");
+    siteNav?.classList.remove("is-open");
+  }
   navToggle?.addEventListener("click", () => {
     const isOpen = navToggle.getAttribute("aria-expanded") === "true";
     navToggle.setAttribute("aria-expanded", String(!isOpen));
@@ -25,10 +31,18 @@
   });
   siteNav?.addEventListener("click", (event) => {
     if (event.target.closest("a")) {
-      navToggle?.setAttribute("aria-expanded", "false");
-      navToggle?.setAttribute("aria-label", "Open navigation");
-      navToggle?.setAttribute("title", "Open navigation");
-      siteNav.classList.remove("is-open");
+      closeNavigation();
+    }
+  });
+  document.addEventListener("click", (event) => {
+    if (!siteNav?.classList.contains("is-open")) return;
+    if (event.target.closest("[data-nav-toggle], .site-nav")) return;
+    closeNavigation();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && siteNav?.classList.contains("is-open")) {
+      closeNavigation();
+      navToggle?.focus();
     }
   });
   const themeMedia = window.matchMedia?.("(prefers-color-scheme: dark)");
