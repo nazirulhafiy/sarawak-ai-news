@@ -93,7 +93,8 @@ Start a local preview:
 python3 -m http.server 4173 -d dist
 ```
 
-Then open [http://127.0.0.1:4173](http://127.0.0.1:4173).
+Then open [http://127.0.0.1:4173](http://127.0.0.1:4173) or the local About page at
+[http://127.0.0.1:4173/about.html](http://127.0.0.1:4173/about.html).
 
 ### Project Map
 
@@ -105,6 +106,7 @@ scripts/build.py      Builds the website in dist/
 scripts/ingest.py     Finds candidates for manual review
 site/style.css        Production visual design
 site/app.js           Category filtering
+dist/about.html       Generated About page explaining the editorial workflow
 tests/                Automated checks
 design-variants/      Design experiments, not production pages
 ```

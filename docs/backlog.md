@@ -19,6 +19,8 @@ commitment to rewrite the app yet.
   technology focus.
 - Preserved source-page order during candidate selection so recent links are
   checked before older, keyword-dense headlines.
+- Added a simple generated About page with Home/About masthead navigation,
+  source-review context, and coverage categories.
 - Clarified that public summaries lead with the Sarawak signal while source type
   and limitations belong in the attribution and caveat fields.
 - Added incremental date auditing by item ID for local updates and by Git diff
@@ -82,9 +84,8 @@ commitment to rewrite the app yet.
 
 - Keep production on the compact editorial layout until content operations are
   reliable.
-- Revisit the reviewed About-page concept later, using a restrained outlined
-  About link in the masthead and moving fuller publication context off the
-  already wordy homepage.
+- Keep the About page concise and revise its facts only when the underlying
+  reviewed feed or editorial workflow changes.
 - Prototype a data-backed version of Variant D using real reviewed items.
 - Remove or disable unapproved newsletter, sponsor, custom-report, and daily
   update affordances from any productionized Variant D work.

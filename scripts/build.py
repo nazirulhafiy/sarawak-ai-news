@@ -32,6 +32,11 @@ SITE_INTRODUCTION = (
     "AI.Sarawak.News tracks artificial intelligence developments across Sarawak, "
     "bringing Sarawak AI policy, projects, research and adoption into one source-linked brief."
 )
+ABOUT_SEO_TITLE = "About | AI.Sarawak.News"
+ABOUT_SEO_DESCRIPTION = (
+    "Learn how AI.Sarawak.News reviews and links Sarawak AI news, policy, projects, "
+    "research and adoption."
+)
 
 
 def load_json(path: Path):
@@ -92,8 +97,9 @@ def slug(value: str) -> str:
 
 
 def render_compact_signal(item: dict, index: int) -> str:
+    reveal_delay = min(index - 1, 10)
     return f"""
-    <article class="story-card" id="{slug(item['id'])}" data-section="{slug(item['section'])}" tabindex="0" aria-label="Open story: {esc(item['title'])}">
+    <article class="story-card" id="{slug(item['id'])}" data-section="{slug(item['section'])}" style="--story-delay: {reveal_delay}" tabindex="0" aria-label="Open story: {esc(item['title'])}">
       <div class="story-rank" aria-label="Chronological item {index}">{index}</div>
       <div class="story-body">
         <p class="story-meta-row">
@@ -133,6 +139,33 @@ def render_category_filter(items: list[dict]) -> str:
     """
 
 
+def render_site_header(active_page: str) -> str:
+    home_current = ' class="site-nav-link is-active" aria-current="page"' if active_page == "home" else ' class="site-nav-link"'
+    about_current = ' class="site-nav-link is-active" aria-current="page"' if active_page == "about" else ' class="site-nav-link"'
+    return f"""
+  <header class="bar">
+    <span class="brand-lockup"><a class="brand" href="/">AI.Sarawak.News</a></span>
+    <nav class="site-nav" aria-label="Primary">
+      <a{home_current} href="/">Home</a>
+      <a{about_current} href="about.html">About</a>
+    </nav>
+    <span class="bar-rule-tail" aria-hidden="true"></span>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode">
+      <svg class="theme-icon-morph" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+        <mask id="theme-toggle-moon-mask"><rect width="24" height="24" fill="#fff"></rect><circle cx="17" cy="7" r="7" fill="#000"></circle></mask>
+        <circle class="theme-icon-moon" cx="12" cy="12" r="9" mask="url(#theme-toggle-moon-mask)"></circle>
+        <circle class="theme-icon-sun" cx="12" cy="12" r="5"></circle>
+        <g class="theme-icon-rays">
+          <line x1="12" y1="1.6" x2="12" y2="3.8"></line><line x1="12" y1="20.2" x2="12" y2="22.4"></line>
+          <line x1="1.6" y1="12" x2="3.8" y2="12"></line><line x1="20.2" y1="12" x2="22.4" y2="12"></line>
+          <line x1="4.6" y1="4.6" x2="6.2" y2="6.2"></line><line x1="17.8" y1="17.8" x2="19.4" y2="19.4"></line>
+          <line x1="4.6" y1="19.4" x2="6.2" y2="17.8"></line><line x1="17.8" y1="6.2" x2="19.4" y2="4.6"></line>
+        </g>
+      </svg>
+    </button>
+  </header>"""
+
+
 def render_compact_body(items: list[dict]) -> str:
     feed = "\n".join(render_compact_signal(item, index) for index, item in enumerate(items, 1))
     category_filter = render_category_filter(items)
@@ -141,10 +174,7 @@ def render_compact_body(items: list[dict]) -> str:
     return f"""<body>
   <a class="skip-link" href="#content">Skip to content</a>
 
-  <header class="bar">
-    <span class="brand-lockup"><a class="brand" href="/">AI.Sarawak.News</a></span>
-    <span class="bar-rule-tail" aria-hidden="true"></span>
-  </header>
+{render_site_header("home")}
 
   <main id="content">
     <header class="brief">
@@ -161,6 +191,46 @@ def render_compact_body(items: list[dict]) -> str:
   </main>
 
   <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden><span class="back-to-top-label">Back to top</span> <span class="back-to-top-arrow" aria-hidden="true">↑</span></button>
+
+  <footer>
+    <p>Sarawak.News is an independent publication and is not affiliated with the Sarawak Government unless explicitly stated.</p>
+  </footer>
+</body>"""
+
+
+def render_about_body() -> str:
+    return f"""<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+{render_site_header("about")}
+
+  <main id="content" class="about-page">
+    <header class="about-hero">
+      <p class="about-eyebrow">About the brief</p>
+      <h1>About AI.Sarawak.News</h1>
+      <p class="about-lede">An independent, source-linked briefing about how artificial intelligence and digital change are affecting Sarawak.</p>
+    </header>
+
+    <section class="about-section" aria-labelledby="about-purpose-title">
+      <h2 id="about-purpose-title">What this site does</h2>
+      <p>AI.Sarawak.News brings reviewed public reporting into one concise feed. Each story links to its original source and adds a short summary of the Sarawak AI signal, so readers can scan what changed without losing the source behind it.</p>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-coverage-title">
+      <h2 id="about-coverage-title">What we cover</h2>
+      <p>The brief follows AI policy, public services, education, workforce readiness, research, infrastructure and business across Sarawak.</p>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-method-title">
+      <h2 id="about-method-title">How stories are selected</h2>
+      <ol class="about-steps">
+        <li><strong>Find the signal.</strong> Public sources are checked for developments with a clear Sarawak and AI or digital-economy connection.</li>
+        <li><strong>Verify the source.</strong> Candidate links are opened at the original publication and checked for date, context and relevance.</li>
+        <li><strong>Keep the brief concise.</strong> Approved stories receive an original, source-attributed summary. Full article bodies are not republished.</li>
+      </ol>
+    </section>
+
+  </main>
 
   <footer>
     <p>Sarawak.News is an independent publication and is not affiliated with the Sarawak Government unless explicitly stated.</p>
@@ -214,11 +284,71 @@ def render_index(items: list[dict]) -> str:
   <link rel="canonical" href="{esc(SITE_URL)}" />
   <title>{esc(SEO_TITLE)}</title>
   <script type="application/ld+json">{structured_data}</script>
+  <script>
+    try {{
+      const storedTheme = localStorage.getItem("sarawak-theme");
+      if (storedTheme === "dark" || (storedTheme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {{
+        document.documentElement.dataset.theme = "dark";
+      }}
+    }} catch (error) {{}}
+  </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
 </head>
 {render_compact_body(items)}
+</html>
+"""
+
+
+def render_about() -> str:
+    about_url = f"{SITE_URL}about.html"
+    structured_data = json.dumps(
+        {
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "@id": f"{about_url}#about",
+            "url": about_url,
+            "name": ABOUT_SEO_TITLE,
+            "description": ABOUT_SEO_DESCRIPTION,
+            "isPartOf": {"@id": f"{SITE_URL}#website"},
+            "inLanguage": "en",
+        },
+        ensure_ascii=False,
+        separators=(",", ":"),
+    ).replace("</", "<\\/")
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="{esc(ABOUT_SEO_DESCRIPTION)}" />
+  <meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{esc(ABOUT_SEO_TITLE)}" />
+  <meta property="og:description" content="{esc(ABOUT_SEO_DESCRIPTION)}" />
+  <meta property="og:url" content="{esc(about_url)}" />
+  <meta property="og:site_name" content="{esc(SITE_NAME)}" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="{esc(ABOUT_SEO_TITLE)}" />
+  <meta name="twitter:description" content="{esc(ABOUT_SEO_DESCRIPTION)}" />
+  <link rel="canonical" href="{esc(about_url)}" />
+  <title>{esc(ABOUT_SEO_TITLE)}</title>
+  <script type="application/ld+json">{structured_data}</script>
+  <script>
+    try {{
+      const storedTheme = localStorage.getItem("sarawak-theme");
+      if (storedTheme === "dark" || (storedTheme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {{
+        document.documentElement.dataset.theme = "dark";
+      }}
+    }} catch (error) {{}}
+  </script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
+</head>
+{render_about_body()}
 </html>
 """
 
@@ -230,10 +360,8 @@ def build() -> None:
     alternative_dir = DIST / "alternative"
     if alternative_dir.exists():
         shutil.rmtree(alternative_dir)
-    deferred_about = DIST / "about.html"
-    if deferred_about.exists():
-        deferred_about.unlink()
     (DIST / "index.html").write_text(render_index(items), encoding="utf-8")
+    (DIST / "about.html").write_text(render_about(), encoding="utf-8")
     compact_css = (ROOT / "site" / "style.css").read_text(encoding="utf-8")
     (DIST / "style.css").write_text(compact_css, encoding="utf-8")
     (DIST / "app.js").write_text((ROOT / "site" / "app.js").read_text(encoding="utf-8"), encoding="utf-8")
@@ -243,6 +371,10 @@ def build() -> None:
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
   <url>
     <loc>https://ai.sarawak.news/</loc>
+    <lastmod>{sitemap_lastmod}</lastmod>
+  </url>
+  <url>
+    <loc>https://ai.sarawak.news/about.html</loc>
     <lastmod>{sitemap_lastmod}</lastmod>
   </url>
 </urlset>

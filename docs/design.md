@@ -8,17 +8,20 @@ by `site/style.css`.
 The current direction is intentionally restrained:
 
 - White page and white cards.
-- Narrow `680px` maximum body width.
-- Centered editorial headline at a tighter `34px` to `36px` responsive scale with balanced wrapping.
-- Supporting introduction at `15px`, giving search engines and readers concise context about the brief's Sarawak AI coverage.
+- Broad `840px` maximum body width with a restrained `760px` reading column for the feed.
+- A borderless masthead panel with a centered editorial headline at a `40px` to `52px` responsive scale and balanced wrapping.
+- Supporting introduction at `18px`, giving the hero more generous rhythm while keeping the brief's Sarawak AI coverage concise.
 - Sarawak red, yellow, and black accents.
-- Refined top brand bar with a `16px` desktop wordmark and a full-width
-  Sarawak-color rule. The red segment matches the rendered wordmark width;
-  yellow and black divide the remaining space equally.
+- Refined top brand bar with a `16px` wordmark, compact `Home` and `About`
+  links, a theme toggle, and a full-width Sarawak-color rule. The red segment
+  anchors the wordmark; yellow and black divide the remaining space equally.
 - Horizontal category filter using the seven canonical production labels.
 - Ranked story cards with compact metadata.
 - Source name highlighted in yellow.
 - Minimal footer with independence note.
+- Optional dark mode using the same hierarchy: near-black canvas, lifted dark
+  cards, softened borders, brighter text, and preserved Sarawak yellow/red
+  accents.
 
 The design is closer to an editorial memo or briefing page than to a dashboard.
 It is appropriate for proving source-attributed curation before investing in a
@@ -44,6 +47,14 @@ Behavior:
 - Hidden story cards use the `hidden` attribute.
 - Story cards lift slightly and tilt by a quarter-degree on hover, alternating
   direction for a tactile browsing cue; the effect is disabled for reduced-motion users.
+- The hero panel and its headline, introduction, and update line reveal in a
+  visible sequence, followed by story cards that fade and lift in with a short
+  stagger capped after the first ten cards. The feed waits briefly for the hero
+  to establish the page hierarchy; all reveal motion is disabled for reduced-
+  motion users.
+- The masthead theme toggle is a 36px circular control with a morphing moon/sun
+  icon. It follows the system theme by default, persists an explicit choice in
+  local storage, and updates its accessible label for the next mode.
 - Story ranks are renumbered after filtering.
 - A visually hidden live region reports the current result count.
 - Reloading the page resets the viewport to the top, while ordinary history
@@ -67,15 +78,17 @@ Production tokens in `site/style.css`:
 - Accent red: `#d22630`.
 - Accent yellow: `#f7c948`.
 - Accent black: `#111111`.
+- Dark canvas: `#0f1115`; dark card: `#171b22`; dark text and border tokens are
+  defined under `html[data-theme="dark"]`.
 
 Cards use 8 px radius or less in production. The current layout avoids heavy
 decoration and keeps density high enough for repeated scanning.
 
 ## Content Hierarchy
 
-Current hierarchy:
+Homepage hierarchy:
 
-1. Brand.
+1. Brand and `Home`/`About` navigation.
 2. Search-focused `Sarawak AI news` headline.
 3. Short introduction covering Sarawak AI policy, projects, research, and adoption.
 4. Last updated weekday and date.
@@ -83,9 +96,13 @@ Current hierarchy:
 6. Ranked story cards.
 7. Independent-publication footer note.
 
-The masthead intentionally contains only the brand for now. A reviewed About
-page and outlined About link remain a future enhancement rather than a current
-production route.
+The masthead contains the brand lockup, compact navigation, theme toggle, and
+color rule. The About page moves fuller publication context off the already
+wordy homepage while keeping the first screen focused on the live brief.
+
+The About page uses the same restrained system: a clear opening statement and
+short sections for purpose, coverage, and workflow. It keeps the explanation
+closer to the editorial feed instead of adding dashboard-like metrics or pills.
 
 Each story card currently shows date, source, category, title, and summary. Its
 category label exactly matches the corresponding browse filter. The card

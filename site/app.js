@@ -13,6 +13,38 @@
   resetReloadPosition();
   window.addEventListener("pageshow", resetReloadPosition);
 
+  const themeToggle = document.querySelector("[data-theme-toggle]");
+  const themeMedia = window.matchMedia?.("(prefers-color-scheme: dark)");
+  let storedTheme = null;
+  try {
+    storedTheme = localStorage.getItem("sarawak-theme");
+  } catch (error) {}
+
+  function setTheme(theme, persist = false) {
+    const isDark = theme === "dark";
+    if (isDark) document.documentElement.setAttribute("data-theme", "dark");
+    else document.documentElement.removeAttribute("data-theme");
+    if (persist) {
+      try {
+        localStorage.setItem("sarawak-theme", isDark ? "dark" : "light");
+      } catch (error) {}
+    }
+    if (themeToggle) {
+      const nextLabel = isDark ? "Switch to light mode" : "Switch to dark mode";
+      themeToggle.setAttribute("aria-label", nextLabel);
+      themeToggle.setAttribute("title", nextLabel);
+      themeToggle.setAttribute("aria-pressed", String(isDark));
+    }
+  }
+
+  setTheme(document.documentElement.hasAttribute("data-theme") ? "dark" : "light");
+  themeToggle?.addEventListener("click", () => {
+    setTheme(document.documentElement.hasAttribute("data-theme") ? "light" : "dark", true);
+  });
+  if (!storedTheme && themeMedia) {
+    themeMedia.addEventListener?.("change", (event) => setTheme(event.matches ? "dark" : "light"));
+  }
+
   const backToTop = document.querySelector("[data-back-to-top]");
   if (backToTop) {
     function updateBackToTop() {

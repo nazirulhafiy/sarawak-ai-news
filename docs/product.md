@@ -7,7 +7,8 @@ Sarawak-relevant AI and future-economy signals. It is closer to a curated signal
 desk than a general news site: every public item should explain what changed,
 why it matters, where the signal came from, and how confident the brief is.
 
-Current production is a single static homepage generated from reviewed JSON.
+Current production is a static homepage and a small About page generated from
+reviewed JSON and the site's editorial workflow.
 There is no CMS, database, scraper-to-summary pipeline, account system,
 newsletter sender, or paid product surface. A scheduled weekly workflow can
 publish qualifying feed updates after source verification and all required
@@ -29,7 +30,8 @@ The current interface favors fast scanning over deep reading.
 
 The homepage shows:
 
-- Brand bar: `AI.Sarawak.News`.
+- Brand bar: `AI.Sarawak.News`, with `Home` and `About` navigation links and a
+  theme toggle.
 - Search title: `Sarawak AI News | AI.Sarawak.News`.
 - Introductory copy describing the source-linked Sarawak AI coverage.
 - Manual last-updated weekday and date from `data/site.json`.
@@ -38,6 +40,10 @@ The homepage shows:
 - Ranked story cards ordered newest first.
 - Source links opening in new tabs.
 - Independent-publication footer note.
+
+The About page explains the site's purpose, coverage categories, and
+source-review workflow without adding signup, newsletter, or other product
+promises. The independence note remains in the shared footer.
 
 The generated `dist/items.json` preserves richer fields than the UI currently
 shows, including `why_it_matters`, `confidence`, `caveat`, and `tags`. These
