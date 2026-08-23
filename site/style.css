@@ -96,9 +96,9 @@ html[data-theme="dark"] .skip-link {
 
 .bar {
   max-width: 760px;
-  min-height: 66px;
+  min-height: 58px;
   margin: 0 auto;
-  padding: 20px 0 16px;
+  padding: 16px 0 12px;
   position: relative;
   display: flex;
   align-items: center;
@@ -137,7 +137,7 @@ html[data-theme="dark"] .skip-link {
   position: absolute;
   z-index: 1;
   right: 0;
-  bottom: -17px;
+  bottom: -13px;
   left: 0;
   height: 3px;
 }
@@ -183,8 +183,8 @@ html[data-theme="dark"] .bar-rule-tail::after {
 }
 
 .theme-icon-morph {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   overflow: visible;
 }
 
@@ -253,7 +253,7 @@ html[data-theme="dark"] .theme-icon-rays {
   position: absolute;
   z-index: 2;
   top: 50%;
-  left: 160px;
+  right: 48px;
   gap: 3px;
   transform: translateY(-50%);
 }
@@ -265,9 +265,10 @@ html[data-theme="dark"] .theme-icon-rays {
   border: 1px solid transparent;
   border-radius: 6px;
   color: var(--muted);
-  font-size: 11px;
-  font-weight: 850;
-  line-height: 1.3;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  line-height: 1.6;
   text-decoration: none;
   transition: background-color .22s ease, border-color .22s ease, color .22s ease, transform .18s ease;
 }

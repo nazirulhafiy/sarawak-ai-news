@@ -14,7 +14,7 @@ The current direction is intentionally restrained:
 - Supporting introduction at `18px`, giving the hero more generous rhythm while keeping the brief's Sarawak AI coverage concise.
 - Sarawak red, yellow, and black accents.
 - Refined top brand bar with a `16px` wordmark, compact `Home` and `About`
-  links, a theme toggle, and a full-width Sarawak-color rule. The red segment
+  links, a theme toggle, compact desktop height, and a full-width Sarawak-color rule. The red segment
   anchors the wordmark; yellow and black divide the remaining space equally.
 - Horizontal category filter using the seven canonical production labels.
 - Ranked story cards with compact metadata.
@@ -62,6 +62,8 @@ Behavior:
   treatment on hover: black surface, white text, and a visible border. Footer
   links turn Sarawak red and bold on hover, with the same red underline as the
   builder credit.
+- Desktop navigation uses a light 12px treatment with subtle tracking and an
+  open line height, balancing its type against the adjacent 16px theme glyph.
 - Geist is inherited by the body and controls, including buttons, so the
   typography remains consistent across navigation, filters, cards, and footer.
 - Story ranks are renumbered after filtering.
@@ -155,8 +157,9 @@ Recommended adjustments before moving Variant D into production:
 ## Design Risks
 
 - On narrow screens, the inline Home and About links are hidden and remain available in an accessible hamburger menu at the far right, immediately after the theme toggle; desktop keeps the inline links. The mobile menu closes after a link selection, an outside tap, or Escape, and touch devices do not retain hover styling after tapping the controls.
-- The hamburger and theme icons use equal 36px icon-only touch targets at every breakpoint, with an 18px, 1.6px-stroke hamburger mark inspired by OpenClaw’s compact header treatment and no circular outlines. Keyboard focus remains visibly indicated.
+- The hamburger and theme controls use equal 36px icon-only touch targets at every breakpoint. The hamburger keeps its 18px, 1.6px-stroke mark while the denser theme glyph is optically balanced at 16px, inspired by OpenClaw’s compact header treatment and with no circular outlines. Keyboard focus remains visibly indicated.
 - The masthead, hero, category filter, story list, and footer share a 760px desktop content rail so their outer edges align; the three-colour rule follows the same rail.
+- On desktop, Home and About sit on the right side of the masthead immediately before the theme control; on mobile they collapse into the hamburger menu.
 
 - The production UI hides some useful editorial metadata.
 - Variant D is more polished but may imply product features that do not exist
