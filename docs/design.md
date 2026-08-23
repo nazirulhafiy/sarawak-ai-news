@@ -21,7 +21,8 @@ The current direction is intentionally restrained:
 - Source name highlighted in yellow.
 - Structured, contained footer with a source summary, a subtle desktop divider,
   vertical Home/About links, and a full-width builder and independence
-  attribution row.
+  attribution row. The footer follows the story list with a restrained 40px
+  section gap.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark
   cards, softened borders, brighter text, and preserved Sarawak yellow/red
   accents.

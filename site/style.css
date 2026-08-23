@@ -768,7 +768,7 @@ html[data-theme="dark"] .back-to-top:hover {
 .back-to-top[hidden] { display: none; }
 
 footer {
-  margin-top: 56px;
+  margin-top: 40px;
 }
 
 .site-footer {
