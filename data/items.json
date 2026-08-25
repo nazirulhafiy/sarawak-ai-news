@@ -961,5 +961,85 @@
     "why_it_matters": "The panel grounds AI adoption in Sarawak's growing creative sector, where efficiency gains need to coexist with local creative identity, artist development and accountable authorship.",
     "confidence": "high",
     "caveat": "The article reports panel perspectives from BAGFEST 2026 rather than new policy or a measured production study; it provides no data quantifying AI's effect on costs, employment or creative output."
+  },
+  {
+    "id": "sarawaktribune-ai-talent-hub-2026-08-23",
+    "date": "2026-08-23",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/ai-talent-hub-to-boost-sarawak/",
+    "title": "AI Talent Hub To Boost Sarawak",
+    "section": "Workforce",
+    "tags": [
+      "AI Talent Hub",
+      "TEGAS",
+      "Sarawak Artificial Intelligence Centre",
+      "AI Builders Clubs",
+      "local AI models",
+      "Bootcamp Build & Monetize"
+    ],
+    "summary": "TEGAS and SAIC's planned AI Talent Hub combines local model development, AI Builders Clubs and commercialisation training to build Sarawak's homegrown AI workforce.",
+    "why_it_matters": "The plan moves Sarawak's AI agenda from broad awareness toward a talent pipeline that links skills, local model development, technology transfer and commercialisation.",
+    "confidence": "medium",
+    "caveat": "The report describes an announced direction rather than an operating hub; it gives no budget, launch timetable, location, participation targets, model specifications or delivery milestones, and the programme name appears as both AI Talent Hub and Sarawak AI Brain."
+  },
+  {
+    "id": "sarawaktribune-robotics-support-workers-2026-08-23",
+    "date": "2026-08-23",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/robotics-can-support-workers-says-abang-johari/",
+    "title": "Robotics Can Support Workers, Says Abang Johari",
+    "section": "Workforce",
+    "tags": [
+      "robotics",
+      "ageing population",
+      "healthcare",
+      "workforce support",
+      "AI For Makers",
+      "automation"
+    ],
+    "summary": "Abang Johari's call to use robotics alongside workers points to automation as a response to Sarawak's ageing population and relatively small workforce.",
+    "why_it_matters": "The statement broadens Sarawak's AI-for-makers agenda into practical service and labour questions, particularly healthcare and support for older residents.",
+    "confidence": "medium",
+    "caveat": "The article reports a policy statement and examples from other countries, not a Sarawak deployment, funded programme, procurement decision or implementation timetable."
+  },
+  {
+    "id": "dayakdaily-pahkak-ai-product-development-2026-08-23",
+    "date": "2026-08-23",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/the-body-shops-forest-to-fragrance-model-prompts-swak-to-explore-pahkak-tree-oil-for-perfume/",
+    "title": "The Body Shop’s forest-to-fragrance model prompts S’wak to explore Pahkak tree oil for perfume",
+    "section": "Business",
+    "tags": [
+      "Litsea cubeba",
+      "Pahkak",
+      "natural products",
+      "AI-assisted research",
+      "Sarawak Science Centre",
+      "commercialisation"
+    ],
+    "summary": "A proposal to develop Sarawak's Pahkak tree into fragrance products signals how AI and science could turn native resources into higher-value businesses.",
+    "why_it_matters": "It links AI experimentation to local biodiversity and commercialisation, showing a possible future-economy pathway beyond generic technology adoption.",
+    "confidence": "medium",
+    "caveat": "The report records a conceptual suggestion, not a confirmed cultivation, research, product-development or investment programme, and it provides no technical detail on how AI would be used."
+  },
+  {
+    "id": "dayakdaily-sarawak-satellite-chip-2026-08-23",
+    "date": "2026-08-23",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/sarawaks-own-satellite-chip-in-works-as-sarawak-aerospace-agency-icats-labs-begin-next-year/",
+    "title": "Sarawak’s own satellite chip in the works as Sarawak Aerospace Agency, iCATS labs begin next year",
+    "section": "Infrastructure",
+    "tags": [
+      "Sarawak Aerospace Agency",
+      "iCATS",
+      "nanosatellite",
+      "satellite chip",
+      "data sovereignty",
+      "resource planning"
+    ],
+    "summary": "Planned SAA and iCATS laboratories for a homegrown nanosatellite chip signal a move toward local space, data and semiconductor capabilities for Sarawak's resource planning.",
+    "why_it_matters": "Local chip, satellite and data-storage capability could strengthen Sarawak's control over information used in economic planning, disaster management and resource decisions.",
+    "confidence": "medium",
+    "caveat": "The report describes planned laboratories and a target launch by 2030; it does not confirm funding, facility locations, chip specifications, procurement, a launch contract or operating capability."
   }
 ]
