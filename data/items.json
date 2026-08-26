@@ -1041,5 +1041,45 @@
     "why_it_matters": "Local chip, satellite and data-storage capability could strengthen Sarawak's control over information used in economic planning, disaster management and resource decisions.",
     "confidence": "medium",
     "caveat": "The report describes planned laboratories and a target launch by 2030; it does not confirm funding, facility locations, chip specifications, procurement, a launch contract or operating capability."
+  },
+  {
+    "id": "sarawaktribune-ai-fraud-scam-risk-2026-08-25",
+    "date": "2026-08-25",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/sophisticated-scams-cost-sarawakians-millions-as-ai-fuels-fraud/",
+    "title": "Sophisticated scams cost Sarawakians millions as AI fuels fraud",
+    "section": "Public Services",
+    "tags": [
+      "AI-enabled fraud",
+      "commercial crime",
+      "scam prevention",
+      "deepfakes",
+      "synthetic voices",
+      "Sarawak Police"
+    ],
+    "summary": "Sarawak's rising commercial-crime losses signal the need to prepare for AI-enabled chatbots and scaled digital persuasion in local scam prevention.",
+    "why_it_matters": "The report links a documented Sarawak fraud burden to a concrete emerging threat model, making AI literacy, detection and public-sector response relevant to residents and organisations.",
+    "confidence": "medium",
+    "caveat": "The RM71 million covers all reported commercial crime, not confirmed AI-enabled losses; the Kuching and Miri cases were not established as AI-assisted, and the article provides no local AI-fraud case count."
+  },
+  {
+    "id": "borneopost-ai-cultural-heritage-2026-08-25",
+    "date": "2026-08-25",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/08/25/ai-can-potentially-threaten-cultural-heritage-history-by-blurring-the-lines/",
+    "title": "AI can potentially threaten cultural heritage, history by blurring the lines",
+    "section": "Policy",
+    "tags": [
+      "cultural heritage",
+      "Pustaka Negeri Sarawak",
+      "GLAM",
+      "AI governance",
+      "trusted knowledge",
+      "Indigenous histories"
+    ],
+    "summary": "A warning from Pustaka Negeri Sarawak signals a need for trusted GLAM institutions to protect cultural context as AI blends heritage information.",
+    "why_it_matters": "This adds a Sarawak-specific governance and information-integrity concern to the AI brief, especially for Indigenous histories that depend on authoritative attribution and human oversight.",
+    "confidence": "medium",
+    "caveat": "This is a warning from a cultural-institution leader, not a new policy or preservation programme; the article provides no documented AI-generated heritage example, implementation plan or safeguards."
   }
 ]
