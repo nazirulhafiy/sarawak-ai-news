@@ -1081,5 +1081,25 @@
     "why_it_matters": "This adds a Sarawak-specific governance and information-integrity concern to the AI brief, especially for Indigenous histories that depend on authoritative attribution and human oversight.",
     "confidence": "medium",
     "caveat": "This is a warning from a cultural-institution leader, not a new policy or preservation programme; the article provides no documented AI-generated heritage example, implementation plan or safeguards."
+  },
+  {
+    "id": "sarawaktribune-ai-business-design-hackathon-2026-08-26",
+    "date": "2026-08-26",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/participants-to-develop-business-websites-using-ai-tools/",
+    "title": "Participants To Develop Business Websites Using AI Tools",
+    "section": "Business",
+    "tags": [
+      "Kimi AI",
+      "AI skills",
+      "business design",
+      "AI hackathon",
+      "Singapore-Sarawak collaboration",
+      "AI Youth Ambassador Network"
+    ],
+    "summary": "Sarawak participants will use Kimi AI to build websites for local business challenges at a 3–4 September hackathon, signalling practical AI adoption through cross-border business design.",
+    "why_it_matters": "Using a named tool on real business problems gives Sarawak students and entrepreneurs applied AI experience while the event builds links with Singapore and a longer-term youth network.",
+    "confidence": "high",
+    "caveat": "The article confirms a planned two-day event but not registration availability, final venue, participant capacity, judging criteria or post-event outcomes."
   }
 ]
