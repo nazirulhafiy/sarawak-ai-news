@@ -15,7 +15,7 @@
     "summary": "SAIC frames AI as a productivity multiplier for services and business, while warning that readiness and digital inclusion remain risks.",
     "why_it_matters": "This provides the public-facing adoption story: AI as service acceleration and workforce capacity expansion, not just infrastructure strategy.",
     "confidence": "high",
-    "caveat": "Extractor summary was truncated; revisit source before direct quotation."
+    "caveat": "Publication date verified against source metadata; SAIC's productivity, DeepSAR, and digital-inclusion remarks were checked against the live article."
   },
   {
     "id": "dayakdaily-munich-ai-2026-06-24",
@@ -30,10 +30,10 @@
       "public services",
       "AI integration"
     ],
-    "summary": "The Munich engagement signals the transfer of mature smart-city operating models into public institutions, local government, and citizen services.",
+    "summary": "The Munich engagement signals Sarawak's interest in applying Munich's smart-city practices to public institutions, local government, and citizen services.",
     "why_it_matters": "This is a concrete AI policy/adoption signal: Sarawak is looking abroad for operating models, not just branding AI as a future ambition.",
     "confidence": "high",
-    "caveat": "Dated through article publication reference in the source snippet."
+    "caveat": "Publication date verified against the DayakDaily dateline (24 June 2026); the report covers a courtesy call and exchange of practices, not a signed operating-model transfer."
   },
   {
     "id": "borneopost-youth-ai-robotics-smart-farming-2026-06-13",
@@ -52,7 +52,7 @@
     "summary": "Students and young talent are positioned to execute robotics, automation, AI, and smart-farming priorities under PCDS 2030.",
     "why_it_matters": "This adds the talent and adoption angle: Sarawak’s AI strategy depends on whether young workers and communities can actually use the tools being promoted.",
     "confidence": "high",
-    "caveat": "Search result provides date and title; revisit source before direct quotation."
+    "caveat": "Publication date verified against the live Borneo Post byline (13 June 2026)."
   },
   {
     "id": "sarawaktribune-sovereign-ai-2026-05-20",
@@ -88,7 +88,7 @@
     "summary": "AI Grid and satellite exploration signal a distributed infrastructure strategy extending compute and connectivity beyond conventional data centres.",
     "why_it_matters": "This connects AI to the state’s infrastructure layer, showing that the story is not just software but also networks, compute, and connectivity.",
     "confidence": "high",
-    "caveat": "Publication date inferred from source snippet context (May 20)."
+    "caveat": "Publication date verified against the DayakDaily dateline (20 May 2026)."
   },
   {
     "id": "dayakdaily-quantum-ai-cambridge-2026-05-18",
@@ -126,7 +126,7 @@
     "summary": "The Bristol partnership connects local capability-building with global research and advanced computing, strengthening the regional AI hub ambition.",
     "why_it_matters": "This strengthens the research-partnership thread behind Sarawak’s AI ambitions and gives the brief a concrete university anchor.",
     "confidence": "high",
-    "caveat": "Search result provides date and title; revisit source before direct quotation."
+    "caveat": "Publication date verified against the live Borneo Post byline (6 May 2026)."
   },
   {
     "id": "sarawaktribune-global-ai-race-2026-05-06",
@@ -162,7 +162,7 @@
     "summary": "SAIC’s AI Blueprint embeds the agenda within SDE 2030 and PCDS 2030 as a cross-economy programme.",
     "why_it_matters": "This is a core roadmap item: it shows Sarawak’s AI direction being formalised into a planning document.",
     "confidence": "high",
-    "caveat": "Search result provides date and title; revisit source before direct quotation."
+    "caveat": "Publication date verified against the live Borneo Post byline (3 May 2026)."
   },
   {
     "id": "borneopost-ai-grid-model-2026-04-29",
@@ -180,7 +180,7 @@
     "summary": "The Premier’s AI Grid remarks point to compute models that could reshape data-centre planning and infrastructure priorities.",
     "why_it_matters": "This is important because it sharpens the infrastructure thesis: Sarawak may frame AI capacity around grids and compute architecture, not just data-centre construction.",
     "confidence": "high",
-    "caveat": "Search result provides date and title; revisit source before direct quotation."
+    "caveat": "Publication date verified against the live Borneo Post byline (29 April 2026); the obsolescence forecast is the Premier's stated personal view."
   },
   {
     "id": "borneopost-ai-early-intervention-screening-2026-04-22",
@@ -198,7 +198,7 @@
     "summary": "The AI screening rollout gives early childhood intervention a practical public-service use case across SeDidik centres.",
     "why_it_matters": "This is a grounded adoption signal: AI is being applied to service delivery for children rather than only discussed at strategy level.",
     "confidence": "high",
-    "caveat": "Search result provides date and title; revisit source before direct quotation."
+    "caveat": "Publication date verified against the live Borneo Post byline (22 April 2026)."
   },
   {
     "id": "the-edge-sarawak-adopts-ai-2026-04-13",
@@ -216,7 +216,7 @@
     "summary": "Public-sector adoption is moving toward citizen-facing services while readiness, talent, inclusion, and data integration remain constraints.",
     "why_it_matters": "This is the strongest baseline context item for the brief: it explains the institutions, policy frame, and adoption barriers behind Sarawak's AI push.",
     "confidence": "high",
-    "caveat": "Use as background analysis; verify article date/access before quoting."
+    "caveat": "Use as background analysis; publication date verified against the Digital Edge weekly issue of 13–19 April 2026."
   },
   {
     "id": "borneopost-ai-powerhouse-skills-2026-04-01",
@@ -234,7 +234,7 @@
     "summary": "AI talent development is becoming a competitiveness priority tied to practical skills, workforce readiness, and mindset change.",
     "why_it_matters": "This helps separate real AI strategy from hype: talent capacity will decide whether Sarawak can execute its policy and infrastructure ambitions.",
     "confidence": "high",
-    "caveat": "Search result provides date and title; revisit source before direct quotation."
+    "caveat": "Publication date verified against the live Borneo Post URL date (1 April 2026)."
   },
   {
     "id": "borneopost-ai-blueprint-regional-producer-2026-03-20",
@@ -252,7 +252,7 @@
     "summary": "SAIC’s upcoming blueprint aims to move the state from AI adoption toward regional production across four strategic pillars.",
     "why_it_matters": "This is one of the clearest policy-timeline signals for the brief and should remain a baseline item until the blueprint is released.",
     "confidence": "high",
-    "caveat": "Search result provides date and title; revisit source before direct quotation."
+    "caveat": "Publication date verified against the live Borneo Post dateline (20 March 2026); the four pillars named in this earlier report are infrastructure, technology, talent, and policy."
   },
   {
     "id": "borneopost-ai-journey-ambition-execution-2026-03-08",
@@ -270,7 +270,7 @@
     "summary": "The AI agenda is shifting from ambition to groundwork, with SAIC building the institutions and capabilities needed for execution.",
     "why_it_matters": "This is useful context for tracking whether Sarawak’s AI story is moving from announcements into implementation milestones.",
     "confidence": "high",
-    "caveat": "Search result provides date and title; revisit source before direct quotation."
+    "caveat": "Publication date verified against the live Borneo Post URL date (8 March 2026)."
   },
   {
     "id": "dayakdaily-germany-sovereign-ai-2026-06-25",
@@ -708,7 +708,7 @@
     "summary": "Sarawak's call for students to understand how AI works and create new solutions links STEM-focused education reform to the state's long-term talent pipeline.",
     "why_it_matters": "It moves the AI education discussion from general digital literacy toward building students' ability to understand and create with AI, while tying that goal to statewide STEM capacity.",
     "confidence": "medium",
-    "caveat": "The UKAS page currently redirects repeatedly; the date and substance are corroborated by Utusan Borneo's 30 July report, but no curriculum change, teacher training, funding or timetable was announced."
+    "caveat": "The UKAS English page confirms the 30 July 2026 date, though cookie-less clients may still hit a redirect loop. Substance is corroborated by Utusan Sarawak's 30 July report, but no curriculum change, teacher training, funding or timetable was announced."
   },
   {
     "id": "tvs-sarawak-health-data-privacy-ai-2026-08-01",
