@@ -825,23 +825,23 @@
   },
   {
     "id": "aiformakers-borneo-makers-festival-2026-08-13",
-    "date": "2026-08-13",
-    "source": "TEGAS / AI For Makers",
-    "url": "https://aiformakers.my/",
-    "title": "AI For Makers - Borneo Makers Festival 2026",
+    "date": "2026-08-24",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/participants-feedback-to-be-shared-with-premier/",
+    "title": "Participants' Feedback To Be Shared With Premier",
     "section": "Education",
     "tags": [
       "AI For Makers",
       "Borneo Makers Festival",
-      "AI workshops",
+      "TEGAS Digital Village",
       "AI education",
-      "TEGAS",
-      "Sarawak AI Blueprint"
+      "rural schools",
+      "digital labs"
     ],
-    "summary": "AI For Makers' Kuching festival signals a shift from AI awareness to hands-on capability through workshops, showcases, coding challenges and public demonstrations for Sarawak's wider maker community.",
-    "why_it_matters": "The programme gives students, educators, businesses and public agencies a local setting to practise AI tools and see how the Sarawak AI Blueprint translates into skills, prototypes and public participation.",
+    "summary": "Closing feedback from AI For Makers at TEGAS Digital Village signals that laptop capability, software costs and rural school labs remain barriers to practical AI training.",
+    "why_it_matters": "It turns a two-day maker festival into a policy feedback loop: participants' hardware and software constraints are being taken to the Premier rather than left as event-day complaints.",
     "confidence": "medium",
-    "caveat": "The official programme page confirms the 23–24 August 2026 dates, TEGAS Digital Village venue and detailed schedule; its visitor and exhibitor figures are targets, and it does not expose a separate publication timestamp, so the feed date follows Watch's 13 August handoff."
+    "caveat": "The Sarawak Tribune report covers closing-ceremony remarks on 24 August 2026; it does not confirm a new laptop, software-subsidy or rural-lab programme, budget or timetable."
   },
   {
     "id": "sarawaktribune-mpob-biodiversity-ai-2026-08-13",
