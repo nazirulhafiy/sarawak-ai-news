@@ -1101,5 +1101,25 @@
     "why_it_matters": "Using a named tool on real business problems gives Sarawak students and entrepreneurs applied AI experience while the event builds links with Singapore and a longer-term youth network.",
     "confidence": "high",
     "caveat": "The article confirms a planned two-day event but not registration availability, final venue, participant capacity, judging criteria or post-event outcomes."
+  },
+  {
+    "id": "sarawaktribune-smes-practical-ai-adoption-2026-08-27",
+    "date": "2026-08-27",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/how-smes-are-making-ai-work/",
+    "title": "How SMEs are making AI work",
+    "section": "Business",
+    "tags": [
+      "SME AI adoption",
+      "Ensera",
+      "Evolving Brilliance Technologies",
+      "EB TERRA",
+      "geospatial AI",
+      "computer vision"
+    ],
+    "summary": "Three Sarawak-linked SMEs are moving AI into administrative, creative and geospatial workflows, signalling practical business adoption that still depends on human review and reliable data.",
+    "why_it_matters": "Concrete examples from Ensera and EB Tech show how local firms can pair AI with creative production, remote sensing and field data instead of treating it as a stand-alone label.",
+    "confidence": "medium",
+    "caveat": "The feature relies mainly on interviews with co-founder Dr Ashweein Narayanan; it reports no quantified productivity results, named active deployments in Sarawak, or independent performance data."
   }
 ]
