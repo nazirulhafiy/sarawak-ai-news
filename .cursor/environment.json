@@ -1,0 +1,17 @@
+{
+  "name": "Sarawak AI News",
+  "install": "python3 scripts/build.py",
+  "terminals": [
+    {
+      "name": "preview",
+      "command": "python3 -m http.server 4173 -d dist",
+      "description": "Serves the generated static site from dist/ at http://127.0.0.1:4173"
+    }
+  ],
+  "ports": [
+    {
+      "name": "preview",
+      "port": 4173
+    }
+  ]
+}
