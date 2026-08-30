@@ -101,7 +101,7 @@ Then open [http://127.0.0.1:4173](http://127.0.0.1:4173) or the local About page
 ```text
 data/items.json       Reviewed stories shown on the public site
 data/sources.json     Public pages checked for possible stories
-data/site.json        Site information, including the update time
+data/site.json        Site information; last-updated is derived at build time
 scripts/build.py      Builds the website in dist/
 scripts/ingest.py     Finds candidates for manual review
 site/style.css        Production visual design
@@ -126,10 +126,9 @@ before adding a story to `data/items.json`.
 1. Run candidate discovery and check any directly supplied source URLs.
 2. Review the original sources manually, including their publication context.
 3. Add approved stories to `data/items.json`.
-4. Update `last_updated` in `data/site.json` whenever an article is added.
-5. Run the checks below.
-6. Build and preview the site.
-7. Push the approved update to `main` for GitHub Pages to deploy it.
+4. Run the checks below. The build derives last-updated from the newest item.
+5. Build and preview the site.
+6. Push the approved update to `main` for GitHub Pages to deploy it.
 
 The scheduled daily workflow follows the same editorial gate. It uses the
 linked ChatGPT Sarawak AI News Watch conversation as the sole
