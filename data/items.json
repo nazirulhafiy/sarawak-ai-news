@@ -1101,5 +1101,26 @@
     "why_it_matters": "Concrete examples from Ensera and EB Tech show how local firms can pair AI with creative production, remote sensing and field data instead of treating it as a stand-alone label.",
     "confidence": "medium",
     "caveat": "The feature relies mainly on interviews with co-founder Dr Ashweein Narayanan; it reports no quantified productivity results, named active deployments in Sarawak, or independent performance data."
+  },
+  {
+    "id": "sarawakenergy-hapua-ai-governance-2026-08-27",
+    "date": "2026-08-27",
+    "source": "Sarawak Energy",
+    "url": "https://www.sarawakenergy.com/media-info/media-releases/2026/sarawak-energy-reinforces-commitment-to-governance-and-digital-resilience-at-hapua-internal-audit-summit-2026",
+    "title": "Sarawak Energy Reinforces Commitment to Governance and Digital Resilience at HAPUA Internal Audit Summit 2026",
+    "section": "Policy",
+    "tags": [
+      "Sarawak Energy",
+      "HAPUA",
+      "AI governance",
+      "digital resilience",
+      "data analytics",
+      "critical infrastructure",
+      "cybersecurity"
+    ],
+    "summary": "Sarawak Energy's ASEAN utility summit placed AI and data analytics for internal audit alongside cybersecurity and digital resilience, bringing responsible-use questions into the critical-infrastructure agenda.",
+    "why_it_matters": "The event links a Sarawak utility to regional governance discussions that will shape how energy organisations assess AI, data quality, cybersecurity and ethical use in critical infrastructure.",
+    "confidence": "medium",
+    "caveat": "The release reports a completed summit and discussion topics, not an AI deployment, pilot, investment, implementation timetable or measured outcome."
   }
 ]
