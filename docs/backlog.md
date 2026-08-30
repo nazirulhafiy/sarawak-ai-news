@@ -6,6 +6,9 @@ commitment to rewrite the app yet.
 
 ## Recent Changes
 
+- Derived homepage and sitemap `last_updated` from the newest reviewed item
+  date at build time, so the public date cannot lag `data/items.json` if
+  `data/site.json` is left unchanged.
 - Refined the production masthead with a larger wordmark and full-width
   Sarawak-color rule, aligning red to the wordmark and splitting the remaining
   space evenly between yellow and black while keeping the first screen free of
@@ -32,8 +35,6 @@ commitment to rewrite the app yet.
 
 ## Known Issues
 
-- `data/site.json` uses a manual `last_updated` timestamp, so it can drift from
-  the newest reviewed item if not updated during the weekly flow.
 - The production HTML does not show `why_it_matters`, `tags`, or confidence for
   high-confidence items, even though those fields are preserved in JSON.
 - Some item caveats still say the source should be revisited before direct

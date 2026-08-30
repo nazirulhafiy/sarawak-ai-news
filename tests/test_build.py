@@ -3,21 +3,74 @@ import subprocess
 import sys
 import unittest
 import xml.etree.ElementTree as ET
-from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from scripts import build
 
 
 class BuildTest(unittest.TestCase):
     @staticmethod
-    def updated_labels():
-        value = json.loads((ROOT / "data" / "site.json").read_text())["last_updated"]
-        updated = datetime.fromisoformat(value)
-        time = updated.strftime("%I:%M %p").lstrip("0")
-        current = f"{updated.strftime('%A, %B')} {updated.day}, {updated.year}, {time}".upper()
-        compact = f"{updated.strftime('%A').upper()}, {updated.day} {updated.strftime('%b %Y').upper()}"
-        return value, current, compact
+    def reviewed_items():
+        return json.loads((ROOT / "data" / "items.json").read_text())
+
+    @classmethod
+    def updated_labels(cls):
+        return build.last_updated(cls.reviewed_items())
+
+    def test_last_updated_follows_newest_reviewed_item(self):
+        items = [
+            {"date": "2026-01-15"},
+            {"date": "2026-08-20"},
+            {"date": "2026-07-04"},
+        ]
+        value, _, compact = build.last_updated(items)
+        self.assertEqual(value, "2026-08-20")
+        self.assertEqual(compact, "THURSDAY, 20 AUG 2026")
+
+    def test_last_updated_ignores_stale_site_metadata(self):
+        site_value = json.loads((ROOT / "data" / "site.json").read_text())["last_updated"]
+        newer_than_site = "2026-12-01"
+        older_than_site = "2026-01-02"
+        self.assertLess(older_than_site, site_value[:10])
+        self.assertGreater(newer_than_site, site_value[:10])
+
+        newer_value, _, newer_compact = build.last_updated(
+            [{"date": older_than_site}, {"date": newer_than_site}]
+        )
+        self.assertEqual(newer_value, newer_than_site)
+        self.assertEqual(newer_compact, "TUESDAY, 1 DEC 2026")
+
+        older_value, _, older_compact = build.last_updated([{"date": older_than_site}])
+        self.assertEqual(older_value, older_than_site)
+        self.assertEqual(older_compact, "FRIDAY, 2 JAN 2026")
+        self.assertNotEqual(older_value, site_value[:10])
+
+    def test_last_updated_requires_dated_items(self):
+        with self.assertRaises(ValueError):
+            build.last_updated([])
+        with self.assertRaises(ValueError):
+            build.last_updated([{"title": "undated"}])
+
+    def test_build_last_updated_tracks_newest_item_not_site_json(self):
+        newest = max(item["date"] for item in self.reviewed_items())
+        site_day = json.loads((ROOT / "data" / "site.json").read_text())["last_updated"][:10]
+        value, _, compact = self.updated_labels()
+        self.assertEqual(value, newest)
+
+        subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT, text=True, capture_output=True, check=True)
+        html = (ROOT / "dist" / "index.html").read_text()
+        sitemap = (ROOT / "dist" / "sitemap.xml").read_text()
+        self.assertIn(
+            f'<span class="updated-label">Last updated</span><time datetime="{newest}">{compact}</time>',
+            html,
+        )
+        self.assertIn(f"<lastmod>{newest}</lastmod>", sitemap)
+        if site_day != newest:
+            self.assertNotIn(f'<time datetime="{site_day}"', html)
+            self.assertNotIn(f"<lastmod>{site_day}</lastmod>", sitemap)
 
     def test_seed_data_has_required_fields(self):
         items = json.loads((ROOT / "data" / "items.json").read_text())

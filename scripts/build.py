@@ -56,8 +56,11 @@ def format_story_date(value: str) -> str:
     return f"{date.day} {date.strftime('%b %Y')}"
 
 
-def last_updated() -> tuple[str, str, str]:
-    value = load_json(DATA / "site.json")["last_updated"]
+def last_updated(items: list[dict]) -> tuple[str, str, str]:
+    dates = [item["date"] for item in items if item.get("date")]
+    if not dates:
+        raise ValueError("Cannot derive last_updated without dated reviewed items")
+    value = max(dates)
     updated = parse_datetime(value)
     time = updated.strftime("%I:%M %p").lstrip("0")
     current = f"{updated.strftime('%A, %B')} {updated.day}, {updated.year}, {time}".upper()
@@ -196,7 +199,7 @@ def render_site_footer(active_page: str) -> str:
 def render_compact_body(items: list[dict]) -> str:
     feed = "\n".join(render_compact_signal(item, index) for index, item in enumerate(items, 1))
     category_filter = render_category_filter(items)
-    updated_iso, _, updated_compact = last_updated()
+    updated_iso, _, updated_compact = last_updated(items)
 
     return f"""<body>
   <a class="skip-link" href="#content">Skip to content</a>
@@ -378,7 +381,7 @@ def render_about() -> str:
 
 def build() -> None:
     items = load_feed_items()
-    sitemap_lastmod = last_updated()[0][:10]
+    sitemap_lastmod = last_updated(items)[0]
     DIST.mkdir(exist_ok=True)
     alternative_dir = DIST / "alternative"
     if alternative_dir.exists():

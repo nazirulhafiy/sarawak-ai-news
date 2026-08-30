@@ -34,7 +34,8 @@ The homepage shows:
   theme toggle.
 - Search title: `Sarawak AI News | AI.Sarawak.News`.
 - Introductory copy describing the source-linked Sarawak AI coverage.
-- Manual last-updated weekday and date from `data/site.json`.
+- Last-updated weekday and date derived at build time from the newest reviewed
+  item date.
 - Editorial headline and deck.
 - Client-side category filters.
 - Ranked story cards ordered newest first.
@@ -112,10 +113,10 @@ canonical label is shown in both the category filter and its story cards:
    rather than phrases such as "the publication reports" or "the article says".
 5. Keep source URL, confidence, caveat, and why-it-matters fields. Use the caveat
    to distinguish analysis from new programmes or implementation milestones.
-6. Update `data/site.json` whenever an article is added.
-7. Run build, unit tests, summary audit, and a targeted date audit using
+6. Run build, unit tests, summary audit, and a targeted date audit using
    `python3 scripts/audit_dates.py --item-id <id>` for each added or edited item.
-8. Push to `main` only when the public feed is ready to redeploy.
+   The build sets the public last-updated date from the newest reviewed item.
+7. Push to `main` only when the public feed is ready to redeploy.
 
 The scheduled weekly auto-publish path applies the same editorial gate. It may
 use the separate Sarawak AI News Watch conversation as supplementary discovery
