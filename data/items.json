@@ -1122,5 +1122,25 @@
     "why_it_matters": "The event links a Sarawak utility to regional governance discussions that will shape how energy organisations assess AI, data quality, cybersecurity and ethical use in critical infrastructure.",
     "confidence": "medium",
     "caveat": "The release reports a completed summit and discussion topics, not an AI deployment, pilot, investment, implementation timetable or measured outcome."
+  },
+  {
+    "id": "dayakdaily-konsortium-bumi-smart-paddy-update-2026-08-31",
+    "date": "2026-08-31",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/konsortium-bumi-group-secures-rm2-8-mln-grant-for-rural-electrification-starts-50-acre-paddy-project-in-sept/",
+    "title": "Konsortium Bumi Group secures RM2.8 mln grant for rural electrification, starts 50-acre paddy project in Sept",
+    "section": "Business",
+    "tags": [
+      "Konsortium Bumi Group",
+      "smart agriculture",
+      "smart paddy",
+      "rural electrification",
+      "rice production",
+      "technology partnerships"
+    ],
+    "summary": "Konsortium Bumi's signed partnerships and planned 50-acre paddy test plot signal a move from consultancy into technology-linked agriculture and practical food-security experimentation in Sarawak.",
+    "why_it_matters": "A near-term 50-acre pilot gives Sarawak a concrete test of whether partnership-led smart agriculture can support local rice production, while the rural-electrification study adds a parallel infrastructure capability signal.",
+    "confidence": "medium",
+    "caveat": "The English report confirms four MoUs, a 50-acre plot and a September planting target, but it names no AI or IoT functions, test-plot location, performance baseline or deployment results."
   }
 ]
