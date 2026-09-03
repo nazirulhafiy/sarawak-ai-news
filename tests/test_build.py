@@ -162,6 +162,8 @@ class BuildTest(unittest.TestCase):
         self.assertEqual(sitemap.count("<url>"), 9)
         self.assertIn('<a class="site-footer-link" href="/policy.html">Policy</a>', html)
         self.assertIn('<a class="site-footer-link" href="/public-services.html">Public Services</a>', html)
+        self.assertIn('<h2 class="site-footer-categories-title">Categories</h2>', html)
+        self.assertNotIn('>Topics</h2>', html)
         ET.fromstring(sitemap)
         self.assertNotIn("How This Is Built", html)
         self.assertNotIn("Sponsor This Brief", html)

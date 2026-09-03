@@ -858,7 +858,7 @@ html[data-theme="dark"] .site-footer {
   text-transform: uppercase;
 }
 
-.site-footer-nav .site-footer-topics-title { margin-top: 22px; }
+.site-footer-nav .site-footer-categories-title { margin-top: 22px; }
 
 .site-footer-nav ul {
   display: grid;

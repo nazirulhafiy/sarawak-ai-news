@@ -205,7 +205,7 @@ def render_site_footer(active_page: str) -> str:
           <li><a class="site-footer-link" href="/"{home_current}>Home</a></li>
           <li><a class="site-footer-link" href="about.html"{about_current}>About</a></li>
         </ul>
-        <h2 class="site-footer-topics-title">Topics</h2>
+        <h2 class="site-footer-categories-title">Categories</h2>
         <ul>
 {topic_links}
         </ul>
