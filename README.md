@@ -54,12 +54,14 @@ The project does not copy or republish full articles.
 For the scheduled publisher, the Watch handoff is the sole discovery gate.
 AI-led headlines may proceed to article-body checks when the headline itself
 does not mention Sarawak, but the body must still make the Sarawak and
-technology relevance clear before the item is considered.
+AI or specific digital-technology relevance clear before the item is
+considered. General words such as "smart", "innovation", or "new technology"
+do not qualify without a named system, method, or technical function.
 
 ## Current Status
 
 This is a working public prototype, not a fully automated news service. As of
-the latest content audit on 1 September 2026, it contains 60 reviewed stories.
+the latest content audit on 3 September 2026, it contains 59 reviewed stories.
 Candidate discovery, source checks, and website building are supported by
 automation, while the editorial criteria and recurring publishing approval
 remain explicitly controlled by Hafiy.
