@@ -23,7 +23,8 @@ are not displayed on the public story cards.
 
 The production categories are Policy, Public Services, Education, Workforce,
 Research, Infrastructure, and Business. The same category label appears in the
-browse filter and on every matching story card.
+browse filter and on every matching story card. Each category also has a
+permanent public page with a unique introduction and canonical URL.
 
 ## Who It Is For
 
@@ -107,6 +108,7 @@ scripts/ingest.py     Finds candidates for manual review
 site/style.css        Production visual design
 site/app.js           Category filtering
 dist/about.html       Generated About page explaining the editorial workflow
+dist/<category>.html  Generated permanent pages for each production category
 tests/                Automated checks
 design-variants/      Design experiments, not production pages
 ```

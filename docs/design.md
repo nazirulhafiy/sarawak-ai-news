@@ -20,7 +20,7 @@ The current direction is intentionally restrained:
 - Ranked story cards with compact metadata.
 - Source name highlighted in yellow.
 - Structured, contained footer with a source summary, a subtle desktop divider,
-  vertical Home/About links, and a full-width builder and independence
+  vertical Home/About and topic links, and a full-width builder and independence
   attribution row. The footer follows the story list with a restrained 40px
   section gap.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark
@@ -107,6 +107,10 @@ Homepage hierarchy:
 5. Category filters.
 6. Ranked story cards.
 7. Independent-publication footer note.
+
+The seven category pages use the same masthead, story cards, theme controls,
+and footer. Each page starts with a compact topic introduction, a link back to
+all news, and only the stories in that category.
 
 The masthead contains the brand lockup, compact navigation, theme toggle, and
 color rule. The About page moves fuller publication context off the already

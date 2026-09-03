@@ -37,6 +37,15 @@ ABOUT_SEO_DESCRIPTION = (
     "Learn how AI.Sarawak.News reviews and links Sarawak AI news, policy, projects, "
     "research and adoption."
 )
+CATEGORY_INTRODUCTIONS = {
+    "Policy": "Track Sarawak AI policy, governance, plans and public decisions that shape responsible adoption across the state.",
+    "Public Services": "Follow practical uses of AI in Sarawak public services, including health, local government, safety and citizen support.",
+    "Education": "Read Sarawak AI education updates about schools, colleges, learning programmes and student projects.",
+    "Workforce": "Follow Sarawak AI workforce developments, including skills programmes, professional training and career readiness.",
+    "Research": "Track Sarawak AI research, university partnerships and scientific work with a clear connection to the state.",
+    "Infrastructure": "Follow Sarawak AI infrastructure, including compute, data centres, connectivity and sovereign technology projects.",
+    "Business": "Read Sarawak AI business updates about adoption, entrepreneurship, investment and industry capability.",
+}
 
 
 def load_json(path: Path):
@@ -175,6 +184,14 @@ def render_site_header(active_page: str) -> str:
 def render_site_footer(active_page: str) -> str:
     home_current = ' aria-current="page"' if active_page == "home" else ""
     about_current = ' aria-current="page"' if active_page == "about" else ""
+    topic_link_rows = []
+    for section in SECTION_FILTERS:
+        section_slug = slug(section)
+        current = ' aria-current="page"' if active_page == section_slug else ""
+        topic_link_rows.append(
+            f'          <li><a class="site-footer-link" href="/{section_slug}.html"{current}>{esc(section)}</a></li>'
+        )
+    topic_links = "\n".join(topic_link_rows)
     return f"""
   <footer class="site-footer">
     <div class="site-footer-main">
@@ -187,6 +204,10 @@ def render_site_footer(active_page: str) -> str:
         <ul>
           <li><a class="site-footer-link" href="/"{home_current}>Home</a></li>
           <li><a class="site-footer-link" href="about.html"{about_current}>About</a></li>
+        </ul>
+        <h2 class="site-footer-topics-title">Topics</h2>
+        <ul>
+{topic_links}
         </ul>
       </nav>
     </div>
@@ -261,6 +282,33 @@ def render_about_body() -> str:
   </main>
 
 {render_site_footer("about")}
+</body>"""
+
+
+def render_category_body(section: str, items: list[dict]) -> str:
+    section_slug = slug(section)
+    feed = "\n".join(render_compact_signal(item, index) for index, item in enumerate(items, 1))
+    return f"""<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+{render_site_header(section_slug)}
+
+  <main id="content" class="category-page">
+    <header class="category-hero">
+      <p class="about-eyebrow">Sarawak AI topic</p>
+      <h1>Sarawak AI {esc(section.lower())} news</h1>
+      <p class="about-lede">{esc(CATEGORY_INTRODUCTIONS[section])}</p>
+      <p class="category-return"><a href="/">View all Sarawak AI news</a></p>
+    </header>
+
+    <section class="story-list category-story-list" aria-label="Latest {esc(section)} stories">
+      {feed}
+    </section>
+  </main>
+
+  <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden><span class="back-to-top-label">Back to top</span> <span class="back-to-top-arrow" aria-hidden="true">↑</span></button>
+
+{render_site_footer(section_slug)}
 </body>"""
 
 
@@ -379,6 +427,61 @@ def render_about() -> str:
 """
 
 
+def render_category(section: str, items: list[dict]) -> str:
+    section_slug = slug(section)
+    category_url = f"{SITE_URL}{section_slug}.html"
+    title = f"Sarawak AI {section} News | {SITE_NAME}"
+    description = CATEGORY_INTRODUCTIONS[section]
+    structured_data = json.dumps(
+        {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "@id": f"{category_url}#collection",
+            "url": category_url,
+            "name": title,
+            "description": description,
+            "isPartOf": {"@id": f"{SITE_URL}#website"},
+            "about": {"@type": "Thing", "name": f"Sarawak AI {section}"},
+            "inLanguage": "en",
+        },
+        ensure_ascii=False,
+        separators=(",", ":"),
+    ).replace("</", "<\\/")
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="{esc(description)}" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{esc(title)}" />
+  <meta property="og:description" content="{esc(description)}" />
+  <meta property="og:url" content="{esc(category_url)}" />
+  <meta property="og:site_name" content="{esc(SITE_NAME)}" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="{esc(title)}" />
+  <meta name="twitter:description" content="{esc(description)}" />
+  <link rel="canonical" href="{esc(category_url)}" />
+  <title>{esc(title)}</title>
+  <script type="application/ld+json">{structured_data}</script>
+  <script>
+    try {{
+      const storedTheme = localStorage.getItem("sarawak-theme");
+      if (storedTheme === "dark" || (storedTheme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {{
+        document.documentElement.dataset.theme = "dark";
+      }}
+    }} catch (error) {{}}
+  </script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
+</head>
+{render_category_body(section, items)}
+</html>
+"""
+
+
 def build() -> None:
     items = load_feed_items()
     sitemap_lastmod = last_updated(items)[0]
@@ -388,21 +491,26 @@ def build() -> None:
         shutil.rmtree(alternative_dir)
     (DIST / "index.html").write_text(render_index(items), encoding="utf-8")
     (DIST / "about.html").write_text(render_about(), encoding="utf-8")
+    for section in SECTION_FILTERS:
+        section_items = [item for item in items if item["section"] == section]
+        (DIST / f"{slug(section)}.html").write_text(
+            render_category(section, section_items), encoding="utf-8"
+        )
     compact_css = (ROOT / "site" / "style.css").read_text(encoding="utf-8")
     (DIST / "style.css").write_text(compact_css, encoding="utf-8")
     (DIST / "app.js").write_text((ROOT / "site" / "app.js").read_text(encoding="utf-8"), encoding="utf-8")
     (DIST / "items.json").write_text(json.dumps(items, indent=2), encoding="utf-8")
     (DIST / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://ai.sarawak.news/sitemap.xml\n", encoding="utf-8")
+    sitemap_urls = [SITE_URL, f"{SITE_URL}about.html"] + [
+        f"{SITE_URL}{slug(section)}.html" for section in SECTION_FILTERS
+    ]
+    sitemap_entries = "\n".join(
+        f"  <url>\n    <loc>{esc(url)}</loc>\n    <lastmod>{sitemap_lastmod}</lastmod>\n  </url>"
+        for url in sitemap_urls
+    )
     (DIST / "sitemap.xml").write_text(f"""<?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
-  <url>
-    <loc>https://ai.sarawak.news/</loc>
-    <lastmod>{sitemap_lastmod}</lastmod>
-  </url>
-  <url>
-    <loc>https://ai.sarawak.news/about.html</loc>
-    <lastmod>{sitemap_lastmod}</lastmod>
-  </url>
+{sitemap_entries}
 </urlset>
 """, encoding="utf-8")
     print(f"Built {DIST / 'index.html'} with {len(items)} feed items")

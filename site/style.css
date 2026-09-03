@@ -379,11 +379,39 @@ html[data-theme="dark"] .brief { background: var(--page); }
   margin: 0 auto;
 }
 
+.category-page {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
 .about-hero {
   padding: 58px 0 46px;
   border-bottom: 1px solid var(--line);
   animation: hero-reveal .85s cubic-bezier(.22, 1, .36, 1) both;
 }
+
+.category-hero {
+  padding: 58px 0 40px;
+  border-bottom: 1px solid var(--line);
+  animation: hero-reveal .85s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.category-hero h1 {
+  max-width: 680px;
+  margin: 0 0 18px;
+  text-align: left;
+  text-transform: capitalize;
+}
+
+.category-return {
+  margin: 20px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.category-return a { color: var(--sarawak-red-ink); }
+
+.category-story-list { margin-top: 28px; }
 
 .about-eyebrow {
   margin: 0 0 12px;
@@ -830,6 +858,8 @@ html[data-theme="dark"] .site-footer {
   text-transform: uppercase;
 }
 
+.site-footer-nav .site-footer-topics-title { margin-top: 22px; }
+
 .site-footer-nav ul {
   display: grid;
   gap: 7px;
@@ -908,6 +938,7 @@ html[data-theme="dark"] .site-footer {
   .brief-deck { font-size: 17px; line-height: 1.55; }
 
   .about-hero { padding: 38px 0 32px; }
+  .category-hero { padding: 38px 0 32px; }
   .about-lede { font-size: 18px; line-height: 1.55; }
   .about-section { padding: 30px 0; }
   .about-section h2 { font-size: 23px; }
@@ -955,6 +986,7 @@ html[data-theme="dark"] .site-footer {
   .brief,
   .brief > *,
   .about-hero,
+  .category-hero,
   .about-section,
   .story-card { transition: none; }
   .brief,

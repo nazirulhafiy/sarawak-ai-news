@@ -26,6 +26,8 @@ commitment to rewrite the app yet.
   source-review context, and coverage categories.
 - Added a structured footer inspired by the PCDS2030 reference, limited to
   existing Home/About routes, source context, and builder attribution.
+- Added permanent category pages with unique metadata, canonical URLs, filtered
+  reviewed stories, sitemap entries, and internal HTML links.
 - Applied Geist typography site-wide and refined masthead and footer link hover
   states to use the selected-filter and Sarawak-red treatments consistently.
 - Clarified that public summaries lead with the Sarawak signal while source type
@@ -81,7 +83,6 @@ commitment to rewrite the app yet.
 - Decide whether generated `dist/candidates.*` should stay in `dist/` or move to
   a non-public review directory.
 - Add RSS or JSON feed output if the site becomes a recurring publication.
-- Add stable category URLs or query-string state for filtered views.
 - Consider an archive page once the feed grows beyond one screen of current
   signals.
 

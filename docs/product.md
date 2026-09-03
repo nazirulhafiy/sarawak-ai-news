@@ -102,6 +102,11 @@ canonical label is shown in both the category filter and its story cards:
 - Infrastructure
 - Business
 
+Each section also has a permanent static page. The homepage and footer link to
+these pages with normal HTML links, so readers and search engines can find them
+without JavaScript. Each page has a unique title, description, canonical URL,
+topic introduction, and filtered list of reviewed stories.
+
 ## Editorial Workflow
 
 1. Run `python3 scripts/ingest.py --limit-per-source 5` and check any directly
