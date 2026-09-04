@@ -123,24 +123,24 @@ topic introduction, and filtered list of reviewed stories.
    The build sets the public last-updated date from the newest reviewed item.
 7. Push to `main` only when the public feed is ready to redeploy.
 
-The scheduled daily auto-publish path applies the same editorial gate. A
-discovery controller searches approved public sources and supplies only a
-structured manifest of candidate URLs, headlines, dates, source names, and
-source-check facts. Controller summaries, recommendations, and caveats are not
-authoritative. Leads are screened against existing items, known URLs, related
-developments, and a private durable screened-URL ledger. The repository
-publisher independently opens and checks every surviving original source
-before it can consider publication. The complete harness-neutral contract is
-in `docs/automation.md`.
+The scheduled daily auto-publish path applies the same editorial gate. News
+Bot owns the private screened-URL ledger and launches one Cursor Cloud Agent.
+That agent searches approved public sources in Stage A and writes a structured
+manifest of candidate URLs, headlines, dates, source names, and source-check
+facts. Stage A summaries, recommendations, and caveats are not authoritative.
+Leads are screened against existing items, known URLs, related developments,
+and the ledger snapshot from News Bot. Stage B independently opens and checks
+every surviving original source before it can consider publication. The
+complete harness-neutral contract is in `docs/automation.md`.
 
 With Hafiy's recurring approval, the workflow may commit and push qualifying
 updates to `origin/main` after JSON validation, tests, date and summary audits,
 the static build, local browser preview, `git diff --check`, and final scope
 inspection all pass. It makes no content commit or push when there are no
-qualifying stories, when the controller handoff is unavailable or invalid, or
-when any required check fails. The automation may publish only `README.md`,
-`data/items.json`, and `data/site.json`; it does not modify docs, assets,
-scripts, tests, or unrelated local changes.
+qualifying stories, when Stage A returns `no_update`, or when any required
+check fails. The automation may publish only `README.md`, `data/items.json`,
+and `data/site.json`; it does not modify docs, assets, scripts, tests, or
+unrelated local changes.
 
 ## Source Policy
 
@@ -169,8 +169,8 @@ explicit full-audit option.
 - Treat `dist/` as generated output.
 - Treat candidate files as internal review material.
 - Do not send newsletters or publish new public surfaces without explicit
-  approval. The recurring feed publisher is separately pre-authorized by Hafiy
-  and remains limited to the verified publication paths described above.
+  approval. The recurring daily Cloud Agent is separately pre-authorized by
+  Hafiy and remains limited to the verified publication paths described above.
 - Prefer auditable source attribution over speed.
 
 ## Success Signals

@@ -1,17 +1,19 @@
 ---
-description: Rules for scheduled Sarawak AI News publication runs
+description: Rules for scheduled Sarawak AI News Cloud Agent runs
 alwaysApply: false
 ---
 
-# Sarawak AI News Publisher
+# Sarawak AI News Daily Agent
 
-For a scheduled or controller-dispatched content publication run:
+For a News Bot-launched daily Cloud Agent run:
 
 - Read `AGENTS.md`, `docs/automation.md`,
   `automation/candidate.schema.json`, and
-  `automation/prompts/publisher.md` first.
-- Treat the supplied candidate manifest as the complete discovery handoff.
-- Independently verify every original source page.
+  `automation/prompts/daily-agent.md` first.
+- Run Stage A discovery, then Stage B publish only when Stage A produced a
+  valid non-empty manifest.
+- Treat Stage A text as non-authoritative. Independently verify every
+  original source page in Stage B.
 - Require an English headline and substantive English article body.
 - Require a meaningful Sarawak link and a named AI or digital technical
   function.

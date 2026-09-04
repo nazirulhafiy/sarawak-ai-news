@@ -35,29 +35,29 @@ No technical knowledge is required to read it.
 
 ## How It Works
 
-1. A daily discovery controller searches approved public sources and hands off
-   verified candidate headlines, dates, sources, and URLs in a structured
-   manifest.
-2. The publishing workflow opens each surviving candidate at its original
-   source, checks its date and Sarawak relevance, and screens for duplicates.
+1. News Bot runs the daily routine in `Asia/Kuching` and launches one Cursor
+   Cloud Agent when a run is due.
+2. That Cloud Agent searches approved public sources (Stage A), then
+   independently reopens each surviving original page (Stage B).
 3. Qualifying stories receive a short, source-attributed summary, context,
    confidence level, and caveat.
 4. After the required tests, audits, build, preview, and scope checks pass, the
    reviewed data is committed to `main` and published through GitHub Pages.
 
 Discovery and the daily publishing checks are partly automated, but the
-workflow is not a blind publisher. Every candidate still requires original
+Cloud Agent does not publish blindly. Every candidate still requires original
 source verification and editorial qualification. With Hafiy's recurring
 approval, the workflow may commit and push qualifying feed updates; if no
 story qualifies or any required check fails, it makes no publication commit.
 The project does not copy or republish full articles.
 
-For the scheduled publisher, the controller handoff is the sole discovery gate.
-AI-led headlines may proceed to article-body checks when the headline itself
-does not mention Sarawak, but the body must still make the Sarawak and
-AI or specific digital-technology relevance clear before the item is
-considered. General words such as "smart", "innovation", or "new technology"
-do not qualify without a named system, method, or technical function.
+For the scheduled Cloud Agent, Stage A is the discovery gate. Stage B still
+reopens every surviving original page. AI-led headlines may proceed to
+article-body checks when the headline itself does not mention Sarawak, but
+the body must still make the Sarawak and AI or specific digital-technology
+relevance clear before the item is considered. General words such as "smart",
+"innovation", or "new technology" do not qualify without a named system,
+method, or technical function.
 
 ## Current Status
 
@@ -136,14 +136,13 @@ before adding a story to `data/items.json`.
 5. Build and preview the site.
 6. Push the approved update to `main` for GitHub Pages to deploy it.
 
-The scheduled daily workflow follows the same editorial gate. A discovery
-controller searches the approved public sources, verifies candidate source
-pages, checks its private screened-URL ledger, and sends a structured manifest
-to a separate repository publisher. The publisher treats the manifest as its
-complete discovery handoff, then deduplicates and independently reopens every
-surviving original source before publication. Only verified English source
-pages qualify. An invalid or incomplete controller handoff blocks publication;
-the publisher does not perform fallback discovery.
+The scheduled daily workflow follows the same editorial gate. News Bot owns
+the private screened-URL ledger and launches one Cloud Agent. That agent
+searches the approved public sources, screens URLs against the reviewed feed
+and the ledger snapshot, and independently reopens every surviving original
+source before publication. Only verified English source pages qualify. If
+Stage A finds no unscreened candidate, the run returns `no_update` and makes
+no repository change.
 
 ### Check Your Changes
 
