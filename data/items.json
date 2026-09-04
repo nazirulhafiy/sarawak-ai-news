@@ -1122,5 +1122,24 @@
     "why_it_matters": "The event links a Sarawak utility to regional governance discussions that will shape how energy organisations assess AI, data quality, cybersecurity and ethical use in critical infrastructure.",
     "confidence": "medium",
     "caveat": "The release reports a completed summit and discussion topics, not an AI deployment, pilot, investment, implementation timetable or measured outcome."
+  },
+  {
+    "id": "curtin-driverai-ai-partnership-2026-09-03",
+    "date": "2026-09-03",
+    "source": "Curtin Malaysia",
+    "url": "https://news.curtin.edu.my/news/curtin-malaysia-driverai-explore-ai-research-and-talent-development-partnership/",
+    "title": "Curtin Malaysia, DriverAI explore AI research and talent development partnership",
+    "section": "Research",
+    "tags": [
+      "DriverAI",
+      "Curtin Malaysia",
+      "high-speed computing",
+      "AI scholarships",
+      "industry partnership"
+    ],
+    "summary": "Curtin Malaysia's Miri meeting with US firm DriverAI signals an exploratory campus track for joint AI research, high-speed computing and student scholarships.",
+    "why_it_matters": "The visit links a named US software firm to a Sarawak campus and the transport minister, giving the state's AI research and talent agenda a concrete industry conversation before any agreement.",
+    "confidence": "medium",
+    "caveat": "The source is a university news release about an exploratory visit; it does not announce a signed agreement, funded programme, confirmed scholarship intake, or deployed system."
   }
 ]
