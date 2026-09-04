@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai.sarawak.news/schemas/candidate-manifest.json",
+  "title": "Sarawak AI News candidate manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "generated_at",
+    "timezone",
+    "candidates"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "timezone": {"const": "Asia/Kuching"},
+    "candidates": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/candidate"}
+    }
+  },
+  "$defs": {
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "headline",
+        "publication_date",
+        "source",
+        "url",
+        "canonical_url",
+        "language",
+        "language_verified",
+        "discovered_at",
+        "source_checked_at",
+        "discovery_source_url"
+      ],
+      "properties": {
+        "headline": {"type": "string", "minLength": 1},
+        "publication_date": {"type": "string", "format": "date"},
+        "source": {"type": "string", "minLength": 1},
+        "url": {"type": "string", "format": "uri", "pattern": "^https://"},
+        "canonical_url": {"type": "string", "format": "uri", "pattern": "^https://"},
+        "language": {"const": "en"},
+        "language_verified": {"const": true},
+        "discovered_at": {"type": "string", "format": "date-time"},
+        "source_checked_at": {"type": "string", "format": "date-time"},
+        "discovery_source_url": {"type": "string", "format": "uri", "pattern": "^https://"}
+      }
+    }
+  }
+}

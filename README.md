@@ -35,8 +35,9 @@ No technical knowledge is required to read it.
 
 ## How It Works
 
-1. The daily Sarawak AI News Watch task searches public sources and hands off
-   verified candidate headlines, dates, sources, and URLs.
+1. A daily discovery controller searches approved public sources and hands off
+   verified candidate headlines, dates, sources, and URLs in a structured
+   manifest.
 2. The publishing workflow opens each surviving candidate at its original
    source, checks its date and Sarawak relevance, and screens for duplicates.
 3. Qualifying stories receive a short, source-attributed summary, context,
@@ -51,7 +52,7 @@ approval, the workflow may commit and push qualifying feed updates; if no
 story qualifies or any required check fails, it makes no publication commit.
 The project does not copy or republish full articles.
 
-For the scheduled publisher, the Watch handoff is the sole discovery gate.
+For the scheduled publisher, the controller handoff is the sole discovery gate.
 AI-led headlines may proceed to article-body checks when the headline itself
 does not mention Sarawak, but the body must still make the Sarawak and
 AI or specific digital-technology relevance clear before the item is
@@ -64,7 +65,8 @@ This is a working public prototype, not a fully automated news service. As of
 the latest content audit on 3 September 2026, it contains 59 reviewed stories.
 Candidate discovery, source checks, and website building are supported by
 automation, while the editorial criteria and recurring publishing approval
-remain explicitly controlled by Hafiy.
+remain explicitly controlled by Hafiy. The portable operating contract is in
+[`docs/automation.md`](docs/automation.md).
 
 ## Editorial Principles
 
@@ -134,14 +136,14 @@ before adding a story to `data/items.json`.
 5. Build and preview the site.
 6. Push the approved update to `main` for GitHub Pages to deploy it.
 
-The scheduled daily workflow follows the same editorial gate. It uses the
-linked ChatGPT Sarawak AI News Watch conversation as the sole
-candidate-discovery source and reads that conversation live on every run. Watch
-recommendations and summaries are treated as provisional leads only: each
-surviving URL is deduplicated, opened at its original source, and independently
-verified before it can be published. Only verified English source pages qualify.
-A failed or incomplete Watch read blocks publication; there is no independent
-discovery fallback.
+The scheduled daily workflow follows the same editorial gate. A discovery
+controller searches the approved public sources, verifies candidate source
+pages, checks its private screened-URL ledger, and sends a structured manifest
+to a separate repository publisher. The publisher treats the manifest as its
+complete discovery handoff, then deduplicates and independently reopens every
+surviving original source before publication. Only verified English source
+pages qualify. An invalid or incomplete controller handoff blocks publication;
+the publisher does not perform fallback discovery.
 
 ### Check Your Changes
 

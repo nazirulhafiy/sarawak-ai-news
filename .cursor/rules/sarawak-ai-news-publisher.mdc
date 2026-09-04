@@ -1,0 +1,21 @@
+---
+description: Rules for scheduled Sarawak AI News publication runs
+alwaysApply: false
+---
+
+# Sarawak AI News Publisher
+
+For a scheduled or controller-dispatched content publication run:
+
+- Read `AGENTS.md`, `docs/automation.md`,
+  `automation/candidate.schema.json`, and
+  `automation/prompts/publisher.md` first.
+- Treat the supplied candidate manifest as the complete discovery handoff.
+- Independently verify every original source page.
+- Require an English headline and substantive English article body.
+- Require a meaningful Sarawak link and a named AI or digital technical
+  function.
+- Modify and stage only `README.md`, `data/items.json`, and `data/site.json`.
+- Run all tests, audits, build, browser checks, and Git checks in the contract.
+- Publish nothing when no story qualifies or any check is incomplete.
+- Verify the remote Git hash before reporting success.

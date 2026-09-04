@@ -57,6 +57,8 @@ python3 -m http.server 4173 -d dist
 
 ## Documentation Map
 - `README.md` is the operational overview.
+- `docs/automation.md` is the harness-neutral discovery and publishing
+  contract.
 - `docs/product.md` records product scope, content model, workflow, and constraints.
 - `docs/design.md` records the current production design and design direction.
 - `docs/backlog.md` records known issues and recommended next tasks.
