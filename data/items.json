@@ -1141,5 +1141,25 @@
     "why_it_matters": "The visit links a named US software firm to a Sarawak campus and the transport minister, giving the state's AI research and talent agenda a concrete industry conversation before any agreement.",
     "confidence": "medium",
     "caveat": "The source is a university news release about an exploratory visit; it does not announce a signed agreement, funded programme, confirmed scholarship intake, or deployed system."
+  },
+  {
+    "id": "tribune-sdec-witsa-ai-awards-2026-09-04",
+    "date": "2026-09-04",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/sdec-wins-two-global-ai-awards-for-sarawak-in-taiwan/",
+    "title": "SDEC wins two global AI awards for Sarawak in Taiwan",
+    "section": "Business",
+    "tags": [
+      "WITSA",
+      "SDEC",
+      "Global AI Awards",
+      "public policy",
+      "investment",
+      "WITSA GAIN"
+    ],
+    "summary": "SDEC's two WITSA Global AI Awards for public policy and investment signal international recognition of Sarawak's AI policy environment, with Kuching set to host the 2027 summit.",
+    "why_it_matters": "The awards and the planned 2027 Kuching summit put Sarawak's AI policy, investment pitch, and WITSA GAIN hub role on a named global industry platform.",
+    "confidence": "high",
+    "caveat": "Publication date verified against Sarawak Tribune metadata (4 September 2026). The awards recognise an enabling environment; the report announces no new funded programme, deployed system, or investment figure. Hosting the 2027 summit is planned."
   }
 ]
