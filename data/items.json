@@ -1161,5 +1161,24 @@
     "why_it_matters": "The awards and the planned 2027 Kuching summit put Sarawak's AI policy, investment pitch, and WITSA GAIN hub role on a named global industry platform.",
     "confidence": "high",
     "caveat": "Publication date verified against Sarawak Tribune metadata (4 September 2026). The awards recognise an enabling environment; the report announces no new funded programme, deployed system, or investment figure. Hosting the 2027 summit is planned."
+  },
+  {
+    "id": "borneopost-azam-us-embassy-ai-2026-09-04",
+    "date": "2026-09-04",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/09/04/azam-sarawak-exploring-ai-engagement-with-us-embassy-kuala-lumpur/",
+    "title": "AZAM Sarawak exploring AI engagement with US Embassy Kuala Lumpur",
+    "section": "Workforce",
+    "tags": [
+      "AZAM Sarawak",
+      "US Embassy",
+      "AI engagement",
+      "international partnership",
+      "talent"
+    ],
+    "summary": "AZAM Sarawak is exploring a November AI engagement with the US Embassy in Kuala Lumpur, signalling another international channel for local talent and expertise.",
+    "why_it_matters": "A named US Embassy conversation would add a second overseas AI-exposure path for Sarawakians after AZAM's Singapore hackathon partnership.",
+    "confidence": "medium",
+    "caveat": "The report records ongoing discussions with the focus still being refined; it does not announce a signed US Embassy programme, funded activity, confirmed November agenda, or deployed system. Publication date verified against the live Borneo Post byline (4 September 2026)."
   }
 ]
