@@ -1180,5 +1180,24 @@
     "why_it_matters": "A named US Embassy conversation would add a second overseas AI-exposure path for Sarawakians after AZAM's Singapore hackathon partnership.",
     "confidence": "medium",
     "caveat": "The report records ongoing discussions with the focus still being refined; it does not announce a signed US Embassy programme, funded activity, confirmed November agenda, or deployed system. Publication date verified against the live Borneo Post byline (4 September 2026)."
+  },
+  {
+    "id": "dayakdaily-socoe-snowflake-ai-2026-08-20",
+    "date": "2026-08-20",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/socoe-takes-sarawaks-ai-data-capabilities-to-snowflake-world-tour-stage/",
+    "title": "SOCOE takes Sarawak's AI, data capabilities to Snowflake World Tour stage",
+    "section": "Business",
+    "tags": [
+      "SOCOE",
+      "Snowflake",
+      "data products",
+      "enterprise AI",
+      "AI agents"
+    ],
+    "summary": "Sarawak-based SOCOE's Snowflake World Tour showcase of AI-powered data products on live enterprise data signals local capability to operationalise enterprise AI beyond sandbox demos.",
+    "why_it_matters": "A Sarawak firm putting live-data AI products on a regional stage shows local capability to operationalise enterprise AI beyond proof-of-concept demos.",
+    "confidence": "medium",
+    "caveat": "DayakDaily's report is based on a company media release about a conference showcase; it does not announce a newly deployed public system, funded programme, or signed partnership."
   }
 ]
