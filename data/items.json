@@ -1199,5 +1199,25 @@
     "why_it_matters": "A Sarawak firm putting live-data AI products on a regional stage shows local capability to operationalise enterprise AI beyond proof-of-concept demos.",
     "confidence": "medium",
     "caveat": "DayakDaily's report is based on a company media release about a conference showcase; it does not announce a newly deployed public system, funded programme, or signed partnership."
+  },
+  {
+    "id": "dayakdaily-michiru-ai-animation-2026-09-08",
+    "date": "2026-09-08",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/free-screening-of-ai-produced-kuching-animation-michiru-at-gsc-the-spring-shopping-mall-on-sept-12/",
+    "title": "Free screening of AI-produced Kuching animation ‘Michiru’ at GSC The Spring Shopping Mall on Sept 12",
+    "section": "Business",
+    "tags": [
+      "Michiru",
+      "AI animation",
+      "MBKS",
+      "Torabera",
+      "Kuching",
+      "generative AI"
+    ],
+    "summary": "MBKS will premiere Michiru, a 30-minute Kuching short produced entirely with AI by a local team, signalling local creative-technology capability ahead of a planned YouTube release.",
+    "why_it_matters": "A named AI-produced local film with an MBKS-backed premiere shows Sarawak creative talent using generative AI for city storytelling, not only policy speeches about AI.",
+    "confidence": "high",
+    "caveat": "Publication date verified against DayakDaily metadata (8 September 2026). Premiere slots and the Malaysia-first claim are attributed to MBKS mayor Wee; YouTube release timing is reported, not independently confirmed."
   }
 ]
