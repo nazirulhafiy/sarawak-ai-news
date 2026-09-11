@@ -1219,5 +1219,25 @@
     "why_it_matters": "A named AI-produced local film with an MBKS-backed premiere shows Sarawak creative talent using generative AI for city storytelling, not only policy speeches about AI.",
     "confidence": "high",
     "caveat": "Publication date verified against DayakDaily metadata (8 September 2026). Premiere slots and the Malaysia-first claim are attributed to MBKS mayor Wee; YouTube release timing is reported, not independently confirmed."
+  },
+  {
+    "id": "dayakdaily-aimass-microalgae-2026-09-10",
+    "date": "2026-09-10",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/ai-powered-microalgae-harvesting-system-earns-curtin-malaysia-global-recognition/",
+    "title": "AI-powered microalgae harvesting system earns Curtin Malaysia global recognition",
+    "section": "Research",
+    "tags": [
+      "Ai-MASS",
+      "Curtin Malaysia",
+      "microalgae",
+      "computer vision",
+      "IoT",
+      "PETRONAS Research"
+    ],
+    "summary": "Curtin Malaysia's Ai-MASS award signals Miri campus research advancing industrial microalgae harvesting with AI, computer vision, IoT and PETRONAS Research input.",
+    "why_it_matters": "A named AI harvesting system from a Sarawak campus, built with industry partners, shows local research moving into industrial bio-process automation rather than policy announcements alone.",
+    "confidence": "high",
+    "caveat": "Publication date verified against DayakDaily metadata (10 September 2026). Award details and the PETRONAS collaboration are attributed to the university media release as carried by DayakDaily; industrial deployment scale is not independently confirmed."
   }
 ]
