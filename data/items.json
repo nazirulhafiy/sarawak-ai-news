@@ -1239,5 +1239,44 @@
     "why_it_matters": "A named AI harvesting system from a Sarawak campus, built with industry partners, shows local research moving into industrial bio-process automation rather than policy announcements alone.",
     "confidence": "high",
     "caveat": "Publication date verified against DayakDaily metadata (10 September 2026). Award details and the PETRONAS collaboration are attributed to the university media release as carried by DayakDaily; industrial deployment scale is not independently confirmed."
+  },
+  {
+    "id": "tribune-sains-8nabler-voice-ai-2026-09-11",
+    "date": "2026-09-11",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/sains-8nabler-tie-up-to-enhance-voice-ai-use/",
+    "title": "SAINS-8nabler tie-Up to enhance voice AI use",
+    "section": "Public Services",
+    "tags": [
+      "SAINS",
+      "8nabler",
+      "Panacea",
+      "voice AI",
+      "DGX26",
+      "ICT support"
+    ],
+    "summary": "SAINS's MoU with 8nabler to deploy Panacea voice AI for civil-servant ICT support signals public-sector adoption of governed voice automation.",
+    "why_it_matters": "A named voice AI platform already handling thousands of government ICT calls, paired with SAINS's agency reach, is a concrete public-service automation path rather than another AI speech.",
+    "confidence": "high",
+    "caveat": "Publication date verified against Sarawak Tribune metadata (11 September 2026). MoU details, Panacea call volumes, and DGX26 signing context are attributed to the SAINS/8nabler statement as reported; statewide rollout scale beyond the pilot window is not independently confirmed."
+  },
+  {
+    "id": "dayakdaily-saic-llamalitica-healthcare-ai-2026-03-05",
+    "date": "2026-03-05",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/sarawak-partners-spanish-ai-firm-llamalitica-to-develop-smart-healthcare-solutions/",
+    "title": "Sarawak partners Spanish AI firm Llamalítica to develop smart healthcare solutions",
+    "section": "Public Services",
+    "tags": [
+      "SAIC",
+      "Llamalítica",
+      "healthcare AI",
+      "generative AI",
+      "MWC 2026"
+    ],
+    "summary": "SAIC's MoU with Spain's Llamalítica on generative AI healthcare tools signals a public-service push for clinical decision support across Sarawak.",
+    "why_it_matters": "A named SAIC partnership with a healthcare-specialist AI firm ties Sarawak's AI centre to clinical tools, not only infrastructure or talent speeches.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against DayakDaily metadata (5 March 2026). Partnership aims and generative-AI healthcare claims are attributed to the media release as carried by DayakDaily; deployed clinical products and timelines are not independently confirmed."
   }
 ]

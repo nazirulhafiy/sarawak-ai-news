@@ -62,7 +62,7 @@ method, or technical function.
 ## Current Status
 
 This is a working public prototype, not a fully automated news service. As of
-the latest content audit on 11 September 2026, it contains 65 reviewed stories.
+the latest content audit on 12 September 2026, it contains 67 reviewed stories.
 Candidate discovery, source checks, and website building are supported by
 automation, while the editorial criteria and recurring publishing approval
 remain explicitly controlled by Hafiy. The portable operating contract is in
