@@ -1261,6 +1261,26 @@
     "caveat": "Publication date verified against Sarawak Tribune metadata (11 September 2026). MoU details, Panacea call volumes, and DGX26 signing context are attributed to the SAINS/8nabler statement as reported; statewide rollout scale beyond the pilot window is not independently confirmed."
   },
   {
+    "id": "tribune-saiyan-ai-youth-ambassador-2026-09-04",
+    "date": "2026-09-04",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/sarawak-and-singapore-launch-ai-youth-ambassador-network/",
+    "title": "Sarawak and Singapore launch AI Youth Ambassador Network",
+    "section": "Workforce",
+    "tags": [
+      "SAIYAN",
+      "AZAM Sarawak",
+      "Anchr AI Labs",
+      "Kimi AI",
+      "AI Youth Ambassador Network",
+      "Singapore-Sarawak collaboration"
+    ],
+    "summary": "AZAM Sarawak signed an MoU with Ibrandium and Anchr AI Labs to launch SAIYAN, giving Sarawak youth a standing AI talent network with Singapore.",
+    "why_it_matters": "The MoU creates a named ongoing youth AI network after the Singapore-Sarawak hackathon, rather than leaving the collaboration as a two-day event.",
+    "confidence": "high",
+    "caveat": "Publication date verified against Sarawak Tribune metadata (4 September 2026). The report confirms the MoU and naming of SAIYAN; it does not give membership numbers, funded activities, or a published programme timetable."
+  },
+  {
     "id": "dayakdaily-saic-llamalitica-healthcare-ai-2026-03-05",
     "date": "2026-03-05",
     "source": "DayakDaily",
