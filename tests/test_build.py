@@ -138,11 +138,16 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<meta property="og:title" content="Sarawak AI News | AI.Sarawak.News" />', html)
         self.assertIn('<meta property="og:site_name" content="AI.Sarawak.News" />', html)
         self.assertIn('<meta property="og:url" content="https://ai.sarawak.news/" />', html)
+        self.assertIn('<meta property="og:image" content="https://ai.sarawak.news/social-card.png" />', html)
         self.assertIn('<meta name="twitter:card" content="summary_large_image" />', html)
+        self.assertIn('<meta name="twitter:image" content="https://ai.sarawak.news/social-card.png" />', html)
         self.assertIn('<link rel="canonical" href="https://ai.sarawak.news/" />', html)
         self.assertIn('<meta name="twitter:title" content="Sarawak AI News | AI.Sarawak.News" />', html)
         self.assertIn('<title>Sarawak AI News | AI.Sarawak.News</title>', html)
         self.assertIn('<script type="application/ld+json">', html)
+        social_card = ROOT / "dist" / "social-card.png"
+        self.assertTrue(social_card.exists())
+        self.assertGreater(social_card.stat().st_size, 1000)
         self.assertIn('"@type":"WebSite"', html)
         self.assertIn('"@type":"CollectionPage"', html)
         structured_data = html.split('<script type="application/ld+json">', 1)[1].split("</script>", 1)[0]

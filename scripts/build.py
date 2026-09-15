@@ -23,6 +23,7 @@ SECTION_FILTERS = (
 
 SITE_URL = "https://ai.sarawak.news/"
 SITE_NAME = "AI.Sarawak.News"
+SOCIAL_CARD_URL = f"{SITE_URL}social-card.png"
 SEO_TITLE = "Sarawak AI News | AI.Sarawak.News"
 SEO_DESCRIPTION = (
     "Follow Sarawak AI news across policy, public services, education, workforce, "
@@ -352,9 +353,11 @@ def render_index(items: list[dict]) -> str:
   <meta property="og:description" content="{esc(SEO_DESCRIPTION)}" />
   <meta property="og:url" content="{esc(SITE_URL)}" />
   <meta property="og:site_name" content="{esc(SITE_NAME)}" />
+  <meta property="og:image" content="{esc(SOCIAL_CARD_URL)}" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{esc(SEO_TITLE)}" />
   <meta name="twitter:description" content="{esc(SEO_DESCRIPTION)}" />
+  <meta name="twitter:image" content="{esc(SOCIAL_CARD_URL)}" />
   <link rel="canonical" href="{esc(SITE_URL)}" />
   <title>{esc(SEO_TITLE)}</title>
   <script type="application/ld+json">{structured_data}</script>
@@ -404,9 +407,11 @@ def render_about() -> str:
   <meta property="og:description" content="{esc(ABOUT_SEO_DESCRIPTION)}" />
   <meta property="og:url" content="{esc(about_url)}" />
   <meta property="og:site_name" content="{esc(SITE_NAME)}" />
+  <meta property="og:image" content="{esc(SOCIAL_CARD_URL)}" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="{esc(ABOUT_SEO_TITLE)}" />
   <meta name="twitter:description" content="{esc(ABOUT_SEO_DESCRIPTION)}" />
+  <meta name="twitter:image" content="{esc(SOCIAL_CARD_URL)}" />
   <link rel="canonical" href="{esc(about_url)}" />
   <title>{esc(ABOUT_SEO_TITLE)}</title>
   <script type="application/ld+json">{structured_data}</script>
@@ -459,9 +464,11 @@ def render_category(section: str, items: list[dict]) -> str:
   <meta property="og:description" content="{esc(description)}" />
   <meta property="og:url" content="{esc(category_url)}" />
   <meta property="og:site_name" content="{esc(SITE_NAME)}" />
+  <meta property="og:image" content="{esc(SOCIAL_CARD_URL)}" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="{esc(title)}" />
   <meta name="twitter:description" content="{esc(description)}" />
+  <meta name="twitter:image" content="{esc(SOCIAL_CARD_URL)}" />
   <link rel="canonical" href="{esc(category_url)}" />
   <title>{esc(title)}</title>
   <script type="application/ld+json">{structured_data}</script>
@@ -499,6 +506,7 @@ def build() -> None:
     compact_css = (ROOT / "site" / "style.css").read_text(encoding="utf-8")
     (DIST / "style.css").write_text(compact_css, encoding="utf-8")
     (DIST / "app.js").write_text((ROOT / "site" / "app.js").read_text(encoding="utf-8"), encoding="utf-8")
+    shutil.copy2(ROOT / "site" / "social-card.png", DIST / "social-card.png")
     (DIST / "items.json").write_text(json.dumps(items, indent=2), encoding="utf-8")
     (DIST / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://ai.sarawak.news/sitemap.xml\n", encoding="utf-8")
     sitemap_urls = [SITE_URL, f"{SITE_URL}about.html"] + [

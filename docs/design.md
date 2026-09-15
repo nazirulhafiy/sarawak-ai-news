@@ -27,6 +27,8 @@ The current direction is intentionally restrained:
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark
   cards, softened borders, brighter text, and preserved Sarawak yellow/red
   accents.
+- The homepage and supporting routes use a shared 1200x630 social card with
+  the site name, current headline, short description, and Sarawak colour rule.
 
 The design is closer to an editorial memo or briefing page than to a dashboard.
 It is appropriate for proving source-attributed curation before investing in a
