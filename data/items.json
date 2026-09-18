@@ -1318,5 +1318,24 @@
     "why_it_matters": "A named AI robotic café run as a live student company on a Kuching campus shows Sarawak talent putting AI robotics into a working business, not only classroom projects.",
     "confidence": "medium",
     "caveat": "Publication date verified against Swinburne article:published_time (18 September 2026, 08:22 +08). The page is university communications about a student venture; it does not give independent performance data, a public launch date for the machine, or third-party confirmation of the AI functions."
+  },
+  {
+    "id": "tribune-mpb-creative-ai-video-2026-09-18",
+    "date": "2026-09-18",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/pepper-board-going-digital-and-ai/",
+    "title": "Pepper board going digital and AI",
+    "section": "Workforce",
+    "tags": [
+      "MPB",
+      "Creative AI Video Competition",
+      "pepper",
+      "corporate communication",
+      "AI video"
+    ],
+    "summary": "Kuching's Malaysian Pepper Board is using its Creative AI Video Competition to drive staff AI adoption for official communication, while insisting officers still own accuracy.",
+    "why_it_matters": "A named MPB AI video programme puts a Sarawak commodity agency on the record for staff AI use in official communications, with an explicit human-accountability limit.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against the Tribune dateline (18 September 2026). The named programme is an internal Creative AI Video Competition for corporate communication, not a farm-operations system; service awards were also presented the same night."
   }
 ]
