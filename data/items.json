@@ -1298,5 +1298,25 @@
     "why_it_matters": "A named SAIC partnership with a healthcare-specialist AI firm ties Sarawak's AI centre to clinical tools, not only infrastructure or talent speeches.",
     "confidence": "medium",
     "caveat": "Publication date verified against DayakDaily metadata (5 March 2026). Partnership aims and generative-AI healthcare claims are attributed to the media release as carried by DayakDaily; deployed clinical products and timelines are not independently confirmed."
+  },
+  {
+    "id": "swinburne-sakopi-ai-robotic-cafe-2026-09-18",
+    "date": "2026-09-18",
+    "source": "Swinburne Sarawak",
+    "url": "https://www.swinburne.edu.my/news/swinburne-sarawak-entrepreneurship-student-venture-sakopi/",
+    "title": "Swinburne Sarawak Students Run Their Own AI Robotic Café on Campus",
+    "section": "Education",
+    "tags": [
+      "SaKopi",
+      "Robocafe",
+      "Swinburne Sarawak",
+      "AI robotic café",
+      "student venture",
+      "Entrepreneurship Hub"
+    ],
+    "summary": "Swinburne Sarawak's student-run SaKopi AI robotic café is now operating on campus through Robocafe Sdn Bhd, signalling applied campus commercialisation of AI-enabled robotics.",
+    "why_it_matters": "A named AI robotic café run as a live student company on a Kuching campus shows Sarawak talent putting AI robotics into a working business, not only classroom projects.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against Swinburne article:published_time (18 September 2026, 08:22 +08). The page is university communications about a student venture; it does not give independent performance data, a public launch date for the machine, or third-party confirmation of the AI functions."
   }
 ]
