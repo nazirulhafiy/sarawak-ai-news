@@ -123,15 +123,16 @@ topic introduction, and filtered list of reviewed stories.
    The build sets the public last-updated date from the newest reviewed item.
 7. Push to `main` only when the public feed is ready to redeploy.
 
-The scheduled daily auto-publish path applies the same editorial gate. News
-Bot owns the private screened-URL ledger and launches one Cursor Cloud Agent.
-That agent searches approved public sources in Stage A and writes a structured
-manifest of candidate URLs, headlines, dates, source names, and source-check
-facts. Stage A summaries, recommendations, and caveats are not authoritative.
-Leads are screened against existing items, known URLs, related developments,
-and the ledger snapshot from News Bot. Stage B independently opens and checks
-every surviving original source before it can consider publication. The
-complete harness-neutral contract is in `docs/automation.md`.
+The scheduled daily auto-publish path applies the same editorial gate.
+Maintainer Bot owns the private screened-URL ledger and launches one Cursor
+Cloud Agent. That agent searches approved public sources in Stage A and writes
+a structured manifest of candidate URLs, headlines, dates, source names, and
+source-check facts. Stage A summaries, recommendations, and caveats are not
+authoritative. Leads are screened against existing items, known URLs, related
+developments, and the ledger snapshot from Maintainer Bot. Stage B
+independently opens and checks every surviving original source before it can
+consider publication. The complete harness-neutral contract is in
+`docs/automation.md`.
 
 With Hafiy's recurring approval, the workflow may commit and push qualifying
 updates to `origin/main` after JSON validation, tests, date and summary audits,

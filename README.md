@@ -35,7 +35,7 @@ No technical knowledge is required to read it.
 
 ## How It Works
 
-1. News Bot runs the daily routine in `Asia/Kuching` and launches one Cursor
+1. Maintainer Bot runs the daily routine in `Asia/Kuching` and launches one Cursor
    Cloud Agent when a run is due.
 2. That Cloud Agent searches approved public sources (Stage A), then
    independently reopens each surviving original page (Stage B).
@@ -136,7 +136,7 @@ before adding a story to `data/items.json`.
 5. Build and preview the site.
 6. Push the approved update to `main` for GitHub Pages to deploy it.
 
-The scheduled daily workflow follows the same editorial gate. News Bot owns
+The scheduled daily workflow follows the same editorial gate. Maintainer Bot owns
 the private screened-URL ledger and launches one Cloud Agent. That agent
 searches the approved public sources, screens URLs against the reviewed feed
 and the ledger snapshot, and independently reopens every surviving original

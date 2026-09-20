@@ -5,7 +5,7 @@ alwaysApply: false
 
 # Sarawak AI News Daily Agent
 
-For a News Bot-launched daily Cloud Agent run:
+For a Maintainer Bot-launched daily Cloud Agent run:
 
 - Read `AGENTS.md`, `docs/automation.md`,
   `automation/candidate.schema.json`, and
