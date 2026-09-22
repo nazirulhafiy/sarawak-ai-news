@@ -1356,5 +1356,24 @@
     "why_it_matters": "The inaugural Sarawak Media Workshop puts ownership of AI-generated work on the state's media agenda, including who can register a partly AI-made piece and who receives royalties if it is reused.",
     "confidence": "high",
     "caveat": "Publication date verified against Tribune article:published_time (21 September 2026, 19:10 +08). The item records officiating remarks, not a tabled copyright bill. The proposed Sarawak AI association is described as not yet finalised."
+  },
+  {
+    "id": "sarawaktribune-ukas-ai-tools-2026-08-20",
+    "date": "2026-08-20",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/ukas-looking-into-using-ai-tools/",
+    "title": "UKAS looking into using AI tools",
+    "section": "Public Services",
+    "tags": [
+      "UKAS",
+      "SAIC",
+      "Agentic AI",
+      "public communications",
+      "government communications"
+    ],
+    "summary": "UKAS's visit to SAIC signals public-service interest in using Agentic AI for government communications, including a proposed staff workshop that remains a discussion.",
+    "why_it_matters": "A named UKAS-SAIC meeting puts Agentic AI on the state's public-communications agenda, linking a government media unit to SAIC's governance and public-service work.",
+    "confidence": "high",
+    "caveat": "Publication date verified against Tribune article:published_time (20 August 2026, 11:54 +08). The page reports a 19 August courtesy visit and discussion of a possible workshop and Agentic AI use; no procurement, funding, deployed system, or timetable was announced."
   }
 ]
