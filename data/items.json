@@ -1337,5 +1337,24 @@
     "why_it_matters": "A named MPB AI video programme, announced at a Kuching awards night, records staff AI use for official communications with an explicit human-accountability limit.",
     "confidence": "medium",
     "caveat": "Publication date verified against the Tribune dateline (18 September 2026). The named programme is an internal Creative AI Video Competition for corporate communication, not a farm-operations system; service awards were also presented the same night."
+  },
+  {
+    "id": "sarawaktribune-ai-content-royalties-2026-09-21",
+    "date": "2026-09-21",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/clearer-rules-needed-for-ai-content-ownership-royalties/",
+    "title": "Clearer rules needed for AI content ownership, royalties",
+    "section": "Policy",
+    "tags": [
+      "copyright",
+      "royalties",
+      "Sarawak Media Workshop",
+      "UKAS",
+      "AI-generated content"
+    ],
+    "summary": "Abdullah Saidol signals a Sarawak media copyright and royalty gap for songs, dramas and videos created partly or wholly with AI.",
+    "why_it_matters": "The inaugural Sarawak Media Workshop puts ownership of AI-generated work on the state's media agenda, including who can register a partly AI-made piece and who receives royalties if it is reused.",
+    "confidence": "high",
+    "caveat": "Publication date verified against Tribune article:published_time (21 September 2026, 19:10 +08). The item records officiating remarks, not a tabled copyright bill. The proposed Sarawak AI association is described as not yet finalised."
   }
 ]
