@@ -1375,5 +1375,64 @@
     "why_it_matters": "A named UKAS-SAIC meeting puts Agentic AI on the state's public-communications agenda, linking a government media unit to SAIC's governance and public-service work.",
     "confidence": "high",
     "caveat": "Publication date verified against Tribune article:published_time (20 August 2026, 11:54 +08). The page reports a 19 August courtesy visit and discussion of a possible workshop and Agentic AI use; no procurement, funding, deployed system, or timetable was announced."
+  },
+  {
+    "id": "borneopost-aqufish-aqumonitor-2026-09-06",
+    "date": "2026-09-06",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/09/06/aqufish-puts-sarawak-innovation-on-global-start-up-stage/",
+    "title": "AquFish puts Sarawak innovation on global start-up stage",
+    "section": "Business",
+    "tags": [
+      "AquFish",
+      "AquMonitor",
+      "SDEC",
+      "DiVA",
+      "aquaculture",
+      "AI monitoring"
+    ],
+    "summary": "AquFish's Start-up Wheel 2026 title signals SDEC-backed adoption of AquMonitor, an AI system for fish-farm monitoring and feeding.",
+    "why_it_matters": "A named AI aquaculture system from an SDEC Digital Village Accelerator company gives Sarawak a business signal beyond a competition headline, including a claimed cut in feed use.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against Borneo Post article:published_time (6 September 2026, 08:02 +08; source timestamp 2026-09-06T00:02:53+00:00). The Start-up Wheel finale was the previous month in Ho Chi Minh City. The stated 20 per cent feed reduction is the company's claim in the article, not an independent audit."
+  },
+  {
+    "id": "sarawaktribune-sakat-ai-literature-2026-09-21",
+    "date": "2026-09-21",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/ai-offers-new-ways-to-preserve-southeast-asian-literature/",
+    "title": "AI offers new ways to preserve Southeast Asian literature",
+    "section": "Education",
+    "tags": [
+      "SAKAT 2026",
+      "UNIMAS",
+      "DBP",
+      "NITRA",
+      "folklore",
+      "literature"
+    ],
+    "summary": "SAKAT 2026 speakers at UNIMAS signal education uses of AI for Malay literature learning and folklore preservation, with human oversight still required.",
+    "why_it_matters": "The UNIMAS seminar puts named classroom and heritage uses of AI on Sarawak's education agenda, including NITRA for Malay literature and limits on folklore accuracy and authenticity.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against Tribune article:published_time (21 September 2026, 19:12 +08). The page reports seminar presentations, not a funded preservation programme or a deployed system. A separate Tribune report the same day covers the opening address and is not treated as a second development."
+  },
+  {
+    "id": "sarawaktribune-soes-ai-adoption-2026-09-22",
+    "date": "2026-09-22",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/soes-urged-to-accelerate-ai-adoption/",
+    "title": "SOEs urged to accelerate AI adoption",
+    "section": "Policy",
+    "tags": [
+      "SOE",
+      "Phase 2 assessment",
+      "AI adoption",
+      "talent maturity",
+      "state-owned enterprises"
+    ],
+    "summary": "A Phase 2 assessment signals that only 38 per cent of Sarawak's state-owned enterprises had digital and AI initiatives adopted or underway.",
+    "why_it_matters": "The figure gives Sarawak a measured baseline for AI use inside state-owned enterprises, tied to a talent-maturity average of 1.4 out of 5 from the same assessment.",
+    "confidence": "high",
+    "caveat": "Publication date verified against Tribune article:published_time (22 September 2026, 18:01 +08). The page reports the Premier's remarks and a Phase 2 assessment share; it does not name a specific AI product, budget, or implementation timetable. Talent maturity is an average organisational score, not an AI-skills metric by itself."
   }
 ]
