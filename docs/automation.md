@@ -184,6 +184,16 @@ digital system, IoT use, automation method, data platform, or other clear
 technical function. General words such as `smart`, `innovation`,
 `technology-linked`, or `new technology` do not qualify by themselves.
 
+A story qualifies as central AI relevance when it reports a MoU, MoC,
+partnership, or programme delivery involving Sarawak Artificial Intelligence
+Centre (SAIC) on a named Sarawak system, platform, or initiative. This holds
+when that system is described as data, analytics, or intelligence rather than
+`AI`, and when `artificial intelligence` appears only adjacent in the piece.
+
+Still reject a story in which AI is one word in a long priorities or speech
+list, with no named AI system or platform and no SAIC or equivalent named AI
+centre role.
+
 Prefer a concise set of distinct developments. Do not publish several reports
 about one event unless each report contains a separate material development.
 

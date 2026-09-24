@@ -32,11 +32,25 @@ an article.
    Browser translation and English metadata do not qualify.
 4. Screen each URL against `data/items.json` and the ledger snapshot above.
 5. Reject duplicates, weak matches, unsupported claims, inaccessible pages,
-   non-English pages, and purely promotional pages.
+   non-English pages, and purely promotional pages. Apply the Extra editorial
+   clarifications below when judging central AI relevance.
 6. If zero unscreened candidates qualify, stop. Return status `no_update`.
    Make no repository edit, commit, or push.
 7. If one or more candidates qualify, produce a JSON manifest that passes
    `automation/candidate.schema.json`. Do not write final story summaries.
+
+### Extra editorial clarifications
+
+These follow the Editorial Gate in `docs/automation.md`:
+
+- A MoU, MoC, partnership, or programme delivery involving Sarawak Artificial
+  Intelligence Centre (SAIC) on a named Sarawak system, platform, or initiative
+  is central AI relevance. This includes a system described as data, analytics,
+  or intelligence rather than `AI`, and a piece where `artificial intelligence`
+  appears only adjacent to that delivery.
+- Reject AI as one word in a long priorities or speech list when the piece
+  names no AI system or platform and gives SAIC, or an equivalent named AI
+  centre, no role.
 
 ## Stage B: Publish
 
