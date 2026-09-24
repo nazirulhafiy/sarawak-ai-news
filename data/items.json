@@ -1434,5 +1434,24 @@
     "why_it_matters": "The figure gives Sarawak a measured baseline for AI use inside state-owned enterprises, tied to a talent-maturity average of 1.4 out of 5 from the same assessment.",
     "confidence": "high",
     "caveat": "Publication date verified against Tribune article:published_time (22 September 2026, 18:01 +08). The page reports the Premier's remarks and a Phase 2 assessment share; it does not name a specific AI product, budget, or implementation timetable. Talent maturity is an average organisational score, not an AI-skills metric by itself."
+  },
+  {
+    "id": "borneopost-beacon-saic-moc-2026-09-24",
+    "date": "2026-09-24",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/09/24/sarawak-launches-beacon-to-drive-next-phase-of-business-events/",
+    "title": "Sarawak launches BEACON to drive next phase of business events",
+    "section": "Business",
+    "tags": [
+      "BEACON",
+      "SAIC",
+      "business events",
+      "data intelligence",
+      "BESarawak"
+    ],
+    "summary": "BESarawak's memorandum with SAIC signals a partnership to advance BEACON, Sarawak's new centralised data-intelligence platform for business events.",
+    "why_it_matters": "The exchanged MoC names the Sarawak Artificial Intelligence Centre as the partner advancing BEACON, a centralised data-intelligence platform for the state's business-events industry.",
+    "confidence": "high",
+    "caveat": "Publication date verified against the live English Borneo Post byline (24 September 2026, 9:20 AM). The page reports an MoC exchanged at the Business Events Sarawak 20th Anniversary Gala Dinner in Kuching to advance BEACON, with SAIC chief executive Prof Patrick Then present; it does not publish the memorandum text, funding, or a delivery timetable. The Premier's remarks were read by Deputy Premier Dr Sim Kui Hian."
   }
 ]
