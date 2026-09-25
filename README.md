@@ -1,7 +1,10 @@
 # Sarawak AI News
 
-An independent, source-linked briefing about how artificial intelligence and
-digital change are affecting Sarawak.
+Sarawak has set a target to become Malaysia’s leading AI hub by 2027, as part
+of its talent-development and digital-economy push toward a developed,
+high-income state by 2030.
+
+This is an independent aggregator that tracks public news against that backdrop.
 
 **Read the live briefing:** [ai.sarawak.news](https://ai.sarawak.news/)
 
