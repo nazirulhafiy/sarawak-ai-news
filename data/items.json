@@ -1453,5 +1453,24 @@
     "why_it_matters": "The exchanged MoC names the Sarawak Artificial Intelligence Centre as the partner advancing BEACON, a centralised data-intelligence platform for the state's business-events industry.",
     "confidence": "high",
     "caveat": "Publication date verified against the live English Borneo Post byline (24 September 2026, 9:20 AM). The page reports an MoC exchanged at the Business Events Sarawak 20th Anniversary Gala Dinner in Kuching to advance BEACON, with SAIC chief executive Prof Patrick Then present; it does not publish the memorandum text, funding, or a delivery timetable. The Premier's remarks were read by Deputy Premier Dr Sim Kui Hian."
+  },
+  {
+    "id": "unimas-uriis-singularity-ai-2026-09-25",
+    "date": "2026-09-25",
+    "source": "UNIMAS Gazette",
+    "url": "https://gazette.unimas.my/2026/09/25/uriis-2026-singularity-connect-and-unimas-to-test-ai-solutions-in-sarawak/",
+    "title": "URIIS 2026: Singularity Connect and UNIMAS to Test AI Solutions in Sarawak",
+    "section": "Research",
+    "tags": [
+      "URIIS 2026",
+      "UNIMAS Holdings",
+      "Singularity Connect",
+      "AI pilots",
+      "MoU"
+    ],
+    "summary": "UNIMAS Holdings and Singularity Connect signal a 24-month plan to test AI pilots for Sarawak industry, communities, and public services.",
+    "why_it_matters": "The non-exclusive MoU gives Sarawak a named university route from research problems to measured AI pilots, with wider commercial use only after separate approvals.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against the UNIMAS Gazette byline and WordPress timestamp (25 September 2026, 07:45 +08). The same English page dateline reads '2 SEPTEMBER 2026' and says the MoU was exchanged 'two days ago'; the feed date follows the byline, not that dateline. The page reports a non-exclusive framework MoU at URIIS 2026, witnessed by Deputy Prime Minister Ahmad Zahid Hamidi. Funding, intellectual property, data access, commercial terms, and deployment remain subject to further approvals. It does not name a deployed AI system."
   }
 ]

@@ -61,7 +61,7 @@ method, or technical function.
 
 ## Current Status
 
-As of the latest content audit on 24 September 2026, the briefing contains 76
+As of the latest content audit on 25 September 2026, the briefing contains 77
 reviewed stories. Candidate discovery, source checks, and website building are
 supported by automation, while the editorial criteria and recurring publishing
 approval remain explicitly controlled by Hafiy. The portable operating contract
