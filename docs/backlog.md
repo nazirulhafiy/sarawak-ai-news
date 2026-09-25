@@ -55,6 +55,8 @@ commitment to rewrite the app yet.
 
 ## Next Documentation Tasks
 
+- Local build, preview, ingest, and check commands were removed from the public
+  README. They remain in `AGENTS.md`.
 - Keep `docs/product.md` updated whenever the content model or workflow changes.
 - Add a short editorial style guide for item summaries, caveats, confidence, and
   date verification.
