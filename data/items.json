@@ -1472,5 +1472,24 @@
     "why_it_matters": "The non-exclusive MoU gives Sarawak a named university route from research problems to measured AI pilots, with wider commercial use only after separate approvals.",
     "confidence": "medium",
     "caveat": "Publication date verified against the UNIMAS Gazette byline and WordPress timestamp (25 September 2026, 07:45 +08). The same English page dateline reads '2 SEPTEMBER 2026' and says the MoU was exchanged 'two days ago'; the feed date follows the byline, not that dateline. The page reports a non-exclusive framework MoU at URIIS 2026, witnessed by Deputy Prime Minister Ahmad Zahid Hamidi. Funding, intellectual property, data access, commercial terms, and deployment remain subject to further approvals. It does not name a deployed AI system."
+  },
+  {
+    "id": "dayakdaily-sawitbridge-ai-2026-09-25",
+    "date": "2026-09-25",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/sawitbridge-idea-propels-five-swakians-into-top-5-at-malaysia-student-innovation-challenge/",
+    "title": "SawitBridge idea propels five S’wakians into Top 5 at Malaysia student innovation challenge",
+    "section": "Education",
+    "tags": [
+      "SawitBridge",
+      "URIIS",
+      "oil palm",
+      "student innovation",
+      "industrial symbiosis"
+    ],
+    "summary": "Five Sarawak students reached the URIIS national finalist round with SawitBridge, an AI-powered platform linking oil-palm smallholders to waste buyers.",
+    "why_it_matters": "The finalist place gives Sarawak a named student AI platform in a national business challenge, aimed at new income from oil-palm waste.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against DayakDaily article:published_time (25 September 2026, 12:03 +08). The English page calls SawitBridge an AI-powered industrial-symbiosis platform and says Rising Hornbill, students from Curtin Malaysia, Swinburne Sarawak, and UNIMAS, is a Top 5 national finalist of the URIIS Student Business Innovation Challenge 2026, citing a Champs Education statement reported by TVS. It does not describe the model, training data, or a working deployment. The grand finale at World Trade Centre Kuala Lumpur is still ahead."
   }
 ]
