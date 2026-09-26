@@ -47,6 +47,18 @@ CATEGORY_INTRODUCTIONS = {
     "Infrastructure": "Follow Sarawak AI infrastructure, including compute, data centres, connectivity and sovereign technology projects.",
     "Business": "Read Sarawak AI business updates about adoption, entrepreneurship, investment and industry capability.",
 }
+CLOUDFLARE_WEB_ANALYTICS_TOKEN = "092a061973fc4d899cd2e4b52952af89"
+
+
+def render_analytics_script() -> str:
+    beacon = json.dumps(
+        {"token": CLOUDFLARE_WEB_ANALYTICS_TOKEN, "spa": True},
+        separators=(",", ":"),
+    )
+    return (
+        '<script defer src="https://static.cloudflareinsights.com/beacon.min.js" '
+        f"data-cf-beacon='{beacon}'></script>"
+    )
 
 
 def load_json(path: Path):
@@ -245,6 +257,7 @@ def render_compact_body(items: list[dict]) -> str:
   <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden><span class="back-to-top-label">Back to top</span> <span class="back-to-top-arrow" aria-hidden="true">↑</span></button>
 
 {render_site_footer("home")}
+  {render_analytics_script()}
 </body>"""
 
 
@@ -283,6 +296,7 @@ def render_about_body() -> str:
   </main>
 
 {render_site_footer("about")}
+  {render_analytics_script()}
 </body>"""
 
 
@@ -310,6 +324,7 @@ def render_category_body(section: str, items: list[dict]) -> str:
   <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden><span class="back-to-top-label">Back to top</span> <span class="back-to-top-arrow" aria-hidden="true">↑</span></button>
 
 {render_site_footer(section_slug)}
+  {render_analytics_script()}
 </body>"""
 
 

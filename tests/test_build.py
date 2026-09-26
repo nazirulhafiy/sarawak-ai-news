@@ -310,6 +310,35 @@ class BuildTest(unittest.TestCase):
         self.assertTrue(deferred_about.exists())
         self.assertIn("About AI.Sarawak.News", deferred_about.read_text())
 
+    def test_published_pages_include_cloudflare_web_analytics(self):
+        beacon = build.render_analytics_script()
+        self.assertEqual(
+            beacon,
+            "<script defer src=\"https://static.cloudflareinsights.com/beacon.min.js\" "
+            "data-cf-beacon='{\"token\":\"092a061973fc4d899cd2e4b52952af89\",\"spa\":true}'></script>",
+        )
+        self.assertIn("092a061973fc4d899cd2e4b52952af89", beacon)
+        self.assertEqual(build.CLOUDFLARE_WEB_ANALYTICS_TOKEN, "092a061973fc4d899cd2e4b52952af89")
+
+        subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT, text=True, capture_output=True, check=True)
+        pages = [
+            ROOT / "dist" / "index.html",
+            ROOT / "dist" / "about.html",
+            ROOT / "dist" / "policy.html",
+        ]
+        for page in pages:
+            html = page.read_text()
+            self.assertEqual(html.count(beacon), 1, page.name)
+            self.assertLess(html.index(beacon), html.index("</body>"))
+            self.assertNotIn("googletagmanager", html)
+            self.assertNotIn("plausible.io", html)
+            self.assertNotIn("umami", html)
+        for name in ("index.html", "about.html"):
+            self.assertIn(
+                '<meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />',
+                (ROOT / "dist" / name).read_text(),
+            )
+
 
 if __name__ == "__main__":
     unittest.main()
