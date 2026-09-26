@@ -354,6 +354,8 @@ def render_index(items: list[dict]) -> str:
   <meta property="og:url" content="{esc(SITE_URL)}" />
   <meta property="og:site_name" content="{esc(SITE_NAME)}" />
   <meta property="og:image" content="{esc(SOCIAL_CARD_URL)}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{esc(SEO_TITLE)}" />
   <meta name="twitter:description" content="{esc(SEO_DESCRIPTION)}" />
@@ -408,7 +410,9 @@ def render_about() -> str:
   <meta property="og:url" content="{esc(about_url)}" />
   <meta property="og:site_name" content="{esc(SITE_NAME)}" />
   <meta property="og:image" content="{esc(SOCIAL_CARD_URL)}" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{esc(ABOUT_SEO_TITLE)}" />
   <meta name="twitter:description" content="{esc(ABOUT_SEO_DESCRIPTION)}" />
   <meta name="twitter:image" content="{esc(SOCIAL_CARD_URL)}" />
@@ -465,7 +469,9 @@ def render_category(section: str, items: list[dict]) -> str:
   <meta property="og:url" content="{esc(category_url)}" />
   <meta property="og:site_name" content="{esc(SITE_NAME)}" />
   <meta property="og:image" content="{esc(SOCIAL_CARD_URL)}" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{esc(title)}" />
   <meta name="twitter:description" content="{esc(description)}" />
   <meta name="twitter:image" content="{esc(SOCIAL_CARD_URL)}" />
