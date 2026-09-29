@@ -1491,5 +1491,24 @@
     "why_it_matters": "The finalist place gives Sarawak a named student AI platform in a national business challenge, aimed at new income from oil-palm waste.",
     "confidence": "medium",
     "caveat": "Publication date verified against DayakDaily article:published_time (25 September 2026, 12:03 +08). The English page calls SawitBridge an AI-powered industrial-symbiosis platform and says Rising Hornbill, students from Curtin Malaysia, Swinburne Sarawak, and UNIMAS, is a Top 5 national finalist of the URIIS Student Business Innovation Challenge 2026, citing a Champs Education statement reported by TVS. It does not describe the model, training data, or a working deployment. The grand finale at World Trade Centre Kuala Lumpur is still ahead."
+  },
+  {
+    "id": "dayakdaily-mfc-opar-ai-2026-09-28",
+    "date": "2026-09-28",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/sarawaks-first-food-cluster-in-lundu-turns-to-ai-to-cut-costs-25-pct-boost-yields-20-pct/",
+    "title": "Sarawak’s first food cluster in Lundu turns to AI to cut costs 25 pct, boost yields 20 pct",
+    "section": "Business",
+    "tags": [
+      "Metropolitan Food Cluster",
+      "precision agriculture",
+      "Plant Empowerment",
+      "Agrofest",
+      "Lundu"
+    ],
+    "summary": "The Opar food cluster signals AI-enabled precision agriculture, with Plant Empowerment and named greenhouse systems briefed at Sarawak Agrofest 2026.",
+    "why_it_matters": "The Agrofest briefing gives Sarawak a named food-cluster route for AI-assisted cultivation and autonomous greenhouse control, aimed at local supply resilience.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against DayakDaily article:published_time (28 September 2026, 21:37 +08). The English page reports the Premier's walkthrough of the SMFC Consortium showcase at Sarawak Agrofest 2026 in Bintulu on 28 September 2026. The 25 per cent cost and 20 per cent yield figures are consortium statements of potential, not measured results. Named systems are Plant Empowerment, Hydros, Climate Chamber, and Aura Pass. The page does not name an AI model, a SAIC role, a budget, or an independent evaluation. Completion is targeted for 2027."
   }
 ]
