@@ -32,7 +32,7 @@ The homepage shows:
 
 - Brand bar: `AI.Sarawak.News`, with `Home` and `About` navigation links and a
   theme toggle.
-- Search title: `Sarawak AI News | AI.Sarawak.News`.
+- Search title: `Sarawak AI news, in one place.`
 - Introductory copy describing the source-linked Sarawak AI coverage.
 - Last-updated weekday and date derived at build time from the newest reviewed
   item date.

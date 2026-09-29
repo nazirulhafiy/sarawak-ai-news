@@ -131,11 +131,13 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<script src="app.js" defer></script>', html)
         self.assertIn('class="story-rank" aria-label="Chronological item 1">1</div>', html)
         self.assertIn('<time datetime="2026-06-24">24 Jun 2026</time>', html)
-        description = "Follow Sarawak AI news across policy, public services, education, workforce, research, infrastructure and business."
+        description = "Source-linked coverage across policy, public services, education, workforce, research, infrastructure and business."
         self.assertIn(f'<meta name="description" content="{description}" />', html)
+        self.assertIn(f'<meta property="og:description" content="{description}" />', html)
+        self.assertIn(f'<meta name="twitter:description" content="{description}" />', html)
         self.assertIn('<meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />', html)
         self.assertIn('<meta name="robots" content="index,follow" />', html)
-        self.assertIn('<meta property="og:title" content="Sarawak AI News | AI.Sarawak.News" />', html)
+        self.assertIn('<meta property="og:title" content="Sarawak AI news, in one place." />', html)
         self.assertIn('<meta property="og:site_name" content="AI.Sarawak.News" />', html)
         self.assertIn('<meta property="og:url" content="https://ai.sarawak.news/" />', html)
         self.assertIn('<meta property="og:image" content="https://ai.sarawak.news/social-card.png" />', html)
@@ -144,8 +146,8 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<meta name="twitter:card" content="summary_large_image" />', html)
         self.assertIn('<meta name="twitter:image" content="https://ai.sarawak.news/social-card.png" />', html)
         self.assertIn('<link rel="canonical" href="https://ai.sarawak.news/" />', html)
-        self.assertIn('<meta name="twitter:title" content="Sarawak AI News | AI.Sarawak.News" />', html)
-        self.assertIn('<title>Sarawak AI News | AI.Sarawak.News</title>', html)
+        self.assertIn('<meta name="twitter:title" content="Sarawak AI news, in one place." />', html)
+        self.assertIn('<title>Sarawak AI news, in one place.</title>', html)
         self.assertIn('<script type="application/ld+json">', html)
         social_card = ROOT / "dist" / "social-card.png"
         self.assertTrue(social_card.exists())
@@ -155,6 +157,11 @@ class BuildTest(unittest.TestCase):
         structured_data = html.split('<script type="application/ld+json">', 1)[1].split("</script>", 1)[0]
         schema = json.loads(structured_data)
         self.assertEqual([node["@type"] for node in schema["@graph"]], ["WebSite", "CollectionPage"])
+        website, collection = schema["@graph"]
+        self.assertEqual(website["name"], "AI.Sarawak.News")
+        self.assertEqual(website["description"], description)
+        self.assertEqual(collection["name"], "Sarawak AI news, in one place.")
+        self.assertEqual(collection["description"], description)
         sitemap = (ROOT / "dist" / "sitemap.xml").read_text()
         self.assertIn(f"<lastmod>{updated_iso[:10]}</lastmod>", sitemap)
         self.assertIn("<loc>https://ai.sarawak.news/about.html</loc>", sitemap)

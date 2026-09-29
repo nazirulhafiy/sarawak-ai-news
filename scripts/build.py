@@ -24,9 +24,9 @@ SECTION_FILTERS = (
 SITE_URL = "https://ai.sarawak.news/"
 SITE_NAME = "AI.Sarawak.News"
 SOCIAL_CARD_URL = f"{SITE_URL}social-card.png"
-SEO_TITLE = "Sarawak AI News | AI.Sarawak.News"
+SEO_TITLE = "Sarawak AI news, in one place."
 SEO_DESCRIPTION = (
-    "Follow Sarawak AI news across policy, public services, education, workforce, "
+    "Source-linked coverage across policy, public services, education, workforce, "
     "research, infrastructure and business."
 )
 SITE_INTRODUCTION = (
