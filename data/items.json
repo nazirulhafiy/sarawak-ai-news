@@ -539,25 +539,6 @@
     "caveat": "The article reports panellist recommendations from a media conference; it does not confirm that the Sarawak government or media organisations have adopted the proposals."
   },
   {
-    "id": "sarawaktribune-data-centre-economic-value-2026-07-19",
-    "date": "2026-07-19",
-    "source": "Sarawak Tribune",
-    "url": "https://www.sarawaktribune.com/premier-data-centre-approvals-to-hinge-on-economic-value/",
-    "title": "Premier: Data centre approvals to hinge on economic value",
-    "section": "Infrastructure",
-    "tags": [
-      "data centres",
-      "investment policy",
-      "economic value",
-      "skilled jobs",
-      "AI infrastructure"
-    ],
-    "summary": "Sarawak's move toward more selective data-centre approvals signals that future projects will be judged on economic value, skilled jobs and links to advanced industries.",
-    "why_it_matters": "The position connects AI infrastructure planning to local value creation rather than accepting energy-intensive capacity with limited employment benefits.",
-    "confidence": "medium",
-    "caveat": "The Premier announced no formal approval criteria, process, rejected proposal or timeline; his five-to-ten-year forecast about conventional data centres was explicitly a personal view."
-  },
-  {
     "id": "borneopost-dubs-ai-business-workshop-2026-07-23",
     "date": "2026-07-23",
     "source": "The Borneo Post",
@@ -961,26 +942,6 @@
     "why_it_matters": "The plan moves Sarawak's AI agenda from broad awareness toward a talent pipeline that links skills, local model development, technology transfer and commercialisation.",
     "confidence": "medium",
     "caveat": "The report describes an announced direction rather than an operating hub; it gives no budget, launch timetable, location, participation targets, model specifications or delivery milestones, and the programme name appears as both AI Talent Hub and Sarawak AI Brain."
-  },
-  {
-    "id": "sarawaktribune-robotics-support-workers-2026-08-23",
-    "date": "2026-08-23",
-    "source": "Sarawak Tribune",
-    "url": "https://www.sarawaktribune.com/robotics-can-support-workers-says-abang-johari/",
-    "title": "Robotics Can Support Workers, Says Abang Johari",
-    "section": "Workforce",
-    "tags": [
-      "robotics",
-      "ageing population",
-      "healthcare",
-      "workforce support",
-      "AI For Makers",
-      "automation"
-    ],
-    "summary": "Abang Johari's call to use robotics alongside workers points to automation as a response to Sarawak's ageing population and relatively small workforce.",
-    "why_it_matters": "The statement broadens Sarawak's AI-for-makers agenda into practical service and labour questions, particularly healthcare and support for older residents.",
-    "confidence": "medium",
-    "caveat": "The article reports a policy statement and examples from other countries, not a Sarawak deployment, funded programme, procurement decision or implementation timetable."
   },
   {
     "id": "sarawaktribune-ai-fraud-scam-risk-2026-08-25",
