@@ -1391,5 +1391,24 @@
     "why_it_matters": "The Agrofest briefing gives Sarawak a named food-cluster route for AI-assisted cultivation and autonomous greenhouse control, aimed at local supply resilience.",
     "confidence": "medium",
     "caveat": "Publication date verified against DayakDaily article:published_time (28 September 2026, 21:37 +08). The English page reports the Premier's walkthrough of the SMFC Consortium showcase at Sarawak Agrofest 2026 in Bintulu on 28 September 2026. The 25 per cent cost and 20 per cent yield figures are consortium statements of potential, not measured results. Named systems are Plant Empowerment, Hydros, Climate Chamber, and Aura Pass. The page does not name an AI model, a SAIC role, a budget, or an independent evaluation. Completion is targeted for 2027."
+  },
+  {
+    "id": "dayakdaily-ai-persona-lab-2026-09-29",
+    "date": "2026-09-29",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/swak-lecturer-wins-national-young-achiever-honour-for-ai-powered-teaching-innovation/",
+    "title": "S’wak lecturer wins national young achiever honour for AI-powered teaching innovation",
+    "section": "Education",
+    "tags": [
+      "Global Voices",
+      "AI Persona Lab",
+      "education",
+      "JCI TOYM",
+      "Kuching"
+    ],
+    "summary": "Global Voices: AI Persona Lab signals a Kuching-born lecturer's classroom tool that lets business students question simulated consumer personas.",
+    "why_it_matters": "The named persona lab gives Sarawak a concrete education example of AI used for consumer-research practice, tied to a national young-achiever honour for a Kuching-born lecturer.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against DayakDaily article:published_time (29 September 2026, 12:58 +08). The English page names Global Voices: AI Persona Lab and a JCI Ten Outstanding Young Malaysians honour presented in Johor Bahru on 19 September 2026. It does not name a Sarawak campus as his current employer; he is pursuing a PhD in Marketing at Universiti Malaya. The 1,000-student reach and IUCEL Gold recognition come from a statement, not an independent evaluation."
   }
 ]
