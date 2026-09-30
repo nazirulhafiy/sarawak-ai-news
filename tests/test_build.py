@@ -283,7 +283,7 @@ class BuildTest(unittest.TestCase):
         public_titles = {item["title"] for item in public_items}
         self.assertIn("AI to transform Sarawak's economy, services, workforce productivity", public_titles)
         self.assertIn("Digital State: Sarawak adopts AI to address citizen needs", public_titles)
-        self.assertIn("Sarawak Eyes Sovereign AI Infrastructure", public_titles)
+        self.assertIn("Sarawak eyes sovereign AI infrastructure", public_titles)
         self.assertIn("Sarawak's AI future takes shape", public_titles)
         self.assertIn("Sarawak expands early intervention with AI screening", public_titles)
         self.assertIn("Managing transition to AI-native economy", public_titles)
