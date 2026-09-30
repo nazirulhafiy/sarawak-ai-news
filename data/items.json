@@ -1410,5 +1410,24 @@
     "why_it_matters": "The named persona lab gives Sarawak a concrete education example of AI used for consumer-research practice, tied to a national young-achiever honour for a Kuching-born lecturer.",
     "confidence": "medium",
     "caveat": "Publication date verified against DayakDaily article:published_time (29 September 2026, 12:58 +08). The English page names Global Voices: AI Persona Lab and a JCI Ten Outstanding Young Malaysians honour presented in Johor Bahru on 19 September 2026. It does not name a Sarawak campus as his current employer; he is pursuing a PhD in Marketing at Universiti Malaya. The 1,000-student reach and IUCEL Gold recognition come from a statement, not an independent evaluation."
+  },
+  {
+    "id": "the-edge-neuon-ai-roadplus-2026-02-12",
+    "date": "2026-02-12",
+    "source": "The Edge Malaysia",
+    "url": "https://theedgemalaysia.com/node/792727",
+    "title": "Hartamodal invests in Sarawak firm NEUON AI and ROADPLUS",
+    "section": "Business",
+    "tags": [
+      "Hartamodal",
+      "NEUON AI",
+      "ROADPLUS",
+      "SDEC",
+      "Dana Impian"
+    ],
+    "summary": "Hartamodal's investment signals venture backing for Sarawak firm NEUON AI, whose ROADPLUS computer-vision platform is deployed for road asset management.",
+    "why_it_matters": "The Dana Impian backing gives Sarawak a named commercial AI company with a deployed road-asset platform, SDEC Digital Village Accelerator seed support, and an MoU on pepper and oil-palm automation.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against The Edge article:published_time (12 February 2026, 12:33 +08). The English page reports a Hartamodal press release. It does not state the amount invested in NEUON AI; Dana Impian is a RM70 million fund with RM15 million deployed across three start-ups. ROADPLUS use by Jabatan Kerja Raya Sarawak, SDEC DiVA seed support, and the Runjian memorandum are as stated in the article."
   }
 ]
