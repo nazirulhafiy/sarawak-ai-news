@@ -1429,5 +1429,24 @@
     "why_it_matters": "The Dana Impian backing gives Sarawak a named commercial AI company with a deployed road-asset platform, SDEC Digital Village Accelerator seed support, and an MoU on pepper and oil-palm automation.",
     "confidence": "medium",
     "caveat": "Publication date verified against The Edge article:published_time (12 February 2026, 12:33 +08). The English page reports a Hartamodal press release. It does not state the amount invested in NEUON AI; Dana Impian is a RM70 million fund with RM15 million deployed across three start-ups. ROADPLUS use by Jabatan Kerja Raya Sarawak, SDEC DiVA seed support, and the Runjian memorandum are as stated in the article."
+  },
+  {
+    "id": "borneopost-ai-smart-bin-sibu-market-2026-09-30",
+    "date": "2026-09-30",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/09/30/ai-smart-bin-to-be-implemented-at-sibu-central-market-until-march-12-next-year/",
+    "title": "AI Smart Bin to run at Sibu Central Market until March 2027",
+    "section": "Public Services",
+    "tags": [
+      "AI Smart Bin",
+      "Smart Forge",
+      "SMK Sacred Heart",
+      "Sibu Municipal Council",
+      "waste sorting"
+    ],
+    "summary": "Sibu's six-month AI Smart Bin rollout signals a council-backed public-service trial of a student waste-sorting system at the central market.",
+    "why_it_matters": "The Sibu Municipal Council agreement moves the named AI Smart Bin from a school prototype into a dated market trial, separate from the July viewing by the Premier.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against the live English Borneo Post byline (30 September 2026, 8:00 AM). The page reports an MoU signed on 11 September 2026 between Smart Forge, led by SMK Sacred Heart principal David Teo Wu, and Sibu Municipal Council chairman Clarence Ting, with the bin at Sibu Central Market from 12 September 2026 to 12 March 2027. It does not publish the memorandum text. The private mobile-data and Bluetooth workaround is the student team's account. A 11 July 2026 item covers the Premier's prototype viewing, not this implementation window."
   }
 ]
