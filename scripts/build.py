@@ -25,6 +25,9 @@ SITE_URL = "https://ai.sarawak.news/"
 SITE_NAME = "AI.Sarawak.News"
 SOCIAL_CARD_URL = f"{SITE_URL}social-card.png"
 SEO_TITLE = "Sarawak AI news, in one place."
+# Social previews on Threads/X repeat the tagline under the domain. The
+# homepage card uses the site URL as its title so that line is not duplicated.
+HOMEPAGE_OG_TITLE = "https://ai.sarawak.news"
 SEO_DESCRIPTION = (
     "Source-linked coverage across policy, public services, education, workforce, "
     "research, infrastructure and business."
@@ -364,7 +367,7 @@ def render_index(items: list[dict]) -> str:
   <meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />
   <meta name="robots" content="index,follow" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="{esc(SEO_TITLE)}" />
+  <meta property="og:title" content="{esc(HOMEPAGE_OG_TITLE)}" />
   <meta property="og:description" content="{esc(SEO_DESCRIPTION)}" />
   <meta property="og:url" content="{esc(SITE_URL)}" />
   <meta property="og:site_name" content="{esc(SITE_NAME)}" />
@@ -372,7 +375,7 @@ def render_index(items: list[dict]) -> str:
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{esc(SEO_TITLE)}" />
+  <meta name="twitter:title" content="{esc(HOMEPAGE_OG_TITLE)}" />
   <meta name="twitter:description" content="{esc(SEO_DESCRIPTION)}" />
   <meta name="twitter:image" content="{esc(SOCIAL_CARD_URL)}" />
   <link rel="canonical" href="{esc(SITE_URL)}" />
