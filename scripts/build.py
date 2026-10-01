@@ -25,9 +25,8 @@ SITE_URL = "https://ai.sarawak.news/"
 SITE_NAME = "AI.Sarawak.News"
 SOCIAL_CARD_URL = f"{SITE_URL}social-card.png"
 SEO_TITLE = "Sarawak AI news, in one place."
-# Social previews on Threads/X repeat the tagline under the domain. The
-# homepage card uses the site URL as its title so that line is not duplicated.
-HOMEPAGE_OG_TITLE = "https://ai.sarawak.news"
+# Homepage social card title (tab title stays SEO_TITLE).
+HOMEPAGE_OG_TITLE = "AI.Sarawak.News"
 SEO_DESCRIPTION = (
     "Source-linked coverage across policy, public services, education, workforce, "
     "research, infrastructure and business."
