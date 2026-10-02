@@ -9,15 +9,15 @@ The current direction is intentionally restrained:
 
 - White page and white cards.
 - Broad `840px` maximum body width with a restrained `760px` reading column for the feed.
-- A borderless masthead panel with a centered editorial headline at a `40px` to `52px` responsive scale and balanced wrapping.
+- A borderless masthead panel with a centered editorial headline at a `40px` to `52px` responsive scale and balanced wrapping. The homepage `.brief` only carries a decorative mid-density network motif on the right (inline SVG, light gray in light mode and a slightly lifted gray in dark mode). The motif has no Sarawak colour stripe and does not replace the live headline, deck, or updated line.
 - Geist Sans typography, with the hero headline aligned to the reference `48px` desktop scale and a responsive `40px` mobile floor.
 - Supporting introduction at `18px`, giving the hero more generous rhythm while keeping the brief's Sarawak AI coverage concise.
 - Sarawak red, yellow, and black accents.
 - Refined top brand bar with a `16px` wordmark, compact `Home` and `About`
   links, a theme toggle, compact desktop height, and a full-width Sarawak-color rule. The red segment
   anchors the wordmark; yellow and black divide the remaining space equally.
-- Horizontal category filter using the seven canonical production labels.
-- Ranked story cards with compact metadata.
+- Horizontal category filter using the seven canonical production labels, with 24px between the filter and the first card.
+- Ranked story cards with 16px padding (14px from 560px down), 8px between title and summary, and 14px between cards.
 - Source name highlighted in yellow.
 - Structured, contained footer with a source summary, a subtle desktop divider,
   vertical Home/About and category links, and a full-width builder and independence
