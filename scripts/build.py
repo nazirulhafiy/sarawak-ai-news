@@ -35,6 +35,7 @@ SITE_INTRODUCTION = (
     "AI.Sarawak.News tracks artificial intelligence developments across Sarawak, "
     "bringing Sarawak AI policy, projects, research and adoption into one source-linked brief."
 )
+BRIEF_NET_SVG = (ROOT / "site" / "brief-net.svg").read_text(encoding="utf-8").strip()
 ABOUT_SEO_TITLE = "About | AI.Sarawak.News"
 ABOUT_SEO_DESCRIPTION = (
     "Learn how AI.Sarawak.News reviews and links Sarawak AI news, policy, projects, "
@@ -244,6 +245,7 @@ def render_compact_body(items: list[dict]) -> str:
 
   <main id="content">
     <header class="brief">
+      {BRIEF_NET_SVG}
       <h1 id="brief-title">Sarawak AI news, in one place.</h1>
       <p class="brief-deck">{esc(SITE_INTRODUCTION)}</p>
       <p class="updated"><span class="updated-label">Last updated</span><time datetime="{esc(updated_iso)}">{esc(updated_compact)}</time></p>
