@@ -1448,5 +1448,42 @@
     "why_it_matters": "The Sibu Municipal Council agreement moves the named AI Smart Bin from a school prototype into a dated market trial, separate from the July viewing by the Premier.",
     "confidence": "medium",
     "caveat": "Publication date verified against the live English Borneo Post byline (30 September 2026, 8:00 AM). The page reports an MoU signed on 11 September 2026 between Smart Forge, led by SMK Sacred Heart principal David Teo Wu, and Sibu Municipal Council chairman Clarence Ting, with the bin at Sibu Central Market from 12 September 2026 to 12 March 2027. It does not publish the memorandum text. The private mobile-data and Bluetooth workaround is the student team's account. A 11 July 2026 item covers the Premier's prototype viewing, not this implementation window."
+  },
+  {
+    "id": "curtin-driverai-mou-2026-09-30",
+    "date": "2026-09-30",
+    "source": "Curtin Malaysia",
+    "url": "https://news.curtin.edu.my/news/curtin-malaysia-driverai-forge-strategic-partnership-to-advance-ai-quantum-and-high-tech-innovation/",
+    "title": "Curtin Malaysia and DriverAI sign an MoU on AI and quantum computing",
+    "section": "Research",
+    "tags": [
+      "DriverAI",
+      "Curtin Malaysia",
+      "MoU",
+      "quantum computing",
+      "talent"
+    ],
+    "summary": "Curtin Malaysia's MoU with DriverAI signals a signed follow-on to the September campus talks on AI research and talent.",
+    "why_it_matters": "The signed MoU turns the 3 September DriverAI campus meeting into a formal research and talent framework, witnessed by Sarawak's transport minister.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against Curtin Malaysia article:published_time (30 September 2026, 11:54 +08). The English release says the MoU was signed on 28 September 2026 at the Ministry of Transport Sarawak office in Kuching by Cary Tantlinger and Professor Vincent Lee, witnessed by Dato Sri Lee Kim Shin. Named areas include AI, quantum computing, and a wider industrial list; no deployed system, funding, scholarship intake, or computing allocation is confirmed. Specific projects remain subject to separate agreements. A 3 September 2026 item covers the earlier exploratory visit, not this signed MoU."
+  },
+  {
+    "id": "dayakdaily-sjk-chung-hua-betong-ai-classroom-2026-10-01",
+    "date": "2026-10-01",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/sjk-chung-hua-betong-leads-swaks-first-ai-classroom-giving-rural-pupils-tech-head-start/",
+    "title": "SJK Chung Hua Betong to host Sarawak's first AI Classroom",
+    "section": "Education",
+    "tags": [
+      "AI Classroom",
+      "Samsung",
+      "SJK Chung Hua Betong",
+      "rural education"
+    ],
+    "summary": "SJK Chung Hua Betong's Samsung AI Classroom signals a rural education rollout of AI-powered learning for pupils from Year 3.",
+    "why_it_matters": "A named AI Classroom in Betong gives rural pupils a concrete education pathway that the deputy minister says should be a model for other Sarawak schools.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against DayakDaily article:published_time (1 October 2026, 12:45 +08). The English page reports a UKAS account of Deputy Minister Gerald Rentap Jabu's remarks at a Samsung Malaysia visit on 30 September 2026. It names an AI Classroom at SJK Chung Hua Betong as Sarawak's first and one of three in Malaysia, expected for Year 3 pupils and above. It does not specify devices, software, curriculum, or an opening date. The UKAS page is in Malay."
   }
 ]
