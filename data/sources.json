@@ -10,5 +10,12 @@
   {"name":"Sarawak Multimedia Authority","url":"https://www.sma.gov.my/","tier":2,"category":"institution","expected_yield":"medium"},
   {"name":"SAINS","url":"https://www.sains.com.my/","tier":2,"category":"institution","expected_yield":"medium"},
   {"name":"Swinburne Sarawak News","url":"https://www.swinburne.edu.my/news/","tier":3,"category":"university","expected_yield":"medium"},
-  {"name":"UNIMAS","url":"https://www.unimas.my/","tier":3,"category":"university","expected_yield":"medium"}
+  {"name":"UNIMAS","url":"https://www.unimas.my/","tier":3,"category":"university","expected_yield":"medium"},
+  {"name":"Bernama — Sarawak search","url":"https://www.bernama.com/en/search.php?terms=sarawak","tier":1,"category":"news","expected_yield":"medium"},
+  {"name":"The Malaysian Reserve — Sarawak AI search","url":"https://themalaysianreserve.com/?s=Sarawak+AI","tier":1,"category":"business news","expected_yield":"medium"},
+  {"name":"TVS — artificial intelligence search","url":"https://www.tvsarawak.my/?s=artificial%2Bintelligence","tier":1,"category":"news","expected_yield":"medium-high"},
+  {"name":"New Straits Times — Sarawak AI search","url":"https://www.nst.com.my/search?keywords=Sarawak%20AI","tier":1,"category":"news","expected_yield":"medium-high"},
+  {"name":"Malay Mail — Sarawak AI search","url":"https://www.malaymail.com/search?query=Sarawak+AI","tier":1,"category":"news","expected_yield":"medium-high"},
+  {"name":"Free Malaysia Today — Sarawak AI search","url":"https://www.freemalaysiatoday.com/search?term=Sarawak%20AI","tier":1,"category":"news","expected_yield":"medium"},
+  {"name":"Digital News Asia — Sarawak AI search","url":"https://www.digitalnewsasia.com/search/node/Sarawak%20AI","tier":1,"category":"business news","expected_yield":"medium"}
 ]
