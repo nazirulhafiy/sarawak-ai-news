@@ -1485,5 +1485,25 @@
     "why_it_matters": "A named AI Classroom in Betong gives rural pupils a concrete education pathway that the deputy minister says should be a model for other Sarawak schools.",
     "confidence": "medium",
     "caveat": "Publication date verified against DayakDaily article:published_time (1 October 2026, 12:45 +08). The English page reports a UKAS account of Deputy Minister Gerald Rentap Jabu's remarks at a Samsung Malaysia visit on 30 September 2026. It names an AI Classroom at SJK Chung Hua Betong as Sarawak's first and one of three in Malaysia, expected for Year 3 pupils and above. It does not specify devices, software, curriculum, or an opening date. The UKAS page is in Malay."
+  },
+  {
+    "id": "thestar-kuching-ai-data-campus-2026-10-06",
+    "date": "2026-10-06",
+    "source": "The Star",
+    "url": "https://www.thestar.com.my/news/nation/2026/10/06/kuching-ai-data-campus-to-drive-sarawaks-ai-push",
+    "title": "Kuching AI Data Campus to drive Sarawak's AI push",
+    "section": "Infrastructure",
+    "tags": [
+      "Kuching AI Data Campus",
+      "Tanjung Embang",
+      "AI Grid",
+      "SAIC",
+      "AI Blueprint",
+      "renewable energy"
+    ],
+    "summary": "The International Digital Economy Conference Sarawak 2026 opening again signals the Kuching AI Data Campus at Tanjung Embang as the physical foundation for an AI Grid, with SAIC in a central role and the AI Blueprint being developed.",
+    "why_it_matters": "Abang Johari's opening of the International Digital Economy Conference Sarawak 2026 puts the Tanjung Embang campus on the record again as the physical foundation for an AI Grid that would connect computing resources and tap Sarawak's renewable energy, with SAIC in a central role and the Sarawak AI Blueprint 2026-2030 still being developed.",
+    "confidence": "high",
+    "caveat": "Publication date verified against The Star article:published_time (2026-10-06) and the visible byline (Tuesday, 06 Oct 2026, Sharon Ling). The page reports Premier Abang Johari's remarks while opening the International Digital Economy Conference Sarawak 2026 in Kuching the previous day. The campus is described as a public-private partnership with dedicated power and water, AI computing facilities, and digital connectivity. The page does not state a site size, budget, builder, or construction start. A 20 May 2026 item covers the earlier campus and AI Grid announcement, not this conference statement. The same page also reports the launch of the Sarawak Cybersecurity Strategy and Roadmap 2030, which is a separate development."
   }
 ]
