@@ -106,7 +106,8 @@ Then it must:
 4. Screen each URL and development against `data/items.json` and the ledger
    snapshot from Maintainer Bot.
 5. Reject duplicates, weak matches, unsupported claims, inaccessible pages,
-   non-English pages, and purely promotional pages.
+   non-English pages, and purely promotional pages. An event-momentum
+   refresher, defined in the Editorial Gate, is not a duplicate.
 6. Produce one JSON manifest that passes `automation/candidate.schema.json`.
 7. Omit final story summaries. The manifest is factual handoff data, not
    publication copy.
@@ -196,6 +197,17 @@ centre role.
 
 Prefer a concise set of distinct developments. Do not publish several reports
 about one event unless each report contains a separate material development.
+
+Event-momentum refresher: a story that restates an already-published plan may
+get its own new card, not be treated as a duplicate, when a major event gives
+it new context. Examples are a keynote or official launch at IDECS or a
+similar flagship conference, or a fresh official commitment. The new card must
+say what is new in the framing, such as the event, what it is linked to, and
+its status. It must not repeat an old card's summary. Precedent: 6 Oct 2026,
+The Star's "Kuching AI Data Campus to drive Sarawak's AI push" (IDECS26
+opening speech), published even though the 3 May / 20 May campus plan was
+already on the site. Plain re-reports that add no new context stay under the
+normal duplicate rule.
 
 Every new item must contain:
 

@@ -5,6 +5,7 @@
   {"name":"DayakDaily — Sarawak AI search","url":"https://dayakdaily.com/?s=Sarawak+AI","tier":1,"category":"news","expected_yield":"high"},
   {"name":"Sarawak Tribune — Sarawak AI search","url":"https://www.sarawaktribune.com/?s=Sarawak+AI","tier":1,"category":"news","expected_yield":"medium-high"},
   {"name":"The Edge Malaysia — Sarawak AI search","url":"https://theedgemalaysia.com/search-results?keywords=Sarawak%20AI","tier":1,"category":"business news","expected_yield":"medium"},
+  {"name":"The Star — Sarawak AI search","url":"https://www.thestar.com.my/search?query=Sarawak+AI","tier":1,"category":"news","expected_yield":"medium-high"},
   {"name":"UKAS","url":"https://ukas.sarawak.gov.my/","tier":2,"category":"government comms","expected_yield":"medium"},
   {"name":"Sarawak Multimedia Authority","url":"https://www.sma.gov.my/","tier":2,"category":"institution","expected_yield":"medium"},
   {"name":"SAINS","url":"https://www.sains.com.my/","tier":2,"category":"institution","expected_yield":"medium"},
