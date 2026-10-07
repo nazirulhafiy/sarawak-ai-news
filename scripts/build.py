@@ -125,9 +125,8 @@ def slug(value: str) -> str:
 
 
 def render_compact_signal(item: dict, index: int) -> str:
-    reveal_delay = min(index - 1, 10)
     return f"""
-    <article class="story-card" id="{slug(item['id'])}" data-section="{slug(item['section'])}" style="--story-delay: {reveal_delay}" tabindex="0" aria-label="Open story: {esc(item['title'])}">
+    <article class="story-card" id="{slug(item['id'])}" data-section="{slug(item['section'])}" tabindex="0" aria-label="Open story: {esc(item['title'])}">
       <div class="story-rank" aria-label="Chronological item {index}">{index}</div>
       <div class="story-body">
         <p class="story-meta-row">
@@ -383,6 +382,7 @@ def render_index(items: list[dict]) -> str:
   <title>{esc(SEO_TITLE)}</title>
   <script type="application/ld+json">{structured_data}</script>
   <script>
+    document.documentElement.classList.add("js");
     try {{
       const storedTheme = localStorage.getItem("sarawak-theme");
       if (storedTheme === "dark" || (storedTheme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {{
@@ -439,6 +439,7 @@ def render_about() -> str:
   <title>{esc(ABOUT_SEO_TITLE)}</title>
   <script type="application/ld+json">{structured_data}</script>
   <script>
+    document.documentElement.classList.add("js");
     try {{
       const storedTheme = localStorage.getItem("sarawak-theme");
       if (storedTheme === "dark" || (storedTheme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {{
@@ -498,6 +499,7 @@ def render_category(section: str, items: list[dict]) -> str:
   <title>{esc(title)}</title>
   <script type="application/ld+json">{structured_data}</script>
   <script>
+    document.documentElement.classList.add("js");
     try {{
       const storedTheme = localStorage.getItem("sarawak-theme");
       if (storedTheme === "dark" || (storedTheme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {{
