@@ -90,6 +90,20 @@
     updateBackToTop();
   }
 
+  const revealCards = document.querySelectorAll(".story-card");
+  if (revealCards.length && "IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-revealed");
+        revealObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px", threshold: 0 });
+    revealCards.forEach((card) => revealObserver.observe(card));
+  } else {
+    revealCards.forEach((card) => card.classList.add("is-revealed"));
+  }
+
   const filter = document.querySelector("[data-category-filter]");
   const storyList = document.querySelector("[data-story-list]");
 

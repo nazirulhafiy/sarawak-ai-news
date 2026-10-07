@@ -651,10 +651,17 @@ html[data-theme="dark"] .category-filter-button.is-active {
   grid-template-columns: 40px minmax(0, 1fr);
   gap: 14px;
   background: var(--card);
-  animation: story-reveal .7s cubic-bezier(.22, 1, .36, 1) both;
-  animation-delay: calc(.65s + var(--story-delay, 0) * 75ms);
   transition: transform .18s ease, box-shadow .22s ease, border-color .22s ease, background-color .22s ease;
   cursor: pointer;
+}
+
+.js .story-card:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.js .story-card.is-revealed {
+  animation: story-reveal .7s cubic-bezier(.22, 1, .36, 1) both;
 }
 
 @keyframes story-reveal {
@@ -1031,6 +1038,12 @@ html[data-theme="dark"] .site-footer {
   .about-hero,
   .about-section,
   .story-card { animation: none; }
+  .js .story-card:not(.is-revealed),
+  .js .story-card.is-revealed {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
   .story-card:hover,
   .story-card:nth-child(even):hover { transform: none; }
 }
