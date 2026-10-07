@@ -1505,5 +1505,24 @@
     "why_it_matters": "Abang Johari's opening of the International Digital Economy Conference Sarawak 2026 puts the Tanjung Embang campus on the record again as the physical foundation for an AI Grid that would connect computing resources and tap Sarawak's renewable energy, with SAIC in a central role and the Sarawak AI Blueprint 2026-2030 still being developed.",
     "confidence": "high",
     "caveat": "Publication date verified against The Star article:published_time (2026-10-06) and the visible byline (Tuesday, 06 Oct 2026, Sharon Ling). The page reports Premier Abang Johari's remarks while opening the International Digital Economy Conference Sarawak 2026 in Kuching the previous day. The campus is described as a public-private partnership with dedicated power and water, AI computing facilities, and digital connectivity. The page does not state a site size, budget, builder, or construction start. A 20 May 2026 item covers the earlier campus and AI Grid announcement, not this conference statement. The same page also reports the launch of the Sarawak Cybersecurity Strategy and Roadmap 2030, which is a separate development."
+  },
+  {
+    "id": "edge-saic-ibm-quantum-safe-centre-2026-10-06",
+    "date": "2026-10-06",
+    "source": "The Edge Malaysia",
+    "url": "https://theedgemalaysia.com/node/820705",
+    "title": "SAIC, IBM plan Sarawak quantum-safe centre",
+    "section": "Infrastructure",
+    "tags": [
+      "SAIC",
+      "IBM Malaysia",
+      "Sarawak Quantum Safe Centre",
+      "quantum-safe",
+      "cryptography"
+    ],
+    "summary": "SAIC and IBM Malaysia's plan for a Sarawak Quantum Safe Centre signals a capability push to inventory cryptographic assets and prepare systems for post-quantum risk.",
+    "why_it_matters": "The planned centre gives SAIC a named quantum-safe programme with IBM Malaysia, using Guardium Cryptography Manager to inventory cryptographic assets, distinct from the July IBM Singapore exploration and from the same-day Kuching AI Data Campus statement.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against The Edge article:published_time (6 October 2026, 14:45 +08) and the Kuching (Oct 6) dateline. The English page says SAIC and IBM Malaysia plan to establish the Sarawak Quantum Safe Centre for quantum-safe readiness, research, talent development and ecosystem building. It names IBM Guardium Cryptography Manager for cryptographic-asset discovery and transition planning, and quotes SAIC CEO Patrick Then plus IBM Malaysia's Dickson Woo and Eddy Liew. It does not state a launch date, budget, site, or customers. A 29 July 2026 item covers an exploratory IBM Singapore meeting, not this centre. The Kuching AI Data Campus item dated the same day is a separate IDECS opening statement."
   }
 ]
