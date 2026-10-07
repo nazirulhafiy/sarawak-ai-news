@@ -54,11 +54,15 @@ Behavior:
 - Hidden story cards use the `hidden` attribute.
 - Story cards lift slightly and tilt by a quarter-degree on hover, alternating
   direction for a tactile browsing cue; the effect is disabled for reduced-motion users.
-- The hero panel and its headline, introduction, and update line reveal in a
-  visible sequence, followed by story cards that fade and lift in with a short
-  stagger capped after the first ten cards. The feed waits briefly for the hero
-  to establish the page hierarchy; all reveal motion is disabled for reduced-
-  motion users.
+- The hero panel and its headline, introduction, and update line still reveal
+  in a visible sequence on load, and category heroes keep that same load
+  animation. Story cards do not share it. With `html.js`, an unrevealed
+  `.story-card` stays at opacity 0 and `translateY(12px)` until an
+  IntersectionObserver adds `is-revealed` once (`rootMargin: 0px`,
+  `threshold: 0`) and then unobserves that card. The motion is `story-reveal`,
+  0.7s, `cubic-bezier(.22, 1, .36, 1)`. Reduced motion shows the cards
+  immediately. Hero and category-hero load animations are unchanged, and all
+  reveal motion is disabled for reduced-motion users.
 - The masthead theme toggle is a 36px circular control with a morphing moon/sun
   icon. It follows the system theme by default, persists an explicit choice in
   local storage, and updates its accessible label for the next mode.
