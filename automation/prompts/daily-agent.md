@@ -25,18 +25,36 @@ an article.
 
 ## Stage A: Discovery
 
+Before any other run step, refresh the working copy to the current
+`origin/main`: fetch, then reset so the working copy matches `origin/main`.
+Record that main SHA in the result contract. If a coordinator keeps a working
+copy, it refreshes that copy to `origin/main` before handing a run to a
+thread.
+
 1. Read `AGENTS.md`, `docs/automation.md`, `data/sources.json`,
    `automation/candidate.schema.json`, and `data/items.json`.
 2. Search the approved public sources. Open each possible original article.
-3. Require a visible English headline and a substantive English article body.
+3. When a Borneo Post article, or any approved outlet's article, cannot be
+   loaded (Cloudflare, timeout, or access error), look for the same story in
+   another approved English outlet such as DayakDaily, The Star, TVS, The
+   Edge, or New Sarawak Tribune. If the same story is found, screen and
+   publish from that outlet under the normal gates, and record the blocked
+   URL as inaccessible with a pointer to the alternate URL. If the same story
+   cannot be found anywhere else and the story looks possibly AI-central from
+   its headline or search snippet, list it in the result contract under
+   **Needs manual check**. Each entry gives the headline, URL, date, snippet,
+   and a one-line reason it might qualify. Nazirul checks these himself. Do
+   not publish a story from snippets alone. Clearly non-AI blocked pages stay
+   inaccessible with no manual-check entry.
+4. Require a visible English headline and a substantive English article body.
    Browser translation and English metadata do not qualify.
-4. Screen each URL against `data/items.json` and the ledger snapshot above.
-5. Reject duplicates, weak matches, unsupported claims, inaccessible pages,
+5. Screen each URL against `data/items.json` and the ledger snapshot above.
+6. Reject duplicates, weak matches, unsupported claims, inaccessible pages,
    non-English pages, and purely promotional pages. Apply the Extra editorial
    clarifications below when judging central AI relevance.
-6. If zero unscreened candidates qualify, stop. Return status `no_update`.
+7. If zero unscreened candidates qualify, stop. Return status `no_update`.
    Make no repository edit, commit, or push.
-7. If one or more candidates qualify, produce a JSON manifest that passes
+8. If one or more candidates qualify, produce a JSON manifest that passes
    `automation/candidate.schema.json`. Do not write final story summaries.
 
 ### Extra editorial clarifications
