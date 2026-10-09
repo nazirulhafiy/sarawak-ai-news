@@ -25,6 +25,7 @@ The current app is intentionally small:
 - Public publishing, newsletter sending, domain setup, or outreach requires Hafiy's explicit approval.
 - Do not rewrite the app when the request is only for audit, planning, or documentation.
 - Any change to how the site looks or behaves (layout, colours, fonts, icons, motion, interactions, content structure) must update `docs/design.md`, or the relevant doc in `docs/`, in the same PR. A PR that changes design without updating the docs is not ready.
+- CI **docs check** enforces that rule on watched `site/` assets, `site/fonts/`, and `scripts/build.py` only (not `data/` or `dist/`). Add the `no-docs-needed` label on the pull request when a design/behavior change genuinely needs no `docs/` update. See `docs/ci.md`.
 
 ## Required Checks
 Run the unit test suite before claiming changes work:
@@ -67,3 +68,4 @@ cd tools && npm install && node shots.mjs [--url <url-or-dist>] [--out <dir>] [o
 - `docs/product.md` records product scope, content model, workflow, and constraints.
 - `docs/design.md` records the current production design and design direction.
 - `docs/backlog.md` records known issues and recommended next tasks.
+- `docs/ci.md` records pull-request CI checks, including docs check and the `no-docs-needed` label.
