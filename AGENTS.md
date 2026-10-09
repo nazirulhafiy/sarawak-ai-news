@@ -13,6 +13,7 @@ The current app is intentionally small:
 - `scripts/build.py` renders the static site into `dist/`.
 - `scripts/ingest.py` discovers candidate URLs for manual review only.
 - `site/style.css` and `site/app.js` are the production front-end assets.
+- `site/fonts/` holds self-hosted Geist (`Geist-Variable.woff2`, `OFL.txt`); keep production on these files rather than swapping back to a CDN font.
 - `design-variants/` contains static design explorations, not production routes.
 - `tests/` covers build output, ingestion scoring, date auditing, and summary quality.
 
