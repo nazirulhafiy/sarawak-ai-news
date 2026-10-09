@@ -1,5 +1,22 @@
 # Continuous integration
 
+## Build workflow
+
+The **build** workflow (`.github/workflows/build.yml`) runs tests, audits, a static
+build, and (on `main` pushes) GitHub Pages deploy.
+
+### Concurrency
+
+- **Pull requests:** `test-build` uses a per-PR concurrency group
+  (`build-<PR number>`) with `cancel-in-progress`, so new commits on the same PR
+  cancel an older run on that PR only. Different PRs do not cancel each other.
+- **`main` pushes and deploy:** `deploy` uses a shared `pages` group with
+  `cancel-in-progress: false`, so a Pages deploy (including after the daily story
+  push) is never cancelled mid-flight by another workflow run.
+
+`test-build` on `main` uses a ref-based group without cancel-in-progress so PR
+activity cannot cancel production builds.
+
 ## Docs check
 
 Pull requests run the **docs check** workflow (`.github/workflows/docs-check.yml`) on
