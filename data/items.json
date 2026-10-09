@@ -1524,5 +1524,25 @@
     "why_it_matters": "The planned centre gives SAIC a named quantum-safe programme with IBM Malaysia, using Guardium Cryptography Manager to inventory cryptographic assets, distinct from the July IBM Singapore exploration and from the same-day Kuching AI Data Campus statement.",
     "confidence": "medium",
     "caveat": "Publication date verified against The Edge article:published_time (6 October 2026, 14:45 +08) and the Kuching (Oct 6) dateline. The English page says SAIC and IBM Malaysia plan to establish the Sarawak Quantum Safe Centre for quantum-safe readiness, research, talent development and ecosystem building. It names IBM Guardium Cryptography Manager for cryptographic-asset discovery and transition planning, and quotes SAIC CEO Patrick Then plus IBM Malaysia's Dickson Woo and Eddy Liew. It does not state a launch date, budget, site, or customers. A 29 July 2026 item covers an exploratory IBM Singapore meeting, not this centre. The Kuching AI Data Campus item dated the same day is a separate IDECS opening statement."
+  },
+  {
+    "id": "dayakdaily-softbank-grab-petros-ai-2026-10-08",
+    "date": "2026-10-08",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/sarawak-lays-groundwork-for-new-ai-economy-with-softbank-grab-petros/",
+    "title": "SoftBank, Grab and PETROS sign AI platform framework for Sarawak",
+    "section": "Infrastructure",
+    "tags": [
+      "SoftBank",
+      "Grab",
+      "PETROS",
+      "AI infrastructure",
+      "framework agreement",
+      "Kuching Low-Carbon Hub"
+    ],
+    "summary": "SoftBank, Grab and PETROS signed a framework agreement to explore an AI and digital infrastructure platform in Sarawak, with a phased roadmap covering AI compute, robotics and local workforce development.",
+    "why_it_matters": "The framework pairs SoftBank AI infrastructure expertise, Grab applied AI platforms and PETROS energy and Kuching Low-Carbon Hub roles behind a named Sarawak AI and digital infrastructure platform the parties will roadmap in phases.",
+    "confidence": "high",
+    "caveat": "Publication date verified against DayakDaily article:published_time (2026-10-08T10:35:42+00:00 / 18:35 +08) and the Oct 8, 2026 @ 18:35 byline. The English page says SoftBank, Grab and PETROS signed a Framework Agreement to explore an AI and digital infrastructure platform in Sarawak, signed by Masayoshi Son, Anthony Tan and Dato Janin Girie with Premier Abang Johari present. It covers a roadmap for phased development across AI compute and services, advanced technologies, robotics and local workforce development. SoftBank, Grab and PETROS contribution roles are named. No investment value, site, or build timeline is disclosed; the parties will further assess the roadmap and scope."
   }
 ]
