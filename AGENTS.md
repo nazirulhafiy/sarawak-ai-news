@@ -47,6 +47,8 @@ check new or date-relevant records on ordinary pushes and pull requests, while a
 manual workflow run keeps the full-audit path. Live source checks may warn when
 a selected source is temporarily unavailable.
 
+For every screenshot, use `tools/shots.mjs` (3× phone, cropped to the change, light and dark).
+
 ## Useful Commands
 
 ```bash
@@ -55,6 +57,7 @@ python3 scripts/ingest.py --limit-per-source 5
 python3 scripts/audit_dates.py --item-id <item-id>
 python3 -m unittest discover -s tests -v
 python3 -m http.server 4173 -d dist
+cd tools && npm install && node shots.mjs --url <url-or-dist> --out <dir> [options]
 ```
 
 ## Documentation Map

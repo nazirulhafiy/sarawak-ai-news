@@ -1,0 +1,11 @@
+{
+  "name": "sarawak-ai-news-shots",
+  "private": true,
+  "type": "module",
+  "description": "Playwright screenshot helper for Sarawak AI News (install only under tools/)",
+  "dependencies": {
+    "pixelmatch": "^7.1.0",
+    "playwright-core": "^1.51.0",
+    "pngjs": "^7.0.0"
+  }
+}
