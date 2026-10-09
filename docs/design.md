@@ -10,13 +10,23 @@ The current direction is intentionally restrained:
 - White page and white cards.
 - Broad `840px` maximum body width with a restrained `760px` reading column for the feed.
 - A borderless masthead panel with a centered editorial headline at a `40px` to `52px` responsive scale and balanced wrapping. The homepage `.brief` only carries a decorative mid-density network motif on the right (inline SVG, light gray in light mode and a slightly lifted gray in dark mode). The motif has no Sarawak colour stripe and does not replace the live headline, deck, or updated line.
-- Geist Sans typography, with the hero headline aligned to the reference `48px` desktop scale and a responsive `40px` mobile floor.
+- Geist Sans typography self-hosted from `site/fonts/Geist-Variable.woff2`
+  (variable weights 100–900; licence in `site/fonts/OFL.txt`). `scripts/build.py`
+  preloads the WOFF2 in each HTML head and copies the font plus `OFL.txt` into
+  `dist/fonts/`. `site/style.css` declares `@font-face` with `font-display: swap`
+  and sets the body stack to `"Geist", ui-sans-serif, system-ui`, and
+  fallbacks. The hero headline aligns to the reference `48px` desktop scale with
+  a responsive `40px` mobile floor.
 - Supporting introduction at `18px`, giving the hero more generous rhythm while keeping the brief's Sarawak AI coverage concise.
 - Sarawak red, yellow, and black accents.
 - Refined top brand bar with a `16px` wordmark, compact `Home` and `About`
   links, a theme toggle, compact desktop height, and a full-width Sarawak-color rule. The red segment
   anchors the wordmark; yellow and black divide the remaining space equally.
-- Horizontal category filter using the seven canonical production labels, with 24px between the filter and the first card.
+- Horizontal category filter using the seven canonical production labels, with
+  24px between the filter and the first card. When the pill row overflows,
+  non-interactive edge hints (48px fade plus chevron on the side that still has
+  hidden categories) signal horizontal scrolling; hints stay hidden when every
+  category fits.
 - Ranked story cards with 16px padding (14px from 560px down), 8px between title and summary, and 14px between cards.
 - Source name highlighted in yellow.
 - Structured, contained footer with a source summary, a subtle desktop divider,
@@ -26,7 +36,9 @@ The current direction is intentionally restrained:
   follows the story list with a restrained 40px section gap.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark
   cards, softened borders, brighter text, and preserved Sarawak yellow/red
-  accents.
+  accents. The selected category filter pill keeps its black fill and white
+  label but uses a Sarawak yellow border so the active filter stays visible
+  against dark surfaces.
 - The homepage and supporting routes use a shared 1200x630 social card with
   the site name, current headline, short description, and Sarawak colour rule.
 
@@ -42,6 +54,11 @@ without dependencies.
 Behavior:
 
 - Filter starts hidden in HTML and appears when JavaScript loads.
+- When the category row overflows, `site/app.js` toggles `can-scroll-start` and
+  `can-scroll-end` on `[data-category-scroll]` from scroll position, resize,
+  and font load. Matching CSS shows a 48px page-colour fade and chevron on the
+  start or end edge; hints use `pointer-events: none`, `aria-hidden="true"`, and
+  stay off when all pills fit without scrolling.
 - Filter buttons and story cards use the same canonical category labels:
   Policy, Public Services, Education, Workforce, Research, Infrastructure, and
   Business.
@@ -72,8 +89,9 @@ Behavior:
   builder credit.
 - Desktop navigation uses a light 12px treatment with subtle tracking and an
   open line height, balancing its type against the adjacent 16px theme glyph.
-- Geist is inherited by the body and controls, including buttons, so the
-  typography remains consistent across navigation, filters, cards, and footer.
+- Geist is self-hosted (not loaded from a CDN) and inherited by the body and
+  controls, including buttons, so typography stays consistent across navigation,
+  filters, cards, and footer.
 - Story ranks are renumbered after filtering.
 - A visually hidden live region reports the current result count.
 - Reloading the page resets the viewport to the top, while ordinary history
