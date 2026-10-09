@@ -1,0 +1,38 @@
+# Watched paths (design/behavior only; keep in sync with scripts/docs_check_pr.py):
+# - site/**/*.css
+# - site/**/*.js
+# - site/fonts/** (any file under site/fonts/)
+# - scripts/build.py (inline HTML templates; dist/ is generated and not watched)
+name: docs check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: write
+
+jobs:
+  docs-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Ensure no-docs-needed label exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create "no-docs-needed" \
+            --description "Design or behavior change needs no docs/ update" \
+            --color "FEF2C0" 2>/dev/null || true
+
+      - name: Run docs check
+        env:
+          DOCS_CHECK_BASE: ${{ github.event.pull_request.base.sha }}
+          DOCS_CHECK_HEAD: ${{ github.event.pull_request.head.sha }}
+          GITHUB_EVENT_PATH: ${{ github.event_path }}
+        run: python3 scripts/docs_check_pr.py
