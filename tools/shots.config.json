@@ -1,0 +1,24 @@
+{
+  "name": "sarawak",
+  "defaultUrl": "https://ai.sarawak.news",
+  "outDir": "shots",
+  "defaults": {
+    "devices": ["phone"],
+    "themes": ["light", "dark"],
+    "crop": "[data-category-filter]",
+    "pad": 24
+  },
+  "crop": { "minAspect": 0.75, "maxAspect": 1.3 },
+  "theme": {
+    "supported": ["light", "dark"],
+    "localStorageKey": "sarawak-theme",
+    "attribute": "data-theme",
+    "attributeValues": { "light": null, "dark": "dark" },
+    "setColorScheme": false,
+    "themeColor": null
+  },
+  "localStorage": {},
+  "sessionStorage": {},
+  "readySelector": null,
+  "settleMs": 250
+}
