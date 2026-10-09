@@ -104,6 +104,28 @@
     revealCards.forEach((card) => card.classList.add("is-revealed"));
   }
 
+  function bindCategoryScrollHint(filter) {
+    const wrap = filter.querySelector("[data-category-scroll]");
+    const scroller = wrap?.querySelector(".category-filter-options");
+    if (!wrap || !scroller) return;
+
+    const update = () => {
+      const overflow = scroller.scrollWidth - scroller.clientWidth;
+      const overflows = overflow > 1;
+      wrap.classList.toggle("can-scroll-start", overflows && scroller.scrollLeft > 1);
+      wrap.classList.toggle("can-scroll-end", overflows && scroller.scrollLeft < overflow - 1);
+    };
+
+    scroller.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    if (typeof ResizeObserver !== "undefined") {
+      const observer = new ResizeObserver(update);
+      observer.observe(scroller);
+    }
+    update();
+    document.fonts?.ready?.then(update);
+  }
+
   const filter = document.querySelector("[data-category-filter]");
   const storyList = document.querySelector("[data-story-list]");
 
@@ -161,6 +183,7 @@
   }
 
   filter.hidden = false;
+  bindCategoryScrollHint(filter);
   filter.addEventListener("click", (event) => {
     const button = event.target.closest("[data-section-filter]");
     if (button && filter.contains(button)) {

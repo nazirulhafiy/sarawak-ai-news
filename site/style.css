@@ -1,7 +1,9 @@
 /* Production compact layout */
+/* Geist variable, weights 100–900. SIL OFL 1.1.
+   Source: vercel/geist-font v1.7.2, fonts/Geist/webfonts/Geist[wght].woff2 */
 @font-face {
   font-family: "Geist";
-  src: url("https://www.shadcn.io/_next/media/Geist_Variable-s.p.0mrjj4bg00-he.woff2") format("woff2");
+  src: url("fonts/Geist-Variable.woff2") format("woff2");
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
@@ -52,7 +54,7 @@ body {
   padding: 0 20px 80px;
   background: var(--page);
   color: var(--ink);
-  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   transition: background-color .22s ease, color .22s ease;
@@ -526,17 +528,67 @@ html[data-theme="dark"] .brief-net {
   text-transform: uppercase;
 }
 
+.category-filter-scroll {
+  --category-fade: 48px;
+  position: relative;
+}
+
 .category-filter-options {
   display: flex;
   flex-wrap: nowrap;
   gap: 3px;
   overflow-x: auto;
-  padding-bottom: 2px;
+  padding: 4px var(--category-fade) 6px 0;
+  scroll-padding-inline: var(--category-fade);
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
 
 .category-filter-options::-webkit-scrollbar { display: none; }
+
+.category-filter-hint {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: none;
+  align-items: center;
+  width: var(--category-fade);
+  pointer-events: none;
+  color: var(--muted);
+}
+
+.category-filter-scroll.can-scroll-end .category-filter-hint-end,
+.category-filter-scroll.can-scroll-start .category-filter-hint-start {
+  display: flex;
+}
+
+.category-filter-hint-end {
+  right: 0;
+  justify-content: flex-end;
+  padding-right: 8px;
+  background: linear-gradient(90deg, rgb(from var(--page) r g b / 0), var(--page));
+}
+
+.category-filter-hint-start {
+  left: 0;
+  justify-content: flex-start;
+  padding-left: 8px;
+  background: linear-gradient(90deg, var(--page), rgb(from var(--page) r g b / 0));
+}
+
+.category-filter-chevron {
+  width: 7px;
+  height: 7px;
+  box-sizing: border-box;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+}
+
+.category-filter-hint-start .category-filter-chevron {
+  transform: rotate(135deg);
+}
 
 .category-filter-button {
   appearance: none;
@@ -570,7 +622,7 @@ html[data-theme="dark"] .category-filter-button { color: #c5cdd6; }
 }
 
 html[data-theme="dark"] .category-filter-button.is-active {
-  border-color: var(--sarawak-black);
+  border-color: var(--sarawak-yellow);
   background: var(--sarawak-black);
   color: #fff;
 }
