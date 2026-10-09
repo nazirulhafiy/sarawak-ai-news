@@ -24,6 +24,7 @@ The current app is intentionally small:
 - Keep the build dependency-free unless there is a clear reason to add tooling.
 - Public publishing, newsletter sending, domain setup, or outreach requires Hafiy's explicit approval.
 - Do not rewrite the app when the request is only for audit, planning, or documentation.
+- Any change to how the site looks or behaves (layout, colours, fonts, icons, motion, interactions, content structure) must update `docs/design.md`, or the relevant doc in `docs/`, in the same PR. A PR that changes design without updating the docs is not ready.
 
 ## Required Checks
 Run the unit test suite before claiming changes work:
