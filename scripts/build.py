@@ -158,8 +158,12 @@ def render_category_filter(items: list[dict]) -> str:
     return f"""
     <section class="category-filter" aria-labelledby="category-filter-title" data-category-filter hidden>
       <p class="category-filter-title" id="category-filter-title">Browse by category</p>
-      <div class="category-filter-options">
-        {' '.join(buttons)}
+      <div class="category-filter-scroll" data-category-scroll>
+        <div class="category-filter-options">
+          {' '.join(buttons)}
+        </div>
+        <span class="category-filter-hint category-filter-hint-start" aria-hidden="true"><span class="category-filter-chevron"></span></span>
+        <span class="category-filter-hint category-filter-hint-end" aria-hidden="true"><span class="category-filter-chevron"></span></span>
       </div>
       <p class="visually-hidden" data-filter-status aria-live="polite">Showing all {len(items)} stories</p>
     </section>
@@ -391,6 +395,7 @@ def render_index(items: list[dict]) -> str:
     }} catch (error) {{}}
   </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+  <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
 </head>
@@ -448,6 +453,7 @@ def render_about() -> str:
     }} catch (error) {{}}
   </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+  <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
 </head>
@@ -508,12 +514,25 @@ def render_category(section: str, items: list[dict]) -> str:
     }} catch (error) {{}}
   </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+  <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
 </head>
 {render_category_body(section, items)}
 </html>
 """
+
+
+def copy_site_fonts() -> None:
+    source = ROOT / "site" / "fonts"
+    woff = source / "Geist-Variable.woff2"
+    license_file = source / "OFL.txt"
+    if not woff.is_file() or not license_file.is_file():
+        raise SystemExit("site/fonts must contain Geist-Variable.woff2 and OFL.txt")
+    target = DIST / "fonts"
+    target.mkdir(exist_ok=True)
+    shutil.copy2(woff, target / woff.name)
+    shutil.copy2(license_file, target / license_file.name)
 
 
 def build() -> None:
@@ -534,6 +553,7 @@ def build() -> None:
     (DIST / "style.css").write_text(compact_css, encoding="utf-8")
     (DIST / "app.js").write_text((ROOT / "site" / "app.js").read_text(encoding="utf-8"), encoding="utf-8")
     shutil.copy2(ROOT / "site" / "social-card.png", DIST / "social-card.png")
+    copy_site_fonts()
     (DIST / "items.json").write_text(json.dumps(items, indent=2), encoding="utf-8")
     (DIST / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://ai.sarawak.news/sitemap.xml\n", encoding="utf-8")
     sitemap_urls = [SITE_URL, f"{SITE_URL}about.html"] + [
