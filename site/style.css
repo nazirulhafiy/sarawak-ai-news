@@ -1082,8 +1082,8 @@ html[data-theme="dark"] .site-footer {
     padding: 14px;
   }
   .story-meta-row { margin-bottom: 10px; }
-  .story-source::after { display: none; }
-  .story-section { flex-basis: 100%; }
+  .story-meta-row time { flex-basis: 100%; }
+  .story-meta-row time::after { display: none; }
   .story-rank { width: 24px; height: 24px; font-size: 10px; }
 }
 
