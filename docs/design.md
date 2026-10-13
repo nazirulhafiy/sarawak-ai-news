@@ -30,6 +30,7 @@ The current direction is intentionally restrained:
 - Ranked story cards with 16px padding (14px from 560px down), 8px between title and summary, and 14px between cards.
 - Compact black index badges (26px desktop, 24px from 560px down) so the rank stays secondary to the title.
 - Source name highlighted in yellow.
+- On narrow viewports (`max-width: 560px`), each card’s meta row stacks as two lines: the date alone on the first line, then the yellow source chip and category on the second line with a middot separator (`SOURCE · CATEGORY`). Wider viewports keep the single-line `DATE · SOURCE · CATEGORY` meta row.
 - Structured, contained footer with a source summary, a subtle desktop divider,
   vertical Home/About and category links, and a full-width builder and independence
   attribution row. A thin, edge-to-edge divider and controlled vertical spacing
@@ -150,9 +151,11 @@ short sections for purpose, coverage, and workflow. It keeps the explanation
 closer to the editorial feed instead of adding dashboard-like metrics or pills.
 
 Each story card currently shows date, source, category, title, and summary. Its
-category label exactly matches the corresponding browse filter. The card
-does not expose tags, confidence, caveat, or why-it-matters copy in the HTML,
-although those fields are preserved in generated JSON for editorial review.
+category label exactly matches the corresponding browse filter. On phone-width
+layouts the date sits on its own line above the source chip and category; desktop
+meta order is unchanged. The card does not expose tags, confidence, caveat, or
+why-it-matters copy in the HTML, although those fields are preserved in generated
+JSON for editorial review.
 
 ## Design Variants
 
