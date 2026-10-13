@@ -22,6 +22,11 @@ The current direction is intentionally restrained:
 - Refined top brand bar with a `16px` wordmark, compact `Home` and `About`
   links, a theme toggle, compact desktop height, and a full-width Sarawak-color rule. The red segment
   anchors the wordmark; yellow and black divide the remaining space equally.
+  The bar is `position: sticky; top: 0` with a solid page-colour background in
+  light and dark mode so feed content scrolls beneath it. After any scroll,
+  `site/app.js` toggles `.is-scrolled` for a thin bottom edge and subtle
+  shadow. `html` uses `scroll-padding-top`, and heroes use `scroll-margin-top`,
+  so in-page anchors clear the sticky bar.
 - Horizontal category filter using the seven canonical production labels, with
   24px between the filter and the first card. When the pill row overflows,
   non-interactive edge hints (48px fade plus chevron on the side that still has
@@ -101,6 +106,9 @@ Behavior:
 - A visually hidden live region reports the current result count.
 - Reloading the page resets the viewport to the top, while ordinary history
   navigation can preserve the reader's position.
+- The masthead sticky state is driven by a passive scroll listener on `.bar`
+  (independent of the category filter), so Home, About, and category pages all
+  get the scrolled edge treatment.
 - A compact fixed `Back to top` control appears after 600 px of scrolling and
   uses the active category filter palette permanently: black surface, white label,
   and yellow arrow. It respects the reader's reduced-motion preference.
@@ -143,8 +151,10 @@ and footer. Each page starts with a compact topic introduction, a link back to
 all news, and only the stories in that category.
 
 The masthead contains the brand lockup, compact navigation, theme toggle, and
-color rule. The About page moves fuller publication context off the already
-wordy homepage while keeping the first screen focused on the live brief.
+color rule. It stays pinned while the reader scrolls, with a solid background and
+a scrolled shadow so story content does not show through. The About page moves
+fuller publication context off the already wordy homepage while keeping the first
+screen focused on the live brief.
 
 The About page uses the same restrained system: a clear opening statement and
 short sections for purpose, coverage, and workflow. It keeps the explanation
