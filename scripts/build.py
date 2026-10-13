@@ -131,7 +131,7 @@ def render_compact_signal(item: dict, index: int) -> str:
       <div class="story-body">
         <p class="story-meta-row">
           <time datetime="{esc(item['date'])}">{esc(format_story_date(item['date']))}</time>
-          <span class="story-source"><span class="story-source-label">{esc(item['source'])}</span></span>
+          <span class="story-source"><span class="story-source-prefix">Read on</span> <span class="story-source-label">{esc(item['source'])}</span><span class="story-source-arrow" aria-hidden="true">↗</span></span>
           <span class="story-section">{esc(item['section'])}</span>
         </p>
         <h2><a href="{esc(item['url'])}" target="_blank" rel="noopener noreferrer">{esc(item['title'])}</a></h2>

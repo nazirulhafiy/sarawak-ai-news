@@ -28,7 +28,9 @@ The current direction is intentionally restrained:
   hidden categories) signal horizontal scrolling; hints stay hidden when every
   category fits.
 - Ranked story cards with 16px padding (14px from 560px down), 8px between title and summary, and 14px between cards.
-- Source name highlighted in yellow.
+- Compact black index badges (26px desktop, 24px from 560px down) so the rank stays secondary to the title.
+- Story titles use link styling at rest (Sarawak red-ink colour plus a soft underline) so the external destination is obvious before hover; card hover still lifts and shadows the whole card.
+- Source row reads as `Read on {source} ↗`, with the outlet name still highlighted in yellow and an external-link arrow, so each card clearly opens the original article in a new tab.
 - Structured, contained footer with a source summary, a subtle desktop divider,
   vertical Home/About and category links, and a full-width builder and independence
   attribution row. A thin, edge-to-edge divider and controlled vertical spacing
@@ -71,6 +73,9 @@ Behavior:
 - Hidden story cards use the `hidden` attribute.
 - Story cards lift slightly and tilt by a quarter-degree on hover, alternating
   direction for a tactile browsing cue; the effect is disabled for reduced-motion users.
+- Keyboard focus on a story card uses a clear `:focus-visible` ring: a 2px ink
+  outline with a 6px Sarawak yellow outer glow so the focused card reads in
+  both light and dark mode.
 - The hero panel and its headline, introduction, and update line still reveal
   in a visible sequence on load, and category heroes keep that same load
   animation. Story cards do not share it. With `html.js`, an unrevealed
@@ -145,10 +150,13 @@ The About page uses the same restrained system: a clear opening statement and
 short sections for purpose, coverage, and workflow. It keeps the explanation
 closer to the editorial feed instead of adding dashboard-like metrics or pills.
 
-Each story card currently shows date, source, category, title, and summary. Its
-category label exactly matches the corresponding browse filter. The card
-does not expose tags, confidence, caveat, or why-it-matters copy in the HTML,
-although those fields are preserved in generated JSON for editorial review.
+Each story card currently shows date, a `Read on {source} ↗` cue, category,
+title, and summary. Its category label exactly matches the corresponding browse
+filter. The title is link-styled at rest and the whole card opens the source
+URL in a new tab; the hero already states that stories link to sources, so
+cards do not repeat that instructional note. The card does not expose tags,
+confidence, caveat, or why-it-matters copy in the HTML, although those fields
+are preserved in generated JSON for editorial review.
 
 ## Design Variants
 
