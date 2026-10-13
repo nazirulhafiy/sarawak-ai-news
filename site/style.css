@@ -22,6 +22,8 @@
   --sarawak-yellow: #f7c948;
   --sarawak-yellow-soft: #fffbea;
   --sarawak-black: #111111;
+  --page-gutter: 20px;
+  --bar-rule-bleed: max(var(--page-gutter), (100vw - 760px) / 2);
 }
 
 * { box-sizing: border-box; }
@@ -30,6 +32,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 72px;
   background: var(--canvas);
+  overflow-x: clip;
 }
 
 html[data-theme="dark"] {
@@ -98,18 +101,26 @@ html[data-theme="dark"] .skip-link {
 }
 
 .bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 0 var(--page-gutter);
+  background: var(--page);
+  transition: box-shadow .18s ease;
+}
+
+.bar-inner {
+  width: 100%;
   max-width: 760px;
   min-height: 58px;
   margin: 0 auto;
   padding: 16px 0 12px;
-  position: sticky;
-  top: 0;
-  z-index: 40;
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0;
-  background: var(--page);
-  transition: box-shadow .18s ease;
 }
 
 .bar::after {
@@ -157,10 +168,15 @@ html[data-theme="dark"] .bar.is-scrolled {
   height: 3px;
 }
 
-.brand-lockup::after { background: var(--sarawak-red); }
-.bar-rule-tail::after { background: linear-gradient(90deg, var(--sarawak-yellow) 0 50%, var(--sarawak-black) 50% 100%); }
+.brand-lockup::after {
+  left: calc(-1 * var(--bar-rule-bleed));
+  background: var(--sarawak-red);
+}
 
-.bar-rule-tail::after { right: -36px; }
+.bar-rule-tail::after {
+  right: calc(-36px - var(--bar-rule-bleed));
+  background: linear-gradient(90deg, var(--sarawak-yellow) 0 50%, var(--sarawak-black) 50% 100%);
+}
 
 html[data-theme="dark"] .bar-rule-tail::after {
   background: linear-gradient(90deg, var(--sarawak-yellow) 0 50%, #3d4652 50% 100%);
@@ -1028,8 +1044,9 @@ html[data-theme="dark"] .site-footer {
 
 @media (max-width: 560px) {
   html { scroll-padding-top: 76px; }
+  :root { --page-gutter: 15px; }
   body { padding: 0 15px 64px; }
-  .bar {
+  .bar-inner {
     min-height: 62px;
     padding: 18px 0 14px;
   }
@@ -1038,7 +1055,7 @@ html[data-theme="dark"] .site-footer {
   .category-hero { scroll-margin-top: 76px; }
   .brand-lockup::after,
   .bar-rule-tail::after { bottom: -15px; }
-  .bar-rule-tail::after { right: -78px; }
+  .bar-rule-tail::after { right: calc(-78px - var(--bar-rule-bleed)); }
   .brand { font-size: 16px; }
 
   .bar-rule-tail { order: 2; }
