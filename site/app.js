@@ -104,26 +104,6 @@
     revealCards.forEach((card) => card.classList.add("is-revealed"));
   }
 
-  const touchArrowMedia = window.matchMedia("(hover: none), (pointer: coarse)");
-  if (revealCards.length && "IntersectionObserver" in window && touchArrowMedia.matches) {
-    let midScrollCard = null;
-    const midScrollObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (midScrollCard && midScrollCard !== entry.target) {
-            midScrollCard.classList.remove("is-mid-scroll");
-          }
-          entry.target.classList.add("is-mid-scroll");
-          midScrollCard = entry.target;
-          return;
-        }
-        entry.target.classList.remove("is-mid-scroll");
-        if (midScrollCard === entry.target) midScrollCard = null;
-      });
-    }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
-    revealCards.forEach((card) => midScrollObserver.observe(card));
-  }
-
   function bindCategoryScrollHint(filter) {
     const wrap = filter.querySelector("[data-category-scroll]");
     const scroller = wrap?.querySelector(".category-filter-options");
