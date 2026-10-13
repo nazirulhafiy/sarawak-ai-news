@@ -1544,5 +1544,43 @@
     "why_it_matters": "The framework pairs SoftBank AI infrastructure expertise, Grab applied AI platforms and PETROS energy and Kuching Low-Carbon Hub roles behind a named Sarawak AI and digital infrastructure platform the parties will roadmap in phases.",
     "confidence": "high",
     "caveat": "Publication date verified against DayakDaily article:published_time (2026-10-08T10:35:42+00:00 / 18:35 +08) and the Oct 8, 2026 @ 18:35 byline. The English page says SoftBank, Grab and PETROS signed a Framework Agreement to explore an AI and digital infrastructure platform in Sarawak, signed by Masayoshi Son, Anthony Tan and Dato Janin Girie with Premier Abang Johari present. It covers a roadmap for phased development across AI compute and services, advanced technologies, robotics and local workforce development. SoftBank, Grab and PETROS contribution roles are named. No investment value, site, or build timeline is disclosed; the parties will further assess the roadmap and scope."
+  },
+  {
+    "id": "dayakdaily-smk-long-bedian-sort-ai-2026-10-12",
+    "date": "2026-10-12",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/smk-long-bedians-ai-powered-waste-sorting-system-wins-top-prize-at-petrosains-tech4all-2026/",
+    "title": "SMK Long Bedian's AI waste sorter wins Petrosains Tech4All",
+    "section": "Education",
+    "tags": [
+      "S.O.R.T.",
+      "Petrosains Tech4All",
+      "SMK Long Bedian",
+      "waste sorting",
+      "Teachable Machine"
+    ],
+    "summary": "SMK Long Bedian's SORT AI waste-sorting win at Petrosains Tech4All 2026 signals a Baram school using camera recognition to separate cans, plastic and paper.",
+    "why_it_matters": "A named AI waste sorter from a Baram secondary school gives Sarawak a concrete rural STEM win at a national Petrosains competition, separate from the earlier Sacred Heart / Sibu Smart Bin trail.",
+    "confidence": "high",
+    "caveat": "Publication date verified against DayakDaily article:published_time (2026-10-12T10:21:27+00:00 / 18:21 +08) and the Oct 12, 2026 @ 18:21 byline. The English page says SMK Long Bedian from Baram won the Petrosains Tech4All 2026 national competition in Kuala Lumpur on 12 October 2026 with S.O.R.T., an AI-powered waste-sorting system using Teachable Machine and Arduino to recognise cans, plastic and paper. It quotes student Agustus Antonio Galvin and teacher Hanson Teo Kim Guan. It does not state a school-wide rollout timeline or commercial deployment."
+  },
+  {
+    "id": "thestar-smk-lutong-scamshield-ai-2026-10-12",
+    "date": "2026-10-12",
+    "source": "The Star",
+    "url": "https://www.thestar.com.my/starpicks/2026/10/12/young-sarawakians-engineering-ai-for-good",
+    "title": "SMK Lutong's ScamShield AI wins Shell NXplorers Sarawak title",
+    "section": "Education",
+    "tags": [
+      "ScamShield AI",
+      "Shell NXplorers",
+      "SMK Lutong",
+      "ElderCare AI",
+      "cybersecurity"
+    ],
+    "summary": "SMK Lutong's ScamShield AI win at Shell NXplorers 2026 signals a Sarawak student on-device app that scores scam risk in messages, links and APKs.",
+    "why_it_matters": "A named on-device scam-detection AI from an SMK Lutong team marks a Sarawak student cybersecurity product path, including a CyberSecurity Malaysia presentation invite.",
+    "confidence": "high",
+    "caveat": "Publication date verified against The Star article:published_time (2026-10-12T12:17:00.000Z) and the Monday, 12 Oct 2026 | 12:17 PM MYT byline. The English StarPicks page covers the Shell NXplorers 2026 Sarawak Challenge finale: SMK Lutong team ScamBusters won with ScamShield AI (on-device analysis of messages, WhatsApp, links, QR codes and APKs), SMK Bandar Bintulu's ElderCare AI placed runner-up, and SMK Baru Bintulu took most innovative. Muhammad Labeeb was invited to present ScamShield AI to CyberSecurity Malaysia. No statewide deployment or commercial release is stated."
   }
 ]
