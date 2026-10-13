@@ -72,8 +72,10 @@ Behavior:
 - Hidden story cards use the `hidden` attribute.
 - Story cards lift slightly and tilt by a quarter-degree on hover, alternating
   direction for a tactile browsing cue; the effect is disabled for reduced-motion users.
-  On card hover, the title keeps its underline treatment and gains a trailing
-  external-link arrow (`↗`) after the title text.
+  On fine-pointer desktop hover, the title keeps its underline treatment and
+  gains a trailing external-link arrow (`↗`) after the title text. On touch
+  devices (`hover: none` or `pointer: coarse`), that same small `↗` stays
+  visible after every card title at rest.
 - The hero panel and its headline, introduction, and update line still reveal
   in a visible sequence on load, and category heroes keep that same load
   animation. Story cards do not share it. With `html.js`, an unrevealed

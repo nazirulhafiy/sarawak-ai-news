@@ -283,6 +283,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn(".story-rank {\n  width: 26px;\n  height: 26px;", css)
         self.assertIn(".story-card:focus-visible {\n  outline: 3px solid var(--sarawak-yellow);\n  outline-offset: 3px;\n}", css)
         self.assertIn('.story-card:hover h2 a::after {\n    content: "↗";\n    margin-left: .28em;\n  }', css)
+        self.assertIn("@media (hover: none), (pointer: coarse) {\n  .story-card h2 a::after {\n    content: \"↗\";\n    margin-left: .28em;\n  }\n}", css)
         self.assertNotIn(".story-source-prefix", css)
         self.assertNotIn(".story-source-arrow", css)
         self.assertNotIn("padding: 12px", css)

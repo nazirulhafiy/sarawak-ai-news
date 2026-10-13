@@ -841,6 +841,13 @@ html[data-theme="dark"] .story-rank {
   }
 }
 
+@media (hover: none), (pointer: coarse) {
+  .story-card h2 a::after {
+    content: "↗";
+    margin-left: .28em;
+  }
+}
+
 .story-summary {
   margin: 8px 0 0;
   color: var(--muted);
