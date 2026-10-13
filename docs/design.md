@@ -28,6 +28,7 @@ The current direction is intentionally restrained:
   hidden categories) signal horizontal scrolling; hints stay hidden when every
   category fits.
 - Ranked story cards with 16px padding (14px from 560px down), 8px between title and summary, and 14px between cards.
+- Compact black index badges (26px desktop, 24px from 560px down) so the rank stays secondary to the title.
 - Source name highlighted in yellow.
 - Structured, contained footer with a source summary, a subtle desktop divider,
   vertical Home/About and category links, and a full-width builder and independence
@@ -71,6 +72,10 @@ Behavior:
 - Hidden story cards use the `hidden` attribute.
 - Story cards lift slightly and tilt by a quarter-degree on hover, alternating
   direction for a tactile browsing cue; the effect is disabled for reduced-motion users.
+  On fine-pointer desktop hover, the title keeps its underline treatment and
+  gains a trailing external-link arrow (`↗`) after the title text. On touch
+  devices (`hover: none` or `pointer: coarse`), that same small `↗` stays
+  visible after every card title at rest.
 - The hero panel and its headline, introduction, and update line still reveal
   in a visible sequence on load, and category heroes keep that same load
   animation. Story cards do not share it. With `html.js`, an unrevealed

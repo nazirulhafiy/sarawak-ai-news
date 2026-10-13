@@ -700,8 +700,8 @@ html[data-theme="dark"] .category-filter-button.is-active {
   border: 1px solid var(--line);
   border-radius: 8px;
   display: grid;
-  grid-template-columns: 40px minmax(0, 1fr);
-  gap: 14px;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 12px;
   background: var(--card);
   transition: transform .18s ease, box-shadow .22s ease, border-color .22s ease, background-color .22s ease;
   cursor: pointer;
@@ -744,17 +744,17 @@ html[data-theme="dark"] .category-filter-button.is-active {
 }
 
 .story-rank {
-  width: 34px;
-  height: 34px;
+  width: 26px;
+  height: 26px;
   border: 1px solid var(--sarawak-black);
-  border-radius: 8px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   background: var(--sarawak-black);
-  font-size: 14px;
-  font-weight: 900;
+  font-size: 11px;
+  font-weight: 800;
   line-height: 1;
 }
 
@@ -817,6 +817,11 @@ html[data-theme="dark"] .story-rank {
 
 .story-card h2 a { text-decoration: none; }
 
+.story-card h2 a::after {
+  content: "";
+  margin-left: 0;
+}
+
 .story-card:hover h2 a,
 .story-card:focus-visible h2 a,
 .story-card:focus-within h2 a {
@@ -827,6 +832,20 @@ html[data-theme="dark"] .story-rank {
 .story-card h2 a:hover {
   color: var(--ink);
   text-decoration: underline;
+}
+
+@media (hover: hover) {
+  .story-card:hover h2 a::after {
+    content: "↗";
+    margin-left: .28em;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .story-card h2 a::after {
+    content: "↗";
+    margin-left: .28em;
+  }
 }
 
 .story-summary {
@@ -1065,14 +1084,14 @@ html[data-theme="dark"] .site-footer {
   }
 
   .story-card {
-    grid-template-columns: 34px minmax(0, 1fr);
-    gap: 12px;
+    grid-template-columns: 26px minmax(0, 1fr);
+    gap: 10px;
     padding: 14px;
   }
   .story-meta-row { margin-bottom: 10px; }
   .story-source::after { display: none; }
   .story-section { flex-basis: 100%; }
-  .story-rank { width: 32px; height: 32px; }
+  .story-rank { width: 24px; height: 24px; font-size: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
