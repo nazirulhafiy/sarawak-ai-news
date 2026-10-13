@@ -74,8 +74,12 @@ Behavior:
   direction for a tactile browsing cue; the effect is disabled for reduced-motion users.
   On fine-pointer desktop hover, the title keeps its underline treatment and
   gains a trailing external-link arrow (`↗`) after the title text. On touch
-  devices (`hover: none` or `pointer: coarse`), that same small `↗` stays
-  visible after every card title at rest.
+  devices (`hover: none` or `pointer: coarse`), that `↗` is not always
+  visible: an IntersectionObserver with a centred `rootMargin` of
+  `-45% 0px -45% 0px` adds `is-mid-scroll` to the card in the middle band of
+  the viewport while scrolling, and CSS fades the title `↗` in and out over
+  about 200ms so only one card shows it at a time. With
+  `prefers-reduced-motion: reduce`, the arrow shows and hides with no fade.
 - The hero panel and its headline, introduction, and update line still reveal
   in a visible sequence on load, and category heroes keep that same load
   animation. Story cards do not share it. With `html.js`, an unrevealed

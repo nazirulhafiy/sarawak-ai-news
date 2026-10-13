@@ -845,6 +845,12 @@ html[data-theme="dark"] .story-rank {
   .story-card h2 a::after {
     content: "↗";
     margin-left: .28em;
+    opacity: 0;
+    transition: opacity .2s ease;
+  }
+
+  .story-card.is-mid-scroll h2 a::after {
+    opacity: 1;
   }
 }
 
@@ -1117,4 +1123,5 @@ html[data-theme="dark"] .site-footer {
   }
   .story-card:hover,
   .story-card:nth-child(even):hover { transform: none; }
+  .story-card h2 a::after { transition: none; }
 }
