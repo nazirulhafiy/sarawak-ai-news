@@ -126,9 +126,14 @@ Behavior:
   motion. When hidden it is not focusable (`hidden`, `tabindex="-1"`,
   `aria-hidden="true"`).
 - Desktop (wider than 560 px): text pill `Back to top ↑`, `24px` from the
-  viewport right and bottom edges.
-- Phone (560 px and below): icon-only ↑ on a `44×44` tap target, inset
-  `max(14px, env(safe-area-inset-*) + 14px)` from the right and bottom.
+  viewport right and bottom edges. Typography and spacing are hardcoded on
+  `.back-to-top` (not inherited from body tokens): Geist stack at `11px` /
+  `850` / `1.3`, `letter-spacing: normal`, `padding: 8px 12px`, `gap: 3.08px`,
+  `border-radius: 999px`, `1px` border, and the shared shadow — so the pill
+  matches the Sarawak hub standard when copied verbatim.
+- Phone (560 px and below): icon-only ↑ on a `44×44` circle (`border-radius:
+  50%`), inset `max(14px, env(safe-area-inset-*) + 14px)` from the right and
+  bottom; `18px` arrow size on the same hardcoded font stack.
 - Both themes: `#111` chip, `#f7c948` label/arrow; light mode `1px` border
   `#111`, dark mode `1px` border `#f7c948`. Focus: `3px` yellow ring, `2px`
   offset. Click scrolls smoothly to the top (instant when reduced motion is on).
