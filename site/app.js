@@ -88,7 +88,10 @@
   const backToTop = document.querySelector("[data-back-to-top]");
   if (backToTop) {
     function updateBackToTop() {
-      backToTop.hidden = window.scrollY < 600;
+      const show = window.scrollY >= 600;
+      backToTop.hidden = !show;
+      backToTop.tabIndex = show ? 0 : -1;
+      backToTop.setAttribute("aria-hidden", show ? "false" : "true");
     }
 
     backToTop.addEventListener("click", () => {

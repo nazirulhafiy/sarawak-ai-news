@@ -345,7 +345,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn('applyFilter(resetToAll ? "all"', js)
         self.assertIn('history.scrollRestoration = "manual"', js)
         self.assertIn('navigation?.type === "reload"', js)
-        self.assertIn('window.scrollY < 600', js)
+        self.assertIn('window.scrollY >= 600', js)
         self.assertIn('window.scrollTo({ top: 0', js)
         for label in [">AI<", ">Tech<", ">PCDS 2030<", ">Startups<", ">Energy<", ">Events<"]:
             self.assertNotIn(label, html)

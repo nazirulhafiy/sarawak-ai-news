@@ -120,12 +120,18 @@ Behavior:
 - The masthead sticky state is driven by a passive scroll listener on `.bar`
   (independent of the category filter), so Home, About, and category pages all
   get the scrolled edge treatment.
-- A compact fixed `Back to top` control appears after 600 px of scrolling and
-  uses the active category filter palette permanently: black surface, white label,
-  and yellow arrow. It respects the reader's reduced-motion preference.
-  On screens up to 560 px wide it becomes a 40 px arrow-only control, using the
-  active filter's black surface and yellow accent while retaining its accessible
-  `Back to top` name.
+- A fixed `Back to top` control sits in the viewport's bottom-right corner (not
+  beside the content column). It appears after 600 px of scroll with a short
+  opacity/translate fade (~180 ms); `prefers-reduced-motion` disables that
+  motion. When hidden it is not focusable (`hidden`, `tabindex="-1"`,
+  `aria-hidden="true"`).
+- Desktop (wider than 560 px): text pill `Back to top ↑`, `24px` from the
+  viewport right and bottom edges.
+- Phone (560 px and below): icon-only ↑ on a `44×44` tap target, inset
+  `max(14px, env(safe-area-inset-*) + 14px)` from the right and bottom.
+- Both themes: `#111` chip, `#f7c948` label/arrow; light mode `1px` border
+  `#111`, dark mode `1px` border `#f7c948`. Focus: `3px` yellow ring, `2px`
+  offset. Click scrolls smoothly to the top (instant when reduced motion is on).
 
 The page still works as a readable feed without JavaScript.
 
