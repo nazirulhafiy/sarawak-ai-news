@@ -1049,7 +1049,8 @@ html[data-theme="dark"] .site-footer {
   .category-hero { scroll-margin-top: 76px; }
   .brand-lockup::after,
   .bar-rule-tail::after { bottom: -15px; }
-  .bar-rule-tail::after { right: -78px; }
+  .brand-lockup::after { left: calc(-1 * var(--page-gutter)); }
+  .bar-rule-tail::after { right: calc(-1 * var(--page-gutter)); }
   .brand { font-size: 16px; }
 
   .bar-rule-tail { order: 2; }
