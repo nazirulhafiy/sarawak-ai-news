@@ -23,9 +23,15 @@ The current direction is intentionally restrained:
   links, a theme toggle, compact desktop height, and a Sarawak-color rule.
   The sticky bar is a full-viewport outer shell (edge-to-edge background and
   scrolled bottom border/shadow) with an inner `max-width: 760px` wrapper that
-  keeps the wordmark, Home/About links, theme toggle, menu, and tri-colour
-  rule aligned to the reading column. The red segment anchors the wordmark;
-  yellow and black divide the remaining space on that content rail equally.
+  keeps the wordmark, Home/About links, theme toggle, and menu aligned to the
+  reading column. The tri-colour rule follows the same content rail on viewports
+  wider than `560px` (tablet and desktop): the red segment anchors the wordmark;
+  yellow and black divide the remaining space on that rail equally.   From
+  `560px` down (mobile), the rule extends edge to edge across the viewport:
+  the red segment offsets by the bar’s horizontal padding (`--page-gutter`),
+  and the yellow/black segment extends past the mobile theme and menu controls
+  to the right viewport edge while the bar background and scrolled shadow stay
+  full-bleed.
   The bar is `position: sticky; top: 0` with a solid page-colour background in
   light and dark mode so feed content scrolls beneath it. After any scroll,
   `site/app.js` toggles `.is-scrolled` for a thin bottom edge and subtle
