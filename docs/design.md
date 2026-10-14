@@ -21,14 +21,13 @@ The current direction is intentionally restrained:
 - Sarawak red, yellow, and black accents.
 - Refined top brand bar with a `16px` wordmark, compact `Home` and `About`
   links, a theme toggle, compact desktop height, and a Sarawak-color rule.
-  The sticky bar is a full-viewport outer shell (edge-to-edge background,
-  scrolled bottom border/shadow, and tri-colour rule) with an inner
-  `max-width: 760px` wrapper that keeps the wordmark, Home/About links, theme
-  toggle, and menu aligned to the reading column. The red segment anchors the
-  wordmark and extends to the left viewport edge; yellow and black divide the
-  remaining span to the right edge equally. The bar is
-  `position: sticky; top: 0` with a solid page-colour background in light and
-  dark mode so feed content scrolls beneath it. After any scroll,
+  The sticky bar is a full-viewport outer shell (edge-to-edge background and
+  scrolled bottom border/shadow) with an inner `max-width: 760px` wrapper that
+  keeps the wordmark, Home/About links, theme toggle, menu, and tri-colour
+  rule aligned to the reading column. The red segment anchors the wordmark;
+  yellow and black divide the remaining space on that content rail equally.
+  The bar is `position: sticky; top: 0` with a solid page-colour background in
+  light and dark mode so feed content scrolls beneath it. After any scroll,
   `site/app.js` toggles `.is-scrolled` for a thin bottom edge and subtle
   shadow. `html` uses `scroll-padding-top` and `overflow-x: clip`, and heroes
   use `scroll-margin-top`, so in-page anchors clear the sticky bar without a
