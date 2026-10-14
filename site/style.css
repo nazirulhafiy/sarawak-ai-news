@@ -1050,7 +1050,8 @@ html[data-theme="dark"] .site-footer {
   .brand-lockup::after,
   .bar-rule-tail::after { bottom: -15px; }
   .brand-lockup::after { left: calc(-1 * var(--page-gutter)); }
-  .bar-rule-tail::after { right: calc(-1 * var(--page-gutter)); }
+  /* Past theme toggle (36px), nav gap (6px), nav toggle (36px), and bar padding to viewport edge */
+  .bar-rule-tail::after { right: calc(-1 * var(--page-gutter) - 78px); }
   .brand { font-size: 16px; }
 
   .bar-rule-tail { order: 2; }

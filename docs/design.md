@@ -26,10 +26,11 @@ The current direction is intentionally restrained:
   keeps the wordmark, Home/About links, theme toggle, and menu aligned to the
   reading column. The tri-colour rule follows the same content rail on viewports
   wider than `560px` (tablet and desktop): the red segment anchors the wordmark;
-  yellow and black divide the remaining space on that rail equally. From
-  `560px` down (mobile), the rule extends edge to edge across the viewport by
-  offsetting the red and yellow/black segments with the bar’s horizontal
-  padding (`--page-gutter`) while the bar background and scrolled shadow stay
+  yellow and black divide the remaining space on that rail equally.   From
+  `560px` down (mobile), the rule extends edge to edge across the viewport:
+  the red segment offsets by the bar’s horizontal padding (`--page-gutter`),
+  and the yellow/black segment extends past the mobile theme and menu controls
+  to the right viewport edge while the bar background and scrolled shadow stay
   full-bleed.
   The bar is `position: sticky; top: 0` with a solid page-colour background in
   light and dark mode so feed content scrolls beneath it. After any scroll,
