@@ -429,7 +429,10 @@ class BuildTest(unittest.TestCase):
             html = page.read_text()
             self.assertEqual(html.count(beacon), 1, page.name)
             self.assertLess(html.index(beacon), html.index("</body>"))
-            self.assertNotIn("googletagmanager", html)
+            ga = build.render_ga_script()
+            self.assertEqual(html.count(ga), 1, page.name)
+            self.assertLess(html.index(ga), html.index("</head>"))
+            self.assertIn("G-RJ2ZFQ52J7", ga)
             self.assertNotIn("plausible.io", html)
             self.assertNotIn("umami", html)
         for name in ("index.html", "about.html"):

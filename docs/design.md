@@ -238,3 +238,9 @@ Recommended adjustments before moving Variant D into production:
   verify text fit carefully across common mobile widths.
 - The brief currently has no archive, item detail view, or persistent category
   URL state.
+
+## Analytics
+
+- Google Analytics 4: measurement ID `G-RJ2ZFQ52J7`, emitted in `<head>` of every page by `render_ga_script()` in `scripts/build.py`.
+- Cloudflare Web Analytics beacon (token `092a061973fc4d899cd2e4b52952af89`) stays before `</body>` via `render_analytics_script()`.
+- No Content-Security-Policy is set; if one is added, allow `www.googletagmanager.com`, `*.google-analytics.com` and `static.cloudflareinsights.com`.
