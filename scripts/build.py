@@ -53,6 +53,17 @@ CATEGORY_INTRODUCTIONS = {
 CLOUDFLARE_WEB_ANALYTICS_TOKEN = "092a061973fc4d899cd2e4b52952af89"
 
 
+GA_MEASUREMENT_ID = "G-RJ2ZFQ52J7"
+
+
+def render_ga_script() -> str:
+    return (
+        f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA_MEASUREMENT_ID}"></script>'
+        "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}"
+        f"gtag('js',new Date());gtag('config','{GA_MEASUREMENT_ID}');</script>"
+    )
+
+
 def render_analytics_script() -> str:
     beacon = json.dumps(
         {"token": CLOUDFLARE_WEB_ANALYTICS_TOKEN, "spa": True},
@@ -400,6 +411,7 @@ def render_index(items: list[dict]) -> str:
   <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
+  {render_ga_script()}
 </head>
 {render_compact_body(items)}
 </html>
@@ -458,6 +470,7 @@ def render_about() -> str:
   <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
+  {render_ga_script()}
 </head>
 {render_about_body()}
 </html>
@@ -519,6 +532,7 @@ def render_category(section: str, items: list[dict]) -> str:
   <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
+  {render_ga_script()}
 </head>
 {render_category_body(section, items)}
 </html>
