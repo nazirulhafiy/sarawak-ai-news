@@ -1601,5 +1601,24 @@
     "why_it_matters": "A named Kuching evening for Sarawakian women to build websites with AI adds a practical local skills pathway beyond awareness talks, with open Luma registration before the 28 November session.",
     "confidence": "high",
     "caveat": "Details verified against the organiser event page on 15 October 2026 (no article publication metadata). The page lists Sat, 28 Nov 2026, 6pm to 10pm, Fable Malaysia, Kuching; free; 60 seats; opening by Soh Wan Wei, Kimi AI Official Global Ambassador; registration at https://luma.com/hg6y7ftx. Participant selection, attendance and outcomes have not yet occurred."
+  },
+  {
+    "id": "dayakdaily-kuching-smart-city-ai-2026-10-15",
+    "date": "2026-10-15",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/rm550-mln-kuching-smart-city-project-to-boost-digital-infrastructure-ai-services/",
+    "title": "RM550m Kuching smart city MoU to back AI urban services",
+    "section": "Infrastructure",
+    "tags": [
+      "Kuching Smart City",
+      "MCMC",
+      "digital twin",
+      "Network Operations Centre",
+      "Greater Kuching"
+    ],
+    "summary": "The MCMC-Sarawak MoU for a RM550 million Kuching Smart City and Digital Connectivity project signals AI and data-driven urban services, a digital twin and a Network Operations Centre across Greater Kuching.",
+    "why_it_matters": "A dated federal-state MoU names AI and data-driven services, digital twin technology and a Network Operations Centre for Greater Kuching councils, moving smart-city talk into a funded MCMC-MPHLG delivery frame.",
+    "confidence": "high",
+    "caveat": "Publication date verified against the DayakDaily Oct 15, 2026 @ 14:40 byline and the matching English Borneo Post report the same day. The page says MCMC and MPHLG exchanged an MoU at DUS for the Kuching Smart City and Digital Connectivity project, valued at about RM550 million, covering Greater Kuching (DBKU, MBKS, MPP, MPKS) with AI and data-driven services, an integrated city platform, digital twin technology and a Network Operations Centre. Build timeline, operators and vendor stack are not stated."
   }
 ]
