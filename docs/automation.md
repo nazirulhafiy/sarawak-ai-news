@@ -230,6 +230,17 @@ opening speech), published even though the 3 May / 20 May campus plan was
 already on the site. Plain re-reports that add no new context stay under the
 normal duplicate rule.
 
+Organiser-requested stories: when an event organiser or company asks Nazirul
+to feature their event or announcement, it may be published from their own
+page (for example an event or registration site) as the source, with
+Nazirul's approval. The normal gates still apply: a Sarawak connection,
+central AI relevance, and support for every factual statement. Write it in
+news voice with a news-style headline (who is doing what, where), not the
+event's own title or marketing copy. Keep the organiser's own names and
+spellings for their programmes and communities, even when they look unusual.
+Precedent: 15 Oct 2026, ANCHR AI Labs' Digital Bloom night for Sarawakian
+women, requested by the organiser and linked to their event site.
+
 Every new item must contain:
 
 - `id`
