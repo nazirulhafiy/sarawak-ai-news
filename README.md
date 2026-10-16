@@ -8,6 +8,9 @@ This is an independent aggregator that tracks public news against that backdrop.
 
 **Read the live briefing:** [ai.sarawak.news](https://ai.sarawak.news/)
 
+The homepage hero headline is **Sarawak AI news, in one place.** (same text as the
+`<title>` and schema `CollectionPage` name).
+
 ## What You Will Find
 
 Sarawak AI News turns scattered public information into a short, easy-to-scan
@@ -43,3 +46,12 @@ No technical knowledge is required to read it.
 - **Keep it concise.** Summaries are original and intentionally short.
 - **Require source review.** Discovery results stay private until the original
   source has been checked and the item passes the editorial criteria.
+
+## Analytics
+
+Google Analytics 4 (`G-RJ2ZFQ52J7`) and [Cloudflare Web
+Analytics](https://developers.cloudflare.com/web-analytics/) are injected at
+build time (`render_ga_script()` in `<head>`,
+`render_analytics_script()` before `</body>` in `scripts/build.py`). The
+Cloudflare token is `092a061973fc4d899cd2e4b52952af89` (`spa: true` on the
+deferred `beacon.min.js` tag). See `docs/design.md` (Analytics).
