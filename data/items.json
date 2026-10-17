@@ -1620,5 +1620,24 @@
     "why_it_matters": "A dated federal-state MoU names AI and data-driven services, digital twin technology and a Network Operations Centre for Greater Kuching councils, moving smart-city talk into a funded MCMC-MPHLG delivery frame.",
     "confidence": "high",
     "caveat": "Publication date verified against the DayakDaily Oct 15, 2026 @ 14:40 byline and the matching English Borneo Post report the same day. The page says MCMC and MPHLG exchanged an MoU at DUS for the Kuching Smart City and Digital Connectivity project, valued at about RM550 million, covering Greater Kuching (DBKU, MBKS, MPP, MPKS) with AI and data-driven services, an integrated city platform, digital twin technology and a Network Operations Centre. Build timeline, operators and vendor stack are not stated."
+  },
+  {
+    "id": "borneopost-borneo-digital-capital-ai-fund-2026-10-16",
+    "date": "2026-10-16",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/10/16/borneo-digital-capital-launches-rm100-million-fund-rm15-million-reserved-so-far/",
+    "title": "Borneo Digital Capital launches RM100m fund for AI and smart city projects",
+    "section": "Infrastructure",
+    "tags": [
+      "Borneo Digital Capital",
+      "AI solutions",
+      "smart city",
+      "private equity",
+      "Kuching"
+    ],
+    "summary": "Borneo Digital Capital Fund PLT launched a RM100 million private equity fund in Kuching for Sarawak digital infrastructure, smart city and AI solutions, with about RM15 million already reserved.",
+    "why_it_matters": "A named Sarawak private equity fund that lists AI solutions as a core investment pillar puts local capital beside state smart-city and digital infrastructure plans.",
+    "confidence": "high",
+    "caveat": "Publication date verified against the Borneo Post byline (James Wong, October 16, 2026, Friday at 4:10 PM) and the English article body opened in-browser on 17 October 2026. Melvin Ong (general partner) said current projects sit in utility, AI and smart city sectors; the fund's three pillars are digital infrastructure, smart city and AI solutions, and digital enablement platforms. About RM15 million of the RM100 million is reserved. Specific portfolio companies, AI products and deployment timelines are not named."
   }
 ]
