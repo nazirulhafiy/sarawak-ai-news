@@ -1,6 +1,6 @@
 {
   "name": "sarawak",
-  "defaultUrl": "https://ai.sarawak.news",
+  "defaultUrl": "https://ai.sarawak.news/?internal=1",
   "outDir": "shots",
   "defaults": {
     "devices": ["phone"],

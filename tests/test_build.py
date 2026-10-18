@@ -409,15 +409,37 @@ class BuildTest(unittest.TestCase):
         self.assertTrue(deferred_about.exists())
         self.assertIn("About AI.Sarawak.News", deferred_about.read_text())
 
+    def test_ga_script_production_gate_and_internal_traffic(self):
+        ga = build.render_ga_script()
+        self.assertEqual(build.GA_MEASUREMENT_ID, "G-RJ2ZFQ52J7")
+        self.assertEqual(build.GA_PRODUCTION_HOSTS, ("ai.sarawak.news", "www.ai.sarawak.news"))
+        self.assertEqual(build.GA_INTERNAL_COOKIE, "sn_internal")
+        self.assertEqual(build.GA_INTERNAL_MAX_AGE_SECONDS, 365 * 24 * 60 * 60)
+        self.assertIn("ai.sarawak.news", ga)
+        self.assertIn("www.ai.sarawak.news", ga)
+        self.assertIn("G-RJ2ZFQ52J7", ga)
+        self.assertIn("sn_internal", ga)
+        self.assertIn("31536000", ga)
+        self.assertIn("get('internal')", ga)
+        self.assertIn("traffic_type", ga)
+        self.assertIn("'internal'", ga)
+        self.assertIn("createElement('script')", ga)
+        self.assertNotIn('<script async src="https://www.googletagmanager.com/gtag/js', ga)
+        self.assertIn("H.indexOf(location.hostname)<0", ga)
+
     def test_published_pages_include_cloudflare_web_analytics(self):
         beacon = build.render_analytics_script()
-        self.assertEqual(
-            beacon,
-            "<script defer src=\"https://static.cloudflareinsights.com/beacon.min.js\" "
-            "data-cf-beacon='{\"token\":\"092a061973fc4d899cd2e4b52952af89\",\"spa\":true}'></script>",
-        )
-        self.assertIn("092a061973fc4d899cd2e4b52952af89", beacon)
         self.assertEqual(build.CLOUDFLARE_WEB_ANALYTICS_TOKEN, "092a061973fc4d899cd2e4b52952af89")
+        self.assertIn("092a061973fc4d899cd2e4b52952af89", beacon)
+        self.assertIn("static.cloudflareinsights.com/beacon.min.js", beacon)
+        self.assertIn("sn_internal", beacon)
+        self.assertIn("ai.sarawak.news", beacon)
+        self.assertIn("H.indexOf(location.hostname)<0", beacon)
+        self.assertIn("createElement('script')", beacon)
+        self.assertNotIn(
+            '<script defer src="https://static.cloudflareinsights.com/beacon.min.js"',
+            beacon,
+        )
 
         subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT, text=True, capture_output=True, check=True)
         pages = [
@@ -433,6 +455,7 @@ class BuildTest(unittest.TestCase):
             self.assertEqual(html.count(ga), 1, page.name)
             self.assertLess(html.index(ga), html.index("</head>"))
             self.assertIn("G-RJ2ZFQ52J7", ga)
+            self.assertIn("traffic_type", ga)
             self.assertNotIn("plausible.io", html)
             self.assertNotIn("umami", html)
         for name in ("index.html", "about.html"):

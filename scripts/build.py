@@ -54,24 +54,65 @@ CLOUDFLARE_WEB_ANALYTICS_TOKEN = "092a061973fc4d899cd2e4b52952af89"
 
 
 GA_MEASUREMENT_ID = "G-RJ2ZFQ52J7"
+GA_PRODUCTION_HOSTS = ("ai.sarawak.news", "www.ai.sarawak.news")
+GA_INTERNAL_COOKIE = "sn_internal"
+GA_INTERNAL_MAX_AGE_SECONDS = 365 * 24 * 60 * 60  # ~1 year
 
 
 def render_ga_script() -> str:
+    """Emit production-only GA4 loader with optional internal traffic cookie.
+
+    Loads gtag only on GA_PRODUCTION_HOSTS. Query ``?internal=1`` sets a
+    long-lived first-party cookie; ``?internal=0`` clears it. While the cookie
+    is set, ``gtag('config', …)`` includes ``traffic_type: 'internal'``.
+    """
+    hosts_js = json.dumps(list(GA_PRODUCTION_HOSTS))
+    cookie_js = json.dumps(GA_INTERNAL_COOKIE)
+    id_js = json.dumps(GA_MEASUREMENT_ID)
+    max_age = GA_INTERNAL_MAX_AGE_SECONDS
     return (
-        f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA_MEASUREMENT_ID}"></script>'
-        "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}"
-        f"gtag('js',new Date());gtag('config','{GA_MEASUREMENT_ID}');</script>"
+        "<script>(function(){"
+        f"var H={hosts_js},C={cookie_js},M={id_js},A={max_age};"
+        "if(H.indexOf(location.hostname)<0)return;"
+        "var v=new URLSearchParams(location.search).get('internal');"
+        "if(v==='1')document.cookie=C+'=1;path=/;max-age='+A+';SameSite=Lax;Secure';"
+        "else if(v==='0')document.cookie=C+'=;path=/;max-age=0;SameSite=Lax;Secure';"
+        "var internal=document.cookie.split(';').some(function(p){return p.trim()===C+'=1';});"
+        "window.dataLayer=window.dataLayer||[];"
+        "function gtag(){dataLayer.push(arguments);}window.gtag=gtag;"
+        "var s=document.createElement('script');s.async=true;"
+        "s.src='https://www.googletagmanager.com/gtag/js?id='+M;"
+        "document.head.appendChild(s);"
+        "gtag('js',new Date());"
+        "var cfg={};if(internal)cfg.traffic_type='internal';"
+        "gtag('config',M,cfg);"
+        "})();</script>"
     )
 
 
 def render_analytics_script() -> str:
+    """Emit Cloudflare Web Analytics beacon, gated like GA4.
+
+    Loads ``beacon.min.js`` only on ``GA_PRODUCTION_HOSTS`` and only when the
+    ``sn_internal`` cookie (set via ``?internal=1`` in ``render_ga_script``) is
+    absent, so agent/test visits are not counted in Cloudflare either.
+    """
     beacon = json.dumps(
         {"token": CLOUDFLARE_WEB_ANALYTICS_TOKEN, "spa": True},
         separators=(",", ":"),
     )
+    hosts_js = json.dumps(list(GA_PRODUCTION_HOSTS))
+    cookie_js = json.dumps(GA_INTERNAL_COOKIE)
     return (
-        '<script defer src="https://static.cloudflareinsights.com/beacon.min.js" '
-        f"data-cf-beacon='{beacon}'></script>"
+        "<script>(function(){"
+        f"var H={hosts_js},C={cookie_js};"
+        "if(H.indexOf(location.hostname)<0)return;"
+        "if(document.cookie.split(';').some(function(p){return p.trim()===C+'=1';}))return;"
+        "var s=document.createElement('script');s.defer=true;"
+        "s.src='https://static.cloudflareinsights.com/beacon.min.js';"
+        f"s.setAttribute('data-cf-beacon','{beacon}');"
+        "document.body.appendChild(s);"
+        "})();</script>"
     )
 
 
