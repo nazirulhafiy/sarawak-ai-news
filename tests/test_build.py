@@ -92,7 +92,17 @@ class BuildTest(unittest.TestCase):
         expected_items = len(json.loads((ROOT / "data" / "items.json").read_text()))
         self.assertIn('<header class="bar">', html)
         self.assertIn('<div class="bar-inner">', html)
-        self.assertIn('<span class="brand-lockup"><a class="brand" href="/">AI.Sarawak.News</a></span>', html)
+        self.assertIn(
+            '<span class="brand-lockup"><a class="brand" href="/">'
+            '<img class="brand-mark brand-mark-light" src="icons/nav-mark-transparent.svg" alt="" width="220" height="220" decoding="async" aria-hidden="true" />'
+            '<img class="brand-mark brand-mark-dark" src="icons/nav-mark-transparent-dark.svg" alt="" width="220" height="220" decoding="async" aria-hidden="true" />'
+            '<span class="brand-text">AI.Sarawak.News</span></a></span>',
+            html,
+        )
+        self.assertTrue((ROOT / "dist" / "icons" / "nav-mark-transparent.svg").is_file())
+        self.assertTrue((ROOT / "dist" / "icons" / "nav-mark-transparent-dark.svg").is_file())
+        self.assertIn(".brand-mark", css)
+        self.assertIn("white-space: nowrap", css)
         self.assertIn('<nav class="site-nav" id="primary-navigation" aria-label="Primary">', html)
         self.assertIn('<a class="site-nav-link is-active" aria-current="page" href="/">Home</a>', html)
         self.assertIn('<a class="site-nav-link" href="about.html">About</a>', html)
