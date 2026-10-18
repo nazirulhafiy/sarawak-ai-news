@@ -179,9 +179,12 @@ a scrolled shadow so story content does not show through. The About page moves
 fuller publication context off the already wordy homepage while keeping the first
 screen focused on the live brief.
 
-The About page uses the same restrained system: a clear opening statement and
-short sections for purpose, coverage, and workflow. It keeps the explanation
+The About page uses the same restrained system: the hero opens on the
+“About AI.Sarawak.News” heading (no eyebrow label), then a short lede and
+sections for purpose, coverage, and workflow. It keeps the explanation
 closer to the editorial feed instead of adding dashboard-like metrics or pills.
+Category topic pages still use the shared `.about-eyebrow` label above their
+headings.
 
 Each story card currently shows date, source, category, title, and summary. Its
 category label exactly matches the corresponding browse filter. On phone-width

@@ -330,7 +330,6 @@ def render_about_body() -> str:
 
   <main id="content" class="about-page">
     <header class="about-hero">
-      <p class="about-eyebrow">About the brief</p>
       <h1>About AI.Sarawak.News</h1>
       <p class="about-lede">An independent, source-linked briefing about how artificial intelligence and digital change are affecting Sarawak.</p>
     </header>
