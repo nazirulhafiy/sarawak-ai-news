@@ -48,7 +48,14 @@ check new or date-relevant records on ordinary pushes and pull requests, while a
 manual workflow run keeps the full-audit path. Live source checks may warn when
 a selected source is temporarily unavailable.
 
-For every screenshot, use `tools/shots.mjs` (3× phone, cropped to the change, light and dark). Default URL, crop, themes, and output directory come from `tools/shots.config.json` (see `docs/screenshots.md`).
+For every screenshot, use `tools/shots.mjs` (3× phone, cropped to the change, light and dark). Default URL, crop, themes, and output directory come from `tools/shots.config.json` (see `docs/screenshots.md`). When capturing or opening the **live** site, use `https://ai.sarawak.news/?internal=1` so GA4 marks the session as internal traffic (default in `tools/shots.config.json`).
+
+## Analytics (GA4)
+
+- Measurement ID: `G-RJ2ZFQ52J7` (see `render_ga_script()` in `scripts/build.py`).
+- GA loads only on production hostnames `ai.sarawak.news` and `www.ai.sarawak.news`. It does not load on localhost, `*.pages.dev`, `*.github.io`, `*.vercel.app`, or other hosts.
+- `?internal=1` sets cookie `sn_internal` (~1 year); `?internal=0` clears it. While set, gtag config includes `traffic_type: 'internal'`.
+- Daily agents and screenshot checks that hit the live site must open it with `?internal=1`.
 
 ## Useful Commands
 

@@ -409,6 +409,24 @@ class BuildTest(unittest.TestCase):
         self.assertTrue(deferred_about.exists())
         self.assertIn("About AI.Sarawak.News", deferred_about.read_text())
 
+    def test_ga_script_production_gate_and_internal_traffic(self):
+        ga = build.render_ga_script()
+        self.assertEqual(build.GA_MEASUREMENT_ID, "G-RJ2ZFQ52J7")
+        self.assertEqual(build.GA_PRODUCTION_HOSTS, ("ai.sarawak.news", "www.ai.sarawak.news"))
+        self.assertEqual(build.GA_INTERNAL_COOKIE, "sn_internal")
+        self.assertEqual(build.GA_INTERNAL_MAX_AGE_SECONDS, 365 * 24 * 60 * 60)
+        self.assertIn("ai.sarawak.news", ga)
+        self.assertIn("www.ai.sarawak.news", ga)
+        self.assertIn("G-RJ2ZFQ52J7", ga)
+        self.assertIn("sn_internal", ga)
+        self.assertIn("31536000", ga)
+        self.assertIn("get('internal')", ga)
+        self.assertIn("traffic_type", ga)
+        self.assertIn("'internal'", ga)
+        self.assertIn("createElement('script')", ga)
+        self.assertNotIn('<script async src="https://www.googletagmanager.com/gtag/js', ga)
+        self.assertIn("H.indexOf(location.hostname)<0", ga)
+
     def test_published_pages_include_cloudflare_web_analytics(self):
         beacon = build.render_analytics_script()
         self.assertEqual(
@@ -433,6 +451,7 @@ class BuildTest(unittest.TestCase):
             self.assertEqual(html.count(ga), 1, page.name)
             self.assertLess(html.index(ga), html.index("</head>"))
             self.assertIn("G-RJ2ZFQ52J7", ga)
+            self.assertIn("traffic_type", ga)
             self.assertNotIn("plausible.io", html)
             self.assertNotIn("umami", html)
         for name in ("index.html", "about.html"):

@@ -52,6 +52,9 @@ No technical knowledge is required to read it.
 Google Analytics 4 (`G-RJ2ZFQ52J7`) and [Cloudflare Web
 Analytics](https://developers.cloudflare.com/web-analytics/) are injected at
 build time (`render_ga_script()` in `<head>`,
-`render_analytics_script()` before `</body>` in `scripts/build.py`). The
-Cloudflare token is `092a061973fc4d899cd2e4b52952af89` (`spa: true` on the
-deferred `beacon.min.js` tag). See `docs/design.md` (Analytics).
+`render_analytics_script()` before `</body>` in `scripts/build.py`). GA loads
+only on `ai.sarawak.news` / `www.ai.sarawak.news`. On those hosts,
+`?internal=1` sets a long-lived `sn_internal` cookie so gtag sends
+`traffic_type: 'internal'`; `?internal=0` clears it. The Cloudflare token is
+`092a061973fc4d899cd2e4b52952af89` (`spa: true` on the deferred `beacon.min.js`
+tag). See `docs/design.md` (Analytics).

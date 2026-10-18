@@ -20,7 +20,7 @@ Set `CHROME_PATH` if Chrome is not on the default path.
 
 | Field | Purpose |
 |-------|---------|
-| `defaultUrl` | Target when `--url` is omitted (e.g. `https://ai.sarawak.news`) |
+| `defaultUrl` | Target when `--url` is omitted (live site with `?internal=1` so GA4 marks agent traffic as internal) |
 | `outDir` | Default `--out` directory (`shots/`, gitignored) |
 | `name` | Default filename prefix |
 | `defaults.devices` / `defaults.themes` | Default `--devices` and `--themes` |
@@ -42,7 +42,7 @@ node tools/shots.mjs --out /tmp/shots
 Explicit URL and options:
 
 ```bash
-node tools/shots.mjs --url https://ai.sarawak.news --out /tmp/shots \
+node tools/shots.mjs --url 'https://ai.sarawak.news/?internal=1' --out /tmp/shots \
   --name sarawak --crop '[data-category-filter]' --pad 24 \
   --themes light,dark --devices phone
 ```
