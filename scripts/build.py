@@ -32,8 +32,8 @@ SEO_DESCRIPTION = (
     "research, infrastructure and business."
 )
 SITE_INTRODUCTION = (
-    "AI.Sarawak.News tracks artificial intelligence developments across Sarawak, "
-    "bringing Sarawak AI policy, projects, research and adoption into one source-linked brief."
+    "Tracking artificial intelligence developments across Sarawak, bringing AI "
+    "policy, projects, research and adoption into one source-linked brief."
 )
 BRIEF_NET_SVG = (ROOT / "site" / "brief-net.svg").read_text(encoding="utf-8").strip()
 ABOUT_SEO_TITLE = "About | AI.Sarawak.News"
