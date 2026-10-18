@@ -21,6 +21,15 @@ The current direction is intentionally restrained:
 - Sarawak red, yellow, and black accents.
 - Refined top brand bar with a `16px` wordmark, compact `Home` and `About`
   links, a theme toggle, compact desktop height, and a Sarawak-color rule.
+  The home link (`.brand`) starts with Design Bot’s origami line hornbill
+  (`#snnav` / hub `#snnav`), then “AI.Sarawak.News”, with a small gap. Sources
+  are `site/icons/nav-mark-transparent.svg` (light) and
+  `site/icons/nav-mark-transparent-dark.svg` (dark; transparent, no `#111`
+  square), copied byte-for-byte from hub `main`. The build copies both to
+  `dist/icons/`. Images use `alt=""` and `aria-hidden`; the text labels the
+  link. Mark height matches the wordmark line (`1.15em`). The brand stays on
+  one line (`white-space: nowrap`) down to 375px. SVGs are used as supplied —
+  no recolouring. Favicon and footer brand text are unchanged.
   The sticky bar is a full-viewport outer shell (edge-to-edge background and
   scrolled bottom border/shadow) with an inner `max-width: 760px` wrapper that
   keeps the wordmark, Home/About links, theme toggle, and menu aligned to the

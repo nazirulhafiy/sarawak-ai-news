@@ -228,7 +228,7 @@ def render_site_header(active_page: str) -> str:
     return f"""
   <header class="bar">
     <div class="bar-inner">
-      <span class="brand-lockup"><a class="brand" href="/">AI.Sarawak.News</a></span>
+      <span class="brand-lockup"><a class="brand" href="/"><img class="brand-mark brand-mark-light" src="icons/nav-mark-transparent.svg" alt="" width="220" height="220" decoding="async" aria-hidden="true" /><img class="brand-mark brand-mark-dark" src="icons/nav-mark-transparent-dark.svg" alt="" width="220" height="220" decoding="async" aria-hidden="true" /><span class="brand-text">AI.Sarawak.News</span></a></span>
       <nav class="site-nav" id="primary-navigation" aria-label="Primary">
         <a{home_current} href="/">Home</a>
         <a{about_current} href="about.html">About</a>
@@ -591,6 +591,16 @@ def copy_site_fonts() -> None:
     shutil.copy2(license_file, target / license_file.name)
 
 
+def copy_nav_marks() -> None:
+    icons_dist = DIST / "icons"
+    icons_dist.mkdir(exist_ok=True)
+    for mark_name in ("nav-mark-transparent.svg", "nav-mark-transparent-dark.svg"):
+        mark_src = ROOT / "site" / "icons" / mark_name
+        if not mark_src.is_file():
+            raise SystemExit(f"missing nav mark {mark_src.relative_to(ROOT)}")
+        shutil.copy2(mark_src, icons_dist / mark_name)
+
+
 def build() -> None:
     items = load_feed_items()
     sitemap_lastmod = last_updated(items)[0]
@@ -610,6 +620,7 @@ def build() -> None:
     (DIST / "app.js").write_text((ROOT / "site" / "app.js").read_text(encoding="utf-8"), encoding="utf-8")
     shutil.copy2(ROOT / "site" / "social-card.png", DIST / "social-card.png")
     copy_site_fonts()
+    copy_nav_marks()
     (DIST / "items.json").write_text(json.dumps(items, indent=2), encoding="utf-8")
     (DIST / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://ai.sarawak.news/sitemap.xml\n", encoding="utf-8")
     sitemap_urls = [SITE_URL, f"{SITE_URL}about.html"] + [
