@@ -20,7 +20,7 @@ Set `CHROME_PATH` if Chrome is not on the default path.
 
 | Field | Purpose |
 |-------|---------|
-| `defaultUrl` | Target when `--url` is omitted (live site with `?internal=1` so GA4 marks agent traffic as internal) |
+| `defaultUrl` | Target when `--url` is omitted (live site with `?internal=1` so GA4 marks agent traffic as internal and the Cloudflare beacon is skipped) |
 | `outDir` | Default `--out` directory (`shots/`, gitignored) |
 | `name` | Default filename prefix |
 | `defaults.devices` / `defaults.themes` | Default `--devices` and `--themes` |

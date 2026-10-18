@@ -429,13 +429,17 @@ class BuildTest(unittest.TestCase):
 
     def test_published_pages_include_cloudflare_web_analytics(self):
         beacon = build.render_analytics_script()
-        self.assertEqual(
-            beacon,
-            "<script defer src=\"https://static.cloudflareinsights.com/beacon.min.js\" "
-            "data-cf-beacon='{\"token\":\"092a061973fc4d899cd2e4b52952af89\",\"spa\":true}'></script>",
-        )
-        self.assertIn("092a061973fc4d899cd2e4b52952af89", beacon)
         self.assertEqual(build.CLOUDFLARE_WEB_ANALYTICS_TOKEN, "092a061973fc4d899cd2e4b52952af89")
+        self.assertIn("092a061973fc4d899cd2e4b52952af89", beacon)
+        self.assertIn("static.cloudflareinsights.com/beacon.min.js", beacon)
+        self.assertIn("sn_internal", beacon)
+        self.assertIn("ai.sarawak.news", beacon)
+        self.assertIn("H.indexOf(location.hostname)<0", beacon)
+        self.assertIn("createElement('script')", beacon)
+        self.assertNotIn(
+            '<script defer src="https://static.cloudflareinsights.com/beacon.min.js"',
+            beacon,
+        )
 
         subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT, text=True, capture_output=True, check=True)
         pages = [

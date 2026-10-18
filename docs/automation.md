@@ -276,7 +276,8 @@ When at least one story qualifies, the Cloud Agent must:
    exact viewport, DOM, screenshot, or console check. Record the reason.
    When opening or screenshotting the **live** site (not local `dist/`), use
    `https://ai.sarawak.news/?internal=1` so GA4 marks the session as internal
-   traffic (see `AGENTS.md` Analytics and `tools/shots.config.json`).
+   and the Cloudflare Web Analytics beacon is skipped (see `AGENTS.md`
+   Analytics and `tools/shots.config.json`).
 10. Confirm that public cards expose no internal editorial metadata.
 11. Run `git diff --check`.
 12. Inspect the final diff and staged paths.

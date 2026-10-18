@@ -83,7 +83,7 @@ Run this stage only after Stage A produced a valid non-empty manifest.
 5. Change only `README.md`, `data/items.json`, and `data/site.json`.
 6. Complete every required command and browser check in the contract.
    When opening or screenshotting the live site, use
-   `https://ai.sarawak.news/?internal=1` (GA4 internal traffic cookie).
+   `https://ai.sarawak.news/?internal=1` (GA4 internal + skip Cloudflare beacon).
 7. If no candidate qualifies, make no changes, commit, or push.
 8. Publish only in the supplied publication mode and only after all checks
    pass.

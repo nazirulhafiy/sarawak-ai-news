@@ -255,11 +255,14 @@ after a local build). Each HTML document includes:
   cookie `sn_internal=1` (`path=/`, `max-age=31536000` ≈ 1 year, `SameSite=Lax`,
   `Secure`). `?internal=0` clears it. While the cookie is present,
   `gtag('config', …)` sends `traffic_type: 'internal'` for GA4 internal-traffic
-  filtering. Agents and screenshot checks should open the live site with
+  filtering, and the Cloudflare Web Analytics beacon is not loaded. Agents and
+  screenshot checks should open the live site with
   `https://ai.sarawak.news/?internal=1` (see `AGENTS.md` and
   `tools/shots.config.json`).
-- Cloudflare Web Analytics: deferred `beacon.min.js` from
-  `static.cloudflareinsights.com` before `</body>` via `render_analytics_script()`,
-  with `data-cf-beacon` token `092a061973fc4d899cd2e4b52952af89` and `"spa": true`.
+- Cloudflare Web Analytics: injected before `</body>` via
+  `render_analytics_script()`. The inline snippet loads deferred
+  `beacon.min.js` from `static.cloudflareinsights.com` only on the same
+  production hostnames as GA, and only when `sn_internal` is absent, with
+  `data-cf-beacon` token `092a061973fc4d899cd2e4b52952af89` and `"spa": true`.
 
 - No Content-Security-Policy is set; if one is added, allow `www.googletagmanager.com`, `*.google-analytics.com` and `static.cloudflareinsights.com`.

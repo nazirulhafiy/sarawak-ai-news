@@ -20,6 +20,6 @@ For a Maintainer Bot-launched daily Cloud Agent run:
 - Modify and stage only `README.md`, `data/items.json`, and `data/site.json`.
 - Run all tests, audits, build, browser checks, and Git checks in the contract.
 - When opening or screenshotting the live site, use
-  `https://ai.sarawak.news/?internal=1` (GA4 internal traffic).
+  `https://ai.sarawak.news/?internal=1` (GA4 internal + skip Cloudflare beacon).
 - Publish nothing when no story qualifies or any check is incomplete.
 - Verify the remote Git hash before reporting success.

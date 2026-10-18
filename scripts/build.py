@@ -91,13 +91,28 @@ def render_ga_script() -> str:
 
 
 def render_analytics_script() -> str:
+    """Emit Cloudflare Web Analytics beacon, gated like GA4.
+
+    Loads ``beacon.min.js`` only on ``GA_PRODUCTION_HOSTS`` and only when the
+    ``sn_internal`` cookie (set via ``?internal=1`` in ``render_ga_script``) is
+    absent, so agent/test visits are not counted in Cloudflare either.
+    """
     beacon = json.dumps(
         {"token": CLOUDFLARE_WEB_ANALYTICS_TOKEN, "spa": True},
         separators=(",", ":"),
     )
+    hosts_js = json.dumps(list(GA_PRODUCTION_HOSTS))
+    cookie_js = json.dumps(GA_INTERNAL_COOKIE)
     return (
-        '<script defer src="https://static.cloudflareinsights.com/beacon.min.js" '
-        f"data-cf-beacon='{beacon}'></script>"
+        "<script>(function(){"
+        f"var H={hosts_js},C={cookie_js};"
+        "if(H.indexOf(location.hostname)<0)return;"
+        "if(document.cookie.split(';').some(function(p){return p.trim()===C+'=1';}))return;"
+        "var s=document.createElement('script');s.defer=true;"
+        "s.src='https://static.cloudflareinsights.com/beacon.min.js';"
+        f"s.setAttribute('data-cf-beacon','{beacon}');"
+        "document.body.appendChild(s);"
+        "})();</script>"
     )
 
 
