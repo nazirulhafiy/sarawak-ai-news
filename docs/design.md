@@ -172,7 +172,7 @@ Homepage hierarchy:
 
 1. Brand and `Home`/`About` navigation.
 2. Hero headline: `Sarawak AI news, in one place.`
-3. Short introduction covering Sarawak AI policy, projects, research, and adoption.
+3. Brief deck (`p.brief-deck`, max-width `600px`): `Tracking artificial intelligence developments across Sarawak, bringing AI policy, projects, research and adoption into one source-linked brief.`
 4. Last updated weekday and date.
 5. Category filters.
 6. Ranked story cards.
