@@ -334,8 +334,7 @@ def render_about_body() -> str:
 
     <section class="about-section" aria-labelledby="about-method-title">
       <h2 id="about-method-title">How stories are picked and checked</h2>
-      <p>Every day at 10 AM Malaysia time, a scan checks public news and official pages for Sarawak AI developments.</p>
-      <p>Approved items get a short original summary and a link to the source.</p>
+      <p>Every day at 10 AM Malaysia time, a scan checks public news and official pages for Sarawak AI developments. Approved items get a short original summary and a link to the source.</p>
     </section>
 
     <section class="about-section" aria-labelledby="about-contact-title">
