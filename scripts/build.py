@@ -38,8 +38,8 @@ SITE_INTRODUCTION = (
 BRIEF_NET_SVG = (ROOT / "site" / "brief-net.svg").read_text(encoding="utf-8").strip()
 ABOUT_SEO_TITLE = "About AI.Sarawak.News | Sarawak AI News"
 ABOUT_SEO_DESCRIPTION = (
-    "What AI.Sarawak.News covers, how each Sarawak AI story is checked against "
-    "its original source, and how often the brief is updated."
+    "What AI.Sarawak.News covers and how each Sarawak AI story is checked "
+    "against its original source."
 )
 CLOUDFLARE_WEB_ANALYTICS_TOKEN = "092a061973fc4d899cd2e4b52952af89"
 
@@ -315,7 +315,7 @@ def render_about_body() -> str:
 
     <section class="about-section" aria-labelledby="about-why-title">
       <h2 id="about-why-title">Why Sarawak AI</h2>
-      <p>Sarawak has set a target to become Malaysia's leading AI hub by 2027, as part of its push toward a developed, high-income state by 2030. Announcements about plans, platforms, partnerships, training and investment now arrive almost every week. This brief helps the public, policymakers, researchers, educators, journalists and business owners keep track of them without needing a technical background.</p>
+      <p>Sarawak has set a target to become Malaysia's leading AI hub by 2027, as part of its push toward a developed, high-income state by 2030. Announcements about plans, platforms, partnerships, training and investment now arrive almost every week. This brief helps Sarawakians in general to keep track of them.</p>
     </section>
 
     <section class="about-section" aria-labelledby="about-coverage-title">
@@ -335,18 +335,12 @@ def render_about_body() -> str:
     <section class="about-section" aria-labelledby="about-method-title">
       <h2 id="about-method-title">How stories are picked and checked</h2>
       <p>Every day at 10 AM Malaysia time, a scan checks public news and official pages for Sarawak AI developments.</p>
-      <p>A story is published only when it is in English, has a clear Sarawak connection, puts AI at the centre of the news (not a passing mention), and is supported by the original source. Purely promotional pages are left out.</p>
-      <p>Approved items get a short original summary and a link to the source. We never republish full articles.</p>
-    </section>
-
-    <section class="about-section" aria-labelledby="about-cadence-title">
-      <h2 id="about-cadence-title">How often it updates</h2>
-      <p>The scan runs daily, but a story is only added when it passes every check, so some days bring nothing new. The "Last updated" date on the homepage shows the date of the newest story.</p>
+      <p>Approved items get a short original summary and a link to the source.</p>
     </section>
 
     <section class="about-section" aria-labelledby="about-contact-title">
       <h2 id="about-contact-title">Contact</h2>
-      <p>To get in touch, visit <a href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>.</p>
+      <p><a href="mailto:contact@sarawak.news">contact@sarawak.news</a></p>
     </section>
 
   </main>

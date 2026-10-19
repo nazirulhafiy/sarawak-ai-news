@@ -192,8 +192,8 @@ screen focused on the live brief.
 The About page uses the same restrained system: the hero opens on the
 “About AI.Sarawak.News” heading (no eyebrow label), then a short lede and
 sections for why Sarawak AI, coverage categories (tags, not separate pages),
-how stories are picked and checked (short plain-language gate), update cadence,
-and contact (link to hafiy.my; no email). It keeps the explanation closer to the
+how stories are picked and checked (short scan + summary note), and contact
+(`mailto:contact@sarawak.news` only). It keeps the explanation closer to the
 editorial feed instead of adding dashboard-like metrics or pills.
 
 Each story card currently shows date, source, category, title, and summary. Its
