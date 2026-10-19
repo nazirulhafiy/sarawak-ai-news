@@ -36,7 +36,7 @@ maintenance task.
 
 Maintainer Bot is the coordinator. It must:
 
-1. Run daily in the `Asia/Kuching` time zone.
+1. Run daily at 10:00 `Asia/Kuching` (MYT).
 2. Own the durable private screened-URL ledger outside the public repository.
 3. Read the latest contract from `origin/main` before it starts a run.
 4. If it keeps a working copy, refresh that copy to `origin/main` before

@@ -24,32 +24,23 @@ SECTION_FILTERS = (
 SITE_URL = "https://ai.sarawak.news/"
 SITE_NAME = "AI.Sarawak.News"
 SOCIAL_CARD_URL = f"{SITE_URL}social-card.png"
-SEO_TITLE = "Sarawak AI news, in one place."
+SEO_TITLE = "Sarawak AI News | AI.Sarawak.News"
 # Homepage social card title (tab title stays SEO_TITLE).
 HOMEPAGE_OG_TITLE = "AI.Sarawak.News"
 SEO_DESCRIPTION = (
-    "Source-linked coverage across policy, public services, education, workforce, "
-    "research, infrastructure and business."
+    "Sarawak AI news in one place: reviewed, source-linked updates on AI policy, "
+    "public services, education, workforce, research, infrastructure and business."
 )
 SITE_INTRODUCTION = (
     "Tracking artificial intelligence developments across Sarawak, bringing AI "
     "policy, projects, research and adoption into one source-linked brief."
 )
 BRIEF_NET_SVG = (ROOT / "site" / "brief-net.svg").read_text(encoding="utf-8").strip()
-ABOUT_SEO_TITLE = "About | AI.Sarawak.News"
+ABOUT_SEO_TITLE = "About AI.Sarawak.News | Sarawak AI News"
 ABOUT_SEO_DESCRIPTION = (
-    "Learn how AI.Sarawak.News reviews and links Sarawak AI news, policy, projects, "
-    "research and adoption."
+    "Who runs AI.Sarawak.News, which Sarawak AI topics it covers, how each story "
+    "is checked against its original source, and how often the brief is updated."
 )
-CATEGORY_INTRODUCTIONS = {
-    "Policy": "Track Sarawak AI policy, governance, plans and public decisions that shape responsible adoption across the state.",
-    "Public Services": "Follow practical uses of AI in Sarawak public services, including health, local government, safety and citizen support.",
-    "Education": "Read Sarawak AI education updates about schools, colleges, learning programmes and student projects.",
-    "Workforce": "Follow Sarawak AI workforce developments, including skills programmes, professional training and career readiness.",
-    "Research": "Track Sarawak AI research, university partnerships and scientific work with a clear connection to the state.",
-    "Infrastructure": "Follow Sarawak AI infrastructure, including compute, data centres, connectivity and sovereign technology projects.",
-    "Business": "Read Sarawak AI business updates about adoption, entrepreneurship, investment and industry capability.",
-}
 CLOUDFLARE_WEB_ANALYTICS_TOKEN = "092a061973fc4d899cd2e4b52952af89"
 
 
@@ -257,14 +248,6 @@ def render_site_header(active_page: str) -> str:
 def render_site_footer(active_page: str) -> str:
     home_current = ' aria-current="page"' if active_page == "home" else ""
     about_current = ' aria-current="page"' if active_page == "about" else ""
-    topic_link_rows = []
-    for section in SECTION_FILTERS:
-        section_slug = slug(section)
-        current = ' aria-current="page"' if active_page == section_slug else ""
-        topic_link_rows.append(
-            f'          <li><a class="site-footer-link" href="/{section_slug}.html"{current}>{esc(section)}</a></li>'
-        )
-    topic_links = "\n".join(topic_link_rows)
     return f"""
   <footer class="site-footer">
     <div class="site-footer-main">
@@ -277,10 +260,6 @@ def render_site_footer(active_page: str) -> str:
         <ul>
           <li><a class="site-footer-link" href="/"{home_current}>Home</a></li>
           <li><a class="site-footer-link" href="about.html"{about_current}>About</a></li>
-        </ul>
-        <h2 class="site-footer-categories-title">Categories</h2>
-        <ul>
-{topic_links}
         </ul>
       </nav>
     </div>
@@ -334,56 +313,58 @@ def render_about_body() -> str:
       <p class="about-lede">An independent, source-linked briefing about how artificial intelligence and digital change are affecting Sarawak.</p>
     </header>
 
-    <section class="about-section" aria-labelledby="about-purpose-title">
-      <h2 id="about-purpose-title">What this site does</h2>
-      <p>AI.Sarawak.News brings reviewed public reporting into one concise feed. Each story links to its original source and adds a short summary of the Sarawak AI signal, so readers can scan what changed without losing the source behind it.</p>
+    <section class="about-section" aria-labelledby="about-who-title">
+      <h2 id="about-who-title">Who runs it</h2>
+      <p>AI.Sarawak.News is an independent publication run by Nazirul Hafiy (<a href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>). It is not affiliated with the Sarawak Government. The site started in June 2026 as a small working prototype. It tests a simple idea: Sarawak AI news is spread across many outlets and official pages, and readers benefit from one short brief that always shows where each story came from.</p>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-why-title">
+      <h2 id="about-why-title">Why Sarawak AI</h2>
+      <p>Sarawak has set a target to become Malaysia's leading AI hub by 2027, as part of its push toward a developed, high-income state by 2030. Announcements about plans, platforms, partnerships, training and investment now arrive almost every week. This brief helps the public, policymakers, researchers, educators, journalists and business owners keep track of them without needing a technical background.</p>
     </section>
 
     <section class="about-section" aria-labelledby="about-coverage-title">
       <h2 id="about-coverage-title">What we cover</h2>
-      <p>The brief follows AI policy, public services, education, workforce readiness, research, infrastructure and business across Sarawak.</p>
+      <p>Every story is tagged with one of seven categories:</p>
+      <ul class="about-category-list">
+        <li><strong>Policy:</strong> plans, laws, governance and public decisions about AI.</li>
+        <li><strong>Public Services:</strong> AI used by agencies, councils and health services.</li>
+        <li><strong>Education:</strong> AI in schools, colleges, universities and student projects.</li>
+        <li><strong>Workforce:</strong> skills, training and talent programmes.</li>
+        <li><strong>Research:</strong> university and industry research with a clear Sarawak link.</li>
+        <li><strong>Infrastructure:</strong> compute, data centres, connectivity and sovereign AI projects.</li>
+        <li><strong>Business:</strong> adoption, start-ups, investment and industry capability.</li>
+      </ul>
     </section>
 
     <section class="about-section" aria-labelledby="about-method-title">
-      <h2 id="about-method-title">How stories are selected</h2>
+      <h2 id="about-method-title">How stories are picked and checked</h2>
+      <p>Every day at 10 AM Malaysia time, a scan checks a fixed list of public sources. The list includes The Borneo Post, DayakDaily, Sarawak Tribune, The Star, Bernama, The Malaysian Reserve, TVS, New Straits Times, Malay Mail, Free Malaysia Today, Digital News Asia and The Edge Malaysia. It also covers official and university pages such as UKAS, the Sarawak Multimedia Authority, SAINS, SDEC, Swinburne Sarawak and UNIMAS. Being on the list is not an endorsement.</p>
+      <p>Each possible story is opened at its original page and must pass every check before it is published:</p>
       <ol class="about-steps">
-        <li><strong>Find the signal.</strong> Public sources are checked for developments with a clear Sarawak and AI or digital-economy connection.</li>
-        <li><strong>Verify the source.</strong> Candidate links are opened at the original publication and checked for date, context and relevance.</li>
-        <li><strong>Keep the brief concise.</strong> Approved stories receive an original, source-attributed summary. Full article bodies are not republished.</li>
+        <li>The headline and article are in English.</li>
+        <li>The story has a real Sarawak connection.</li>
+        <li>AI is central to it. That means a named AI system or platform, a clear technical use, or a defined role for a body such as the Sarawak Artificial Intelligence Centre (SAIC). AI being one word in a long speech does not count.</li>
+        <li>The source supports every statement in our summary.</li>
+        <li>It is a new development, not a repeat of one already covered.</li>
+        <li>It has enough substance to be worth a story. Purely promotional pages are rejected.</li>
       </ol>
+      <p>Approved stories get a short, original one-sentence summary, a date, a source and a category. We never republish full articles, and every story links to its original source so you can read the full report there.</p>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-cadence-title">
+      <h2 id="about-cadence-title">How often it updates</h2>
+      <p>The scan runs daily, but a story is only added when it passes every check, so some days bring nothing new. The "Last updated" date on the homepage shows the date of the newest story.</p>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-contact-title">
+      <h2 id="about-contact-title">Contact</h2>
+      <p>To get in touch, visit <a href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>.</p>
     </section>
 
   </main>
 
 {render_site_footer("about")}
-  {render_analytics_script()}
-</body>"""
-
-
-def render_category_body(section: str, items: list[dict]) -> str:
-    section_slug = slug(section)
-    feed = "\n".join(render_compact_signal(item, index) for index, item in enumerate(items, 1))
-    return f"""<body>
-  <a class="skip-link" href="#content">Skip to content</a>
-
-{render_site_header(section_slug)}
-
-  <main id="content" class="category-page">
-    <header class="category-hero">
-      <p class="about-eyebrow">Sarawak AI topic</p>
-      <h1>Sarawak AI {esc(section.lower())} news</h1>
-      <p class="about-lede">{esc(CATEGORY_INTRODUCTIONS[section])}</p>
-      <p class="category-return"><a href="/">View all Sarawak AI news</a></p>
-    </header>
-
-    <section class="story-list category-story-list" aria-label="Latest {esc(section)} stories">
-      {feed}
-    </section>
-  </main>
-
-  <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden><span class="back-to-top-label">Back to top</span> <span class="back-to-top-arrow" aria-hidden="true">↑</span></button>
-
-{render_site_footer(section_slug)}
   {render_analytics_script()}
 </body>"""
 
@@ -517,64 +498,25 @@ def render_about() -> str:
 """
 
 
-def render_category(section: str, items: list[dict]) -> str:
-    section_slug = slug(section)
-    category_url = f"{SITE_URL}{section_slug}.html"
-    title = f"Sarawak AI {section} News | {SITE_NAME}"
-    description = CATEGORY_INTRODUCTIONS[section]
-    structured_data = json.dumps(
-        {
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            "@id": f"{category_url}#collection",
-            "url": category_url,
-            "name": title,
-            "description": description,
-            "isPartOf": {"@id": f"{SITE_URL}#website"},
-            "about": {"@type": "Thing", "name": f"Sarawak AI {section}"},
-            "inLanguage": "en",
-        },
-        ensure_ascii=False,
-        separators=(",", ":"),
-    ).replace("</", "<\\/")
+
+def render_category_redirect(section: str) -> str:
+    """Legacy category URL stub. Main has no filter preselect, so stubs go home."""
+    target = SITE_URL
+    title = f"{section} stories moved | {SITE_NAME}"
     return f"""<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="{esc(description)}" />
-  <meta name="robots" content="index,follow" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="{esc(title)}" />
-  <meta property="og:description" content="{esc(description)}" />
-  <meta property="og:url" content="{esc(category_url)}" />
-  <meta property="og:site_name" content="{esc(SITE_NAME)}" />
-  <meta property="og:image" content="{esc(SOCIAL_CARD_URL)}" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{esc(title)}" />
-  <meta name="twitter:description" content="{esc(description)}" />
-  <meta name="twitter:image" content="{esc(SOCIAL_CARD_URL)}" />
-  <link rel="canonical" href="{esc(category_url)}" />
+  <meta name="robots" content="noindex,follow" />
+  <meta http-equiv="refresh" content="0;url={esc(target)}" />
+  <link rel="canonical" href="{esc(target)}" />
   <title>{esc(title)}</title>
-  <script type="application/ld+json">{structured_data}</script>
-  <script>
-    document.documentElement.classList.add("js");
-    try {{
-      const storedTheme = localStorage.getItem("sarawak-theme");
-      if (storedTheme === "dark" || (storedTheme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {{
-        document.documentElement.dataset.theme = "dark";
-      }}
-    }} catch (error) {{}}
-  </script>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
-  <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="style.css" />
-  <script src="app.js" defer></script>
-  {render_ga_script()}
+  <script>location.replace({json.dumps(target)});</script>
 </head>
-{render_category_body(section, items)}
+<body>
+  <p>{esc(section)} stories now live on the homepage. <a href="{esc(target)}">Continue to AI.Sarawak.News</a>.</p>
+</body>
 </html>
 """
 
@@ -611,9 +553,8 @@ def build() -> None:
     (DIST / "index.html").write_text(render_index(items), encoding="utf-8")
     (DIST / "about.html").write_text(render_about(), encoding="utf-8")
     for section in SECTION_FILTERS:
-        section_items = [item for item in items if item["section"] == section]
         (DIST / f"{slug(section)}.html").write_text(
-            render_category(section, section_items), encoding="utf-8"
+            render_category_redirect(section), encoding="utf-8"
         )
     compact_css = (ROOT / "site" / "style.css").read_text(encoding="utf-8")
     (DIST / "style.css").write_text(compact_css, encoding="utf-8")
@@ -623,9 +564,7 @@ def build() -> None:
     copy_nav_marks()
     (DIST / "items.json").write_text(json.dumps(items, indent=2), encoding="utf-8")
     (DIST / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://ai.sarawak.news/sitemap.xml\n", encoding="utf-8")
-    sitemap_urls = [SITE_URL, f"{SITE_URL}about.html"] + [
-        f"{SITE_URL}{slug(section)}.html" for section in SECTION_FILTERS
-    ]
+    sitemap_urls = [SITE_URL, f"{SITE_URL}about.html"]
     sitemap_entries = "\n".join(
         f"  <url>\n    <loc>{esc(url)}</loc>\n    <lastmod>{sitemap_lastmod}</lastmod>\n  </url>"
         for url in sitemap_urls

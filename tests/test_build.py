@@ -117,6 +117,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn('cx="260" cy="220" r="9"', html)
         self.assertIn('x1="80" y1="90" x2="180" y2="60"', html)
         self.assertIn("Sarawak AI news, in one place.", html)
+        self.assertIn('<h1 id="brief-title">Sarawak AI news, in one place.</h1>', html)
         self.assertIn("Tracking artificial intelligence developments across Sarawak, bringing AI policy, projects, research and adoption into one source-linked brief.", html)
         self.assertIn("Latest intelligence signals", html)
         self.assertIn('Built by <a class="site-footer-link site-footer-credit-link" href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>, an independent publication. Not affiliated with the Sarawak Government.', html)
@@ -149,7 +150,8 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<script src="app.js" defer></script>', html)
         self.assertIn('class="story-rank" aria-label="Chronological item 1">1</div>', html)
         self.assertIn('<time datetime="2026-06-24">24 Jun 2026</time>', html)
-        description = "Source-linked coverage across policy, public services, education, workforce, research, infrastructure and business."
+        description = build.SEO_DESCRIPTION
+        self.assertEqual(len(description), 153)
         self.assertIn(f'<meta name="description" content="{description}" />', html)
         self.assertIn(f'<meta property="og:description" content="{description}" />', html)
         self.assertIn(f'<meta name="twitter:description" content="{description}" />', html)
@@ -165,7 +167,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<meta name="twitter:image" content="https://ai.sarawak.news/social-card.png" />', html)
         self.assertIn('<link rel="canonical" href="https://ai.sarawak.news/" />', html)
         self.assertIn('<meta name="twitter:title" content="AI.Sarawak.News" />', html)
-        self.assertIn('<title>Sarawak AI news, in one place.</title>', html)
+        self.assertIn('<title>Sarawak AI News | AI.Sarawak.News</title>', html)
         self.assertIn('<script type="application/ld+json">', html)
         social_card = ROOT / "dist" / "social-card.png"
         self.assertTrue(social_card.exists())
@@ -178,33 +180,37 @@ class BuildTest(unittest.TestCase):
         website, collection = schema["@graph"]
         self.assertEqual(website["name"], "AI.Sarawak.News")
         self.assertEqual(website["description"], description)
-        self.assertEqual(collection["name"], "Sarawak AI news, in one place.")
+        self.assertEqual(collection["name"], "Sarawak AI News | AI.Sarawak.News")
         self.assertEqual(collection["description"], description)
         sitemap = (ROOT / "dist" / "sitemap.xml").read_text()
         self.assertIn(f"<lastmod>{updated_iso[:10]}</lastmod>", sitemap)
         self.assertIn("<loc>https://ai.sarawak.news/about.html</loc>", sitemap)
-        for category in ["policy", "public-services", "education", "workforce", "research", "infrastructure", "business"]:
+        section_names = {
+            "policy": "Policy",
+            "public-services": "Public Services",
+            "education": "Education",
+            "workforce": "Workforce",
+            "research": "Research",
+            "infrastructure": "Infrastructure",
+            "business": "Business",
+        }
+        for category, section_name in section_names.items():
             category_path = ROOT / "dist" / f"{category}.html"
             self.assertTrue(category_path.exists())
             category_html = category_path.read_text()
-            self.assertIn(f'<link rel="canonical" href="https://ai.sarawak.news/{category}.html" />', category_html)
-            self.assertIn(f"<loc>https://ai.sarawak.news/{category}.html</loc>", sitemap)
-            self.assertIn('<script type="application/ld+json">', category_html)
-            self.assertIn('document.documentElement.classList.add("js")', category_html)
-            self.assertIn('href="/">View all Sarawak AI news</a>', category_html)
-            category_title = f"Sarawak AI {category.replace('-', ' ').title()} News | AI.Sarawak.News"
-            self.assertIn(f'<meta property="og:title" content="{category_title}" />', category_html)
-            self.assertIn(f'<meta name="twitter:title" content="{category_title}" />', category_html)
-            self.assertIn(f'<title>{category_title}</title>', category_html)
-            self.assertNotIn('<meta property="og:title" content="AI.Sarawak.News" />', category_html)
-            self.assertIn('<meta property="og:image:width" content="1200" />', category_html)
-            self.assertIn('<meta property="og:image:height" content="630" />', category_html)
-            self.assertIn('<meta name="twitter:card" content="summary_large_image" />', category_html)
-            self.assertNotIn('<meta name="twitter:card" content="summary" />', category_html)
-        self.assertEqual(sitemap.count("<url>"), 9)
-        self.assertIn('<a class="site-footer-link" href="/policy.html">Policy</a>', html)
-        self.assertIn('<a class="site-footer-link" href="/public-services.html">Public Services</a>', html)
-        self.assertIn('<h2 class="site-footer-categories-title">Categories</h2>', html)
+            self.assertNotIn(f"<loc>https://ai.sarawak.news/{category}.html</loc>", sitemap)
+            self.assertIn('<meta name="robots" content="noindex,follow" />', category_html)
+            self.assertIn('<meta http-equiv="refresh" content="0;url=https://ai.sarawak.news/" />', category_html)
+            self.assertIn('<link rel="canonical" href="https://ai.sarawak.news/" />', category_html)
+            self.assertIn('location.replace("https://ai.sarawak.news/");', category_html)
+            self.assertIn('href="https://ai.sarawak.news/">Continue to AI.Sarawak.News</a>', category_html)
+            self.assertIn(f'<title>{section_name} stories moved | AI.Sarawak.News</title>', category_html)
+            self.assertNotIn('class="story-card"', category_html)
+        self.assertEqual(sitemap.count("<url>"), 2)
+        self.assertIn("<loc>https://ai.sarawak.news/</loc>", sitemap)
+        self.assertIn("<loc>https://ai.sarawak.news/about.html</loc>", sitemap)
+        self.assertNotIn('<a class="site-footer-link" href="/policy.html">Policy</a>', html)
+        self.assertNotIn('<h2 class="site-footer-categories-title">Categories</h2>', html)
         self.assertNotIn('>Topics</h2>', html)
         ET.fromstring(sitemap)
         self.assertNotIn("How This Is Built", html)
@@ -376,11 +382,12 @@ class BuildTest(unittest.TestCase):
         self.assertTrue(all(item.get("caveat") for item in public_items))
 
         about = (ROOT / "dist" / "about.html").read_text()
-        self.assertIn('<title>About | AI.Sarawak.News</title>', about)
-        self.assertIn('<meta property="og:title" content="About | AI.Sarawak.News" />', about)
-        self.assertIn('<meta name="twitter:title" content="About | AI.Sarawak.News" />', about)
+        self.assertEqual(len(build.ABOUT_SEO_DESCRIPTION), 151)
+        self.assertIn('<title>About AI.Sarawak.News | Sarawak AI News</title>', about)
+        self.assertIn('<meta property="og:title" content="About AI.Sarawak.News | Sarawak AI News" />', about)
+        self.assertIn('<meta name="twitter:title" content="About AI.Sarawak.News | Sarawak AI News" />', about)
         self.assertNotIn('<meta property="og:title" content="AI.Sarawak.News" />', about)
-        self.assertIn('<meta name="description" content="Learn how AI.Sarawak.News reviews and links Sarawak AI news, policy, projects, research and adoption." />', about)
+        self.assertIn(f'<meta name="description" content="{build.ABOUT_SEO_DESCRIPTION}" />', about)
         self.assertIn('<meta property="og:image" content="https://ai.sarawak.news/social-card.png" />', about)
         self.assertIn('<meta property="og:image:width" content="1200" />', about)
         self.assertIn('<meta property="og:image:height" content="630" />', about)
@@ -389,9 +396,19 @@ class BuildTest(unittest.TestCase):
         self.assertNotIn('<meta name="twitter:card" content="summary" />', about)
         self.assertIn('<a class="site-nav-link" href="/">Home</a>', about)
         self.assertIn('<a class="site-nav-link is-active" aria-current="page" href="about.html">About</a>', about)
-        self.assertIn("What this site does", about)
-        self.assertIn("How stories are selected", about)
-        self.assertIn("Full article bodies are not republished.", about)
+        self.assertIn("Who runs it", about)
+        self.assertIn("Why Sarawak AI", about)
+        self.assertIn("How stories are picked and checked", about)
+        self.assertIn("How often it updates", about)
+        self.assertIn("Every story is tagged with one of seven categories:", about)
+        self.assertNotIn("each category has its own page", about)
+        self.assertIn("Contact", about)
+        self.assertIn("To get in touch, visit", about)
+        self.assertIn('href="https://hafiy.my"', about)
+        self.assertNotIn("Corrections", about)
+        self.assertNotIn("[Nazirul to confirm", about)
+        self.assertNotIn("[contact:", about)
+        self.assertIn("We never republish full articles", about)
         self.assertNotIn('class="about-facts"', about)
         self.assertNotIn('class="about-topics"', about)
         self.assertIn('class="theme-toggle"', about)
@@ -399,12 +416,10 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<nav aria-label="Explore" class="site-footer-nav">', about)
         self.assertIn('<a class="site-footer-link" href="/">Home</a>', about)
         self.assertIn('<a class="site-footer-link" href="about.html" aria-current="page">About</a>', about)
+        self.assertNotIn('site-footer-categories-title', about)
         self.assertIn('class="about-page"', about)
         self.assertIn('document.documentElement.classList.add("js")', about)
         self.assertNotIn('class="brief-net"', about)
-        for section in ["policy", "public-services", "education", "workforce", "research", "infrastructure", "business"]:
-            category_page = (ROOT / "dist" / f"{section}.html").read_text()
-            self.assertNotIn('class="brief-net"', category_page, section)
 
     def test_build_preserves_only_supported_routes(self):
         alternative_dir = ROOT / "dist" / "alternative"
@@ -454,7 +469,6 @@ class BuildTest(unittest.TestCase):
         pages = [
             ROOT / "dist" / "index.html",
             ROOT / "dist" / "about.html",
-            ROOT / "dist" / "policy.html",
         ]
         for page in pages:
             html = page.read_text()
