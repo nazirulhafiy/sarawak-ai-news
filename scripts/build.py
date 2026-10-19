@@ -443,14 +443,9 @@ def render_about_body() -> str:
       <p>The scan runs daily, but a story is only added when it passes every check, so some days bring nothing new. The "Last updated" date on the homepage shows the date of the newest story.</p>
     </section>
 
-    <section class="about-section" aria-labelledby="about-corrections-title">
-      <h2 id="about-corrections-title">Corrections <span class="about-confirm">[Nazirul to confirm: this policy is not yet in the docs]</span></h2>
-      <p>If a summary is wrong, a date is off or a source link breaks, please tell us. We will recheck the original source, then correct the item or remove it.</p>
-    </section>
-
     <section class="about-section" aria-labelledby="about-contact-title">
       <h2 id="about-contact-title">Contact</h2>
-      <p>[contact: Nazirul to confirm]</p>
+      <p>To get in touch, visit <a href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>.</p>
     </section>
 
   </main>

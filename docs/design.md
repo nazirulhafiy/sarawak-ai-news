@@ -174,9 +174,9 @@ screen focused on the live brief.
 The About page uses the same restrained system: the hero opens on the
 “About AI.Sarawak.News” heading (no eyebrow label), then a short lede and
 sections for who runs it, why Sarawak AI, coverage categories, how stories are
-picked and checked, update cadence, corrections, and contact. Placeholder
-confirmations stay visible until Nazirul replaces them. It keeps the explanation
-closer to the editorial feed instead of adding dashboard-like metrics or pills.
+picked and checked, update cadence, and contact (link to hafiy.my; no email).
+It keeps the explanation closer to the editorial feed instead of adding
+dashboard-like metrics or pills.
 Category topic pages still use the shared `.about-eyebrow` label above their
 headings.
 

@@ -46,9 +46,9 @@ The homepage shows:
   attribution row.
 
 The About page explains who runs the brief, why Sarawak AI matters, the seven
-coverage categories, how stories are picked and checked, update cadence,
-corrections, and contact, without adding signup, newsletter, or other product
-promises. The independence note remains in the shared footer.
+coverage categories, how stories are picked and checked, update cadence, and
+contact via hafiy.my (no email address), without adding signup, newsletter, or
+other product promises. The independence note remains in the shared footer.
 
 The generated `dist/items.json` preserves richer fields than the UI currently
 shows, including `why_it_matters`, `confidence`, `caveat`, and `tags`. These
