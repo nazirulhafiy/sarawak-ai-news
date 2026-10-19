@@ -41,8 +41,8 @@ The homepage shows:
 - Client-side category filters over all ranked story cards, newest first.
 - Source links opening in new tabs.
 - Structured footer with source context, a separated Explore column with
-  vertical Home/About links, and a builder and independent-publication
-  attribution row.
+  vertical Home/About/Contact links (Contact mailto:contact@sarawak.news),
+  and a builder and independent-publication attribution row.
 
 The About page explains why Sarawak AI matters, the seven coverage categories,
 how stories are picked and checked, and contact via contact@sarawak.news

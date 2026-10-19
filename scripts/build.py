@@ -260,6 +260,7 @@ def render_site_footer(active_page: str) -> str:
         <ul>
           <li><a class="site-footer-link" href="/"{home_current}>Home</a></li>
           <li><a class="site-footer-link" href="about.html"{about_current}>About</a></li>
+          <li><a class="site-footer-link" href="mailto:contact@sarawak.news">Contact</a></li>
         </ul>
       </nav>
     </div>

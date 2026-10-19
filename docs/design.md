@@ -59,7 +59,8 @@ The current direction is intentionally restrained:
 - Source name highlighted in yellow.
 - On narrow viewports (`max-width: 560px`), each card’s meta row stacks as two lines: the date alone on the first line, then the yellow source chip and category on the second line with a middot separator (`SOURCE · CATEGORY`). Wider viewports keep the single-line `DATE · SOURCE · CATEGORY` meta row.
 - Structured, contained footer with a source summary, a subtle desktop divider,
-  vertical Home/About links, and a full-width builder and independence
+  vertical Home/About/Contact links (Contact uses
+  `mailto:contact@sarawak.news`), and a full-width builder and independence
   attribution row. The footer follows the story list with a restrained 40px
   section gap.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark
