@@ -24,31 +24,103 @@ SECTION_FILTERS = (
 SITE_URL = "https://ai.sarawak.news/"
 SITE_NAME = "AI.Sarawak.News"
 SOCIAL_CARD_URL = f"{SITE_URL}social-card.png"
-SEO_TITLE = "Sarawak AI news, in one place."
+SEO_TITLE = "Sarawak AI News | AI.Sarawak.News"
 # Homepage social card title (tab title stays SEO_TITLE).
 HOMEPAGE_OG_TITLE = "AI.Sarawak.News"
 SEO_DESCRIPTION = (
-    "Source-linked coverage across policy, public services, education, workforce, "
-    "research, infrastructure and business."
+    "Sarawak AI news in one place: reviewed, source-linked updates on AI policy, "
+    "public services, education, workforce, research, infrastructure and business."
 )
 SITE_INTRODUCTION = (
     "Tracking artificial intelligence developments across Sarawak, bringing AI "
     "policy, projects, research and adoption into one source-linked brief."
 )
 BRIEF_NET_SVG = (ROOT / "site" / "brief-net.svg").read_text(encoding="utf-8").strip()
-ABOUT_SEO_TITLE = "About | AI.Sarawak.News"
+ABOUT_SEO_TITLE = "About AI.Sarawak.News | Sarawak AI News"
 ABOUT_SEO_DESCRIPTION = (
-    "Learn how AI.Sarawak.News reviews and links Sarawak AI news, policy, projects, "
-    "research and adoption."
+    "Who runs AI.Sarawak.News, which Sarawak AI topics it covers, how each story "
+    "is checked against its original source, and how often the brief is updated."
 )
+HOMEPAGE_LIMIT = 12
 CATEGORY_INTRODUCTIONS = {
-    "Policy": "Track Sarawak AI policy, governance, plans and public decisions that shape responsible adoption across the state.",
-    "Public Services": "Follow practical uses of AI in Sarawak public services, including health, local government, safety and citizen support.",
-    "Education": "Read Sarawak AI education updates about schools, colleges, learning programmes and student projects.",
-    "Workforce": "Follow Sarawak AI workforce developments, including skills programmes, professional training and career readiness.",
-    "Research": "Track Sarawak AI research, university partnerships and scientific work with a clear connection to the state.",
-    "Infrastructure": "Follow Sarawak AI infrastructure, including compute, data centres, connectivity and sovereign technology projects.",
-    "Business": "Read Sarawak AI business updates about adoption, entrepreneurship, investment and industry capability.",
+    "Policy": (
+        "Policy is where Sarawak decides how AI will be planned, governed and paid for. "
+        "This page follows the Sarawak AI Blueprint being prepared by the Sarawak "
+        "Artificial Intelligence Centre (SAIC), state data-governance and health-data "
+        "privacy proposals, and debates on AI guardrails and on who owns AI-made content. "
+        "These decisions set the rules that every other category on this site works within."
+    ),
+    "Public Services": (
+        "Public services are where most Sarawakians will meet AI first. This page tracks "
+        "how state agencies, local councils, health services and SAINS put AI to work, "
+        "from early-intervention screening and voice AI to Miri's AI tracking grid and an "
+        "AI smart bin in Sibu. It also covers the risks, such as AI-driven scams, that "
+        "public services must respond to."
+    ),
+    "Education": (
+        "Education decides whether Sarawak can grow its own AI talent. This page follows "
+        "AI in classrooms and campuses, including Sarawak's first AI Classroom in Betong, "
+        "AI use in rural schools, and student projects like AI waste sorters and scam "
+        "detectors that win state and national awards. It also covers colleges and "
+        "universities using AI to teach and to ease educators' workload."
+    ),
+    "Workforce": (
+        "Sarawak's AI plans depend on people who can use and build AI. This page covers "
+        "skills programmes, civil-service training in responsible AI adoption, youth "
+        "initiatives such as the Sarawak–Singapore AI Youth Ambassador Network, "
+        "hackathons, and talent-hub plans. The focus is how Sarawakians at every career "
+        "stage get ready for AI-related work."
+    ),
+    "Research": (
+        "Research is where Sarawak tests new AI before it reaches industry or government. "
+        "This page tracks university and industry partnerships, such as Curtin Malaysia's "
+        "work with DriverAI on AI and quantum computing and UNIMAS's 24-month plan to "
+        "pilot AI solutions with Singularity Connect. It also covers applied science like "
+        "AI-assisted biodiversity monitoring and microalgae harvesting."
+    ),
+    "Infrastructure": (
+        "Infrastructure is the physical base for Sarawak's AI ambitions. This page follows "
+        "the Sarawak Sovereign AI Infrastructure Platform run by SAINS, the planned "
+        "Kuching AI Data Campus at Tanjung Embang and the AI Grid around it, quantum-safe "
+        "and data-centre plans, and smart-city connectivity projects. It also covers the "
+        "funds and partnerships that pay for them."
+    ),
+    "Business": (
+        "Business coverage shows whether AI is paying off in Sarawak's economy. This page "
+        "tracks SMEs and food producers adopting AI, local AI firms and start-ups, "
+        "investment deals, and international awards won by Sarawak teams. It also covers "
+        "the workshops and partnerships that help local businesses build AI capability."
+    ),
+}
+CATEGORY_DESCRIPTIONS = {
+    "Policy": (
+        "Sarawak AI policy news: the state AI blueprint, data governance, privacy law, "
+        "AI guardrails and public decisions shaping how Sarawak adopts AI."
+    ),
+    "Public Services": (
+        "Sarawak AI public services news: how agencies, councils, health services and "
+        "SAINS use AI for screening, public safety, waste and citizen services."
+    ),
+    "Education": (
+        "Sarawak AI education news: AI classrooms, student AI projects and awards, "
+        "college and university programmes, and AI teaching in rural schools."
+    ),
+    "Workforce": (
+        "Sarawak AI workforce news: AI skills programmes, civil service training, youth "
+        "networks, hackathons and talent plans preparing Sarawakians for AI work."
+    ),
+    "Research": (
+        "Sarawak AI research news: university and industry partnerships, AI pilots, "
+        "quantum AI work and science projects with a clear link to Sarawak."
+    ),
+    "Infrastructure": (
+        "Sarawak AI infrastructure news: sovereign AI compute, the Kuching AI Data Campus, "
+        "AI Grid plans, data centres, connectivity and smart city projects."
+    ),
+    "Business": (
+        "Sarawak AI business news: SMEs adopting AI, local AI firms and start-ups, "
+        "investment, awards and the industry capability behind Sarawak's AI economy."
+    ),
 }
 CLOUDFLARE_WEB_ANALYTICS_TOKEN = "092a061973fc4d899cd2e4b52952af89"
 
@@ -177,14 +249,15 @@ def slug(value: str) -> str:
 
 
 def render_compact_signal(item: dict, index: int) -> str:
+    section_slug = slug(item["section"])
     return f"""
-    <article class="story-card" id="{slug(item['id'])}" data-section="{slug(item['section'])}" tabindex="0" aria-label="Open story: {esc(item['title'])}">
+    <article class="story-card" id="{slug(item['id'])}" data-section="{section_slug}" tabindex="0" aria-label="Open story: {esc(item['title'])}">
       <div class="story-rank" aria-label="Chronological item {index}">{index}</div>
       <div class="story-body">
         <p class="story-meta-row">
           <time datetime="{esc(item['date'])}">{esc(format_story_date(item['date']))}</time>
           <span class="story-source"><span class="story-source-label">{esc(item['source'])}</span></span>
-          <span class="story-section">{esc(item['section'])}</span>
+          <a class="story-section" href="/{section_slug}.html">{esc(item['section'])}</a>
         </p>
         <h2><a href="{esc(item['url'])}" target="_blank" rel="noopener noreferrer">{esc(item['title'])}</a></h2>
         <p class="story-summary">{esc(item['note'])}</p>
@@ -193,31 +266,20 @@ def render_compact_signal(item: dict, index: int) -> str:
     """
 
 
-def render_category_filter(items: list[dict]) -> str:
+def render_category_browse(items: list[dict]) -> str:
     counts = {section: sum(item["section"] == section for item in items) for section in SECTION_FILTERS}
-    buttons = [
-        f'<button type="button" class="category-filter-button is-active" data-section-filter="all" '
-        f'data-filter-label="All stories" aria-pressed="true">All '
-        f'<span class="category-filter-count" aria-hidden="true">{len(items)}</span></button>'
-    ]
-    buttons.extend(
-        f'<button type="button" class="category-filter-button" data-section-filter="{slug(section)}" '
-        f'data-filter-label="{esc(section)}" aria-pressed="false">{esc(section)} '
-        f'<span class="category-filter-count" aria-hidden="true">{counts[section]}</span></button>'
+    links = [
+        f'<li><a class="category-browse-link" href="/{slug(section)}.html">'
+        f"See all {counts[section]} {esc(section)} stories →</a></li>"
         for section in SECTION_FILTERS
         if counts[section]
-    )
+    ]
     return f"""
-    <section class="category-filter" aria-labelledby="category-filter-title" data-category-filter hidden>
-      <p class="category-filter-title" id="category-filter-title">Browse by category</p>
-      <div class="category-filter-scroll" data-category-scroll>
-        <div class="category-filter-options">
-          {' '.join(buttons)}
-        </div>
-        <span class="category-filter-hint category-filter-hint-start" aria-hidden="true"><span class="category-filter-chevron"></span></span>
-        <span class="category-filter-hint category-filter-hint-end" aria-hidden="true"><span class="category-filter-chevron"></span></span>
-      </div>
-      <p class="visually-hidden" data-filter-status aria-live="polite">Showing all {len(items)} stories</p>
+    <section class="category-browse" aria-labelledby="category-browse-title">
+      <h2 class="category-browse-title" id="category-browse-title">Browse by category</h2>
+      <ul class="category-browse-list">
+        {"".join(links)}
+      </ul>
     </section>
     """
 
@@ -291,8 +353,11 @@ def render_site_footer(active_page: str) -> str:
 
 
 def render_compact_body(items: list[dict]) -> str:
-    feed = "\n".join(render_compact_signal(item, index) for index, item in enumerate(items, 1))
-    category_filter = render_category_filter(items)
+    homepage_items = items[:HOMEPAGE_LIMIT]
+    feed = "\n".join(
+        render_compact_signal(item, index) for index, item in enumerate(homepage_items, 1)
+    )
+    category_browse = render_category_browse(items)
     updated_iso, _, updated_compact = last_updated(items)
 
     return f"""<body>
@@ -308,11 +373,11 @@ def render_compact_body(items: list[dict]) -> str:
       <p class="updated"><span class="updated-label">Last updated</span><time datetime="{esc(updated_iso)}">{esc(updated_compact)}</time></p>
     </header>
 
-    {category_filter}
-
     <section class="story-list" aria-label="Latest intelligence signals" data-story-list>
       {feed}
     </section>
+
+    {category_browse}
   </main>
 
   <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden><span class="back-to-top-label">Back to top</span> <span class="back-to-top-arrow" aria-hidden="true">↑</span></button>
@@ -334,23 +399,58 @@ def render_about_body() -> str:
       <p class="about-lede">An independent, source-linked briefing about how artificial intelligence and digital change are affecting Sarawak.</p>
     </header>
 
-    <section class="about-section" aria-labelledby="about-purpose-title">
-      <h2 id="about-purpose-title">What this site does</h2>
-      <p>AI.Sarawak.News brings reviewed public reporting into one concise feed. Each story links to its original source and adds a short summary of the Sarawak AI signal, so readers can scan what changed without losing the source behind it.</p>
+    <section class="about-section" aria-labelledby="about-who-title">
+      <h2 id="about-who-title">Who runs it</h2>
+      <p>AI.Sarawak.News is an independent publication run by Nazirul Hafiy (<a href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>). It is not affiliated with the Sarawak Government. The site started in June 2026 as a small working prototype. It tests a simple idea: Sarawak AI news is spread across many outlets and official pages, and readers benefit from one short brief that always shows where each story came from.</p>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-why-title">
+      <h2 id="about-why-title">Why Sarawak AI</h2>
+      <p>Sarawak has set a target to become Malaysia's leading AI hub by 2027, as part of its push toward a developed, high-income state by 2030. Announcements about plans, platforms, partnerships, training and investment now arrive almost every week. This brief helps the public, policymakers, researchers, educators, journalists and business owners keep track of them without needing a technical background.</p>
     </section>
 
     <section class="about-section" aria-labelledby="about-coverage-title">
       <h2 id="about-coverage-title">What we cover</h2>
-      <p>The brief follows AI policy, public services, education, workforce readiness, research, infrastructure and business across Sarawak.</p>
+      <p>Every story sits in one of seven categories, and each category has its own page:</p>
+      <ul class="about-category-list">
+        <li><strong>Policy:</strong> plans, laws, governance and public decisions about AI.</li>
+        <li><strong>Public Services:</strong> AI used by agencies, councils and health services.</li>
+        <li><strong>Education:</strong> AI in schools, colleges, universities and student projects.</li>
+        <li><strong>Workforce:</strong> skills, training and talent programmes.</li>
+        <li><strong>Research:</strong> university and industry research with a clear Sarawak link.</li>
+        <li><strong>Infrastructure:</strong> compute, data centres, connectivity and sovereign AI projects.</li>
+        <li><strong>Business:</strong> adoption, start-ups, investment and industry capability.</li>
+      </ul>
     </section>
 
     <section class="about-section" aria-labelledby="about-method-title">
-      <h2 id="about-method-title">How stories are selected</h2>
+      <h2 id="about-method-title">How stories are picked and checked</h2>
+      <p>Every day at 10 AM Malaysia time, a scan checks a fixed list of public sources. The list includes The Borneo Post, DayakDaily, Sarawak Tribune, The Star, Bernama, The Malaysian Reserve, TVS, New Straits Times, Malay Mail, Free Malaysia Today, Digital News Asia and The Edge Malaysia. It also covers official and university pages such as UKAS, the Sarawak Multimedia Authority, SAINS, SDEC, Swinburne Sarawak and UNIMAS. Being on the list is not an endorsement.</p>
+      <p>Each possible story is opened at its original page and must pass every check before it is published:</p>
       <ol class="about-steps">
-        <li><strong>Find the signal.</strong> Public sources are checked for developments with a clear Sarawak and AI or digital-economy connection.</li>
-        <li><strong>Verify the source.</strong> Candidate links are opened at the original publication and checked for date, context and relevance.</li>
-        <li><strong>Keep the brief concise.</strong> Approved stories receive an original, source-attributed summary. Full article bodies are not republished.</li>
+        <li>The headline and article are in English.</li>
+        <li>The story has a real Sarawak connection.</li>
+        <li>AI is central to it. That means a named AI system or platform, a clear technical use, or a defined role for a body such as the Sarawak Artificial Intelligence Centre (SAIC). AI being one word in a long speech does not count.</li>
+        <li>The source supports every statement in our summary.</li>
+        <li>It is a new development, not a repeat of one already covered.</li>
+        <li>It has enough substance to be worth a story. Purely promotional pages are rejected.</li>
       </ol>
+      <p>Approved stories get a short, original one-sentence summary, a date, a source and a category. We never republish full articles, and every story links to its original source so you can read the full report there.</p>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-cadence-title">
+      <h2 id="about-cadence-title">How often it updates</h2>
+      <p>The scan runs daily, but a story is only added when it passes every check, so some days bring nothing new. The "Last updated" date on the homepage shows the date of the newest story.</p>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-corrections-title">
+      <h2 id="about-corrections-title">Corrections <span class="about-confirm">[Nazirul to confirm: this policy is not yet in the docs]</span></h2>
+      <p>If a summary is wrong, a date is off or a source link breaks, please tell us. We will recheck the original source, then correct the item or remove it.</p>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-contact-title">
+      <h2 id="about-contact-title">Contact</h2>
+      <p>[contact: Nazirul to confirm]</p>
     </section>
 
   </main>
@@ -521,7 +621,7 @@ def render_category(section: str, items: list[dict]) -> str:
     section_slug = slug(section)
     category_url = f"{SITE_URL}{section_slug}.html"
     title = f"Sarawak AI {section} News | {SITE_NAME}"
-    description = CATEGORY_INTRODUCTIONS[section]
+    description = CATEGORY_DESCRIPTIONS[section]
     structured_data = json.dumps(
         {
             "@context": "https://schema.org",

@@ -8,13 +8,14 @@ This is an independent aggregator that tracks public news against that backdrop.
 
 **Read the live briefing:** [ai.sarawak.news](https://ai.sarawak.news/)
 
-The homepage hero headline is **Sarawak AI news, in one place.** (same text as the
-`<title>` and schema `CollectionPage` name).
+The homepage hero headline is **Sarawak AI news, in one place.** The document
+`<title>` and schema `CollectionPage` name are **Sarawak AI News | AI.Sarawak.News**.
 
 ## What You Will Find
 
 Sarawak AI News turns scattered public information into a short, easy-to-scan
-brief. Each public story card includes:
+brief. The homepage shows the newest 12 stories, then browse links into each
+category archive. Each public story card includes:
 
 - a link to the original source;
 - a concise, original summary; and
@@ -25,9 +26,10 @@ to Sarawak, a confidence level, and a caveat for editorial review. These fields
 are not displayed on the public story cards.
 
 The production categories are Policy, Public Services, Education, Workforce,
-Research, Infrastructure, and Business. The same category label appears in the
-browse filter and on every matching story card. Each category also has a
-permanent public page with a unique introduction and canonical URL.
+Research, Infrastructure, and Business. The same category label appears on every
+matching story card and links to that category’s archive page. Each category also
+has a permanent public page with a unique introduction, meta description, and
+canonical URL.
 
 ## Who It Is For
 

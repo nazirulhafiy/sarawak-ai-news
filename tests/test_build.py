@@ -117,6 +117,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn('cx="260" cy="220" r="9"', html)
         self.assertIn('x1="80" y1="90" x2="180" y2="60"', html)
         self.assertIn("Sarawak AI news, in one place.", html)
+        self.assertIn('<h1 id="brief-title">Sarawak AI news, in one place.</h1>', html)
         self.assertIn("Tracking artificial intelligence developments across Sarawak, bringing AI policy, projects, research and adoption into one source-linked brief.", html)
         self.assertIn("Latest intelligence signals", html)
         self.assertIn('Built by <a class="site-footer-link site-footer-credit-link" href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>, an independent publication. Not affiliated with the Sarawak Government.', html)
@@ -133,23 +134,46 @@ class BuildTest(unittest.TestCase):
         self.assertIn('class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden', html)
         self.assertIn('class="back-to-top-label">Back to top</span>', html)
         self.assertIn('class="back-to-top-arrow" aria-hidden="true">↑</span>', html)
-        self.assertEqual(html.count('class="story-card"'), expected_items)
-        self.assertEqual(html.count('class="story-section"'), expected_items)
-        self.assertEqual(html.count('class="story-source-label"'), expected_items)
+        homepage_limit = min(build.HOMEPAGE_LIMIT, expected_items)
+        self.assertEqual(build.HOMEPAGE_LIMIT, 12)
+        self.assertEqual(html.count('class="story-card"'), homepage_limit)
+        self.assertEqual(html.count('class="story-section"'), homepage_limit)
+        self.assertEqual(html.count('class="story-source-label"'), homepage_limit)
         self.assertNotIn('class="story-source-prefix"', html)
         self.assertNotIn("Read on", html)
-        self.assertEqual(html.count('class="category-filter-button'), 8)
-        self.assertIn('data-category-filter hidden', html)
+        self.assertNotIn("category-filter-button", html)
+        self.assertNotIn("data-category-filter", html)
+        self.assertNotIn("data-section-filter", html)
+        self.assertIn('class="category-browse"', html)
+        self.assertIn('id="category-browse-title">Browse by category</h2>', html)
         self.assertIn('data-section="infrastructure"', html)
-        self.assertIn('data-section-filter="all"', html)
-        self.assertIn('data-section-filter="policy"', html)
+        self.assertLess(html.index('data-story-list'), html.index('class="category-browse"'))
+        sorted_items = sorted(self.reviewed_items(), key=lambda row: row["date"], reverse=True)
+        homepage_sections = {item["section"] for item in sorted_items[:homepage_limit]}
         for category in ["Policy", "Public Services", "Education", "Workforce", "Research", "Infrastructure", "Business"]:
-            self.assertIn(f'data-filter-label="{category}"', html)
-            self.assertIn(f'class="story-section">{category}</span>', html)
+            category_count = sum(item["section"] == category for item in self.reviewed_items())
+            self.assertIn(
+                f'href="/{build.slug(category)}.html">See all {category_count} {category} stories →</a>',
+                html,
+            )
+            if category in homepage_sections:
+                self.assertIn(
+                    f'class="story-section" href="/{build.slug(category)}.html">{category}</a>',
+                    html,
+                )
+        self.assertTrue(homepage_sections)
+        self.assertIn('class="story-section" href="', html)
         self.assertIn('<script src="app.js" defer></script>', html)
         self.assertIn('class="story-rank" aria-label="Chronological item 1">1</div>', html)
-        self.assertIn('<time datetime="2026-06-24">24 Jun 2026</time>', html)
-        description = "Source-linked coverage across policy, public services, education, workforce, research, infrastructure and business."
+        newest_date = sorted_items[0]["date"]
+        newest_label = build.format_story_date(newest_date)
+        self.assertIn(f'<time datetime="{newest_date}">{newest_label}</time>', html)
+        self.assertIn(
+            '<time datetime="2026-06-24">24 Jun 2026</time>',
+            (ROOT / "dist" / "public-services.html").read_text(),
+        )
+        description = build.SEO_DESCRIPTION
+        self.assertEqual(len(description), 153)
         self.assertIn(f'<meta name="description" content="{description}" />', html)
         self.assertIn(f'<meta property="og:description" content="{description}" />', html)
         self.assertIn(f'<meta name="twitter:description" content="{description}" />', html)
@@ -165,7 +189,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<meta name="twitter:image" content="https://ai.sarawak.news/social-card.png" />', html)
         self.assertIn('<link rel="canonical" href="https://ai.sarawak.news/" />', html)
         self.assertIn('<meta name="twitter:title" content="AI.Sarawak.News" />', html)
-        self.assertIn('<title>Sarawak AI news, in one place.</title>', html)
+        self.assertIn('<title>Sarawak AI News | AI.Sarawak.News</title>', html)
         self.assertIn('<script type="application/ld+json">', html)
         social_card = ROOT / "dist" / "social-card.png"
         self.assertTrue(social_card.exists())
@@ -178,7 +202,7 @@ class BuildTest(unittest.TestCase):
         website, collection = schema["@graph"]
         self.assertEqual(website["name"], "AI.Sarawak.News")
         self.assertEqual(website["description"], description)
-        self.assertEqual(collection["name"], "Sarawak AI news, in one place.")
+        self.assertEqual(collection["name"], "Sarawak AI News | AI.Sarawak.News")
         self.assertEqual(collection["description"], description)
         sitemap = (ROOT / "dist" / "sitemap.xml").read_text()
         self.assertIn(f"<lastmod>{updated_iso[:10]}</lastmod>", sitemap)
@@ -201,6 +225,24 @@ class BuildTest(unittest.TestCase):
             self.assertIn('<meta property="og:image:height" content="630" />', category_html)
             self.assertIn('<meta name="twitter:card" content="summary_large_image" />', category_html)
             self.assertNotIn('<meta name="twitter:card" content="summary" />', category_html)
+            section_name = {
+                "policy": "Policy",
+                "public-services": "Public Services",
+                "education": "Education",
+                "workforce": "Workforce",
+                "research": "Research",
+                "infrastructure": "Infrastructure",
+                "business": "Business",
+            }[category]
+            intro = build.CATEGORY_INTRODUCTIONS[section_name]
+            meta = build.CATEGORY_DESCRIPTIONS[section_name]
+            self.assertNotEqual(intro, meta)
+            self.assertIn(build.esc(intro), category_html)
+            self.assertIn(f'<meta name="description" content="{build.esc(meta)}" />', category_html)
+            self.assertGreaterEqual(len(meta), 140)
+            self.assertLessEqual(len(meta), 160)
+            section_items = [item for item in self.reviewed_items() if item["section"] == section_name]
+            self.assertEqual(category_html.count('class="story-card"'), len(section_items))
         self.assertEqual(sitemap.count("<url>"), 9)
         self.assertIn('<a class="site-footer-link" href="/policy.html">Policy</a>', html)
         self.assertIn('<a class="site-footer-link" href="/public-services.html">Public Services</a>', html)
@@ -238,10 +280,10 @@ class BuildTest(unittest.TestCase):
         self.assertEqual(geist.read_bytes(), (ROOT / "site" / "fonts" / "Geist-Variable.woff2").read_bytes())
         self.assertIn("SIL OPEN FONT LICENSE", (ROOT / "dist" / "fonts" / "OFL.txt").read_text(encoding="utf-8"))
         self.assertIn('rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin', html)
-        self.assertIn('data-category-scroll', html)
-        self.assertIn("can-scroll-end", js)
-        self.assertIn("can-scroll-start", js)
-        self.assertIn("border-color: var(--sarawak-yellow);", css)
+        self.assertNotIn('data-category-scroll', html)
+        self.assertNotIn("can-scroll-end", js)
+        self.assertNotIn("can-scroll-start", js)
+        self.assertIn("outline: 3px solid var(--sarawak-yellow);", css)
         self.assertIn("button { font: inherit; }", css)
         self.assertIn(".site-footer-nav .site-footer-link:hover", css)
         self.assertIn(".site-footer-nav .site-footer-categories-title {", css)
@@ -292,7 +334,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn("opacity: 0.37", css)
         self.assertIn('html[data-theme="dark"] .brief-net', css)
         self.assertIn("opacity: 0.42", css)
-        self.assertIn("margin: 0 auto 24px", css)
+        self.assertIn("margin: 28px auto 0", css)
         self.assertIn(".story-list {\n  max-width: 760px;\n  margin: 0 auto;\n  display: grid;\n  gap: 14px;\n}", css)
         self.assertIn(".story-card {\n  width: 100%;\n  padding: 16px;", css)
         self.assertIn(".story-summary {\n  margin: 8px 0 0;", css)
@@ -335,23 +377,19 @@ class BuildTest(unittest.TestCase):
         self.assertIn("--sarawak-yellow: #f7c948", css)
         self.assertIn("--sarawak-black: #111111", css)
         self.assertNotIn(".story-rank::after", css)
-        self.assertIn(".category-filter-button.is-active", css)
-        self.assertIn(".category-filter-options:has(.category-filter-button:hover)", css)
-        self.assertIn(".category-filter-button.is-active:not(:hover)", css)
+        self.assertNotIn(".category-filter-button", css)
+        self.assertIn(".category-browse", css)
+        self.assertIn(".category-browse-link", css)
         self.assertIn(".updated-label", css)
         self.assertIn(".updated time", css)
-        self.assertIn("padding: 0 0 14px", css)
-        self.assertIn("flex-wrap: nowrap", css)
-        self.assertIn("overflow-x: auto", css)
         self.assertIn(".story-section", css)
         self.assertIn(".story-source", css)
         self.assertIn(".story-source-label", css)
         self.assertIn("background: var(--sarawak-yellow)", css)
         self.assertIn("color: var(--sarawak-black)", css)
-        self.assertIn('applyFilter("all")', js)
-        self.assertIn("story.hidden = !isVisible", js)
-        self.assertIn('button.dataset.sectionFilter !== "all"', js)
-        self.assertIn('applyFilter(resetToAll ? "all"', js)
+        self.assertNotIn("applyFilter", js)
+        self.assertNotIn("story.hidden = !isVisible", js)
+        self.assertNotIn("sectionFilter", js)
         self.assertIn('history.scrollRestoration = "manual"', js)
         self.assertIn('navigation?.type === "reload"', js)
         self.assertIn('window.scrollY >= 600', js)
@@ -376,11 +414,12 @@ class BuildTest(unittest.TestCase):
         self.assertTrue(all(item.get("caveat") for item in public_items))
 
         about = (ROOT / "dist" / "about.html").read_text()
-        self.assertIn('<title>About | AI.Sarawak.News</title>', about)
-        self.assertIn('<meta property="og:title" content="About | AI.Sarawak.News" />', about)
-        self.assertIn('<meta name="twitter:title" content="About | AI.Sarawak.News" />', about)
+        self.assertEqual(len(build.ABOUT_SEO_DESCRIPTION), 151)
+        self.assertIn('<title>About AI.Sarawak.News | Sarawak AI News</title>', about)
+        self.assertIn('<meta property="og:title" content="About AI.Sarawak.News | Sarawak AI News" />', about)
+        self.assertIn('<meta name="twitter:title" content="About AI.Sarawak.News | Sarawak AI News" />', about)
         self.assertNotIn('<meta property="og:title" content="AI.Sarawak.News" />', about)
-        self.assertIn('<meta name="description" content="Learn how AI.Sarawak.News reviews and links Sarawak AI news, policy, projects, research and adoption." />', about)
+        self.assertIn(f'<meta name="description" content="{build.ABOUT_SEO_DESCRIPTION}" />', about)
         self.assertIn('<meta property="og:image" content="https://ai.sarawak.news/social-card.png" />', about)
         self.assertIn('<meta property="og:image:width" content="1200" />', about)
         self.assertIn('<meta property="og:image:height" content="630" />', about)
@@ -389,9 +428,13 @@ class BuildTest(unittest.TestCase):
         self.assertNotIn('<meta name="twitter:card" content="summary" />', about)
         self.assertIn('<a class="site-nav-link" href="/">Home</a>', about)
         self.assertIn('<a class="site-nav-link is-active" aria-current="page" href="about.html">About</a>', about)
-        self.assertIn("What this site does", about)
-        self.assertIn("How stories are selected", about)
-        self.assertIn("Full article bodies are not republished.", about)
+        self.assertIn("Who runs it", about)
+        self.assertIn("Why Sarawak AI", about)
+        self.assertIn("How stories are picked and checked", about)
+        self.assertIn("How often it updates", about)
+        self.assertIn("[Nazirul to confirm: this policy is not yet in the docs]", about)
+        self.assertIn("[contact: Nazirul to confirm]", about)
+        self.assertIn("We never republish full articles", about)
         self.assertNotIn('class="about-facts"', about)
         self.assertNotIn('class="about-topics"', about)
         self.assertIn('class="theme-toggle"', about)

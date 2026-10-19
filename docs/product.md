@@ -7,10 +7,11 @@ Sarawak-relevant AI and future-economy signals. It is closer to a curated signal
 desk than a general news site: every public item should explain what changed,
 why it matters, where the signal came from, and how confident the brief is.
 
-Current production is a static homepage and a small About page generated from
-reviewed JSON and the site's editorial workflow.
+Current production is a static homepage (newest 12 stories plus category browse
+links), seven category archive pages, and an About page generated from reviewed
+JSON and the site's editorial workflow.
 There is no CMS, database, scraper-to-summary pipeline, account system,
-newsletter sender, or paid product surface. A scheduled weekly workflow can
+newsletter sender, or paid product surface. A scheduled daily workflow can
 publish qualifying feed updates after source verification and all required
 checks pass.
 
@@ -32,20 +33,21 @@ The homepage shows:
 
 - Brand bar: `AI.Sarawak.News`, with `Home` and `About` navigation links and a
   theme toggle.
-- Search title: `Sarawak AI news, in one place.`
+- Document title: `Sarawak AI News | AI.Sarawak.News`.
+- Hero headline: `Sarawak AI news, in one place.`
 - Introductory copy describing the source-linked Sarawak AI coverage.
 - Last-updated weekday and date derived at build time from the newest reviewed
   item date.
-- Editorial headline and deck.
-- Client-side category filters.
-- Ranked story cards ordered newest first.
+- The newest 12 ranked story cards, ordered newest first.
+- A “Browse by category” block of crawlable links with per-category counts.
 - Source links opening in new tabs.
 - Structured footer with source context, a separated Explore column with
   vertical Home/About links, and a builder and independent-publication
   attribution row.
 
-The About page explains the site's purpose, coverage categories, and
-source-review workflow without adding signup, newsletter, or other product
+The About page explains who runs the brief, why Sarawak AI matters, the seven
+coverage categories, how stories are picked and checked, update cadence,
+corrections, and contact, without adding signup, newsletter, or other product
 promises. The independence note remains in the shared footer.
 
 The generated `dist/items.json` preserves richer fields than the UI currently
@@ -84,15 +86,15 @@ Required item fields:
 - `source`: readable source name.
 - `url`: canonical public source URL.
 - `title`: source article title.
-- `section`: one of the production filter sections.
+- `section`: one of the production category sections.
 - `tags`: short topical labels for internal/product use.
 - `summary`: one-sentence strategic signal shown publicly.
 - `why_it_matters`: editorial rationale, currently preserved in JSON.
 - `confidence`: confidence level for the reviewed item.
 - `caveat`: source or verification caveat.
 
-Production filter sections are defined in `scripts/build.py`. The same
-canonical label is shown in both the category filter and its story cards:
+Production category sections are defined in `scripts/build.py`. The same
+canonical label is shown on story cards, browse links, and category pages:
 
 - Policy
 - Public Services
@@ -178,7 +180,7 @@ explicit full-audit option.
 
 Near-term success means:
 
-- The weekly update flow is repeatable in under an hour.
+- The daily update flow is repeatable in under an hour.
 - Every public item has a source, caveat, confidence, and why-it-matters field.
 - The brief makes Sarawak's AI story easier to scan than reading scattered
   source sites.

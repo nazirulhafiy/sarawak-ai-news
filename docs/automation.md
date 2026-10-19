@@ -36,7 +36,7 @@ maintenance task.
 
 Maintainer Bot is the coordinator. It must:
 
-1. Run daily in the `Asia/Kuching` time zone.
+1. Run daily at 10:00 `Asia/Kuching` (MYT).
 2. Own the durable private screened-URL ledger outside the public repository.
 3. Read the latest contract from `origin/main` before it starts a run.
 4. If it keeps a working copy, refresh that copy to `origin/main` before
@@ -270,8 +270,10 @@ When at least one story qualifies, the Cloud Agent must:
 5. Run `python3 scripts/audit_summaries.py`.
 6. Run `python3 scripts/build.py`.
 7. Start a local preview of `dist/`.
-8. Use the available primary browser first. Verify newest-story order,
-   category counts, filtering, desktop and mobile layout, and console output.
+8. Use the available primary browser first. Verify that the homepage shows the
+   newest 12 stories in date order, that each new item appears on its category
+   page, that the “Browse by category” counts match `items.json`, and that
+   desktop and mobile layout and console output are clean.
 9. Use a precise browser tool only when the primary browser cannot provide an
    exact viewport, DOM, screenshot, or console check. Record the reason.
    When opening or screenshotting the **live** site (not local `dist/`), use
