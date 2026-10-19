@@ -270,10 +270,8 @@ When at least one story qualifies, the Cloud Agent must:
 5. Run `python3 scripts/audit_summaries.py`.
 6. Run `python3 scripts/build.py`.
 7. Start a local preview of `dist/`.
-8. Use the available primary browser first. Verify that the homepage shows the
-   newest 12 stories in date order, that each new item appears on its category
-   page, that the “Browse by category” counts match `items.json`, and that
-   desktop and mobile layout and console output are clean.
+8. Use the available primary browser first. Verify newest-story order,
+   category counts, filtering, desktop and mobile layout, and console output.
 9. Use a precise browser tool only when the primary browser cannot provide an
    exact viewport, DOM, screenshot, or console check. Record the reason.
    When opening or screenshotting the **live** site (not local `dist/`), use

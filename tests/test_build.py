@@ -134,44 +134,22 @@ class BuildTest(unittest.TestCase):
         self.assertIn('class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden', html)
         self.assertIn('class="back-to-top-label">Back to top</span>', html)
         self.assertIn('class="back-to-top-arrow" aria-hidden="true">↑</span>', html)
-        homepage_limit = min(build.HOMEPAGE_LIMIT, expected_items)
-        self.assertEqual(build.HOMEPAGE_LIMIT, 12)
-        self.assertEqual(html.count('class="story-card"'), homepage_limit)
-        self.assertEqual(html.count('class="story-section"'), homepage_limit)
-        self.assertEqual(html.count('class="story-source-label"'), homepage_limit)
+        self.assertEqual(html.count('class="story-card"'), expected_items)
+        self.assertEqual(html.count('class="story-section"'), expected_items)
+        self.assertEqual(html.count('class="story-source-label"'), expected_items)
         self.assertNotIn('class="story-source-prefix"', html)
         self.assertNotIn("Read on", html)
-        self.assertNotIn("category-filter-button", html)
-        self.assertNotIn("data-category-filter", html)
-        self.assertNotIn("data-section-filter", html)
-        self.assertIn('class="category-browse"', html)
-        self.assertIn('id="category-browse-title">Browse by category</h2>', html)
+        self.assertEqual(html.count('class="category-filter-button'), 8)
+        self.assertIn('data-category-filter hidden', html)
         self.assertIn('data-section="infrastructure"', html)
-        self.assertLess(html.index('data-story-list'), html.index('class="category-browse"'))
-        sorted_items = sorted(self.reviewed_items(), key=lambda row: row["date"], reverse=True)
-        homepage_sections = {item["section"] for item in sorted_items[:homepage_limit]}
+        self.assertIn('data-section-filter="all"', html)
+        self.assertIn('data-section-filter="policy"', html)
         for category in ["Policy", "Public Services", "Education", "Workforce", "Research", "Infrastructure", "Business"]:
-            category_count = sum(item["section"] == category for item in self.reviewed_items())
-            self.assertIn(
-                f'href="/{build.slug(category)}.html">See all {category_count} {category} stories →</a>',
-                html,
-            )
-            if category in homepage_sections:
-                self.assertIn(
-                    f'class="story-section" href="/{build.slug(category)}.html">{category}</a>',
-                    html,
-                )
-        self.assertTrue(homepage_sections)
-        self.assertIn('class="story-section" href="', html)
+            self.assertIn(f'data-filter-label="{category}"', html)
+            self.assertIn(f'class="story-section">{category}</span>', html)
         self.assertIn('<script src="app.js" defer></script>', html)
         self.assertIn('class="story-rank" aria-label="Chronological item 1">1</div>', html)
-        newest_date = sorted_items[0]["date"]
-        newest_label = build.format_story_date(newest_date)
-        self.assertIn(f'<time datetime="{newest_date}">{newest_label}</time>', html)
-        self.assertIn(
-            '<time datetime="2026-06-24">24 Jun 2026</time>',
-            (ROOT / "dist" / "public-services.html").read_text(),
-        )
+        self.assertIn('<time datetime="2026-06-24">24 Jun 2026</time>', html)
         description = build.SEO_DESCRIPTION
         self.assertEqual(len(description), 153)
         self.assertIn(f'<meta name="description" content="{description}" />', html)
@@ -207,46 +185,32 @@ class BuildTest(unittest.TestCase):
         sitemap = (ROOT / "dist" / "sitemap.xml").read_text()
         self.assertIn(f"<lastmod>{updated_iso[:10]}</lastmod>", sitemap)
         self.assertIn("<loc>https://ai.sarawak.news/about.html</loc>", sitemap)
-        for category in ["policy", "public-services", "education", "workforce", "research", "infrastructure", "business"]:
+        section_names = {
+            "policy": "Policy",
+            "public-services": "Public Services",
+            "education": "Education",
+            "workforce": "Workforce",
+            "research": "Research",
+            "infrastructure": "Infrastructure",
+            "business": "Business",
+        }
+        for category, section_name in section_names.items():
             category_path = ROOT / "dist" / f"{category}.html"
             self.assertTrue(category_path.exists())
             category_html = category_path.read_text()
-            self.assertIn(f'<link rel="canonical" href="https://ai.sarawak.news/{category}.html" />', category_html)
-            self.assertIn(f"<loc>https://ai.sarawak.news/{category}.html</loc>", sitemap)
-            self.assertIn('<script type="application/ld+json">', category_html)
-            self.assertIn('document.documentElement.classList.add("js")', category_html)
-            self.assertIn('href="/">View all Sarawak AI news</a>', category_html)
-            category_title = f"Sarawak AI {category.replace('-', ' ').title()} News | AI.Sarawak.News"
-            self.assertIn(f'<meta property="og:title" content="{category_title}" />', category_html)
-            self.assertIn(f'<meta name="twitter:title" content="{category_title}" />', category_html)
-            self.assertIn(f'<title>{category_title}</title>', category_html)
-            self.assertNotIn('<meta property="og:title" content="AI.Sarawak.News" />', category_html)
-            self.assertIn('<meta property="og:image:width" content="1200" />', category_html)
-            self.assertIn('<meta property="og:image:height" content="630" />', category_html)
-            self.assertIn('<meta name="twitter:card" content="summary_large_image" />', category_html)
-            self.assertNotIn('<meta name="twitter:card" content="summary" />', category_html)
-            section_name = {
-                "policy": "Policy",
-                "public-services": "Public Services",
-                "education": "Education",
-                "workforce": "Workforce",
-                "research": "Research",
-                "infrastructure": "Infrastructure",
-                "business": "Business",
-            }[category]
-            intro = build.CATEGORY_INTRODUCTIONS[section_name]
-            meta = build.CATEGORY_DESCRIPTIONS[section_name]
-            self.assertNotEqual(intro, meta)
-            self.assertIn(build.esc(intro), category_html)
-            self.assertIn(f'<meta name="description" content="{build.esc(meta)}" />', category_html)
-            self.assertGreaterEqual(len(meta), 140)
-            self.assertLessEqual(len(meta), 160)
-            section_items = [item for item in self.reviewed_items() if item["section"] == section_name]
-            self.assertEqual(category_html.count('class="story-card"'), len(section_items))
-        self.assertEqual(sitemap.count("<url>"), 9)
-        self.assertIn('<a class="site-footer-link" href="/policy.html">Policy</a>', html)
-        self.assertIn('<a class="site-footer-link" href="/public-services.html">Public Services</a>', html)
-        self.assertIn('<h2 class="site-footer-categories-title">Categories</h2>', html)
+            self.assertNotIn(f"<loc>https://ai.sarawak.news/{category}.html</loc>", sitemap)
+            self.assertIn('<meta name="robots" content="noindex,follow" />', category_html)
+            self.assertIn('<meta http-equiv="refresh" content="0;url=https://ai.sarawak.news/" />', category_html)
+            self.assertIn('<link rel="canonical" href="https://ai.sarawak.news/" />', category_html)
+            self.assertIn('location.replace("https://ai.sarawak.news/");', category_html)
+            self.assertIn('href="https://ai.sarawak.news/">Continue to AI.Sarawak.News</a>', category_html)
+            self.assertIn(f'<title>{section_name} stories moved | AI.Sarawak.News</title>', category_html)
+            self.assertNotIn('class="story-card"', category_html)
+        self.assertEqual(sitemap.count("<url>"), 2)
+        self.assertIn("<loc>https://ai.sarawak.news/</loc>", sitemap)
+        self.assertIn("<loc>https://ai.sarawak.news/about.html</loc>", sitemap)
+        self.assertNotIn('<a class="site-footer-link" href="/policy.html">Policy</a>', html)
+        self.assertNotIn('<h2 class="site-footer-categories-title">Categories</h2>', html)
         self.assertNotIn('>Topics</h2>', html)
         ET.fromstring(sitemap)
         self.assertNotIn("How This Is Built", html)
@@ -280,10 +244,10 @@ class BuildTest(unittest.TestCase):
         self.assertEqual(geist.read_bytes(), (ROOT / "site" / "fonts" / "Geist-Variable.woff2").read_bytes())
         self.assertIn("SIL OPEN FONT LICENSE", (ROOT / "dist" / "fonts" / "OFL.txt").read_text(encoding="utf-8"))
         self.assertIn('rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin', html)
-        self.assertNotIn('data-category-scroll', html)
-        self.assertNotIn("can-scroll-end", js)
-        self.assertNotIn("can-scroll-start", js)
-        self.assertIn("outline: 3px solid var(--sarawak-yellow);", css)
+        self.assertIn('data-category-scroll', html)
+        self.assertIn("can-scroll-end", js)
+        self.assertIn("can-scroll-start", js)
+        self.assertIn("border-color: var(--sarawak-yellow);", css)
         self.assertIn("button { font: inherit; }", css)
         self.assertIn(".site-footer-nav .site-footer-link:hover", css)
         self.assertIn(".site-footer-nav .site-footer-categories-title {", css)
@@ -334,7 +298,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn("opacity: 0.37", css)
         self.assertIn('html[data-theme="dark"] .brief-net', css)
         self.assertIn("opacity: 0.42", css)
-        self.assertIn("margin: 28px auto 0", css)
+        self.assertIn("margin: 0 auto 24px", css)
         self.assertIn(".story-list {\n  max-width: 760px;\n  margin: 0 auto;\n  display: grid;\n  gap: 14px;\n}", css)
         self.assertIn(".story-card {\n  width: 100%;\n  padding: 16px;", css)
         self.assertIn(".story-summary {\n  margin: 8px 0 0;", css)
@@ -377,19 +341,23 @@ class BuildTest(unittest.TestCase):
         self.assertIn("--sarawak-yellow: #f7c948", css)
         self.assertIn("--sarawak-black: #111111", css)
         self.assertNotIn(".story-rank::after", css)
-        self.assertNotIn(".category-filter-button", css)
-        self.assertIn(".category-browse", css)
-        self.assertIn(".category-browse-link", css)
+        self.assertIn(".category-filter-button.is-active", css)
+        self.assertIn(".category-filter-options:has(.category-filter-button:hover)", css)
+        self.assertIn(".category-filter-button.is-active:not(:hover)", css)
         self.assertIn(".updated-label", css)
         self.assertIn(".updated time", css)
+        self.assertIn("padding: 0 0 14px", css)
+        self.assertIn("flex-wrap: nowrap", css)
+        self.assertIn("overflow-x: auto", css)
         self.assertIn(".story-section", css)
         self.assertIn(".story-source", css)
         self.assertIn(".story-source-label", css)
         self.assertIn("background: var(--sarawak-yellow)", css)
         self.assertIn("color: var(--sarawak-black)", css)
-        self.assertNotIn("applyFilter", js)
-        self.assertNotIn("story.hidden = !isVisible", js)
-        self.assertNotIn("sectionFilter", js)
+        self.assertIn('applyFilter("all")', js)
+        self.assertIn("story.hidden = !isVisible", js)
+        self.assertIn('button.dataset.sectionFilter !== "all"', js)
+        self.assertIn('applyFilter(resetToAll ? "all"', js)
         self.assertIn('history.scrollRestoration = "manual"', js)
         self.assertIn('navigation?.type === "reload"', js)
         self.assertIn('window.scrollY >= 600', js)
@@ -432,13 +400,14 @@ class BuildTest(unittest.TestCase):
         self.assertIn("Why Sarawak AI", about)
         self.assertIn("How stories are picked and checked", about)
         self.assertIn("How often it updates", about)
+        self.assertIn("Every story is tagged with one of seven categories:", about)
+        self.assertNotIn("each category has its own page", about)
         self.assertIn("Contact", about)
         self.assertIn("To get in touch, visit", about)
         self.assertIn('href="https://hafiy.my"', about)
         self.assertNotIn("Corrections", about)
         self.assertNotIn("[Nazirul to confirm", about)
         self.assertNotIn("[contact:", about)
-        self.assertNotIn("@", about.split("Contact", 1)[-1].split("</main>", 1)[0])
         self.assertIn("We never republish full articles", about)
         self.assertNotIn('class="about-facts"', about)
         self.assertNotIn('class="about-topics"', about)
@@ -447,12 +416,10 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<nav aria-label="Explore" class="site-footer-nav">', about)
         self.assertIn('<a class="site-footer-link" href="/">Home</a>', about)
         self.assertIn('<a class="site-footer-link" href="about.html" aria-current="page">About</a>', about)
+        self.assertNotIn('site-footer-categories-title', about)
         self.assertIn('class="about-page"', about)
         self.assertIn('document.documentElement.classList.add("js")', about)
         self.assertNotIn('class="brief-net"', about)
-        for section in ["policy", "public-services", "education", "workforce", "research", "infrastructure", "business"]:
-            category_page = (ROOT / "dist" / f"{section}.html").read_text()
-            self.assertNotIn('class="brief-net"', category_page, section)
 
     def test_build_preserves_only_supported_routes(self):
         alternative_dir = ROOT / "dist" / "alternative"
@@ -502,7 +469,6 @@ class BuildTest(unittest.TestCase):
         pages = [
             ROOT / "dist" / "index.html",
             ROOT / "dist" / "about.html",
-            ROOT / "dist" / "policy.html",
         ]
         for page in pages:
             html = page.read_text()

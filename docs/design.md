@@ -47,22 +47,26 @@ The current direction is intentionally restrained:
   shadow. `html` uses `scroll-padding-top` and `overflow-x: clip`, and heroes
   use `scroll-margin-top`, so in-page anchors clear the sticky bar without a
   horizontal scrollbar.
-- Homepage story list limited to the newest 12 reviewed items (`HOMEPAGE_LIMIT`),
-  followed by a “Browse by category” block of seven crawlable links with live
-  counts (for example, “See all 16 Business stories →”) pointing at each
-  category archive page.
-- Ranked story cards with 16px padding (14px from 560px down), 8px between title and summary, and 14px between cards. On fine-pointer devices (`@media (hover: hover)`), `.story-card:hover` shares a subtle lift: `translateY(-3px)` with a slight tilt (`rotate(-.25deg)`, even cards `rotate(.25deg)`), softened border colour, and a light box shadow (stronger in dark mode). Title links underline on hover/focus and gain a trailing `↗` after the title text. `prefers-reduced-motion` disables the hover transform. Each card’s category label is a link to that category’s archive page.
+- Horizontal category filter using the seven canonical production labels, with
+  24px between the filter and the first card. When the pill row overflows,
+  non-interactive edge hints (48px fade plus chevron on the side that still has
+  hidden categories) signal horizontal scrolling; hints stay hidden when every
+  category fits. The homepage lists every reviewed story; there are no separate
+  category archive pages. Legacy `/policy.html` (and the other six slugs) are
+  noindex redirect stubs to the homepage.
+- Ranked story cards with 16px padding (14px from 560px down), 8px between title and summary, and 14px between cards. On fine-pointer devices (`@media (hover: hover)`), `.story-card:hover` shares a subtle lift: `translateY(-3px)` with a slight tilt (`rotate(-.25deg)`, even cards `rotate(.25deg)`), softened border colour, and a light box shadow (stronger in dark mode). Title links underline on hover/focus and gain a trailing `↗` after the title text. `prefers-reduced-motion` disables the hover transform.
 - Compact black index badges (26px desktop, 24px from 560px down) so the rank stays secondary to the title.
 - Source name highlighted in yellow.
 - On narrow viewports (`max-width: 560px`), each card’s meta row stacks as two lines: the date alone on the first line, then the yellow source chip and category on the second line with a middot separator (`SOURCE · CATEGORY`). Wider viewports keep the single-line `DATE · SOURCE · CATEGORY` meta row.
 - Structured, contained footer with a source summary, a subtle desktop divider,
-  vertical Home/About and category links, and a full-width builder and independence
-  attribution row. A thin, edge-to-edge divider and controlled vertical spacing
-  separate the Categories group from the main navigation links. The footer
-  follows the story list with a restrained 40px section gap.
+  vertical Home/About links, and a full-width builder and independence
+  attribution row. The footer follows the story list with a restrained 40px
+  section gap.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark
   cards, softened borders, brighter text, and preserved Sarawak yellow/red
-  accents.
+  accents. The selected category filter pill keeps its black fill and white
+  label but uses a Sarawak yellow border so the active filter stays visible
+  against dark surfaces.
 - The homepage and supporting routes use a shared 1200x630 social card with
   the site name, current headline, short description, and Sarawak colour rule.
 
@@ -72,29 +76,41 @@ larger product interface.
 
 ## Interaction Design
 
-`site/app.js` handles theme, navigation, sticky bar, reveal, back-to-top, and
-card click affordances without dependencies. Category browsing uses static HTML
-links; there is no client-side story filter.
+`site/app.js` progressively reveals the category filter and handles filtering
+without dependencies. It does not read a hash or query string to preselect a
+filter.
 
 Behavior:
 
-- Story cards and the homepage “Browse by category” links use the same
-  canonical category labels: Policy, Public Services, Education, Workforce,
-  Research, Infrastructure, and Business.
+- Filter starts hidden in HTML and appears when JavaScript loads.
+- When the category row overflows, `site/app.js` toggles `can-scroll-start` and
+  `can-scroll-end` on `[data-category-scroll]` from scroll position, resize,
+  and font load. Matching CSS shows a 48px page-colour fade and chevron on the
+  start or end edge; hints use `pointer-events: none`, `aria-hidden="true"`, and
+  stay off when all pills fit without scrolling.
+- Filter buttons and story cards use the same canonical category labels:
+  Policy, Public Services, Education, Workforce, Research, Infrastructure, and
+  Business.
+- Buttons use `aria-pressed`.
+- Hovering a category temporarily previews the selected treatment and returns
+  the current selection to its resting appearance without changing results or
+  `aria-pressed`; moving away restores the actual selection.
+- Clicking an already-selected category resets the feed to `All`; clicking the
+  active `All` button leaves the full feed unchanged.
+- Hidden story cards use the `hidden` attribute.
 - Story cards lift slightly and tilt by a quarter-degree on hover, alternating
   direction for a tactile browsing cue; the effect is disabled for reduced-motion users.
   On fine-pointer desktop hover, the title keeps its underline treatment and
   gains a trailing external-link arrow (`↗`) after the title text. On touch
   devices (`hover: none` or `pointer: coarse`), that `↗` is not shown.
 - The hero panel and its headline, introduction, and update line still reveal
-  in a visible sequence on load, and category heroes keep that same load
-  animation. Story cards do not share it. With `html.js`, an unrevealed
-  `.story-card` stays at opacity 0 and `translateY(12px)` until an
+  in a visible sequence on load. Story cards do not share it. With `html.js`,
+  an unrevealed `.story-card` stays at opacity 0 and `translateY(12px)` until an
   IntersectionObserver adds `is-revealed` once (`rootMargin: 0px`,
   `threshold: 0`) and then unobserves that card. The motion is `story-reveal`,
   0.7s, `cubic-bezier(.22, 1, .36, 1)`. Reduced motion shows the cards
-  immediately. Hero and category-hero load animations are unchanged, and all
-  reveal motion is disabled for reduced-motion users.
+  immediately. Hero load animations are unchanged, and all reveal motion is
+  disabled for reduced-motion users.
 - The masthead theme toggle is a 36px circular control with a morphing moon/sun
   icon. It follows the system theme by default, persists an explicit choice in
   local storage, and updates its accessible label for the next mode.
@@ -106,11 +122,14 @@ Behavior:
   open line height, balancing its type against the adjacent 16px theme glyph.
 - Geist is self-hosted (not loaded from a CDN) and inherited by the body and
   controls, including buttons, so typography stays consistent across navigation,
-  cards, and footer.
+  filters, cards, and footer.
+- Story ranks are renumbered after filtering.
+- A visually hidden live region reports the current result count.
 - Reloading the page resets the viewport to the top, while ordinary history
   navigation can preserve the reader's position.
-- The masthead sticky state is driven by a passive scroll listener on `.bar`,
-  so Home, About, and category pages all get the scrolled edge treatment.
+- The masthead sticky state is driven by a passive scroll listener on `.bar`
+  (independent of the category filter), so Home and About both get the scrolled
+  edge treatment.
 - A fixed `Back to top` control sits in the viewport's bottom-right corner (not
   beside the content column). It appears after 600 px of scroll with a short
   opacity/translate fade (~180 ms); `prefers-reduced-motion` disables that
@@ -156,14 +175,13 @@ Homepage hierarchy:
 2. Hero headline: `Sarawak AI news, in one place.`
 3. Brief deck (`p.brief-deck`, max-width `600px`): `Tracking artificial intelligence developments across Sarawak, bringing AI policy, projects, research and adoption into one source-linked brief.`
 4. Last updated weekday and date.
-5. Newest 12 ranked story cards.
-6. “Browse by category” links with counts.
+5. Category filters.
+6. Ranked story cards (full reviewed feed).
 7. Independent-publication footer note.
 
-The seven category pages use the same masthead, story cards, theme controls,
-and footer. Each page starts with a longer topic introduction (separate from the
-page meta description), a link back to all news, and the full archive of stories
-in that category.
+There are no public category archive pages. The sitemap lists only the homepage
+and About. Former category URLs remain as noindex redirect stubs to
+`https://ai.sarawak.news/`.
 
 The masthead contains the brand lockup, compact navigation, theme toggle, and
 color rule. It stays pinned while the reader scrolls, with a solid background and
@@ -173,19 +191,17 @@ screen focused on the live brief.
 
 The About page uses the same restrained system: the hero opens on the
 “About AI.Sarawak.News” heading (no eyebrow label), then a short lede and
-sections for who runs it, why Sarawak AI, coverage categories, how stories are
-picked and checked, update cadence, and contact (link to hafiy.my; no email).
-It keeps the explanation closer to the editorial feed instead of adding
-dashboard-like metrics or pills.
-Category topic pages still use the shared `.about-eyebrow` label above their
-headings.
+sections for who runs it, why Sarawak AI, coverage categories (tags, not
+separate pages), how stories are picked and checked, update cadence, and
+contact (link to hafiy.my; no email). It keeps the explanation closer to the
+editorial feed instead of adding dashboard-like metrics or pills.
 
 Each story card currently shows date, source, category, title, and summary. Its
-category label links to that category’s archive page. On phone-width layouts the
-date sits on its own line above the source chip and category; desktop meta order
-is unchanged. The card does not expose tags, confidence, caveat, or why-it-matters
-copy in the HTML, although those fields are preserved in generated JSON for
-editorial review.
+category label exactly matches the corresponding browse filter. On phone-width
+layouts the date sits on its own line above the source chip and category; desktop
+meta order is unchanged. The card does not expose tags, confidence, caveat, or
+why-it-matters copy in the HTML, although those fields are preserved in generated
+JSON for editorial review.
 
 ## Design Variants
 
@@ -225,7 +241,7 @@ Recommended adjustments before moving Variant D into production:
 
 - On narrow screens, the inline Home and About links are hidden and remain available in an accessible hamburger menu at the far right, immediately after the theme toggle; desktop keeps the inline links. The mobile menu closes after a link selection, an outside tap, or Escape, and touch devices do not retain hover styling after tapping the controls.
 - The hamburger and theme controls use equal 36px icon-only touch targets at every breakpoint. The hamburger keeps its 18px, 1.6px-stroke mark while the denser theme glyph is optically balanced at 16px, inspired by OpenClaw’s compact header treatment and with no circular outlines. Keyboard focus remains visibly indicated.
-- The masthead, hero, story list, category browse block, and footer share a 760px desktop content rail so their outer edges align; the three-colour rule follows the same rail.
+- The masthead, hero, category filter, story list, and footer share a 760px desktop content rail so their outer edges align; the three-colour rule follows the same rail.
 - On desktop, Home and About sit on the right side of the masthead immediately before the theme control; on mobile they collapse into the hamburger menu.
 
 - The production UI hides some useful editorial metadata.

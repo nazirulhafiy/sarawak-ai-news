@@ -116,10 +116,36 @@
     revealCards.forEach((card) => card.classList.add("is-revealed"));
   }
 
+  function bindCategoryScrollHint(filter) {
+    const wrap = filter.querySelector("[data-category-scroll]");
+    const scroller = wrap?.querySelector(".category-filter-options");
+    if (!wrap || !scroller) return;
+
+    const update = () => {
+      const overflow = scroller.scrollWidth - scroller.clientWidth;
+      const overflows = overflow > 1;
+      wrap.classList.toggle("can-scroll-start", overflows && scroller.scrollLeft > 1);
+      wrap.classList.toggle("can-scroll-end", overflows && scroller.scrollLeft < overflow - 1);
+    };
+
+    scroller.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    if (typeof ResizeObserver !== "undefined") {
+      const observer = new ResizeObserver(update);
+      observer.observe(scroller);
+    }
+    update();
+    document.fonts?.ready?.then(update);
+  }
+
+  const filter = document.querySelector("[data-category-filter]");
   const storyList = document.querySelector("[data-story-list]");
-  const stories = storyList
-    ? Array.from(storyList.querySelectorAll(".story-card"))
-    : Array.from(document.querySelectorAll(".story-card"));
+
+  if (!filter || !storyList) return;
+
+  const buttons = Array.from(filter.querySelectorAll("[data-section-filter]"));
+  const stories = Array.from(storyList.querySelectorAll(".story-card"));
+  const status = filter.querySelector("[data-filter-status]");
 
   stories.forEach((story) => {
     const link = story.querySelector("h2 a");
@@ -135,4 +161,47 @@
       link.click();
     });
   });
+
+  function applyFilter(section) {
+    const activeButton = buttons.find((button) => button.dataset.sectionFilter === section);
+    if (!activeButton) return;
+
+    let visibleCount = 0;
+    stories.forEach((story) => {
+      const isVisible = section === "all" || story.dataset.section === section;
+      story.hidden = !isVisible;
+
+      if (isVisible) {
+        visibleCount += 1;
+        const rank = story.querySelector(".story-rank");
+        if (rank) {
+          rank.textContent = String(visibleCount);
+          rank.setAttribute("aria-label", section === "all" ? `Chronological item ${visibleCount}` : `Filtered item ${visibleCount}`);
+        }
+      }
+    });
+
+    buttons.forEach((button) => {
+      const isActive = button === activeButton;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+
+    if (status) {
+      status.textContent = section === "all"
+        ? `Showing all ${visibleCount} stories`
+        : `Showing ${visibleCount} ${activeButton.dataset.filterLabel} stories`;
+    }
+  }
+
+  filter.hidden = false;
+  bindCategoryScrollHint(filter);
+  filter.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-section-filter]");
+    if (button && filter.contains(button)) {
+      const resetToAll = button.classList.contains("is-active") && button.dataset.sectionFilter !== "all";
+      applyFilter(resetToAll ? "all" : button.dataset.sectionFilter);
+    }
+  });
+  applyFilter("all");
 })();

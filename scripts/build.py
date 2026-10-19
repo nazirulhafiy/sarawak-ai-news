@@ -41,87 +41,6 @@ ABOUT_SEO_DESCRIPTION = (
     "Who runs AI.Sarawak.News, which Sarawak AI topics it covers, how each story "
     "is checked against its original source, and how often the brief is updated."
 )
-HOMEPAGE_LIMIT = 12
-CATEGORY_INTRODUCTIONS = {
-    "Policy": (
-        "Policy is where Sarawak decides how AI will be planned, governed and paid for. "
-        "This page follows the Sarawak AI Blueprint being prepared by the Sarawak "
-        "Artificial Intelligence Centre (SAIC), state data-governance and health-data "
-        "privacy proposals, and debates on AI guardrails and on who owns AI-made content. "
-        "These decisions set the rules that every other category on this site works within."
-    ),
-    "Public Services": (
-        "Public services are where most Sarawakians will meet AI first. This page tracks "
-        "how state agencies, local councils, health services and SAINS put AI to work, "
-        "from early-intervention screening and voice AI to Miri's AI tracking grid and an "
-        "AI smart bin in Sibu. It also covers the risks, such as AI-driven scams, that "
-        "public services must respond to."
-    ),
-    "Education": (
-        "Education decides whether Sarawak can grow its own AI talent. This page follows "
-        "AI in classrooms and campuses, including Sarawak's first AI Classroom in Betong, "
-        "AI use in rural schools, and student projects like AI waste sorters and scam "
-        "detectors that win state and national awards. It also covers colleges and "
-        "universities using AI to teach and to ease educators' workload."
-    ),
-    "Workforce": (
-        "Sarawak's AI plans depend on people who can use and build AI. This page covers "
-        "skills programmes, civil-service training in responsible AI adoption, youth "
-        "initiatives such as the Sarawak–Singapore AI Youth Ambassador Network, "
-        "hackathons, and talent-hub plans. The focus is how Sarawakians at every career "
-        "stage get ready for AI-related work."
-    ),
-    "Research": (
-        "Research is where Sarawak tests new AI before it reaches industry or government. "
-        "This page tracks university and industry partnerships, such as Curtin Malaysia's "
-        "work with DriverAI on AI and quantum computing and UNIMAS's 24-month plan to "
-        "pilot AI solutions with Singularity Connect. It also covers applied science like "
-        "AI-assisted biodiversity monitoring and microalgae harvesting."
-    ),
-    "Infrastructure": (
-        "Infrastructure is the physical base for Sarawak's AI ambitions. This page follows "
-        "the Sarawak Sovereign AI Infrastructure Platform run by SAINS, the planned "
-        "Kuching AI Data Campus at Tanjung Embang and the AI Grid around it, quantum-safe "
-        "and data-centre plans, and smart-city connectivity projects. It also covers the "
-        "funds and partnerships that pay for them."
-    ),
-    "Business": (
-        "Business coverage shows whether AI is paying off in Sarawak's economy. This page "
-        "tracks SMEs and food producers adopting AI, local AI firms and start-ups, "
-        "investment deals, and international awards won by Sarawak teams. It also covers "
-        "the workshops and partnerships that help local businesses build AI capability."
-    ),
-}
-CATEGORY_DESCRIPTIONS = {
-    "Policy": (
-        "Sarawak AI policy news: the state AI blueprint, data governance, privacy law, "
-        "AI guardrails and public decisions shaping how Sarawak adopts AI."
-    ),
-    "Public Services": (
-        "Sarawak AI public services news: how agencies, councils, health services and "
-        "SAINS use AI for screening, public safety, waste and citizen services."
-    ),
-    "Education": (
-        "Sarawak AI education news: AI classrooms, student AI projects and awards, "
-        "college and university programmes, and AI teaching in rural schools."
-    ),
-    "Workforce": (
-        "Sarawak AI workforce news: AI skills programmes, civil service training, youth "
-        "networks, hackathons and talent plans preparing Sarawakians for AI work."
-    ),
-    "Research": (
-        "Sarawak AI research news: university and industry partnerships, AI pilots, "
-        "quantum AI work and science projects with a clear link to Sarawak."
-    ),
-    "Infrastructure": (
-        "Sarawak AI infrastructure news: sovereign AI compute, the Kuching AI Data Campus, "
-        "AI Grid plans, data centres, connectivity and smart city projects."
-    ),
-    "Business": (
-        "Sarawak AI business news: SMEs adopting AI, local AI firms and start-ups, "
-        "investment, awards and the industry capability behind Sarawak's AI economy."
-    ),
-}
 CLOUDFLARE_WEB_ANALYTICS_TOKEN = "092a061973fc4d899cd2e4b52952af89"
 
 
@@ -249,15 +168,14 @@ def slug(value: str) -> str:
 
 
 def render_compact_signal(item: dict, index: int) -> str:
-    section_slug = slug(item["section"])
     return f"""
-    <article class="story-card" id="{slug(item['id'])}" data-section="{section_slug}" tabindex="0" aria-label="Open story: {esc(item['title'])}">
+    <article class="story-card" id="{slug(item['id'])}" data-section="{slug(item['section'])}" tabindex="0" aria-label="Open story: {esc(item['title'])}">
       <div class="story-rank" aria-label="Chronological item {index}">{index}</div>
       <div class="story-body">
         <p class="story-meta-row">
           <time datetime="{esc(item['date'])}">{esc(format_story_date(item['date']))}</time>
           <span class="story-source"><span class="story-source-label">{esc(item['source'])}</span></span>
-          <a class="story-section" href="/{section_slug}.html">{esc(item['section'])}</a>
+          <span class="story-section">{esc(item['section'])}</span>
         </p>
         <h2><a href="{esc(item['url'])}" target="_blank" rel="noopener noreferrer">{esc(item['title'])}</a></h2>
         <p class="story-summary">{esc(item['note'])}</p>
@@ -266,20 +184,31 @@ def render_compact_signal(item: dict, index: int) -> str:
     """
 
 
-def render_category_browse(items: list[dict]) -> str:
+def render_category_filter(items: list[dict]) -> str:
     counts = {section: sum(item["section"] == section for item in items) for section in SECTION_FILTERS}
-    links = [
-        f'<li><a class="category-browse-link" href="/{slug(section)}.html">'
-        f"See all {counts[section]} {esc(section)} stories →</a></li>"
+    buttons = [
+        f'<button type="button" class="category-filter-button is-active" data-section-filter="all" '
+        f'data-filter-label="All stories" aria-pressed="true">All '
+        f'<span class="category-filter-count" aria-hidden="true">{len(items)}</span></button>'
+    ]
+    buttons.extend(
+        f'<button type="button" class="category-filter-button" data-section-filter="{slug(section)}" '
+        f'data-filter-label="{esc(section)}" aria-pressed="false">{esc(section)} '
+        f'<span class="category-filter-count" aria-hidden="true">{counts[section]}</span></button>'
         for section in SECTION_FILTERS
         if counts[section]
-    ]
+    )
     return f"""
-    <section class="category-browse" aria-labelledby="category-browse-title">
-      <h2 class="category-browse-title" id="category-browse-title">Browse by category</h2>
-      <ul class="category-browse-list">
-        {"".join(links)}
-      </ul>
+    <section class="category-filter" aria-labelledby="category-filter-title" data-category-filter hidden>
+      <p class="category-filter-title" id="category-filter-title">Browse by category</p>
+      <div class="category-filter-scroll" data-category-scroll>
+        <div class="category-filter-options">
+          {' '.join(buttons)}
+        </div>
+        <span class="category-filter-hint category-filter-hint-start" aria-hidden="true"><span class="category-filter-chevron"></span></span>
+        <span class="category-filter-hint category-filter-hint-end" aria-hidden="true"><span class="category-filter-chevron"></span></span>
+      </div>
+      <p class="visually-hidden" data-filter-status aria-live="polite">Showing all {len(items)} stories</p>
     </section>
     """
 
@@ -319,14 +248,6 @@ def render_site_header(active_page: str) -> str:
 def render_site_footer(active_page: str) -> str:
     home_current = ' aria-current="page"' if active_page == "home" else ""
     about_current = ' aria-current="page"' if active_page == "about" else ""
-    topic_link_rows = []
-    for section in SECTION_FILTERS:
-        section_slug = slug(section)
-        current = ' aria-current="page"' if active_page == section_slug else ""
-        topic_link_rows.append(
-            f'          <li><a class="site-footer-link" href="/{section_slug}.html"{current}>{esc(section)}</a></li>'
-        )
-    topic_links = "\n".join(topic_link_rows)
     return f"""
   <footer class="site-footer">
     <div class="site-footer-main">
@@ -340,10 +261,6 @@ def render_site_footer(active_page: str) -> str:
           <li><a class="site-footer-link" href="/"{home_current}>Home</a></li>
           <li><a class="site-footer-link" href="about.html"{about_current}>About</a></li>
         </ul>
-        <h2 class="site-footer-categories-title">Categories</h2>
-        <ul>
-{topic_links}
-        </ul>
       </nav>
     </div>
     <div class="site-footer-bottom">
@@ -353,11 +270,8 @@ def render_site_footer(active_page: str) -> str:
 
 
 def render_compact_body(items: list[dict]) -> str:
-    homepage_items = items[:HOMEPAGE_LIMIT]
-    feed = "\n".join(
-        render_compact_signal(item, index) for index, item in enumerate(homepage_items, 1)
-    )
-    category_browse = render_category_browse(items)
+    feed = "\n".join(render_compact_signal(item, index) for index, item in enumerate(items, 1))
+    category_filter = render_category_filter(items)
     updated_iso, _, updated_compact = last_updated(items)
 
     return f"""<body>
@@ -373,11 +287,11 @@ def render_compact_body(items: list[dict]) -> str:
       <p class="updated"><span class="updated-label">Last updated</span><time datetime="{esc(updated_iso)}">{esc(updated_compact)}</time></p>
     </header>
 
+    {category_filter}
+
     <section class="story-list" aria-label="Latest intelligence signals" data-story-list>
       {feed}
     </section>
-
-    {category_browse}
   </main>
 
   <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden><span class="back-to-top-label">Back to top</span> <span class="back-to-top-arrow" aria-hidden="true">↑</span></button>
@@ -411,7 +325,7 @@ def render_about_body() -> str:
 
     <section class="about-section" aria-labelledby="about-coverage-title">
       <h2 id="about-coverage-title">What we cover</h2>
-      <p>Every story sits in one of seven categories, and each category has its own page:</p>
+      <p>Every story is tagged with one of seven categories:</p>
       <ul class="about-category-list">
         <li><strong>Policy:</strong> plans, laws, governance and public decisions about AI.</li>
         <li><strong>Public Services:</strong> AI used by agencies, councils and health services.</li>
@@ -451,34 +365,6 @@ def render_about_body() -> str:
   </main>
 
 {render_site_footer("about")}
-  {render_analytics_script()}
-</body>"""
-
-
-def render_category_body(section: str, items: list[dict]) -> str:
-    section_slug = slug(section)
-    feed = "\n".join(render_compact_signal(item, index) for index, item in enumerate(items, 1))
-    return f"""<body>
-  <a class="skip-link" href="#content">Skip to content</a>
-
-{render_site_header(section_slug)}
-
-  <main id="content" class="category-page">
-    <header class="category-hero">
-      <p class="about-eyebrow">Sarawak AI topic</p>
-      <h1>Sarawak AI {esc(section.lower())} news</h1>
-      <p class="about-lede">{esc(CATEGORY_INTRODUCTIONS[section])}</p>
-      <p class="category-return"><a href="/">View all Sarawak AI news</a></p>
-    </header>
-
-    <section class="story-list category-story-list" aria-label="Latest {esc(section)} stories">
-      {feed}
-    </section>
-  </main>
-
-  <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden><span class="back-to-top-label">Back to top</span> <span class="back-to-top-arrow" aria-hidden="true">↑</span></button>
-
-{render_site_footer(section_slug)}
   {render_analytics_script()}
 </body>"""
 
@@ -612,64 +498,25 @@ def render_about() -> str:
 """
 
 
-def render_category(section: str, items: list[dict]) -> str:
-    section_slug = slug(section)
-    category_url = f"{SITE_URL}{section_slug}.html"
-    title = f"Sarawak AI {section} News | {SITE_NAME}"
-    description = CATEGORY_DESCRIPTIONS[section]
-    structured_data = json.dumps(
-        {
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            "@id": f"{category_url}#collection",
-            "url": category_url,
-            "name": title,
-            "description": description,
-            "isPartOf": {"@id": f"{SITE_URL}#website"},
-            "about": {"@type": "Thing", "name": f"Sarawak AI {section}"},
-            "inLanguage": "en",
-        },
-        ensure_ascii=False,
-        separators=(",", ":"),
-    ).replace("</", "<\\/")
+
+def render_category_redirect(section: str) -> str:
+    """Legacy category URL stub. Main has no filter preselect, so stubs go home."""
+    target = SITE_URL
+    title = f"{section} stories moved | {SITE_NAME}"
     return f"""<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="{esc(description)}" />
-  <meta name="robots" content="index,follow" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="{esc(title)}" />
-  <meta property="og:description" content="{esc(description)}" />
-  <meta property="og:url" content="{esc(category_url)}" />
-  <meta property="og:site_name" content="{esc(SITE_NAME)}" />
-  <meta property="og:image" content="{esc(SOCIAL_CARD_URL)}" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{esc(title)}" />
-  <meta name="twitter:description" content="{esc(description)}" />
-  <meta name="twitter:image" content="{esc(SOCIAL_CARD_URL)}" />
-  <link rel="canonical" href="{esc(category_url)}" />
+  <meta name="robots" content="noindex,follow" />
+  <meta http-equiv="refresh" content="0;url={esc(target)}" />
+  <link rel="canonical" href="{esc(target)}" />
   <title>{esc(title)}</title>
-  <script type="application/ld+json">{structured_data}</script>
-  <script>
-    document.documentElement.classList.add("js");
-    try {{
-      const storedTheme = localStorage.getItem("sarawak-theme");
-      if (storedTheme === "dark" || (storedTheme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {{
-        document.documentElement.dataset.theme = "dark";
-      }}
-    }} catch (error) {{}}
-  </script>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
-  <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="style.css" />
-  <script src="app.js" defer></script>
-  {render_ga_script()}
+  <script>location.replace({json.dumps(target)});</script>
 </head>
-{render_category_body(section, items)}
+<body>
+  <p>{esc(section)} stories now live on the homepage. <a href="{esc(target)}">Continue to AI.Sarawak.News</a>.</p>
+</body>
 </html>
 """
 
@@ -706,9 +553,8 @@ def build() -> None:
     (DIST / "index.html").write_text(render_index(items), encoding="utf-8")
     (DIST / "about.html").write_text(render_about(), encoding="utf-8")
     for section in SECTION_FILTERS:
-        section_items = [item for item in items if item["section"] == section]
         (DIST / f"{slug(section)}.html").write_text(
-            render_category(section, section_items), encoding="utf-8"
+            render_category_redirect(section), encoding="utf-8"
         )
     compact_css = (ROOT / "site" / "style.css").read_text(encoding="utf-8")
     (DIST / "style.css").write_text(compact_css, encoding="utf-8")
@@ -718,9 +564,7 @@ def build() -> None:
     copy_nav_marks()
     (DIST / "items.json").write_text(json.dumps(items, indent=2), encoding="utf-8")
     (DIST / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://ai.sarawak.news/sitemap.xml\n", encoding="utf-8")
-    sitemap_urls = [SITE_URL, f"{SITE_URL}about.html"] + [
-        f"{SITE_URL}{slug(section)}.html" for section in SECTION_FILTERS
-    ]
+    sitemap_urls = [SITE_URL, f"{SITE_URL}about.html"]
     sitemap_entries = "\n".join(
         f"  <url>\n    <loc>{esc(url)}</loc>\n    <lastmod>{sitemap_lastmod}</lastmod>\n  </url>"
         for url in sitemap_urls

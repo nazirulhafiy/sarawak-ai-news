@@ -7,9 +7,9 @@ Sarawak-relevant AI and future-economy signals. It is closer to a curated signal
 desk than a general news site: every public item should explain what changed,
 why it matters, where the signal came from, and how confident the brief is.
 
-Current production is a static homepage (newest 12 stories plus category browse
-links), seven category archive pages, and an About page generated from reviewed
-JSON and the site's editorial workflow.
+Current production is a static homepage with a client-side category filter over
+the full reviewed feed, plus an About page generated from reviewed JSON and the
+site's editorial workflow. Former category URLs redirect to the homepage.
 There is no CMS, database, scraper-to-summary pipeline, account system,
 newsletter sender, or paid product surface. A scheduled daily workflow can
 publish qualifying feed updates after source verification and all required
@@ -38,8 +38,7 @@ The homepage shows:
 - Introductory copy describing the source-linked Sarawak AI coverage.
 - Last-updated weekday and date derived at build time from the newest reviewed
   item date.
-- The newest 12 ranked story cards, ordered newest first.
-- A “Browse by category” block of crawlable links with per-category counts.
+- Client-side category filters over all ranked story cards, newest first.
 - Source links opening in new tabs.
 - Structured footer with source context, a separated Explore column with
   vertical Home/About links, and a builder and independent-publication
@@ -94,7 +93,7 @@ Required item fields:
 - `caveat`: source or verification caveat.
 
 Production category sections are defined in `scripts/build.py`. The same
-canonical label is shown on story cards, browse links, and category pages:
+canonical label is shown in the homepage filter and on matching story cards:
 
 - Policy
 - Public Services
@@ -104,10 +103,8 @@ canonical label is shown on story cards, browse links, and category pages:
 - Infrastructure
 - Business
 
-Each section also has a permanent static page. The homepage and footer link to
-these pages with normal HTML links, so readers and search engines can find them
-without JavaScript. Each page has a unique title, description, canonical URL,
-topic introduction, and filtered list of reviewed stories.
+There are no separate category archive pages. Legacy `/{section}.html` paths
+are emitted as noindex redirect stubs to the homepage so old links do not 404.
 
 ## Editorial Workflow
 
