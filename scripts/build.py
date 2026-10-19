@@ -38,8 +38,8 @@ SITE_INTRODUCTION = (
 BRIEF_NET_SVG = (ROOT / "site" / "brief-net.svg").read_text(encoding="utf-8").strip()
 ABOUT_SEO_TITLE = "About AI.Sarawak.News | Sarawak AI News"
 ABOUT_SEO_DESCRIPTION = (
-    "Who runs AI.Sarawak.News, which Sarawak AI topics it covers, how each story "
-    "is checked against its original source, and how often the brief is updated."
+    "What AI.Sarawak.News covers, how each Sarawak AI story is checked against "
+    "its original source, and how often the brief is updated."
 )
 CLOUDFLARE_WEB_ANALYTICS_TOKEN = "092a061973fc4d899cd2e4b52952af89"
 
@@ -313,11 +313,6 @@ def render_about_body() -> str:
       <p class="about-lede">An independent, source-linked briefing about how artificial intelligence and digital change are affecting Sarawak.</p>
     </header>
 
-    <section class="about-section" aria-labelledby="about-who-title">
-      <h2 id="about-who-title">Who runs it</h2>
-      <p>AI.Sarawak.News is an independent publication run by Nazirul Hafiy (<a href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>). It is not affiliated with the Sarawak Government. The site started in June 2026 as a small working prototype. It tests a simple idea: Sarawak AI news is spread across many outlets and official pages, and readers benefit from one short brief that always shows where each story came from.</p>
-    </section>
-
     <section class="about-section" aria-labelledby="about-why-title">
       <h2 id="about-why-title">Why Sarawak AI</h2>
       <p>Sarawak has set a target to become Malaysia's leading AI hub by 2027, as part of its push toward a developed, high-income state by 2030. Announcements about plans, platforms, partnerships, training and investment now arrive almost every week. This brief helps the public, policymakers, researchers, educators, journalists and business owners keep track of them without needing a technical background.</p>
@@ -339,17 +334,9 @@ def render_about_body() -> str:
 
     <section class="about-section" aria-labelledby="about-method-title">
       <h2 id="about-method-title">How stories are picked and checked</h2>
-      <p>Every day at 10 AM Malaysia time, a scan checks a fixed list of public sources. The list includes The Borneo Post, DayakDaily, Sarawak Tribune, The Star, Bernama, The Malaysian Reserve, TVS, New Straits Times, Malay Mail, Free Malaysia Today, Digital News Asia and The Edge Malaysia. It also covers official and university pages such as UKAS, the Sarawak Multimedia Authority, SAINS, SDEC, Swinburne Sarawak and UNIMAS. Being on the list is not an endorsement.</p>
-      <p>Each possible story is opened at its original page and must pass every check before it is published:</p>
-      <ol class="about-steps">
-        <li>The headline and article are in English.</li>
-        <li>The story has a real Sarawak connection.</li>
-        <li>AI is central to it. That means a named AI system or platform, a clear technical use, or a defined role for a body such as the Sarawak Artificial Intelligence Centre (SAIC). AI being one word in a long speech does not count.</li>
-        <li>The source supports every statement in our summary.</li>
-        <li>It is a new development, not a repeat of one already covered.</li>
-        <li>It has enough substance to be worth a story. Purely promotional pages are rejected.</li>
-      </ol>
-      <p>Approved stories get a short, original one-sentence summary, a date, a source and a category. We never republish full articles, and every story links to its original source so you can read the full report there.</p>
+      <p>Every day at 10 AM Malaysia time, a scan checks public news and official pages for Sarawak AI developments.</p>
+      <p>A story is published only when it is in English, has a clear Sarawak connection, puts AI at the centre of the news (not a passing mention), and is supported by the original source. Purely promotional pages are left out.</p>
+      <p>Approved items get a short original summary and a link to the source. We never republish full articles.</p>
     </section>
 
     <section class="about-section" aria-labelledby="about-cadence-title">
