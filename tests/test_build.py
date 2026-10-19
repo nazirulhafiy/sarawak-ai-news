@@ -401,8 +401,10 @@ class BuildTest(unittest.TestCase):
         self.assertIn("This brief helps Sarawakians in general to keep track of them.", about)
         self.assertNotIn("policymakers, researchers, educators", about)
         self.assertIn("How stories are picked and checked", about)
-        self.assertIn("Every day at 10 AM Malaysia time", about)
-        self.assertIn("Approved items get a short original summary and a link to the source.", about)
+        self.assertIn(
+            "<p>Every day at 10 AM Malaysia time, a scan checks public news and official pages for Sarawak AI developments. Approved items get a short original summary and a link to the source.</p>",
+            about,
+        )
         self.assertNotIn("We never republish full articles", about)
         self.assertNotIn("puts AI at the centre of the news", about)
         self.assertNotIn("Purely promotional pages are left out", about)
