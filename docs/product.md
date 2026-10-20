@@ -82,7 +82,9 @@ Required item fields:
 
 - `id`: stable slug-like identifier.
 - `date`: source publication date in `YYYY-MM-DD`.
-- `source`: readable source name.
+- `source`: readable source name. Must be an exact entry in
+  `data/allowed-sources.json`. `scripts/validate.py` (and CI) fail the build
+  otherwise.
 - `url`: canonical public source URL.
 - `title`: source article title.
 - `section`: one of the production category sections.
@@ -143,6 +145,13 @@ and `data/site.json`; it does not modify docs, assets, scripts, tests, or
 unrelated local changes.
 
 ## Source Policy
+
+Every published item’s `source` field must match an entry in
+`data/allowed-sources.json` exactly (for example `The Borneo Post`, not
+`Borneo Post`). That allowlist is the attribution set used on cards; it is
+separate from discovery page titles in `data/sources.json`. Add a name to the
+allowlist before publishing from a new outlet. `scripts/validate.py` enforces
+the rule in local checks and CI.
 
 `data/sources.json` currently watches a mix of media, institutional, government,
 university, search, and focused topic pages, including SDEC, The Borneo Post,

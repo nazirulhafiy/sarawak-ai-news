@@ -37,6 +37,8 @@ jobs:
         run: python kit/sync.py --check --hub-path .hub-kit-ref
       - name: Check generated docs
         run: python3 kit/generate_docs.py --check
+      - name: Validate published item sources
+        run: python scripts/validate.py
       - name: Run tests
         run: python -m unittest discover -s tests -v
       - name: Audit source dates

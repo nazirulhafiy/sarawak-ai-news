@@ -96,6 +96,7 @@ the CF beacon is skipped (see `AGENTS.md`). CI runs
 ```bash
 python3 kit/sync.py --check --hub-path "$SN_HUB_PATH"
 python3 kit/generate_docs.py --check
+python3 scripts/validate.py
 python3 -m unittest discover -s tests -v
 python3 scripts/build.py
 python3 scripts/check_analytics_dist.py
