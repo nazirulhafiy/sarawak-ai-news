@@ -8,9 +8,8 @@ import re
 from pathlib import Path
 from typing import Any
 
-KIT_ROOT = Path(__file__).resolve().parent
-REPO_ROOT = KIT_ROOT.parent
-ROOT = REPO_ROOT
+# kit/python/this file sits two levels under the repo that vendors the kit.
+ROOT = Path(__file__).resolve().parents[2]
 ANALYTICS_PATH = ROOT / "data" / "analytics.json"
 
 GA4_ID_RE = re.compile(r"^G-[A-Z0-9]+$")

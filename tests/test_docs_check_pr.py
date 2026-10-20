@@ -25,7 +25,7 @@ class DocsCheckPrTests(unittest.TestCase):
         self.assertTrue(is_watched("scripts/check_analytics_dist.py"))
         self.assertTrue(is_watched("data/site.json"))
         self.assertTrue(is_watched("data/analytics.json"))
-        self.assertTrue(is_watched("kit/shell.py"))
+        self.assertTrue(is_watched("kit/python/shell.py"))
         self.assertTrue(is_watched("kit/js/back-to-top.js"))
 
     def test_ignores_data_and_dist(self) -> None:

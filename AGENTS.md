@@ -65,7 +65,7 @@ python3 kit/sync.py --check --hub-path "$SN_HUB_PATH"
 ## Analytics (GA4 + Cloudflare)
 
 - IDs live in `data/analytics.json` (measurement ID `G-RJ2ZFQ52J7`). Loader from
-  `kit.analytics_loader` via `render_analytics_loader()` in `scripts/build.py`.
+  `kit.python.analytics_loader` via `render_analytics_loader()` in `scripts/build.py`.
 - GA and the Cloudflare Web Analytics beacon load only on production hostnames `ai.sarawak.news` and `www.ai.sarawak.news`. They do not load on localhost, `*.pages.dev`, `*.github.io`, `*.vercel.app`, or other hosts.
 - `?internal=1` sets cookie `sn_internal` (~1 year); `?internal=0` clears it. While set, gtag config includes `traffic_type: 'internal'`, and the Cloudflare beacon (`beacon.min.js`) is not loaded.
 - Daily agents and screenshot checks that hit the live site must open it with `?internal=1` so they skip counting in both GA4 (as internal) and Cloudflare Web Analytics.

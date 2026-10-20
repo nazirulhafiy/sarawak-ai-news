@@ -16,13 +16,17 @@ SITE_META_PATH = DATA / "site.json"
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from kit.analytics_loader import (  # noqa: E402
+from kit.python.analytics_loader import (  # noqa: E402
     ANALYTICS_MAX_AGE,
     render_analytics_loader as kit_render_analytics_loader,
 )
-from kit.analytics_registry import AnalyticsRegistry, load_analytics  # noqa: E402
-from kit.shell import NavItem, render_back_to_top, render_footer as kit_render_footer  # noqa: E402
-from kit.shell import render_header as kit_render_header  # noqa: E402
+from kit.python.analytics_registry import AnalyticsRegistry, load_analytics  # noqa: E402
+from kit.python.shell import (  # noqa: E402
+    NavItem,
+    render_back_to_top,
+    render_footer as kit_render_footer,
+    render_header as kit_render_header,
+)
 
 SECTION_FILTERS = (
     "Policy",
@@ -42,7 +46,7 @@ SITE_INTRODUCTION = (
     "Tracking artificial intelligence developments across Sarawak, bringing AI "
     "policy, projects, research and adoption into one source-linked brief."
 )
-# Footer summary note (plain text; kit.shell escapes HTML).
+# Footer summary note (plain text; kit.python.shell escapes HTML).
 FOOTER_BRAND_NOTE = (
     "AI news updates are sourced from public reports, news outlets, and official "
     "announcements. Each item links to its source and includes a concise editorial "

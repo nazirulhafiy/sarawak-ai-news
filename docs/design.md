@@ -59,10 +59,10 @@ The current direction is intentionally restrained:
 - Compact black index badges (26px desktop, 24px from 560px down) so the rank stays secondary to the title.
 - Source name highlighted in yellow.
 - On narrow viewports (`max-width: 560px`), each card’s meta row stacks as two lines: the date alone on the first line, then the yellow source chip and category on the second line with a middot separator (`SOURCE · CATEGORY`). Wider viewports keep the single-line `DATE · SOURCE · CATEGORY` meta row.
-- Structured, contained footer rendered by `kit.shell.render_footer`: a source
-  summary, a subtle desktop divider, vertical Home/About/Contact links (Contact
-  always uses `mailto:contact@sarawak.news`), and a full-width builder and
-  independence attribution row. The footer follows the story list with a
+- Structured, contained footer rendered by `kit.python.shell.render_footer`: a
+  source summary, a subtle desktop divider, vertical Home/About/Contact links
+  (Contact always uses `mailto:contact@sarawak.news`), and a full-width builder
+  and independence attribution row. The footer follows the story list with a
   restrained 40px section gap.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark
   cards, softened borders, brighter text, and preserved Sarawak yellow/red
@@ -132,8 +132,8 @@ Behavior:
 - The masthead sticky state is driven by a passive scroll listener on `.bar`
   (independent of the category filter), so Home and About both get the scrolled
   edge treatment.
-- Markup comes from `kit.shell.render_back_to_top`. CSS and JS are owned by
-  `kit/css/back-to-top.css` and `kit/js/back-to-top.js`, mirrored into
+- Markup comes from `kit.python.shell.render_back_to_top`. CSS and JS are owned
+  by `kit/css/back-to-top.css` and `kit/js/back-to-top.js`, mirrored into
   `site/style.css` / `site/app.js` between `/* sn-kit:back-to-top:begin|end */`
   markers. The control sits in the viewport's bottom-right corner (not beside
   the content column). It appears after 600 px of scroll with a short
@@ -268,9 +268,9 @@ commit recorded in `kit/PIN`. Delivery is a **vendored copy + PIN +
 
 | Kit path | Provides |
 | --- | --- |
-| `kit/shell.py` | Header, footer (always includes Contact `mailto:contact@sarawak.news`), back-to-top markup |
-| `kit/analytics_loader.py` | Registry-driven production loader (`data-sn-analytics-loader`) |
-| `kit/analytics_registry.py` | `data/analytics.json` validation (this site keeps its own registry file) |
+| `kit/python/shell.py` | Header, footer (always includes Contact `mailto:contact@sarawak.news`), back-to-top markup |
+| `kit/python/analytics_loader.py` | Registry-driven production loader (`data-sn-analytics-loader`) |
+| `kit/python/analytics_registry.py` | `data/analytics.json` validation (this site keeps its own registry file) |
 | `kit/assets/icons/` | Origami hornbill nav marks |
 | `kit/css/back-to-top.css` / `kit/js/back-to-top.js` | Back-to-top rules and behaviour (mirrored into `site/style.css` / `site/app.js` inside `sn-kit:back-to-top` markers) |
 
@@ -284,7 +284,7 @@ IDs, cookie name, and CF `spa` live in `data/analytics.json` (fleet kit shape,
 `version: 1`). Measurement ID `G-RJ2ZFQ52J7` and CF token
 `092a061973fc4d899cd2e4b52952af89` stay on this site's registry — do not change
 them when bumping the kit pin. The loader implementation lives in
-`kit/analytics_loader.py`; `scripts/build.py` → `render_analytics_loader()` emits
+`kit/python/analytics_loader.py`; `scripts/build.py` → `render_analytics_loader()` emits
 **one** inline `<script data-sn-analytics-loader>` per page in `<head>` (edit the
 registry / kit, not `dist/`). CI runs `scripts/check_analytics_dist.py` so each
 built HTML page has exactly one loader, only registry GA4 / CF tokens, only the

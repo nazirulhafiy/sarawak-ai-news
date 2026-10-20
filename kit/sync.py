@@ -4,6 +4,7 @@
 Hub (no ``kit/PIN``):
   python3 kit/sync.py --check   # invariants + consumer mirrors
   python3 kit/sync.py --sync    # refresh site/ icons and BTT marker regions from kit
+  python3 kit/sync.py           # same as --sync
 
 Sister (``kit/PIN`` holds a hub commit SHA):
   python3 kit/sync.py --check --hub-path /path/to/sarawak-news-hub
@@ -75,10 +76,21 @@ def replace_marked(text: str, begin: str, end: str, payload: str) -> str:
     return text[: start + len(begin)] + "\n" + body + text[stop:]
 
 
-def check_invariants(manifest: dict) -> list[str]:
+def _inside_kit(path: Path) -> bool:
+    try:
+        path.resolve().relative_to(KIT_ROOT.resolve())
+    except ValueError:
+        return False
+    return True
+
+
+def check_invariants(manifest: dict, *, hub: bool) -> list[str]:
     errors: list[str] = []
     for inv in manifest.get("invariants", []):
-        path = KIT_ROOT / inv["path"]
+        path = (KIT_ROOT / inv["path"]).resolve()
+        # Paths outside kit/ (the hub cookie file) are hub-mode only.
+        if not hub and not _inside_kit(path):
+            continue
         if not path.is_file():
             errors.append(f"invariant {inv['id']}: missing {inv['path']}")
             continue
@@ -107,8 +119,12 @@ def check_hub_consumers(manifest: dict) -> list[str]:
         if marker:
             begin = f"/* {marker}:begin */"
             end = f"/* {marker}:end */"
-            marked = extract_marked(site_path.read_text(encoding="utf-8"), begin, end)
+            site_text = site_path.read_text(encoding="utf-8")
+            marked = extract_marked(site_text, begin, end)
             if marked is None:
+                expected_raw = kit_path.read_text(encoding="utf-8")
+                if site_rel.endswith(".css") and expected_raw in site_text:
+                    continue
                 errors.append(f"consumer {key}: missing markers in {site_rel}")
                 continue
             expected = kit_path.read_text(encoding="utf-8")
@@ -126,25 +142,23 @@ def check_hub_consumers(manifest: dict) -> list[str]:
 
     build_py = (REPO_ROOT / "scripts" / "build.py").read_text(encoding="utf-8")
     for needle in (
-        "from kit.shell import",
-        "from kit.analytics_loader import",
-        "from kit.analytics_registry import",
+        "from kit.python.shell import",
+        "from kit.python.analytics_loader import",
+        "from kit.python.analytics_registry import",
     ):
         if needle not in build_py:
             errors.append(f"scripts/build.py must import kit via {needle!r}")
 
     # No hand-maintained duplicate loader body in build.py.
-    if "data-sn-analytics-loader" in build_py and "render_analytics_loader" in build_py:
-        # allow re-export / call sites; forbid inline script assembly
-        if "www.googletagmanager.com/gtag/js" in build_py:
-            errors.append(
-                "scripts/build.py still contains a hand-typed analytics loader body"
-            )
+    if "def render_back_to_top" in build_py:
+        errors.append("scripts/build.py must not define render_back_to_top")
+    if "www.googletagmanager.com/gtag/js" in build_py:
+        errors.append("scripts/build.py still contains a hand-typed analytics loader body")
     if 'data-back-to-top aria-label="Back to top"' in build_py:
         errors.append("scripts/build.py still hardcodes back-to-top markup")
     if "mailto:contact@sarawak.news" in build_py:
         errors.append(
-            "scripts/build.py still hardcodes Contact mailto (must come from kit.shell)"
+            "scripts/build.py still hardcodes Contact mailto (must come from kit.python.shell)"
         )
     return errors
 
@@ -171,7 +185,19 @@ def git_show(hub: Path, pin: str, rel: str) -> bytes:
     return subprocess.check_output(["git", "-C", str(hub), "show", f"{pin}:kit/{rel}"])
 
 
-def check_sister(manifest: dict, hub: Path) -> list[str]:
+def pinned_file_list(hub: Path, pin: str) -> list[str]:
+    try:
+        raw = git_show(hub, pin, "MANIFEST.json")
+    except subprocess.CalledProcessError as exc:
+        raise SystemExit(f"pin {pin[:12]} has no kit/MANIFEST.json") from exc
+    remote = json.loads(raw.decode("utf-8"))
+    files = remote.get("files", [])
+    if not isinstance(files, list):
+        raise SystemExit(f"pin {pin[:12]} kit/MANIFEST.json has no files list")
+    return list(dict.fromkeys(["MANIFEST.json", *files]))
+
+
+def check_sister(hub: Path) -> list[str]:
     errors: list[str] = []
     pin = PIN_PATH.read_text(encoding="utf-8").strip()
     if not pin:
@@ -184,7 +210,12 @@ def check_sister(manifest: dict, hub: Path) -> list[str]:
     except subprocess.CalledProcessError:
         return [f"pin {pin} is not a commit in {hub}"]
 
-    for rel in manifest["files"]:
+    try:
+        files = pinned_file_list(hub, pin)
+    except SystemExit as exc:
+        return [str(exc)]
+
+    for rel in files:
         local = KIT_ROOT / rel
         if not local.is_file():
             errors.append(f"missing vendored kit/{rel}")
@@ -200,11 +231,11 @@ def check_sister(manifest: dict, hub: Path) -> list[str]:
     return errors
 
 
-def sister_sync(manifest: dict, hub: Path) -> None:
+def sister_sync(hub: Path) -> None:
     pin = PIN_PATH.read_text(encoding="utf-8").strip()
     if not pin:
         raise SystemExit("PIN is empty")
-    for rel in manifest["files"]:
+    for rel in pinned_file_list(hub, pin):
         data = git_show(hub, pin, rel)
         dest = KIT_ROOT / rel
         dest.parent.mkdir(parents=True, exist_ok=True)
@@ -219,15 +250,11 @@ def main() -> int:
     ap.add_argument("--hub-path", default=os.environ.get("SN_HUB_PATH", ""))
     args = ap.parse_args()
     if not args.check and not args.sync:
-        ap.error("pass --check and/or --sync")
+        args.sync = True
 
     if not MANIFEST_PATH.is_file():
         return fail("missing MANIFEST.json")
     manifest = load_manifest()
-
-    for rel in manifest["files"]:
-        if not (KIT_ROOT / rel).is_file():
-            return fail(f"manifest file missing: {rel}")
 
     sister = PIN_PATH.is_file()
     if sister:
@@ -235,9 +262,9 @@ def main() -> int:
         if hub_path is None or not hub_path.is_dir():
             return fail("sister mode needs --hub-path or SN_HUB_PATH to the hub clone")
         if args.sync:
-            sister_sync(manifest, hub_path)
+            sister_sync(hub_path)
         if args.check:
-            errors = check_sister(manifest, hub_path) + check_invariants(manifest)
+            errors = check_sister(hub_path) + check_invariants(manifest, hub=False)
             if errors:
                 for err in errors:
                     print(f"FAIL kit sync: {err}", file=sys.stderr)
@@ -246,11 +273,14 @@ def main() -> int:
             return ok(f"vendored kit matches pin {pin[:12]}")
         return 0
 
-    # Hub source mode
+    for rel in manifest["files"]:
+        if not (KIT_ROOT / rel).is_file():
+            return fail(f"manifest file missing: {rel}")
+
     if args.sync:
         hub_sync(manifest)
     if args.check:
-        errors = check_invariants(manifest) + check_hub_consumers(manifest)
+        errors = check_invariants(manifest, hub=True) + check_hub_consumers(manifest)
         if errors:
             for err in errors:
                 print(f"FAIL kit sync: {err}", file=sys.stderr)

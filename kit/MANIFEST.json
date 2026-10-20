@@ -1,13 +1,13 @@
 {
   "version": 1,
   "files": [
-    "MANIFEST.json",
     "README.md",
+    "MANIFEST.json",
     "sync.py",
-    "__init__.py",
-    "shell.py",
-    "analytics_registry.py",
-    "analytics_loader.py",
+    "python/__init__.py",
+    "python/shell.py",
+    "python/analytics_registry.py",
+    "python/analytics_loader.py",
     "assets/icons/nav-mark-transparent.svg",
     "assets/icons/nav-mark-transparent-dark.svg",
     "css/back-to-top.css",
@@ -16,43 +16,38 @@
   "invariants": [
     {
       "id": "footer-contact",
-      "path": "shell.py",
+      "path": "python/shell.py",
       "must_contain": "mailto:contact@sarawak.news"
     },
     {
       "id": "back-to-top-attr",
-      "path": "shell.py",
+      "path": "python/shell.py",
       "must_contain": "data-back-to-top"
     },
     {
       "id": "back-to-top-label",
-      "path": "shell.py",
+      "path": "python/shell.py",
       "must_contain": "back-to-top-label"
     },
     {
       "id": "back-to-top-arrow",
-      "path": "shell.py",
+      "path": "python/shell.py",
       "must_contain": "back-to-top-arrow"
     },
     {
       "id": "analytics-loader-attr",
-      "path": "analytics_loader.py",
+      "path": "python/analytics_loader.py",
       "must_contain": "data-sn-analytics-loader"
     },
     {
-      "id": "analytics-internal-param",
-      "path": "analytics_loader.py",
-      "must_contain": "traffic_type"
+      "id": "analytics-cookie-from-registry",
+      "path": "python/analytics_loader.py",
+      "must_contain": ".internal_cookie"
     },
     {
-      "id": "btt-css-class",
-      "path": "css/back-to-top.css",
-      "must_contain": ".back-to-top"
-    },
-    {
-      "id": "btt-js-selector",
-      "path": "js/back-to-top.js",
-      "must_contain": "[data-back-to-top]"
+      "id": "analytics-cookie-sn-internal",
+      "path": "../data/analytics.json",
+      "must_contain": "\"internal_cookie\": \"sn_internal\""
     }
   ],
   "hub_consumers": {

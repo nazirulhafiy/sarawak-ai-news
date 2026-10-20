@@ -81,7 +81,6 @@ def render_footer(
     brand_note: str,
     active: str,
     explore_items: list[NavItem] | tuple[NavItem, ...],
-    extra_nav_html: str = "",
     credit_html: str | None = None,
 ) -> str:
     """Render the shared footer. Contact is always the last Explore link."""
@@ -114,7 +113,7 @@ def render_footer(
         <ul>
           {explore}
         </ul>
-{extra_nav_html}      </nav>
+      </nav>
     </div>
     <div class="site-footer-bottom">
       <p>{credit_html}</p>

@@ -74,7 +74,7 @@ class KitSyncTests(unittest.TestCase):
         hub = _hub_path()
         if hub is None:
             self.skipTest("hub clone with kit PIN commit not available")
-        target = ROOT / "kit" / "shell.py"
+        target = ROOT / "kit" / "python" / "shell.py"
         original = target.read_text(encoding="utf-8")
         try:
             target.write_text(
