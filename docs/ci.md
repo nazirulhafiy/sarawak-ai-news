@@ -2,8 +2,14 @@
 
 ## Build workflow
 
-The **build** workflow (`.github/workflows/build.yml`) runs tests, audits, a static
-build, and (on `main` pushes) GitHub Pages deploy.
+The **build** workflow (`.github/workflows/build.yml`) checks the vendored kit
+pin against hub, runs tests, audits, a static build, an analytics dist check,
+and (on `main` pushes) GitHub Pages deploy.
+
+Kit check: checkout `nazirulhafiy/sarawak-news-hub` at the SHA in `kit/PIN`, then
+`python3 kit/sync.py --check --hub-path .hub-kit-ref`. Local kit edits or a
+stale pin fail the job.
+
 
 ### Concurrency
 
@@ -27,8 +33,11 @@ The check watches only design and behavior sources, not editorial content:
 - `site/**/*.css`
 - `site/**/*.js`
 - `site/fonts/**`
+- `kit/**` (shared Sarawak News kit)
 - `scripts/build.py` (HTML page structure and markup are templated here)
+- `scripts/analytics_registry.py`, `scripts/check_analytics_dist.py`
 - `data/site.json` (site title, tagline, description, and About lead)
+- `data/analytics.json` (GA4 / CF registry)
 
 It does **not** watch other `data/` files (such as `items.json`), generated
 `dist/` output, or other content files, so daily news ingestion and publication

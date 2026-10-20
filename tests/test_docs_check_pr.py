@@ -21,7 +21,12 @@ class DocsCheckPrTests(unittest.TestCase):
     def test_watched_fonts_and_build(self) -> None:
         self.assertTrue(is_watched("site/fonts/OFL.txt"))
         self.assertTrue(is_watched("scripts/build.py"))
+        self.assertTrue(is_watched("scripts/analytics_registry.py"))
+        self.assertTrue(is_watched("scripts/check_analytics_dist.py"))
         self.assertTrue(is_watched("data/site.json"))
+        self.assertTrue(is_watched("data/analytics.json"))
+        self.assertTrue(is_watched("kit/shell.py"))
+        self.assertTrue(is_watched("kit/js/back-to-top.js"))
 
     def test_ignores_data_and_dist(self) -> None:
         self.assertFalse(is_watched("data/items.json"))
