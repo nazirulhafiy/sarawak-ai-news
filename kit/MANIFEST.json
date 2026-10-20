@@ -20,6 +20,12 @@
       "must_contain": "mailto:contact@sarawak.news"
     },
     {
+      "id": "footer-note-break",
+      "path": "python/shell.py",
+      "must_contain": "site-footer-note-break"
+    },
+
+    {
       "id": "back-to-top-attr",
       "path": "python/shell.py",
       "must_contain": "data-back-to-top"

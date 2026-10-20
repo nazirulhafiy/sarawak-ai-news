@@ -46,11 +46,11 @@ SITE_INTRODUCTION = (
     "Tracking artificial intelligence developments across Sarawak, bringing AI "
     "policy, projects, research and adoption into one source-linked brief."
 )
-# Footer summary note (plain text; kit.python.shell escapes HTML).
-FOOTER_BRAND_NOTE = (
+# Footer summary note: two sentences joined by kit FOOTER_NOTE_BREAK.
+FOOTER_BRAND_NOTE_PARTS = (
     "AI news updates are sourced from public reports, news outlets, and official "
-    "announcements. Each item links to its source and includes a concise editorial "
-    "summary."
+    "announcements.",
+    "Each item links to its source and includes a concise editorial summary.",
 )
 FOOTER_CREDIT_HTML = (
     'Built by <a class="site-footer-link site-footer-credit-link" '
@@ -234,7 +234,7 @@ def render_site_footer(active_page: str, site: dict[str, str] | None = None) -> 
     site = load_site() if site is None else site
     return kit_render_footer(
         brand_title=site["title"],
-        brand_note=FOOTER_BRAND_NOTE,
+        brand_note_parts=FOOTER_BRAND_NOTE_PARTS,
         active=active_page,
         explore_items=(
             NavItem("home", "/", "Home"),

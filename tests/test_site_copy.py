@@ -19,6 +19,10 @@ SKIP_DIR_NAMES = {
     "__pycache__",
     ".venv",
     "node_modules",
+    # Vendored fleet kit (hub-owned). Sync check enforces pin fidelity.
+    "kit",
+    # CI checkouts hub at the kit PIN here for kit/sync.py --check.
+    ".hub-kit-ref",
 }
 SKIP_SUFFIXES = {
     ".png",

@@ -62,8 +62,10 @@ The current direction is intentionally restrained:
 - Structured, contained footer rendered by `kit.python.shell.render_footer`: a
   source summary, a subtle desktop divider, vertical Home/About/Contact links
   (Contact always uses `mailto:contact@sarawak.news`), and a full-width builder
-  and independence attribution row. The footer follows the story list with a
-  restrained 40px section gap.
+  and independence attribution row. The footer note is two sentences joined by
+  the kit’s forced `<br class="site-footer-note-break" />` (`brand_note_parts`
+  / `FOOTER_NOTE_BREAK` in `kit.python.shell`). The footer follows the story
+  list with a restrained 40px section gap.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark
   cards, softened borders, brighter text, and preserved Sarawak yellow/red
   accents. The selected category filter pill keeps its black fill and white
@@ -268,7 +270,7 @@ commit recorded in `kit/PIN`. Delivery is a **vendored copy + PIN +
 
 | Kit path | Provides |
 | --- | --- |
-| `kit/python/shell.py` | Header, footer (always includes Contact `mailto:contact@sarawak.news`), back-to-top markup |
+| `kit/python/shell.py` | Header, footer (Contact `mailto:contact@sarawak.news`; optional `brand_note_parts` / `FOOTER_NOTE_BREAK`), back-to-top markup |
 | `kit/python/analytics_loader.py` | Registry-driven production loader (`data-sn-analytics-loader`) |
 | `kit/python/analytics_registry.py` | `data/analytics.json` validation (this site keeps its own registry file) |
 | `kit/assets/icons/` | Origami hornbill nav marks |

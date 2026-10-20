@@ -4,10 +4,14 @@
 from __future__ import annotations
 
 import html
+from collections.abc import Sequence
 from dataclasses import dataclass
 
 CONTACT_HREF = "mailto:contact@sarawak.news"
 CONTACT_LABEL = "Contact"
+
+# Forced mid-note line break (AI.Sarawak.News footer). Sites opt in via brand_note_parts.
+FOOTER_NOTE_BREAK = '<br class="site-footer-note-break" />'
 
 THEME_TOGGLE_SVG = """<svg class="theme-icon-morph" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
         <mask id="theme-toggle-moon-mask"><rect width="24" height="24" fill="#fff"></rect><circle cx="17" cy="7" r="7" fill="#000"></circle></mask>
@@ -75,15 +79,34 @@ def render_header(
   </header>"""
 
 
+def format_footer_note(
+    brand_note: str = "",
+    brand_note_parts: Sequence[str] | None = None,
+) -> str:
+    """Escape footer note text. With ``brand_note_parts``, join using FOOTER_NOTE_BREAK."""
+    if brand_note_parts is not None:
+        parts = [part.strip() for part in brand_note_parts if str(part).strip()]
+        if len(parts) < 2:
+            raise ValueError("brand_note_parts needs at least two non-empty strings")
+        return FOOTER_NOTE_BREAK.join(esc(part) for part in parts)
+    return esc(brand_note)
+
+
 def render_footer(
     *,
     brand_title: str,
-    brand_note: str,
+    brand_note: str = "",
     active: str,
     explore_items: list[NavItem] | tuple[NavItem, ...],
+    brand_note_parts: Sequence[str] | None = None,
     credit_html: str | None = None,
 ) -> str:
-    """Render the shared footer. Contact is always the last Explore link."""
+    """Render the shared footer. Contact is always the last Explore link.
+
+    Pass ``brand_note`` for a single escaped paragraph (hub, bantuan, events).
+    Pass ``brand_note_parts`` (two or more strings) to insert
+    ``<br class="site-footer-note-break" />`` between escaped sentences (AI).
+    """
     items = list(explore_items)
     if not any(item.href == CONTACT_HREF for item in items):
         items.append(NavItem("contact", CONTACT_HREF, CONTACT_LABEL))
@@ -96,6 +119,7 @@ def render_footer(
         )
 
     explore = "\n          ".join(link(item) for item in items)
+    note_html = format_footer_note(brand_note, brand_note_parts)
     if credit_html is None:
         credit_html = (
             'Built by <a class="site-footer-link site-footer-credit-link" '
@@ -106,7 +130,7 @@ def render_footer(
     <div class="site-footer-main">
       <div class="site-footer-summary">
         <p class="site-footer-brand">{esc(brand_title)}</p>
-        <p class="site-footer-note">{esc(brand_note)}</p>
+        <p class="site-footer-note">{note_html}</p>
       </div>
       <nav aria-label="Explore" class="site-footer-nav">
         <h2>Explore</h2>

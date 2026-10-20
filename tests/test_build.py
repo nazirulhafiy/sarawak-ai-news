@@ -131,12 +131,17 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<nav aria-label="Explore" class="site-footer-nav">', html)
         self.assertIn(f'<p class="site-footer-brand">{copy["title"]}</p>', html)
         self.assertIn('<p class="site-footer-note">', html)
+        self.assertIn('<br class="site-footer-note-break" />', html)
+        self.assertIn(
+            'AI news updates are sourced from public reports, news outlets, and official '
+            'announcements.<br class="site-footer-note-break" />Each item links to its '
+            'source and includes a concise editorial summary.',
+            html,
+        )
         self.assertIn('<h2>Explore</h2>', html)
         self.assertIn('<a class="site-footer-link" href="/" aria-current="page">Home</a>', html)
         self.assertIn('<a class="site-footer-link" href="about.html">About</a>', html)
         self.assertIn('<a class="site-footer-link" href="mailto:contact@sarawak.news">Contact</a>', html)
-        self.assertIn('AI news updates are sourced from public reports, news outlets, and official announcements.', html)
-        self.assertIn('Each item links to its source and includes a concise editorial summary.', html)
         self.assertIn('class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden', html)
         self.assertIn('class="back-to-top-label">Back to top</span>', html)
         self.assertIn('class="back-to-top-arrow" aria-hidden="true">↑</span>', html)
