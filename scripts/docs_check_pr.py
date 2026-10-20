@@ -16,7 +16,7 @@ from pathlib import Path
 # - kit/** (shared Sarawak News kit)
 # - scripts/build.py (page HTML is templated inline here; dist/*.html is generated only)
 # - scripts/analytics_registry.py, scripts/check_analytics_dist.py
-# - data/site.json, data/analytics.json
+# - data/site.json, data/analytics.json, data/hosting.json
 WATCHED_PREFIXES = (
     "site/fonts/",
     "kit/",
@@ -31,6 +31,7 @@ WATCHED_EXACT = (
     "scripts/check_analytics_dist.py",
     "data/site.json",
     "data/analytics.json",
+    "data/hosting.json",
 )
 
 DOCS_PREFIX = "docs/"

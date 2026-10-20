@@ -92,6 +92,22 @@ def title_pattern(title: str) -> re.Pattern[str]:
     return re.compile(rf"(?<![A-Za-z0-9.-]){escaped}(?![A-Za-z0-9.-])")
 
 
+def iter_checked_lines(text: str):
+    """Yield source lines, skipping generated-block interiors."""
+    skipping = False
+    begin = "<!-- BEGIN GENERATED:"
+    end = "<!-- END GENERATED:"
+    for line_no, line in enumerate(text.splitlines(), start=1):
+        if skipping:
+            if end in line:
+                skipping = False
+            continue
+        if begin in line:
+            skipping = end not in line
+            continue
+        yield line_no, line
+
+
 def find_hand_typed(path: Path, copy: dict[str, str]) -> list[str]:
     try:
         text = path.read_text(encoding="utf-8")
@@ -107,7 +123,7 @@ def find_hand_typed(path: Path, copy: dict[str, str]) -> list[str]:
     if copy["about_lead"] not in (copy["tagline"], copy["description"]):
         checks.append(("about_lead", re.compile(re.escape(copy["about_lead"]))))
 
-    for line_no, line in enumerate(text.splitlines(), start=1):
+    for line_no, line in iter_checked_lines(text):
         for label, pattern in checks:
             if pattern.search(line):
                 hits.append(f"{rel}:{line_no}: hand-typed {label}: {line.strip()}")

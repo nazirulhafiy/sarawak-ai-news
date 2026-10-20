@@ -35,6 +35,8 @@ jobs:
           python-version: '3.12'
       - name: Check shared kit sync
         run: python kit/sync.py --check --hub-path .hub-kit-ref
+      - name: Check generated docs
+        run: python3 kit/generate_docs.py --check
       - name: Run tests
         run: python -m unittest discover -s tests -v
       - name: Audit source dates

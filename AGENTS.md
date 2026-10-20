@@ -60,6 +60,7 @@ and re-sync. Local check:
 ```bash
 export SN_HUB_PATH=/path/to/sarawak-news-hub
 python3 kit/sync.py --check --hub-path "$SN_HUB_PATH"
+python3 kit/generate_docs.py --check
 ```
 
 ## Analytics (GA4 + Cloudflare)

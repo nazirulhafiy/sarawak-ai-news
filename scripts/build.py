@@ -21,6 +21,7 @@ from kit.python.analytics_loader import (  # noqa: E402
     render_analytics_loader as kit_render_analytics_loader,
 )
 from kit.python.analytics_registry import AnalyticsRegistry, load_analytics  # noqa: E402
+from kit.python.asset_urls import versioned_href  # noqa: E402
 from kit.python.shell import (  # noqa: E402
     NavItem,
     render_back_to_top,
@@ -39,7 +40,7 @@ SECTION_FILTERS = (
 )
 
 SITE_URL = "https://ai.sarawak.news/"
-SOCIAL_CARD_URL = f"{SITE_URL}social-card.png"
+SOCIAL_CARD_PATH = ROOT / "site" / "social-card.png"
 # Site title, tagline, description, and About lead live only in data/site.json.
 SITE_COPY_FIELDS = ("title", "tagline", "description", "about_lead")
 SITE_INTRODUCTION = (
@@ -78,6 +79,11 @@ def render_analytics_loader(registry: AnalyticsRegistry | None = None) -> str:
     return kit_render_analytics_loader(
         registry if registry is not None else analytics_registry()
     )
+
+
+def social_card_url() -> str:
+    """Absolute social-card URL with a content-hash query string."""
+    return versioned_href(f"{SITE_URL}social-card.png", SOCIAL_CARD_PATH)
 
 
 def load_json(path: Path):
@@ -367,13 +373,13 @@ def render_index(items: list[dict], site: dict[str, str] | None = None) -> str:
   <meta property="og:description" content="{esc(description)}" />
   <meta property="og:url" content="{esc(SITE_URL)}" />
   <meta property="og:site_name" content="{esc(site["title"])}" />
-  <meta property="og:image" content="{esc(SOCIAL_CARD_URL)}" />
+  <meta property="og:image" content="{esc(social_card_url())}" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{esc(site["title"])}" />
   <meta name="twitter:description" content="{esc(description)}" />
-  <meta name="twitter:image" content="{esc(SOCIAL_CARD_URL)}" />
+  <meta name="twitter:image" content="{esc(social_card_url())}" />
   <link rel="canonical" href="{esc(SITE_URL)}" />
   <title>{esc(page_title)}</title>
   <script type="application/ld+json">{structured_data}</script>
@@ -429,13 +435,13 @@ def render_about(site: dict[str, str] | None = None) -> str:
   <meta property="og:description" content="{esc(description)}" />
   <meta property="og:url" content="{esc(about_url)}" />
   <meta property="og:site_name" content="{esc(site["title"])}" />
-  <meta property="og:image" content="{esc(SOCIAL_CARD_URL)}" />
+  <meta property="og:image" content="{esc(social_card_url())}" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{esc(page_title)}" />
   <meta name="twitter:description" content="{esc(description)}" />
-  <meta name="twitter:image" content="{esc(SOCIAL_CARD_URL)}" />
+  <meta name="twitter:image" content="{esc(social_card_url())}" />
   <link rel="canonical" href="{esc(about_url)}" />
   <title>{esc(page_title)}</title>
   <script type="application/ld+json">{structured_data}</script>
@@ -526,7 +532,7 @@ def build() -> None:
     compact_css = (ROOT / "site" / "style.css").read_text(encoding="utf-8")
     (DIST / "style.css").write_text(compact_css, encoding="utf-8")
     (DIST / "app.js").write_text((ROOT / "site" / "app.js").read_text(encoding="utf-8"), encoding="utf-8")
-    shutil.copy2(ROOT / "site" / "social-card.png", DIST / "social-card.png")
+    shutil.copy2(SOCIAL_CARD_PATH, DIST / "social-card.png")
     copy_site_fonts()
     copy_nav_marks()
     (DIST / "items.json").write_text(json.dumps(items, indent=2), encoding="utf-8")
