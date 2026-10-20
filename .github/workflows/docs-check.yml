@@ -2,7 +2,9 @@
 # - site/**/*.css
 # - site/**/*.js
 # - site/fonts/** (any file under site/fonts/)
-# - scripts/build.py (inline HTML templates; dist/ is generated and not watched)
+# - kit/**
+# - scripts/build.py, scripts/analytics_registry.py, scripts/check_analytics_dist.py
+# - data/site.json, data/analytics.json
 name: docs check
 
 on:

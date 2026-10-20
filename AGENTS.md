@@ -51,12 +51,25 @@ a selected source is temporarily unavailable.
 
 For every screenshot, use `tools/shots.mjs` (3× phone, cropped to the change, light and dark). Default URL, crop, themes, and output directory come from `tools/shots.config.json` (see `docs/screenshots.md`). When capturing or opening the **live** site, use `https://ai.sarawak.news/?internal=1` so analytics treat the visit as internal (default in `tools/shots.config.json`).
 
+## Shared kit
+
+Fleet chrome (header, footer Contact, back-to-top, analytics loader, nav marks)
+is vendored from hub `kit/` at `kit/PIN`. Do not hand-edit `kit/` — bump the pin
+and re-sync. Local check:
+
+```bash
+export SN_HUB_PATH=/path/to/sarawak-news-hub
+python3 kit/sync.py --check --hub-path "$SN_HUB_PATH"
+```
+
 ## Analytics (GA4 + Cloudflare)
 
-- Measurement ID: `G-RJ2ZFQ52J7` (see `render_ga_script()` in `scripts/build.py`).
+- IDs live in `data/analytics.json` (measurement ID `G-RJ2ZFQ52J7`). Loader from
+  `kit.python.analytics_loader` via `render_analytics_loader()` in `scripts/build.py`.
 - GA and the Cloudflare Web Analytics beacon load only on production hostnames `ai.sarawak.news` and `www.ai.sarawak.news`. They do not load on localhost, `*.pages.dev`, `*.github.io`, `*.vercel.app`, or other hosts.
 - `?internal=1` sets cookie `sn_internal` (~1 year); `?internal=0` clears it. While set, gtag config includes `traffic_type: 'internal'`, and the Cloudflare beacon (`beacon.min.js`) is not loaded.
 - Daily agents and screenshot checks that hit the live site must open it with `?internal=1` so they skip counting in both GA4 (as internal) and Cloudflare Web Analytics.
+- After build, run `python3 scripts/check_analytics_dist.py`.
 
 ## Useful Commands
 

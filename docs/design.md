@@ -22,14 +22,15 @@ The current direction is intentionally restrained:
 - Refined top brand bar with a `16px` wordmark, compact `Home` and `About`
   links, a theme toggle, compact desktop height, and a Sarawak-color rule.
   The home link (`.brand`) starts with Design Bot’s origami line hornbill
-  (`#snnav` / hub `#snnav`), then the site `title` from `data/site.json`, with a small gap. Sources
-  are `site/icons/nav-mark-transparent.svg` (light) and
-  `site/icons/nav-mark-transparent-dark.svg` (dark; transparent, no `#111`
-  square), copied byte-for-byte from hub `main`. The build copies both to
-  `dist/icons/`. Images use `alt=""` and `aria-hidden`; the text labels the
-  link. Mark height matches the wordmark line (`1.15em`). The brand stays on
-  one line (`white-space: nowrap`) down to 375px. SVGs are used as supplied —
-  no recolouring. Favicon and footer brand text are unchanged.
+  (`#snnav` / hub `#snnav`), then the site `title` from `data/site.json`, with a small gap.
+  Canonical mark files live in the vendored `kit/assets/icons/`
+  (`nav-mark-transparent.svg` light, `nav-mark-transparent-dark.svg` dark;
+  transparent, no `#111` square). Matching copies under `site/icons/` are kept
+  as the local mirror; the build copies kit marks to `dist/icons/`. Images use
+  `alt=""` and `aria-hidden`; the text labels the link. Mark height matches the
+  wordmark line (`1.15em`). The brand stays on one line (`white-space: nowrap`)
+  down to 375px. SVGs are used as supplied — no recolouring. Favicon and footer
+  brand text are unchanged.
   The sticky bar is a full-viewport outer shell (edge-to-edge background and
   scrolled bottom border/shadow) with an inner `max-width: 760px` wrapper that
   keeps the wordmark, Home/About links, theme toggle, and menu aligned to the
@@ -58,11 +59,13 @@ The current direction is intentionally restrained:
 - Compact black index badges (26px desktop, 24px from 560px down) so the rank stays secondary to the title.
 - Source name highlighted in yellow.
 - On narrow viewports (`max-width: 560px`), each card’s meta row stacks as two lines: the date alone on the first line, then the yellow source chip and category on the second line with a middot separator (`SOURCE · CATEGORY`). Wider viewports keep the single-line `DATE · SOURCE · CATEGORY` meta row.
-- Structured, contained footer with a source summary, a subtle desktop divider,
-  vertical Home/About/Contact links (Contact uses
-  `mailto:contact@sarawak.news`), and a full-width builder and independence
-  attribution row. The footer follows the story list with a restrained 40px
-  section gap.
+- Structured, contained footer rendered by `kit.python.shell.render_footer`: a
+  source summary, a subtle desktop divider, vertical Home/About/Contact links
+  (Contact always uses `mailto:contact@sarawak.news`), and a full-width builder
+  and independence attribution row. The footer note is two sentences joined by
+  the kit’s forced `<br class="site-footer-note-break" />` (`brand_note_parts`
+  / `FOOTER_NOTE_BREAK` in `kit.python.shell`). The footer follows the story
+  list with a restrained 40px section gap.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark
   cards, softened borders, brighter text, and preserved Sarawak yellow/red
   accents. The selected category filter pill keeps its black fill and white
@@ -131,11 +134,13 @@ Behavior:
 - The masthead sticky state is driven by a passive scroll listener on `.bar`
   (independent of the category filter), so Home and About both get the scrolled
   edge treatment.
-- A fixed `Back to top` control sits in the viewport's bottom-right corner (not
-  beside the content column). It appears after 600 px of scroll with a short
+- Markup comes from `kit.python.shell.render_back_to_top`. CSS and JS are owned
+  by `kit/css/back-to-top.css` and `kit/js/back-to-top.js`, mirrored into
+  `site/style.css` / `site/app.js` between `/* sn-kit:back-to-top:begin|end */`
+  markers. The control sits in the viewport's bottom-right corner (not beside
+  the content column). It appears after 600 px of scroll with a short
   opacity/translate fade (~180 ms); `prefers-reduced-motion` disables that
-  motion. When hidden it is not focusable (`hidden`, `tabindex="-1"`,
-  `aria-hidden="true"`).
+  motion. When hidden it is not focusable (`hidden`).
 - Desktop (wider than 560 px): text pill `Back to top ↑`, `24px` from the
   viewport right and bottom edges. Typography and spacing are hardcoded on
   `.back-to-top` (not inherited from body tokens): Geist stack at `11px` /
@@ -255,29 +260,49 @@ Recommended adjustments before moving Variant D into production:
 - The brief currently has no archive, item detail view, or persistent category
   URL state.
 
+## Shared kit
+
+Fleet chrome shared with other sarawak.news sites is vendored from
+[sarawak-news-hub](https://github.com/nazirulhafiy/sarawak-news-hub) `kit/` at the
+commit recorded in `kit/PIN`. Delivery is a **vendored copy + PIN +
+`python3 kit/sync.py --check --hub-path …`**, not a git submodule. See
+`kit/README.md`.
+
+| Kit path | Provides |
+| --- | --- |
+| `kit/python/shell.py` | Header, footer (Contact `mailto:contact@sarawak.news`; optional `brand_note_parts` / `FOOTER_NOTE_BREAK`), back-to-top markup |
+| `kit/python/analytics_loader.py` | Registry-driven production loader (`data-sn-analytics-loader`) |
+| `kit/python/analytics_registry.py` | `data/analytics.json` validation (this site keeps its own registry file) |
+| `kit/assets/icons/` | Origami hornbill nav marks |
+| `kit/css/back-to-top.css` / `kit/js/back-to-top.js` | Back-to-top rules and behaviour (mirrored into `site/style.css` / `site/app.js` inside `sn-kit:back-to-top` markers) |
+
+CI runs `python3 kit/sync.py --check --hub-path .hub-kit-ref` before tests. That
+check fails on local kit edits, a stale PIN, or invariant breaks (for example
+removing Contact).
+
 ## Analytics
 
-Production pages are generated by `scripts/build.py` (for example `dist/index.html`
-after a local build). Each HTML document includes:
+IDs, cookie name, and CF `spa` live in `data/analytics.json` (fleet kit shape,
+`version: 1`). Measurement ID `G-RJ2ZFQ52J7` and CF token
+`092a061973fc4d899cd2e4b52952af89` stay on this site's registry — do not change
+them when bumping the kit pin. The loader implementation lives in
+`kit/python/analytics_loader.py`; `scripts/build.py` → `render_analytics_loader()` emits
+**one** inline `<script data-sn-analytics-loader>` per page in `<head>` (edit the
+registry / kit, not `dist/`). CI runs `scripts/check_analytics_dist.py` so each
+built HTML page has exactly one loader, only registry GA4 / CF tokens, only the
+registry cookie (plus per-host `legacy_internal_cookies` honour), and CF `spa`
+matching the registry (`true` here).
 
-- Google Analytics 4: measurement ID `G-RJ2ZFQ52J7`, injected in `<head>` via
-  `render_ga_script()`. The inline snippet loads `gtag.js` from
-  `www.googletagmanager.com` only when `location.hostname` is
-  `ai.sarawak.news` or `www.ai.sarawak.news`. Preview hosts
-  (`*.pages.dev`, `*.github.io`, `*.vercel.app`, `localhost`, and any other
-  hostname) never load GA.
-- Internal traffic: on a production host, `?internal=1` sets a first-party
-  cookie `sn_internal=1` (`path=/`, `max-age=31536000` ≈ 1 year, `SameSite=Lax`,
-  `Secure`). `?internal=0` clears it. While the cookie is present,
-  `gtag('config', …)` sends `traffic_type: 'internal'` for GA4 internal-traffic
-  filtering, and the Cloudflare Web Analytics beacon is not loaded. Agents and
-  screenshot checks should open the live site with
+- Host gate: `ai.sarawak.news` and `www.ai.sarawak.news` only. Preview hosts
+  never load GA or the Cloudflare beacon.
+- Internal traffic: `?internal=1` sets first-party `sn_internal=1`
+  (`path=/`, `max-age=31536000` ≈ 1 year, `SameSite=Lax`, `Secure` on https).
+  `?internal=0` clears the primary and every listed legacy cookie. While
+  internal, GA4 gets `traffic_type: 'internal'` and the CF beacon is skipped.
+  Agents and screenshot checks should open
   `https://ai.sarawak.news/?internal=1` (see `AGENTS.md` and
   `tools/shots.config.json`).
-- Cloudflare Web Analytics: injected before `</body>` via
-  `render_analytics_script()`. The inline snippet loads deferred
-  `beacon.min.js` from `static.cloudflareinsights.com` only on the same
-  production hostnames as GA, and only when `sn_internal` is absent, with
-  `data-cf-beacon` token `092a061973fc4d899cd2e4b52952af89` and `"spa": true`.
+- Cloudflare Web Analytics: `spa: true`, same production hosts, only when not
+  internal.
 
 - No Content-Security-Policy is set; if one is added, allow `www.googletagmanager.com`, `*.google-analytics.com` and `static.cloudflareinsights.com`.

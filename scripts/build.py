@@ -4,6 +4,7 @@ import html
 import json
 import re
 import shutil
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -11,6 +12,21 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 DIST = ROOT / "dist"
 SITE_META_PATH = DATA / "site.json"
+
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from kit.python.analytics_loader import (  # noqa: E402
+    ANALYTICS_MAX_AGE,
+    render_analytics_loader as kit_render_analytics_loader,
+)
+from kit.python.analytics_registry import AnalyticsRegistry, load_analytics  # noqa: E402
+from kit.python.shell import (  # noqa: E402
+    NavItem,
+    render_back_to_top,
+    render_footer as kit_render_footer,
+    render_header as kit_render_header,
+)
 
 SECTION_FILTERS = (
     "Policy",
@@ -30,70 +46,37 @@ SITE_INTRODUCTION = (
     "Tracking artificial intelligence developments across Sarawak, bringing AI "
     "policy, projects, research and adoption into one source-linked brief."
 )
+# Footer summary note: two sentences joined by kit FOOTER_NOTE_BREAK.
+FOOTER_BRAND_NOTE_PARTS = (
+    "AI news updates are sourced from public reports, news outlets, and official "
+    "announcements.",
+    "Each item links to its source and includes a concise editorial summary.",
+)
+FOOTER_CREDIT_HTML = (
+    'Built by <a class="site-footer-link site-footer-credit-link" '
+    'href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>, '
+    "an independent publication. Not affiliated with the Sarawak Government."
+)
 BRIEF_NET_SVG = (ROOT / "site" / "brief-net.svg").read_text(encoding="utf-8").strip()
-CLOUDFLARE_WEB_ANALYTICS_TOKEN = "092a061973fc4d899cd2e4b52952af89"
 
 
-GA_MEASUREMENT_ID = "G-RJ2ZFQ52J7"
-GA_PRODUCTION_HOSTS = ("ai.sarawak.news", "www.ai.sarawak.news")
-GA_INTERNAL_COOKIE = "sn_internal"
-GA_INTERNAL_MAX_AGE_SECONDS = 365 * 24 * 60 * 60  # ~1 year
+def analytics_registry() -> AnalyticsRegistry:
+    return load_analytics()
 
 
-def render_ga_script() -> str:
-    """Emit production-only GA4 loader with optional internal traffic cookie.
-
-    Loads gtag only on GA_PRODUCTION_HOSTS. Query ``?internal=1`` sets a
-    long-lived first-party cookie; ``?internal=0`` clears it. While the cookie
-    is set, ``gtag('config', …)`` includes ``traffic_type: 'internal'``.
-    """
-    hosts_js = json.dumps(list(GA_PRODUCTION_HOSTS))
-    cookie_js = json.dumps(GA_INTERNAL_COOKIE)
-    id_js = json.dumps(GA_MEASUREMENT_ID)
-    max_age = GA_INTERNAL_MAX_AGE_SECONDS
-    return (
-        "<script>(function(){"
-        f"var H={hosts_js},C={cookie_js},M={id_js},A={max_age};"
-        "if(H.indexOf(location.hostname)<0)return;"
-        "var v=new URLSearchParams(location.search).get('internal');"
-        "if(v==='1')document.cookie=C+'=1;path=/;max-age='+A+';SameSite=Lax;Secure';"
-        "else if(v==='0')document.cookie=C+'=;path=/;max-age=0;SameSite=Lax;Secure';"
-        "var internal=document.cookie.split(';').some(function(p){return p.trim()===C+'=1';});"
-        "window.dataLayer=window.dataLayer||[];"
-        "function gtag(){dataLayer.push(arguments);}window.gtag=gtag;"
-        "var s=document.createElement('script');s.async=true;"
-        "s.src='https://www.googletagmanager.com/gtag/js?id='+M;"
-        "document.head.appendChild(s);"
-        "gtag('js',new Date());"
-        "var cfg={};if(internal)cfg.traffic_type='internal';"
-        "gtag('config',M,cfg);"
-        "})();</script>"
-    )
+# Resolved once at import for tests that still read module-level names.
+_ANALYTICS = analytics_registry()
+GA_MEASUREMENT_ID = _ANALYTICS.primary_ga4_id()
+CLOUDFLARE_WEB_ANALYTICS_TOKEN = _ANALYTICS.primary_cf_token()
+GA_PRODUCTION_HOSTS = _ANALYTICS.hostnames
+GA_INTERNAL_COOKIE = _ANALYTICS.internal_cookie
+GA_INTERNAL_MAX_AGE_SECONDS = ANALYTICS_MAX_AGE
 
 
-def render_analytics_script() -> str:
-    """Emit Cloudflare Web Analytics beacon, gated like GA4.
-
-    Loads ``beacon.min.js`` only on ``GA_PRODUCTION_HOSTS`` and only when the
-    ``sn_internal`` cookie (set via ``?internal=1`` in ``render_ga_script``) is
-    absent, so agent/test visits are not counted in Cloudflare either.
-    """
-    beacon = json.dumps(
-        {"token": CLOUDFLARE_WEB_ANALYTICS_TOKEN, "spa": True},
-        separators=(",", ":"),
-    )
-    hosts_js = json.dumps(list(GA_PRODUCTION_HOSTS))
-    cookie_js = json.dumps(GA_INTERNAL_COOKIE)
-    return (
-        "<script>(function(){"
-        f"var H={hosts_js},C={cookie_js};"
-        "if(H.indexOf(location.hostname)<0)return;"
-        "if(document.cookie.split(';').some(function(p){return p.trim()===C+'=1';}))return;"
-        "var s=document.createElement('script');s.defer=true;"
-        "s.src='https://static.cloudflareinsights.com/beacon.min.js';"
-        f"s.setAttribute('data-cf-beacon','{beacon}');"
-        "document.body.appendChild(s);"
-        "})();</script>"
+def render_analytics_loader(registry: AnalyticsRegistry | None = None) -> str:
+    """Emit the shared kit analytics loader from ``data/analytics.json``."""
+    return kit_render_analytics_loader(
+        registry if registry is not None else analytics_registry()
     )
 
 
@@ -236,61 +219,29 @@ def render_category_filter(items: list[dict]) -> str:
 
 def render_site_header(active_page: str, site: dict[str, str] | None = None) -> str:
     site = load_site() if site is None else site
-    home_current = ' class="site-nav-link is-active" aria-current="page"' if active_page == "home" else ' class="site-nav-link"'
-    about_current = ' class="site-nav-link is-active" aria-current="page"' if active_page == "about" else ' class="site-nav-link"'
-    return f"""
-  <header class="bar">
-    <div class="bar-inner">
-      <span class="brand-lockup"><a class="brand" href="/"><img class="brand-mark brand-mark-light" src="icons/nav-mark-transparent.svg" alt="" width="220" height="220" decoding="async" aria-hidden="true" /><img class="brand-mark brand-mark-dark" src="icons/nav-mark-transparent-dark.svg" alt="" width="220" height="220" decoding="async" aria-hidden="true" /><span class="brand-text">{esc(site["title"])}</span></a></span>
-      <nav class="site-nav" id="primary-navigation" aria-label="Primary">
-        <a{home_current} href="/">Home</a>
-        <a{about_current} href="about.html">About</a>
-      </nav>
-      <span class="bar-rule-tail" aria-hidden="true"></span>
-      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation" title="Open navigation">
-        <span></span><span></span><span></span>
-      </button>
-      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" title="Switch to dark mode">
-        <svg class="theme-icon-morph" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
-          <mask id="theme-toggle-moon-mask"><rect width="24" height="24" fill="#fff"></rect><circle cx="17" cy="7" r="7" fill="#000"></circle></mask>
-          <circle class="theme-icon-moon" cx="12" cy="12" r="9" mask="url(#theme-toggle-moon-mask)"></circle>
-          <circle class="theme-icon-sun" cx="12" cy="12" r="5"></circle>
-          <g class="theme-icon-rays">
-            <line x1="12" y1="1.6" x2="12" y2="3.8"></line><line x1="12" y1="20.2" x2="12" y2="22.4"></line>
-            <line x1="1.6" y1="12" x2="3.8" y2="12"></line><line x1="20.2" y1="12" x2="22.4" y2="12"></line>
-            <line x1="4.6" y1="4.6" x2="6.2" y2="6.2"></line><line x1="17.8" y1="17.8" x2="19.4" y2="19.4"></line>
-            <line x1="4.6" y1="19.4" x2="6.2" y2="17.8"></line><line x1="17.8" y1="6.2" x2="19.4" y2="4.6"></line>
-          </g>
-        </svg>
-      </button>
-    </div>
-  </header>"""
+    return kit_render_header(
+        brand_title=site["title"],
+        brand_href="/",
+        active=active_page,
+        nav_items=(
+            NavItem("home", "/", "Home"),
+            NavItem("about", "about.html", "About"),
+        ),
+    )
 
 
 def render_site_footer(active_page: str, site: dict[str, str] | None = None) -> str:
     site = load_site() if site is None else site
-    home_current = ' aria-current="page"' if active_page == "home" else ""
-    about_current = ' aria-current="page"' if active_page == "about" else ""
-    return f"""
-  <footer class="site-footer">
-    <div class="site-footer-main">
-      <div class="site-footer-summary">
-        <p class="site-footer-brand">{esc(site["title"])}</p>
-        <p class="site-footer-note">AI news updates are sourced from public reports, news outlets, and official announcements.<br class="site-footer-note-break" />Each item links to its source and includes a concise editorial summary.</p>
-      </div>
-      <nav aria-label="Explore" class="site-footer-nav">
-        <h2>Explore</h2>
-        <ul>
-          <li><a class="site-footer-link" href="/"{home_current}>Home</a></li>
-          <li><a class="site-footer-link" href="about.html"{about_current}>About</a></li>
-          <li><a class="site-footer-link" href="mailto:contact@sarawak.news">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-    <div class="site-footer-bottom">
-      <p>Built by <a class="site-footer-link site-footer-credit-link" href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>, an independent publication. Not affiliated with the Sarawak Government.</p>
-    </div>
-  </footer>"""
+    return kit_render_footer(
+        brand_title=site["title"],
+        brand_note_parts=FOOTER_BRAND_NOTE_PARTS,
+        active=active_page,
+        explore_items=(
+            NavItem("home", "/", "Home"),
+            NavItem("about", "about.html", "About"),
+        ),
+        credit_html=FOOTER_CREDIT_HTML,
+    )
 
 
 def render_compact_body(items: list[dict], site: dict[str, str] | None = None) -> str:
@@ -319,10 +270,9 @@ def render_compact_body(items: list[dict], site: dict[str, str] | None = None) -
     </section>
   </main>
 
-  <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden><span class="back-to-top-label">Back to top</span> <span class="back-to-top-arrow" aria-hidden="true">↑</span></button>
+{render_back_to_top()}
 
 {render_site_footer("home", site)}
-  {render_analytics_script()}
 </body>"""
 
 
@@ -371,7 +321,6 @@ def render_about_body(site: dict[str, str] | None = None) -> str:
   </main>
 
 {render_site_footer("about", site)}
-  {render_analytics_script()}
 </body>"""
 
 
@@ -441,7 +390,7 @@ def render_index(items: list[dict], site: dict[str, str] | None = None) -> str:
   <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
-  {render_ga_script()}
+  {render_analytics_loader()}
 </head>
 {render_compact_body(items, site)}
 </html>
@@ -503,7 +452,7 @@ def render_about(site: dict[str, str] | None = None) -> str:
   <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="style.css" />
   <script src="app.js" defer></script>
-  {render_ga_script()}
+  {render_analytics_loader()}
 </head>
 {render_about_body(site)}
 </html>
@@ -547,12 +496,16 @@ def copy_site_fonts() -> None:
 
 
 def copy_nav_marks() -> None:
+    """Copy origami nav marks from the vendored kit (site/icons is the mirror)."""
     icons_dist = DIST / "icons"
     icons_dist.mkdir(exist_ok=True)
     for mark_name in ("nav-mark-transparent.svg", "nav-mark-transparent-dark.svg"):
-        mark_src = ROOT / "site" / "icons" / mark_name
+        mark_src = ROOT / "kit" / "assets" / "icons" / mark_name
         if not mark_src.is_file():
-            raise SystemExit(f"missing nav mark {mark_src.relative_to(ROOT)}")
+            raise SystemExit(f"missing kit nav mark {mark_src.relative_to(ROOT)}")
+        site_mirror = ROOT / "site" / "icons" / mark_name
+        site_mirror.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(mark_src, site_mirror)
         shutil.copy2(mark_src, icons_dist / mark_name)
 
 

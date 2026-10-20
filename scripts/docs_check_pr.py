@@ -13,9 +13,13 @@ from pathlib import Path
 # - site/**/*.css
 # - site/**/*.js
 # - site/fonts/** (any file under site/fonts/)
+# - kit/** (shared Sarawak News kit)
 # - scripts/build.py (page HTML is templated inline here; dist/*.html is generated only)
+# - scripts/analytics_registry.py, scripts/check_analytics_dist.py
+# - data/site.json, data/analytics.json
 WATCHED_PREFIXES = (
     "site/fonts/",
+    "kit/",
 )
 WATCHED_SUFFIXES_IN_SITE = (
     ".css",
@@ -23,7 +27,10 @@ WATCHED_SUFFIXES_IN_SITE = (
 )
 WATCHED_EXACT = (
     "scripts/build.py",
+    "scripts/analytics_registry.py",
+    "scripts/check_analytics_dist.py",
     "data/site.json",
+    "data/analytics.json",
 )
 
 DOCS_PREFIX = "docs/"

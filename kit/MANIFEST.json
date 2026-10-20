@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "files": [
+    "README.md",
+    "MANIFEST.json",
+    "sync.py",
+    "python/__init__.py",
+    "python/shell.py",
+    "python/analytics_registry.py",
+    "python/analytics_loader.py",
+    "assets/icons/nav-mark-transparent.svg",
+    "assets/icons/nav-mark-transparent-dark.svg",
+    "css/back-to-top.css",
+    "js/back-to-top.js"
+  ],
+  "invariants": [
+    {
+      "id": "footer-contact",
+      "path": "python/shell.py",
+      "must_contain": "mailto:contact@sarawak.news"
+    },
+    {
+      "id": "footer-note-break",
+      "path": "python/shell.py",
+      "must_contain": "site-footer-note-break"
+    },
+
+    {
+      "id": "back-to-top-attr",
+      "path": "python/shell.py",
+      "must_contain": "data-back-to-top"
+    },
+    {
+      "id": "back-to-top-label",
+      "path": "python/shell.py",
+      "must_contain": "back-to-top-label"
+    },
+    {
+      "id": "back-to-top-arrow",
+      "path": "python/shell.py",
+      "must_contain": "back-to-top-arrow"
+    },
+    {
+      "id": "analytics-loader-attr",
+      "path": "python/analytics_loader.py",
+      "must_contain": "data-sn-analytics-loader"
+    },
+    {
+      "id": "analytics-cookie-from-registry",
+      "path": "python/analytics_loader.py",
+      "must_contain": ".internal_cookie"
+    },
+    {
+      "id": "analytics-cookie-sn-internal",
+      "path": "../data/analytics.json",
+      "must_contain": "\"internal_cookie\": \"sn_internal\""
+    }
+  ],
+  "hub_consumers": {
+    "icons": {
+      "kit": "assets/icons/nav-mark-transparent.svg",
+      "site": "site/icons/nav-mark-transparent.svg"
+    },
+    "icons_dark": {
+      "kit": "assets/icons/nav-mark-transparent-dark.svg",
+      "site": "site/icons/nav-mark-transparent-dark.svg"
+    },
+    "btt_css": {
+      "kit": "css/back-to-top.css",
+      "site": "site/style.css",
+      "marker": "sn-kit:back-to-top"
+    },
+    "btt_js": {
+      "kit": "js/back-to-top.js",
+      "site": "site/app.js",
+      "marker": "sn-kit:back-to-top"
+    }
+  }
+}
