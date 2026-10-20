@@ -11,6 +11,10 @@ sys.path.insert(0, str(ROOT))
 from scripts import build
 
 
+def site_copy() -> dict[str, str]:
+    return build.load_site()
+
+
 class BuildTest(unittest.TestCase):
     @staticmethod
     def reviewed_items():
@@ -92,11 +96,12 @@ class BuildTest(unittest.TestCase):
         expected_items = len(json.loads((ROOT / "data" / "items.json").read_text()))
         self.assertIn('<header class="bar">', html)
         self.assertIn('<div class="bar-inner">', html)
+        copy = site_copy()
         self.assertIn(
             '<span class="brand-lockup"><a class="brand" href="/">'
             '<img class="brand-mark brand-mark-light" src="icons/nav-mark-transparent.svg" alt="" width="220" height="220" decoding="async" aria-hidden="true" />'
             '<img class="brand-mark brand-mark-dark" src="icons/nav-mark-transparent-dark.svg" alt="" width="220" height="220" decoding="async" aria-hidden="true" />'
-            '<span class="brand-text">AI.Sarawak.News</span></a></span>',
+            f'<span class="brand-text">{copy["title"]}</span></a></span>',
             html,
         )
         self.assertTrue((ROOT / "dist" / "icons" / "nav-mark-transparent.svg").is_file())
@@ -116,15 +121,15 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<svg class="brief-net" role="presentation" viewBox="0 0 520 480"', html)
         self.assertIn('cx="260" cy="220" r="9"', html)
         self.assertIn('x1="80" y1="90" x2="180" y2="60"', html)
-        self.assertIn("Sarawak AI news, in one place.", html)
-        self.assertIn('<h1 id="brief-title">Sarawak AI news, in one place.</h1>', html)
+        self.assertIn(copy["tagline"], html)
+        self.assertIn(f'<h1 id="brief-title">{copy["tagline"]}</h1>', html)
         self.assertIn("Tracking artificial intelligence developments across Sarawak, bringing AI policy, projects, research and adoption into one source-linked brief.", html)
         self.assertIn("Latest intelligence signals", html)
         self.assertIn('Built by <a class="site-footer-link site-footer-credit-link" href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>, an independent publication. Not affiliated with the Sarawak Government.', html)
         self.assertIn('class="site-footer"', html)
         self.assertIn('<div class="site-footer-main">', html)
         self.assertIn('<nav aria-label="Explore" class="site-footer-nav">', html)
-        self.assertIn('<p class="site-footer-brand">AI.Sarawak.News</p>', html)
+        self.assertIn(f'<p class="site-footer-brand">{copy["title"]}</p>', html)
         self.assertIn('<p class="site-footer-note">', html)
         self.assertIn('<h2>Explore</h2>', html)
         self.assertIn('<a class="site-footer-link" href="/" aria-current="page">Home</a>', html)
@@ -151,15 +156,16 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<script src="app.js" defer></script>', html)
         self.assertIn('class="story-rank" aria-label="Chronological item 1">1</div>', html)
         self.assertIn('<time datetime="2026-06-24">24 Jun 2026</time>', html)
-        description = build.SEO_DESCRIPTION
+        description = copy["description"]
+        page_title = build.seo_document_title(copy)
         self.assertEqual(len(description), 153)
         self.assertIn(f'<meta name="description" content="{description}" />', html)
         self.assertIn(f'<meta property="og:description" content="{description}" />', html)
         self.assertIn(f'<meta name="twitter:description" content="{description}" />', html)
         self.assertIn('<meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />', html)
         self.assertIn('<meta name="robots" content="index,follow" />', html)
-        self.assertIn('<meta property="og:title" content="AI.Sarawak.News" />', html)
-        self.assertIn('<meta property="og:site_name" content="AI.Sarawak.News" />', html)
+        self.assertIn(f'<meta property="og:title" content="{copy["title"]}" />', html)
+        self.assertIn(f'<meta property="og:site_name" content="{copy["title"]}" />', html)
         self.assertIn('<meta property="og:url" content="https://ai.sarawak.news/" />', html)
         self.assertIn('<meta property="og:image" content="https://ai.sarawak.news/social-card.png" />', html)
         self.assertIn('<meta property="og:image:width" content="1200" />', html)
@@ -167,8 +173,8 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<meta name="twitter:card" content="summary_large_image" />', html)
         self.assertIn('<meta name="twitter:image" content="https://ai.sarawak.news/social-card.png" />', html)
         self.assertIn('<link rel="canonical" href="https://ai.sarawak.news/" />', html)
-        self.assertIn('<meta name="twitter:title" content="AI.Sarawak.News" />', html)
-        self.assertIn('<title>Sarawak AI News | AI.Sarawak.News</title>', html)
+        self.assertIn(f'<meta name="twitter:title" content="{copy["title"]}" />', html)
+        self.assertIn(f'<title>{page_title}</title>', html)
         self.assertIn('<script type="application/ld+json">', html)
         social_card = ROOT / "dist" / "social-card.png"
         self.assertTrue(social_card.exists())
@@ -179,9 +185,9 @@ class BuildTest(unittest.TestCase):
         schema = json.loads(structured_data)
         self.assertEqual([node["@type"] for node in schema["@graph"]], ["WebSite", "CollectionPage"])
         website, collection = schema["@graph"]
-        self.assertEqual(website["name"], "AI.Sarawak.News")
+        self.assertEqual(website["name"], copy["title"])
         self.assertEqual(website["description"], description)
-        self.assertEqual(collection["name"], "Sarawak AI News | AI.Sarawak.News")
+        self.assertEqual(collection["name"], page_title)
         self.assertEqual(collection["description"], description)
         sitemap = (ROOT / "dist" / "sitemap.xml").read_text()
         self.assertIn(f"<lastmod>{updated_iso[:10]}</lastmod>", sitemap)
@@ -204,8 +210,8 @@ class BuildTest(unittest.TestCase):
             self.assertIn('<meta http-equiv="refresh" content="0;url=https://ai.sarawak.news/" />', category_html)
             self.assertIn('<link rel="canonical" href="https://ai.sarawak.news/" />', category_html)
             self.assertIn('location.replace("https://ai.sarawak.news/");', category_html)
-            self.assertIn('href="https://ai.sarawak.news/">Continue to AI.Sarawak.News</a>', category_html)
-            self.assertIn(f'<title>{section_name} stories moved | AI.Sarawak.News</title>', category_html)
+            self.assertIn(f'href="https://ai.sarawak.news/">Continue to {copy["title"]}</a>', category_html)
+            self.assertIn(f'<title>{section_name} stories moved | {copy["title"]}</title>', category_html)
             self.assertNotIn('class="story-card"', category_html)
         self.assertEqual(sitemap.count("<url>"), 2)
         self.assertIn("<loc>https://ai.sarawak.news/</loc>", sitemap)
@@ -383,12 +389,16 @@ class BuildTest(unittest.TestCase):
         self.assertTrue(all(item.get("caveat") for item in public_items))
 
         about = (ROOT / "dist" / "about.html").read_text()
-        self.assertEqual(len(build.ABOUT_SEO_DESCRIPTION), 97)
-        self.assertIn('<title>About AI.Sarawak.News | Sarawak AI News</title>', about)
-        self.assertIn('<meta property="og:title" content="About AI.Sarawak.News | Sarawak AI News" />', about)
-        self.assertIn('<meta name="twitter:title" content="About AI.Sarawak.News | Sarawak AI News" />', about)
-        self.assertNotIn('<meta property="og:title" content="AI.Sarawak.News" />', about)
-        self.assertIn(f'<meta name="description" content="{build.ABOUT_SEO_DESCRIPTION}" />', about)
+        about_title = build.about_document_title(copy)
+        about_description = build.about_meta_description(copy)
+        self.assertEqual(len(about_description), 97)
+        self.assertIn(f'<title>{about_title}</title>', about)
+        self.assertIn(f'<meta property="og:title" content="{about_title}" />', about)
+        self.assertIn(f'<meta name="twitter:title" content="{about_title}" />', about)
+        self.assertNotIn(f'<meta property="og:title" content="{copy["title"]}" />', about)
+        self.assertIn(f'<meta name="description" content="{about_description}" />', about)
+        self.assertIn(f'<h1>About {copy["title"]}</h1>', about)
+        self.assertIn(copy["about_lead"], about)
         self.assertIn('<meta property="og:image" content="https://ai.sarawak.news/social-card.png" />', about)
         self.assertIn('<meta property="og:image:width" content="1200" />', about)
         self.assertIn('<meta property="og:image:height" content="630" />', about)
@@ -445,7 +455,7 @@ class BuildTest(unittest.TestCase):
         subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT, text=True, capture_output=True, check=True)
         self.assertFalse(alternative_dir.exists())
         self.assertTrue(deferred_about.exists())
-        self.assertIn("About AI.Sarawak.News", deferred_about.read_text())
+        self.assertIn(f'About {site_copy()["title"]}', deferred_about.read_text())
 
     def test_ga_script_production_gate_and_internal_traffic(self):
         ga = build.render_ga_script()

@@ -9,7 +9,7 @@ The current direction is intentionally restrained:
 
 - White page and white cards.
 - Broad `840px` maximum body width with a restrained `760px` reading column for the feed.
-- A borderless masthead panel with a centered editorial headline at a `40px` to `52px` responsive scale and balanced wrapping. The live hero H1 reads `Sarawak AI news, in one place.` The document `<title>` and schema `CollectionPage` name are `Sarawak AI News | AI.Sarawak.News`. The homepage `.brief` only carries a decorative mid-density network motif on the right (inline SVG, light gray in light mode and a slightly lifted gray in dark mode). The motif has no Sarawak colour stripe and does not replace the live headline, deck, or updated line.
+- A borderless masthead panel with a centered editorial headline at a `40px` to `52px` responsive scale and balanced wrapping. Site wording (`title`, `tagline`, `description`, `about_lead`) is owned by `data/site.json`; the build fills the hero H1 from `tagline`, document `<title>` / schema `CollectionPage` name as `Sarawak AI News | {title}`, and other brand surfaces from that file. Do not hand-type those strings in `scripts/`, `tests/`, `docs/`, or `README.md`. `tests/test_site_copy.py` fails if they appear elsewhere in source. The homepage `.brief` only carries a decorative mid-density network motif on the right (inline SVG, light gray in light mode and a slightly lifted gray in dark mode). The motif has no Sarawak colour stripe and does not replace the live headline, deck, or updated line.
 - Geist Sans typography self-hosted from `site/fonts/Geist-Variable.woff2`
   (variable weights 100–900; licence in `site/fonts/OFL.txt`). `scripts/build.py`
   preloads the WOFF2 in each HTML head and copies the font plus `OFL.txt` into
@@ -22,7 +22,7 @@ The current direction is intentionally restrained:
 - Refined top brand bar with a `16px` wordmark, compact `Home` and `About`
   links, a theme toggle, compact desktop height, and a Sarawak-color rule.
   The home link (`.brand`) starts with Design Bot’s origami line hornbill
-  (`#snnav` / hub `#snnav`), then “AI.Sarawak.News”, with a small gap. Sources
+  (`#snnav` / hub `#snnav`), then the site `title` from `data/site.json`, with a small gap. Sources
   are `site/icons/nav-mark-transparent.svg` (light) and
   `site/icons/nav-mark-transparent-dark.svg` (dark; transparent, no `#111`
   square), copied byte-for-byte from hub `main`. The build copies both to
@@ -172,8 +172,8 @@ stays high enough for repeated scanning.
 
 Homepage hierarchy:
 
-1. Brand and `Home`/`About` navigation.
-2. Hero headline: `Sarawak AI news, in one place.`
+1. Brand (`title` from `data/site.json`) and `Home`/`About` navigation.
+2. Hero headline: `tagline` from `data/site.json`.
 3. Brief deck (`p.brief-deck`, max-width `600px`): `Tracking artificial intelligence developments across Sarawak, bringing AI policy, projects, research and adoption into one source-linked brief.`
 4. Last updated weekday and date.
 5. Category filters.
@@ -190,12 +190,13 @@ a scrolled shadow so story content does not show through. The About page moves
 fuller publication context off the already wordy homepage while keeping the first
 screen focused on the live brief.
 
-The About page uses the same restrained system: the hero opens on the
-“About AI.Sarawak.News” heading (no eyebrow label), then a short lede and
-sections for why Sarawak AI, coverage categories (tags, not separate pages),
-how stories are picked and checked (one short paragraph: daily scan + summary note), and contact
-(`mailto:contact@sarawak.news` only). It keeps the explanation closer to the
-editorial feed instead of adding dashboard-like metrics or pills.
+The About page uses the same restrained system: the hero opens on
+`About {title}` from `data/site.json` (no eyebrow label), then the `about_lead`
+lede and sections for why Sarawak AI, coverage categories (tags, not separate
+pages), how stories are picked and checked (one short paragraph: daily scan +
+summary note), and contact (`mailto:contact@sarawak.news` only). It keeps the
+explanation closer to the editorial feed instead of adding dashboard-like
+metrics or pills.
 
 Each story card currently shows date, source, category, title, and summary. Its
 category label exactly matches the corresponding browse filter. On phone-width
