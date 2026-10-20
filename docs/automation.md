@@ -262,7 +262,9 @@ Do not copy a full article body. Keep `tags`, `why_it_matters`, `confidence`,
 
 When at least one story qualifies, the Cloud Agent must:
 
-1. Validate JSON, required fields, unique IDs, and unique URLs.
+1. Validate JSON, required fields, unique IDs, and unique URLs. Run
+   `python3 scripts/validate.py` so every item `source` is in
+   `data/allowed-sources.json` (fail rather than invent or near-miss a name).
 2. Run `python3 -m unittest discover -s tests -v`.
 3. Run `python3 scripts/audit_dates.py`.
 4. Run `python3 scripts/audit_dates.py --item-id <id>` for every added or

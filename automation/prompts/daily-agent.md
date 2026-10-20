@@ -32,7 +32,10 @@ copy, it refreshes that copy to `origin/main` before handing a run to a
 thread.
 
 1. Read `AGENTS.md`, `docs/automation.md`, `data/sources.json`,
-   `automation/candidate.schema.json`, and `data/items.json`.
+   `data/allowed-sources.json`, `automation/candidate.schema.json`, and
+   `data/items.json`. Use an exact allowlisted `source` attribution name
+   (never invent or near-miss labels such as `Borneo Post` for
+   `The Borneo Post`).
 2. Search the approved public sources. Open each possible original article.
 3. When a Borneo Post article, or any approved outlet's article, cannot be
    loaded (Cloudflare, timeout, or access error), look for the same story in
@@ -80,8 +83,11 @@ Run this stage only after Stage A produced a valid non-empty manifest.
    `docs/automation.md` before writing summaries or editing files.
 4. Preserve unrelated work and stop when an approved publication path is
    already dirty.
-5. Change only `README.md`, `data/items.json`, and `data/site.json`.
-6. Complete every required command and browser check in the contract.
+5. Change only `README.md`, `data/items.json`, and `data/site.json`. Do not
+   edit `data/allowed-sources.json` in a content run; if a correct outlet name
+   is missing from the allowlist, return `blocked` for Nazirul.
+6. Complete every required command and browser check in the contract, including
+   `python3 scripts/validate.py`.
    When opening or screenshotting the live site, use
    `https://ai.sarawak.news/?internal=1` (GA4 internal + skip Cloudflare beacon).
 7. If no candidate qualifies, make no changes, commit, or push.

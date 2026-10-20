@@ -42,7 +42,11 @@
       "properties": {
         "headline": {"type": "string", "minLength": 1},
         "publication_date": {"type": "string", "format": "date"},
-        "source": {"type": "string", "minLength": 1},
+        "source": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Attribution name for the published item. Must match an entry in data/allowed-sources.json exactly when published."
+        },
         "url": {"type": "string", "format": "uri", "pattern": "^https://"},
         "canonical_url": {"type": "string", "format": "uri", "pattern": "^https://"},
         "language": {"const": "en"},

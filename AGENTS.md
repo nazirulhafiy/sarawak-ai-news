@@ -7,6 +7,8 @@ source-attributed regional AI intelligence brief at `ai.sarawak.news`.
 The current app is intentionally small:
 
 - `data/items.json` contains reviewed public feed items.
+- `data/allowed-sources.json` is the closed set of allowed item `source`
+  attribution names (enforced by `scripts/validate.py`).
 - `data/sources.json` contains watched source/search pages for candidate discovery.
 - `data/site.json` owns site `title`, `tagline`, `description`, and
   `about_lead`, plus publisher `last_updated`. The public last-updated date on
@@ -32,8 +34,13 @@ The current app is intentionally small:
 Run the unit test suite before claiming changes work:
 
 ```bash
+python3 scripts/validate.py
 python3 -m unittest discover -s tests -v
 ```
+
+`scripts/validate.py` fails when any published item in `data/items.json` has a
+missing `source` or a name outside `data/allowed-sources.json`. Add a new
+attribution name to that allowlist before publishing from a new outlet.
 
 For content/data changes, also run:
 
