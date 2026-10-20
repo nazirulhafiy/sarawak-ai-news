@@ -23,6 +23,7 @@ WATCHED_SUFFIXES_IN_SITE = (
 )
 WATCHED_EXACT = (
     "scripts/build.py",
+    "data/site.json",
 )
 
 DOCS_PREFIX = "docs/"

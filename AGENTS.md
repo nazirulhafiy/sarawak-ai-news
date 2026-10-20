@@ -8,8 +8,9 @@ The current app is intentionally small:
 
 - `data/items.json` contains reviewed public feed items.
 - `data/sources.json` contains watched source/search pages for candidate discovery.
-- `data/site.json` contains site metadata. The public `last_updated` date is
-  derived at build time from the newest reviewed item.
+- `data/site.json` owns site `title`, `tagline`, `description`, and
+  `about_lead`, plus publisher `last_updated`. The public last-updated date on
+  the site is derived at build time from the newest reviewed item.
 - `scripts/build.py` renders the static site into `dist/`.
 - `scripts/ingest.py` discovers candidate URLs for manual review only.
 - `site/style.css` and `site/app.js` are the production front-end assets.

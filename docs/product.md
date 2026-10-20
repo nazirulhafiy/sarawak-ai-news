@@ -31,10 +31,10 @@ The current interface favors fast scanning over deep reading.
 
 The homepage shows:
 
-- Brand bar: `AI.Sarawak.News`, with `Home` and `About` navigation links and a
-  theme toggle.
-- Document title: `Sarawak AI News | AI.Sarawak.News`.
-- Hero headline: `Sarawak AI news, in one place.`
+- Brand bar: site `title` from `data/site.json`, with `Home` and `About`
+  navigation links and a theme toggle.
+- Document title: `Sarawak AI News | {title}` from `data/site.json`.
+- Hero headline: `tagline` from `data/site.json`.
 - Introductory copy describing the source-linked Sarawak AI coverage.
 - Last-updated weekday and date derived at build time from the newest reviewed
   item date.

@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 DIST = ROOT / "dist"
+SITE_META_PATH = DATA / "site.json"
 
 SECTION_FILTERS = (
     "Policy",
@@ -22,25 +23,14 @@ SECTION_FILTERS = (
 )
 
 SITE_URL = "https://ai.sarawak.news/"
-SITE_NAME = "AI.Sarawak.News"
 SOCIAL_CARD_URL = f"{SITE_URL}social-card.png"
-SEO_TITLE = "Sarawak AI News | AI.Sarawak.News"
-# Homepage social card title (tab title stays SEO_TITLE).
-HOMEPAGE_OG_TITLE = "AI.Sarawak.News"
-SEO_DESCRIPTION = (
-    "Sarawak AI news in one place: reviewed, source-linked updates on AI policy, "
-    "public services, education, workforce, research, infrastructure and business."
-)
+# Site title, tagline, description, and About lead live only in data/site.json.
+SITE_COPY_FIELDS = ("title", "tagline", "description", "about_lead")
 SITE_INTRODUCTION = (
     "Tracking artificial intelligence developments across Sarawak, bringing AI "
     "policy, projects, research and adoption into one source-linked brief."
 )
 BRIEF_NET_SVG = (ROOT / "site" / "brief-net.svg").read_text(encoding="utf-8").strip()
-ABOUT_SEO_TITLE = "About AI.Sarawak.News | Sarawak AI News"
-ABOUT_SEO_DESCRIPTION = (
-    "What AI.Sarawak.News covers and how each Sarawak AI story is checked "
-    "against its original source."
-)
 CLOUDFLARE_WEB_ANALYTICS_TOKEN = "092a061973fc4d899cd2e4b52952af89"
 
 
@@ -109,6 +99,37 @@ def render_analytics_script() -> str:
 
 def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_site(path: Path = SITE_META_PATH) -> dict[str, str]:
+    """Load title/tagline/description/about_lead from data/site.json."""
+    if not path.is_file():
+        raise SystemExit(f"missing site copy file: {path.relative_to(ROOT)}")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise SystemExit("data/site.json must be an object")
+    site: dict[str, str] = {}
+    for field in SITE_COPY_FIELDS:
+        value = payload.get(field)
+        if not isinstance(value, str) or not value.strip():
+            raise SystemExit(f"data/site.json is missing {field}")
+        site[field] = value.strip()
+    return site
+
+
+def seo_document_title(site: dict[str, str]) -> str:
+    return f"Sarawak AI News | {site['title']}"
+
+
+def about_document_title(site: dict[str, str]) -> str:
+    return f"About {site['title']} | Sarawak AI News"
+
+
+def about_meta_description(site: dict[str, str]) -> str:
+    return (
+        f"What {site['title']} covers and how each Sarawak AI story is checked "
+        "against its original source."
+    )
 
 
 def esc(value: object) -> str:
@@ -213,13 +234,14 @@ def render_category_filter(items: list[dict]) -> str:
     """
 
 
-def render_site_header(active_page: str) -> str:
+def render_site_header(active_page: str, site: dict[str, str] | None = None) -> str:
+    site = load_site() if site is None else site
     home_current = ' class="site-nav-link is-active" aria-current="page"' if active_page == "home" else ' class="site-nav-link"'
     about_current = ' class="site-nav-link is-active" aria-current="page"' if active_page == "about" else ' class="site-nav-link"'
     return f"""
   <header class="bar">
     <div class="bar-inner">
-      <span class="brand-lockup"><a class="brand" href="/"><img class="brand-mark brand-mark-light" src="icons/nav-mark-transparent.svg" alt="" width="220" height="220" decoding="async" aria-hidden="true" /><img class="brand-mark brand-mark-dark" src="icons/nav-mark-transparent-dark.svg" alt="" width="220" height="220" decoding="async" aria-hidden="true" /><span class="brand-text">AI.Sarawak.News</span></a></span>
+      <span class="brand-lockup"><a class="brand" href="/"><img class="brand-mark brand-mark-light" src="icons/nav-mark-transparent.svg" alt="" width="220" height="220" decoding="async" aria-hidden="true" /><img class="brand-mark brand-mark-dark" src="icons/nav-mark-transparent-dark.svg" alt="" width="220" height="220" decoding="async" aria-hidden="true" /><span class="brand-text">{esc(site["title"])}</span></a></span>
       <nav class="site-nav" id="primary-navigation" aria-label="Primary">
         <a{home_current} href="/">Home</a>
         <a{about_current} href="about.html">About</a>
@@ -245,14 +267,15 @@ def render_site_header(active_page: str) -> str:
   </header>"""
 
 
-def render_site_footer(active_page: str) -> str:
+def render_site_footer(active_page: str, site: dict[str, str] | None = None) -> str:
+    site = load_site() if site is None else site
     home_current = ' aria-current="page"' if active_page == "home" else ""
     about_current = ' aria-current="page"' if active_page == "about" else ""
     return f"""
   <footer class="site-footer">
     <div class="site-footer-main">
       <div class="site-footer-summary">
-        <p class="site-footer-brand">AI.Sarawak.News</p>
+        <p class="site-footer-brand">{esc(site["title"])}</p>
         <p class="site-footer-note">AI news updates are sourced from public reports, news outlets, and official announcements.<br class="site-footer-note-break" />Each item links to its source and includes a concise editorial summary.</p>
       </div>
       <nav aria-label="Explore" class="site-footer-nav">
@@ -270,7 +293,8 @@ def render_site_footer(active_page: str) -> str:
   </footer>"""
 
 
-def render_compact_body(items: list[dict]) -> str:
+def render_compact_body(items: list[dict], site: dict[str, str] | None = None) -> str:
+    site = load_site() if site is None else site
     feed = "\n".join(render_compact_signal(item, index) for index, item in enumerate(items, 1))
     category_filter = render_category_filter(items)
     updated_iso, _, updated_compact = last_updated(items)
@@ -278,12 +302,12 @@ def render_compact_body(items: list[dict]) -> str:
     return f"""<body>
   <a class="skip-link" href="#content">Skip to content</a>
 
-{render_site_header("home")}
+{render_site_header("home", site)}
 
   <main id="content">
     <header class="brief">
       {BRIEF_NET_SVG}
-      <h1 id="brief-title">Sarawak AI news, in one place.</h1>
+      <h1 id="brief-title">{esc(site["tagline"])}</h1>
       <p class="brief-deck">{esc(SITE_INTRODUCTION)}</p>
       <p class="updated"><span class="updated-label">Last updated</span><time datetime="{esc(updated_iso)}">{esc(updated_compact)}</time></p>
     </header>
@@ -297,21 +321,22 @@ def render_compact_body(items: list[dict]) -> str:
 
   <button class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden><span class="back-to-top-label">Back to top</span> <span class="back-to-top-arrow" aria-hidden="true">↑</span></button>
 
-{render_site_footer("home")}
+{render_site_footer("home", site)}
   {render_analytics_script()}
 </body>"""
 
 
-def render_about_body() -> str:
+def render_about_body(site: dict[str, str] | None = None) -> str:
+    site = load_site() if site is None else site
     return f"""<body>
   <a class="skip-link" href="#content">Skip to content</a>
 
-{render_site_header("about")}
+{render_site_header("about", site)}
 
   <main id="content" class="about-page">
     <header class="about-hero">
-      <h1>About AI.Sarawak.News</h1>
-      <p class="about-lede">An independent, source-linked briefing about how artificial intelligence and digital change are affecting Sarawak.</p>
+      <h1>About {esc(site["title"])}</h1>
+      <p class="about-lede">{esc(site["about_lead"])}</p>
     </header>
 
     <section class="about-section" aria-labelledby="about-why-title">
@@ -345,12 +370,15 @@ def render_about_body() -> str:
 
   </main>
 
-{render_site_footer("about")}
+{render_site_footer("about", site)}
   {render_analytics_script()}
 </body>"""
 
 
-def render_index(items: list[dict]) -> str:
+def render_index(items: list[dict], site: dict[str, str] | None = None) -> str:
+    site = load_site() if site is None else site
+    page_title = seo_document_title(site)
+    description = site["description"]
     structured_data = json.dumps(
         {
             "@context": "https://schema.org",
@@ -359,16 +387,16 @@ def render_index(items: list[dict]) -> str:
                     "@type": "WebSite",
                     "@id": f"{SITE_URL}#website",
                     "url": SITE_URL,
-                    "name": SITE_NAME,
-                    "description": SEO_DESCRIPTION,
+                    "name": site["title"],
+                    "description": description,
                     "inLanguage": "en",
                 },
                 {
                     "@type": "CollectionPage",
                     "@id": f"{SITE_URL}#collection",
                     "url": SITE_URL,
-                    "name": SEO_TITLE,
-                    "description": SEO_DESCRIPTION,
+                    "name": page_title,
+                    "description": description,
                     "isPartOf": {"@id": f"{SITE_URL}#website"},
                     "inLanguage": "en",
                 },
@@ -382,23 +410,23 @@ def render_index(items: list[dict]) -> str:
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="{esc(SEO_DESCRIPTION)}" />
+  <meta name="description" content="{esc(description)}" />
   <meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />
   <meta name="robots" content="index,follow" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="{esc(HOMEPAGE_OG_TITLE)}" />
-  <meta property="og:description" content="{esc(SEO_DESCRIPTION)}" />
+  <meta property="og:title" content="{esc(site["title"])}" />
+  <meta property="og:description" content="{esc(description)}" />
   <meta property="og:url" content="{esc(SITE_URL)}" />
-  <meta property="og:site_name" content="{esc(SITE_NAME)}" />
+  <meta property="og:site_name" content="{esc(site["title"])}" />
   <meta property="og:image" content="{esc(SOCIAL_CARD_URL)}" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{esc(HOMEPAGE_OG_TITLE)}" />
-  <meta name="twitter:description" content="{esc(SEO_DESCRIPTION)}" />
+  <meta name="twitter:title" content="{esc(site["title"])}" />
+  <meta name="twitter:description" content="{esc(description)}" />
   <meta name="twitter:image" content="{esc(SOCIAL_CARD_URL)}" />
   <link rel="canonical" href="{esc(SITE_URL)}" />
-  <title>{esc(SEO_TITLE)}</title>
+  <title>{esc(page_title)}</title>
   <script type="application/ld+json">{structured_data}</script>
   <script>
     document.documentElement.classList.add("js");
@@ -415,21 +443,24 @@ def render_index(items: list[dict]) -> str:
   <script src="app.js" defer></script>
   {render_ga_script()}
 </head>
-{render_compact_body(items)}
+{render_compact_body(items, site)}
 </html>
 """
 
 
-def render_about() -> str:
+def render_about(site: dict[str, str] | None = None) -> str:
+    site = load_site() if site is None else site
     about_url = f"{SITE_URL}about.html"
+    page_title = about_document_title(site)
+    description = about_meta_description(site)
     structured_data = json.dumps(
         {
             "@context": "https://schema.org",
             "@type": "AboutPage",
             "@id": f"{about_url}#about",
             "url": about_url,
-            "name": ABOUT_SEO_TITLE,
-            "description": ABOUT_SEO_DESCRIPTION,
+            "name": page_title,
+            "description": description,
             "isPartOf": {"@id": f"{SITE_URL}#website"},
             "inLanguage": "en",
         },
@@ -441,23 +472,23 @@ def render_about() -> str:
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="{esc(ABOUT_SEO_DESCRIPTION)}" />
+  <meta name="description" content="{esc(description)}" />
   <meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />
   <meta name="robots" content="index,follow" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="{esc(ABOUT_SEO_TITLE)}" />
-  <meta property="og:description" content="{esc(ABOUT_SEO_DESCRIPTION)}" />
+  <meta property="og:title" content="{esc(page_title)}" />
+  <meta property="og:description" content="{esc(description)}" />
   <meta property="og:url" content="{esc(about_url)}" />
-  <meta property="og:site_name" content="{esc(SITE_NAME)}" />
+  <meta property="og:site_name" content="{esc(site["title"])}" />
   <meta property="og:image" content="{esc(SOCIAL_CARD_URL)}" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{esc(ABOUT_SEO_TITLE)}" />
-  <meta name="twitter:description" content="{esc(ABOUT_SEO_DESCRIPTION)}" />
+  <meta name="twitter:title" content="{esc(page_title)}" />
+  <meta name="twitter:description" content="{esc(description)}" />
   <meta name="twitter:image" content="{esc(SOCIAL_CARD_URL)}" />
   <link rel="canonical" href="{esc(about_url)}" />
-  <title>{esc(ABOUT_SEO_TITLE)}</title>
+  <title>{esc(page_title)}</title>
   <script type="application/ld+json">{structured_data}</script>
   <script>
     document.documentElement.classList.add("js");
@@ -474,16 +505,17 @@ def render_about() -> str:
   <script src="app.js" defer></script>
   {render_ga_script()}
 </head>
-{render_about_body()}
+{render_about_body(site)}
 </html>
 """
 
 
 
-def render_category_redirect(section: str) -> str:
+def render_category_redirect(section: str, site: dict[str, str] | None = None) -> str:
     """Legacy category URL stub. Main has no filter preselect, so stubs go home."""
+    site = load_site() if site is None else site
     target = SITE_URL
-    title = f"{section} stories moved | {SITE_NAME}"
+    title = f"{section} stories moved | {site['title']}"
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -496,7 +528,7 @@ def render_category_redirect(section: str) -> str:
   <script>location.replace({json.dumps(target)});</script>
 </head>
 <body>
-  <p>{esc(section)} stories now live on the homepage. <a href="{esc(target)}">Continue to AI.Sarawak.News</a>.</p>
+  <p>{esc(section)} stories now live on the homepage. <a href="{esc(target)}">Continue to {esc(site["title"])}</a>.</p>
 </body>
 </html>
 """
@@ -526,16 +558,17 @@ def copy_nav_marks() -> None:
 
 def build() -> None:
     items = load_feed_items()
+    site = load_site()
     sitemap_lastmod = last_updated(items)[0]
     DIST.mkdir(exist_ok=True)
     alternative_dir = DIST / "alternative"
     if alternative_dir.exists():
         shutil.rmtree(alternative_dir)
-    (DIST / "index.html").write_text(render_index(items), encoding="utf-8")
-    (DIST / "about.html").write_text(render_about(), encoding="utf-8")
+    (DIST / "index.html").write_text(render_index(items, site), encoding="utf-8")
+    (DIST / "about.html").write_text(render_about(site), encoding="utf-8")
     for section in SECTION_FILTERS:
         (DIST / f"{slug(section)}.html").write_text(
-            render_category_redirect(section), encoding="utf-8"
+            render_category_redirect(section, site), encoding="utf-8"
         )
     compact_css = (ROOT / "site" / "style.css").read_text(encoding="utf-8")
     (DIST / "style.css").write_text(compact_css, encoding="utf-8")

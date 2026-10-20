@@ -8,8 +8,10 @@ This is an independent aggregator that tracks public news against that backdrop.
 
 **Read the live briefing:** [ai.sarawak.news](https://ai.sarawak.news/)
 
-The homepage hero headline is **Sarawak AI news, in one place.** The document
-`<title>` and schema `CollectionPage` name are **Sarawak AI News | AI.Sarawak.News**.
+Site title, tagline, description, and About lead live only in
+[`data/site.json`](data/site.json); the build fills every page surface from that
+file. `tests/test_site_copy.py` fails if those strings are hand-typed elsewhere
+in source.
 
 ## What You Will Find
 

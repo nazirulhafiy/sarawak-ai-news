@@ -28,9 +28,11 @@ The check watches only design and behavior sources, not editorial content:
 - `site/**/*.js`
 - `site/fonts/**`
 - `scripts/build.py` (HTML page structure and markup are templated here)
+- `data/site.json` (site title, tagline, description, and About lead)
 
-It does **not** watch `data/`, generated `dist/` output, or other content files, so
-daily news ingestion and publication are not blocked by this gate.
+It does **not** watch other `data/` files (such as `items.json`), generated
+`dist/` output, or other content files, so daily news ingestion and publication
+are not blocked by this gate.
 
 ### Pass and fail
 
