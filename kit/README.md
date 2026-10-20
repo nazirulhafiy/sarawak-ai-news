@@ -11,6 +11,10 @@ Sisters vendor the files and record the hub commit in `kit/PIN`. `python3 kit/sy
 | `python/shell.py` | `render_header`, `render_footer`, `render_back_to_top` |
 | `python/analytics_registry.py` | Load and validate `data/analytics.json` |
 | `python/analytics_loader.py` | `render_analytics_loader(registry)` |
+| `python/asset_urls.py` | `content_hash`, `versioned_href` |
+| `python/docs_facts.py` | Generated fact blocks |
+| `generate_docs.py` | Write or `--check` those blocks |
+| `favicon_sheet.py` | 16, 32, and 48 pixel contact sheet |
 | `assets/icons/nav-mark-transparent.svg` | Light nav mark |
 | `assets/icons/nav-mark-transparent-dark.svg` | Dark nav mark |
 | `css/back-to-top.css` | Back-to-top rules |
@@ -27,10 +31,11 @@ Sisters vendor the files and record the hub commit in `kit/PIN`. `python3 kit/sy
 
 The hub has no `kit/PIN`.
 
-Check the kit, the invariants, and the consumer copies.
+Check the kit, the invariants, and the consumer copies. Then check the generated doc blocks. The numbered steps below describe `kit/sync.py --check` only.
 
 ```bash
 python3 kit/sync.py --check
+python3 kit/generate_docs.py --check
 ```
 
 Refresh `site/icons/nav-mark-*.svg` and the back-to-top regions in `site/style.css` and `site/app.js` from the kit. `python3 kit/sync.py` with no flags does the same refresh.
@@ -70,3 +75,43 @@ python3 kit/sync.py --check --hub-path "$SN_HUB_PATH"
 Sister check hashes each vendored file against `git show <pin>:kit/<path>`. A local edit fails the check. Do not hand-edit vendored kit files. Bump `kit/PIN` and sync instead.
 
 Sister CI should run `python3 kit/sync.py --check` with the hub clone available at the pinned commit.
+
+## Generated docs
+
+`python/docs_facts.py` renders four blocks. `site-copy`, `analytics`, and `hosting` belong in `docs/design.md` and `README.md`. `design-tokens` belongs in `docs/design.md` only. Put the marker pair in the file first. The generator fills the interior and does not pick the location.
+
+```html
+<!-- BEGIN GENERATED: site-copy -->
+<!-- END GENERATED: site-copy -->
+```
+
+Use the same pair for `analytics`, `hosting`, and `design-tokens`.
+
+```bash
+python3 kit/generate_docs.py
+python3 kit/generate_docs.py --check
+```
+
+`--check` exits 1 when a marker interior does not match a fresh render, or when a marker pair is missing. Hub CI runs that command after `kit/sync.py --check`.
+
+`favicon_sheet.py` writes one PNG of the icon at 16, 32, and 48 pixels. It is a proof script, not a CI check. Omit `--src` to use `design-handoff/favicon-F1/apple-touch-icon.png`, or `icon-192.png` in that folder when the apple touch file is absent.
+
+```bash
+python3 kit/favicon_sheet.py --src design-handoff/favicon-F1/apple-touch-icon.png \
+  --out /tmp/favicon-sheet.png
+```
+
+Hosting facts come from `data/hosting.json` when that file exists. The keys are `target` and `hostname`. Otherwise the hostname is the text of `CNAME` and the target is GitHub Pages.
+
+After a sister vendors a new pin, add the marker pairs, then regenerate.
+
+```bash
+PIN=<new-tip>
+git -C "$SN_HUB_PATH" archive "$PIN" kit | tar -x -C .
+echo "$PIN" > kit/PIN
+python3 kit/sync.py --check --hub-path "$SN_HUB_PATH"
+python3 kit/generate_docs.py
+python3 kit/generate_docs.py --check
+python3 kit/favicon_sheet.py --src design-handoff/favicon-F1/apple-touch-icon.png \
+  --out /tmp/favicon-sheet.png
+```

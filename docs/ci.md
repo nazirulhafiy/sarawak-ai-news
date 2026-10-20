@@ -3,12 +3,18 @@
 ## Build workflow
 
 The **build** workflow (`.github/workflows/build.yml`) checks the vendored kit
-pin against hub, runs tests, audits, a static build, an analytics dist check,
-and (on `main` pushes) GitHub Pages deploy.
+pin against hub, checks generated docs, runs tests, audits, a static build, an
+analytics dist check, and (on `main` pushes) GitHub Pages deploy.
 
 Kit check: checkout `nazirulhafiy/sarawak-news-hub` at the SHA in `kit/PIN`, then
 `python3 kit/sync.py --check --hub-path .hub-kit-ref`. Local kit edits or a
 stale pin fail the job.
+
+Generated docs: `python3 kit/generate_docs.py --check` compares
+`BEGIN GENERATED` / `END GENERATED` blocks in `docs/design.md` and `README.md`
+to `data/site.json`, `data/analytics.json`, `data/hosting.json`, and
+`site/style.css` tokens. That check is separate from the prose docs check
+below.
 
 
 ### Concurrency
@@ -38,6 +44,7 @@ The check watches only design and behavior sources, not editorial content:
 - `scripts/analytics_registry.py`, `scripts/check_analytics_dist.py`
 - `data/site.json` (site title, tagline, description, and About lead)
 - `data/analytics.json` (GA4 / CF registry)
+- `data/hosting.json` (hostname and deploy target for generated hosting facts)
 
 It does **not** watch other `data/` files (such as `items.json`), generated
 `dist/` output, or other content files, so daily news ingestion and publication

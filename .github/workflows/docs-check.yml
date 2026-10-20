@@ -4,7 +4,7 @@
 # - site/fonts/** (any file under site/fonts/)
 # - kit/**
 # - scripts/build.py, scripts/analytics_registry.py, scripts/check_analytics_dist.py
-# - data/site.json, data/analytics.json
+# - data/site.json, data/analytics.json, data/hosting.json
 name: docs check
 
 on:

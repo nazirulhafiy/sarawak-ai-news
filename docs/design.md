@@ -9,7 +9,7 @@ The current direction is intentionally restrained:
 
 - White page and white cards.
 - Broad `840px` maximum body width with a restrained `760px` reading column for the feed.
-- A borderless masthead panel with a centered editorial headline at a `40px` to `52px` responsive scale and balanced wrapping. Site wording (`title`, `tagline`, `description`, `about_lead`) is owned by `data/site.json`; the build fills the hero H1 from `tagline`, document `<title>` / schema `CollectionPage` name as `Sarawak AI News | {title}`, and other brand surfaces from that file. Do not hand-type those strings in `scripts/`, `tests/`, `docs/`, or `README.md`. `tests/test_site_copy.py` fails if they appear elsewhere in source. The homepage `.brief` only carries a decorative mid-density network motif on the right (inline SVG, light gray in light mode and a slightly lifted gray in dark mode). The motif has no Sarawak colour stripe and does not replace the live headline, deck, or updated line.
+- A borderless masthead panel with a centered editorial headline at a `40px` to `52px` responsive scale and balanced wrapping. Site wording (`title`, `tagline`, `description`, `about_lead`) is owned by `data/site.json`; the build fills the hero H1 from `tagline`, document `<title>` / schema `CollectionPage` name as `Sarawak AI News | {title}`, and other brand surfaces from that file. Do not hand-type those strings outside `data/site.json`, except inside a generated block. `tests/test_site_copy.py` fails if they appear elsewhere in source. `python3 kit/generate_docs.py` writes the site-copy table under Visual System from `data/site.json`. The homepage `.brief` only carries a decorative mid-density network motif on the right (inline SVG, light gray in light mode and a slightly lifted gray in dark mode). The motif has no Sarawak colour stripe and does not replace the live headline, deck, or updated line.
 - Geist Sans typography self-hosted from `site/fonts/Geist-Variable.woff2`
   (variable weights 100–900; licence in `site/fonts/OFL.txt`). `scripts/build.py`
   preloads the WOFF2 in each HTML head and copies the font plus `OFL.txt` into
@@ -73,6 +73,13 @@ The current direction is intentionally restrained:
   against dark surfaces.
 - The homepage and supporting routes use a shared 1200x630 social card with
   the site name, current headline, short description, and Sarawak colour rule.
+  Home and About point `og:image` and `twitter:image` at
+  `https://ai.sarawak.news/social-card.png` plus a content-hash query string
+  from `versioned_href` in `kit/python/asset_urls.py` (first 12 hex characters
+  of the SHA-256 of `site/social-card.png`). The tab favicon stays the inline
+  emoji data URI; there is no published apple-touch icon or web app manifest
+  yet. `tests/test_asset_urls.py` fails if source trees contain a hand-typed
+  asset query stamp outside a generated block.
 
 The design is closer to an editorial memo or briefing page than to a dashboard.
 It is appropriate for proving source-attributed curation before investing in a
@@ -158,16 +165,35 @@ The page still works as a readable feed without JavaScript.
 
 ## Visual System
 
-Production tokens in `site/style.css`:
+Site wording from `data/site.json`:
 
-- Canvas/page/card: white.
-- Ink: near-black.
-- Muted text: gray.
-- Accent red: `#d22630`.
-- Accent yellow: `#f7c948`.
-- Accent black: `#111111`.
-- Dark canvas: `#0f1115`; dark card: `#171b22`; dark text and border tokens are
-  defined under `html[data-theme="dark"]`.
+<!-- BEGIN GENERATED: site-copy -->
+| Field | Value |
+| --- | --- |
+| `title` | AI.Sarawak.News |
+| `tagline` | Sarawak AI news, in one place. |
+| `description` | Sarawak AI news in one place: reviewed, source-linked updates on AI policy, public services, education, workforce, research, infrastructure and business. |
+<!-- END GENERATED: site-copy -->
+
+Production tokens come from `:root` and `html[data-theme="dark"]` in
+`site/style.css`. The table is generated from those rules.
+
+<!-- BEGIN GENERATED: design-tokens -->
+| Token | `:root` | `html[data-theme="dark"]` |
+| --- | --- | --- |
+| `--canvas` | #ffffff | #0f1115 |
+| `--page` | #ffffff | #0f1115 |
+| `--card` | #ffffff | #171b22 |
+| `--ink` | #111827 | #f3f5f7 |
+| `--muted` | #6b7280 | #aeb6c2 |
+| `--line` | #e2e4e9 | #2c333d |
+| `--sarawak-red` | #d22630 | #f15b61 |
+| `--sarawak-red-ink` | #9f1d26 | #ff8d92 |
+| `--sarawak-yellow` | #f7c948 | #f7c948 |
+| `--sarawak-yellow-soft` | #fffbea | #3a3110 |
+| `--sarawak-black` | #111111 | #111111 |
+| `--page-gutter` | 20px |  |
+<!-- END GENERATED: design-tokens -->
 
 Cards use 8 px radius or less in production. The layout stays restrained (no
 dashboard chrome) but story cards still use the shared hover lift above; density
@@ -273,28 +299,57 @@ commit recorded in `kit/PIN`. Delivery is a **vendored copy + PIN +
 | `kit/python/shell.py` | Header, footer (Contact `mailto:contact@sarawak.news`; optional `brand_note_parts` / `FOOTER_NOTE_BREAK`), back-to-top markup |
 | `kit/python/analytics_loader.py` | Registry-driven production loader (`data-sn-analytics-loader`) |
 | `kit/python/analytics_registry.py` | `data/analytics.json` validation (this site keeps its own registry file) |
+| `kit/python/asset_urls.py` | Content-hash query strings for share-image URLs |
+| `kit/python/docs_facts.py` | Generated fact blocks for `docs/design.md` and `README.md` |
+| `kit/generate_docs.py` | Writes those blocks, or checks them with `--check` |
+| `kit/favicon_sheet.py` | 16 / 32 / 48 favicon contact sheet (proof script, not a CI gate) |
 | `kit/assets/icons/` | Origami hornbill nav marks |
 | `kit/css/back-to-top.css` / `kit/js/back-to-top.js` | Back-to-top rules and behaviour (mirrored into `site/style.css` / `site/app.js` inside `sn-kit:back-to-top` markers) |
 
-CI runs `python3 kit/sync.py --check --hub-path .hub-kit-ref` before tests. That
-check fails on local kit edits, a stale PIN, or invariant breaks (for example
-removing Contact).
+CI runs `python3 kit/sync.py --check --hub-path .hub-kit-ref` before tests, then
+`python3 kit/generate_docs.py --check`. Kit sync fails on local kit edits, a
+stale PIN, or invariant breaks (for example removing Contact). The docs
+generator fails when a generated block does not match `data/site.json`, the
+analytics registry, `data/hosting.json`, or the custom properties in
+`site/style.css`. The prose docs check (`.github/workflows/docs-check.yml`)
+stays separate.
+
+## Deploy
+
+`scripts/build.py` writes `dist/` only. `.github/workflows/build.yml` tests and
+builds on every pull request. A push to `main` deploys that build with GitHub
+Pages. Hosting facts are owned by `data/hosting.json`.
+
+<!-- BEGIN GENERATED: hosting -->
+| Field | Value |
+| --- | --- |
+| `hostname` | `ai.sarawak.news` |
+| `target` | GitHub Pages |
+<!-- END GENERATED: hosting -->
 
 ## Analytics
 
 IDs, cookie name, and CF `spa` live in `data/analytics.json` (fleet kit shape,
-`version: 1`). Measurement ID `G-RJ2ZFQ52J7` and CF token
-`092a061973fc4d899cd2e4b52952af89` stay on this site's registry — do not change
-them when bumping the kit pin. The loader implementation lives in
-`kit/python/analytics_loader.py`; `scripts/build.py` → `render_analytics_loader()` emits
-**one** inline `<script data-sn-analytics-loader>` per page in `<head>` (edit the
-registry / kit, not `dist/`). CI runs `scripts/check_analytics_dist.py` so each
-built HTML page has exactly one loader, only registry GA4 / CF tokens, only the
-registry cookie (plus per-host `legacy_internal_cookies` honour), and CF `spa`
-matching the registry (`true` here).
+`version: 1`). Do not change them when bumping the kit pin. The loader
+implementation lives in `kit/python/analytics_loader.py`; `scripts/build.py` →
+`render_analytics_loader()` emits **one** inline
+`<script data-sn-analytics-loader>` per page in `<head>` (edit the registry /
+kit, not `dist/`). CI runs `scripts/check_analytics_dist.py` so each built HTML
+page has exactly one loader, only registry GA4 / CF tokens, only the registry
+cookie (plus per-host `legacy_internal_cookies` honour), and CF `spa` matching
+the registry (`true` here).
 
-- Host gate: `ai.sarawak.news` and `www.ai.sarawak.news` only. Preview hosts
-  never load GA or the Cloudflare beacon.
+<!-- BEGIN GENERATED: analytics -->
+| Field | Value |
+| --- | --- |
+| `ga4_measurement_id` | `G-RJ2ZFQ52J7` |
+| `cf_beacon_token` | `092a061973fc4d899cd2e4b52952af89` |
+| `internal_cookie` | `sn_internal` |
+| `hosts` | `ai.sarawak.news`, `www.ai.sarawak.news` |
+<!-- END GENERATED: analytics -->
+
+- Host gate: registry hosts only. Preview hosts never load GA or the Cloudflare
+  beacon.
 - Internal traffic: `?internal=1` sets first-party `sn_internal=1`
   (`path=/`, `max-age=31536000` ≈ 1 year, `SameSite=Lax`, `Secure` on https).
   `?internal=0` clears the primary and every listed legacy cookie. While

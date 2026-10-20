@@ -1,3 +1,4 @@
+import hashlib
 import json
 import subprocess
 import sys
@@ -9,6 +10,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from scripts import build
+
+
+def social_card_url() -> str:
+    digest = hashlib.sha256(
+        (ROOT / "site" / "social-card.png").read_bytes()
+    ).hexdigest()[:12]
+    return f"https://ai.sarawak.news/social-card.png?v={digest}"
 
 
 def site_copy() -> dict[str, str]:
@@ -172,11 +180,12 @@ class BuildTest(unittest.TestCase):
         self.assertIn(f'<meta property="og:title" content="{copy["title"]}" />', html)
         self.assertIn(f'<meta property="og:site_name" content="{copy["title"]}" />', html)
         self.assertIn('<meta property="og:url" content="https://ai.sarawak.news/" />', html)
-        self.assertIn('<meta property="og:image" content="https://ai.sarawak.news/social-card.png" />', html)
+        card = social_card_url()
+        self.assertIn(f'<meta property="og:image" content="{card}" />', html)
         self.assertIn('<meta property="og:image:width" content="1200" />', html)
         self.assertIn('<meta property="og:image:height" content="630" />', html)
         self.assertIn('<meta name="twitter:card" content="summary_large_image" />', html)
-        self.assertIn('<meta name="twitter:image" content="https://ai.sarawak.news/social-card.png" />', html)
+        self.assertIn(f'<meta name="twitter:image" content="{card}" />', html)
         self.assertIn('<link rel="canonical" href="https://ai.sarawak.news/" />', html)
         self.assertIn(f'<meta name="twitter:title" content="{copy["title"]}" />', html)
         self.assertIn(f'<title>{page_title}</title>', html)
@@ -405,11 +414,12 @@ class BuildTest(unittest.TestCase):
         self.assertIn(f'<meta name="description" content="{about_description}" />', about)
         self.assertIn(f'<h1>About {copy["title"]}</h1>', about)
         self.assertIn(copy["about_lead"], about)
-        self.assertIn('<meta property="og:image" content="https://ai.sarawak.news/social-card.png" />', about)
+        card = social_card_url()
+        self.assertIn(f'<meta property="og:image" content="{card}" />', about)
         self.assertIn('<meta property="og:image:width" content="1200" />', about)
         self.assertIn('<meta property="og:image:height" content="630" />', about)
         self.assertIn('<meta name="twitter:card" content="summary_large_image" />', about)
-        self.assertIn('<meta name="twitter:image" content="https://ai.sarawak.news/social-card.png" />', about)
+        self.assertIn(f'<meta name="twitter:image" content="{card}" />', about)
         self.assertNotIn('<meta name="twitter:card" content="summary" />', about)
         self.assertIn('<a class="site-nav-link" href="/">Home</a>', about)
         self.assertIn('<a class="site-nav-link is-active" href="about.html" aria-current="page">About</a>', about)
