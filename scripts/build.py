@@ -70,10 +70,11 @@ FOOTER_CREDIT_HTML = (
     'href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>, '
     "an independent publication. Not affiliated with the Sarawak Government."
 )
-FOOTER_NETWORK_LINKS = (
-    NavItem("hub", "https://sarawak.news/", "Sarawak.News"),
-    NavItem("events", "https://events.sarawak.news/", "Events.Sarawak.News"),
-    NavItem("bantuan", "https://bantuan.sarawak.news/", "Bantuan.Sarawak.News"),
+# Sister-site footer row (hub kit fleet section; order hub → events → bantuan).
+FLEET_FOOTER_LINKS: tuple[tuple[str, str], ...] = (
+    ("https://sarawak.news/", "Sarawak.News"),
+    ("https://events.sarawak.news/", "Events.Sarawak.News"),
+    ("https://bantuan.sarawak.news/", "Bantuan.Sarawak.News"),
 )
 BRIEF_NET_SVG = (ROOT / "site" / "brief-net.svg").read_text(encoding="utf-8").strip()
 
@@ -261,18 +262,35 @@ def render_site_header(active_page: str, site: dict[str, str] | None = None) -> 
     )
 
 
+def render_footer_fleet_nav() -> str:
+    items = "\n          ".join(
+        f'<li><a class="site-footer-link" href="{esc(href)}">{esc(label)}</a></li>'
+        for href, label in FLEET_FOOTER_LINKS
+    )
+    return f"""      <nav aria-label="Sarawak.News network" class="site-footer-fleet">
+        <ul>
+          {items}
+        </ul>
+      </nav>"""
+
+
 def render_site_footer(active_page: str, site: dict[str, str] | None = None) -> str:
     site = load_site() if site is None else site
-    return kit_render_footer(
+    footer = kit_render_footer(
         brand_title=site["title"],
         brand_note_parts=FOOTER_BRAND_NOTE_PARTS,
         active=active_page,
         explore_items=(
             NavItem("home", "/", "Home"),
             NavItem("about", "about.html", "About"),
-            *FOOTER_NETWORK_LINKS,
         ),
         credit_html=FOOTER_CREDIT_HTML,
+    )
+    fleet_nav = render_footer_fleet_nav()
+    return footer.replace(
+        '    <div class="site-footer-bottom">\n      <p>',
+        f'    <div class="site-footer-bottom site-footer-bottom--fleet">\n{fleet_nav}\n      <p class="site-footer-credit">',
+        1,
     )
 
 

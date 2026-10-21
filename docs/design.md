@@ -61,10 +61,10 @@ The current direction is intentionally restrained:
 - On narrow viewports (`max-width: 560px`), each card’s meta row stacks as two lines: the date alone on the first line, then the yellow source chip and category on the second line with a middot separator (`SOURCE · CATEGORY`). Wider viewports keep the single-line `DATE · SOURCE · CATEGORY` meta row.
 - Structured, contained footer rendered by `kit.python.shell.render_footer`: a
   source summary, a subtle desktop divider, vertical Explore links (Home, About,
-  crawlable plain `href`s to `sarawak.news`, `events.sarawak.news`, and
-  `bantuan.sarawak.news`, then Contact via `mailto:contact@sarawak.news`), and a
-  full-width builder
-  and independence attribution row. The footer note is two sentences joined by
+  Contact via `mailto:contact@sarawak.news`), a bottom row with a separated
+  left fleet column (plain `href`s to `sarawak.news`, `events.sarawak.news`, and
+  `bantuan.sarawak.news` in hub kit order; no self-link; no `rel="nofollow"`),
+  and a builder and independence attribution on the right. The footer note is two sentences joined by
   the kit’s forced `<br class="site-footer-note-break" />` (`brand_note_parts`
   / `FOOTER_NOTE_BREAK` in `kit.python.shell`). The footer follows the story
   list with a restrained 40px section gap.
