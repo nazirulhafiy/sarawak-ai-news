@@ -2,6 +2,7 @@
   "version": 1,
   "files": [
     "README.md",
+    "fleet-cross-links.json",
     "MANIFEST.json",
     "sync.py",
     "generate_docs.py",

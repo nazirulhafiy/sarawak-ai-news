@@ -9,6 +9,7 @@ Sisters vendor the files and record the hub commit in `kit/PIN`. `python3 kit/sy
 | Path | Role |
 | --- | --- |
 | `python/shell.py` | `render_header`, `render_footer`, `render_back_to_top` |
+| `fleet-cross-links.json` | Fleet footer cross-link ids, URLs, and labels |
 | `python/analytics_registry.py` | Load and validate `data/analytics.json` |
 | `python/analytics_loader.py` | `render_analytics_loader(registry)` |
 | `python/asset_urls.py` | `content_hash`, `versioned_href` |
@@ -23,7 +24,7 @@ Sisters vendor the files and record the hub commit in `kit/PIN`. `python3 kit/sy
 | `sync.py` | Check or refresh |
 | `PIN` | Sister only. Hub commit SHA. The hub has no PIN file. |
 
-`render_footer` always emits Contact as `mailto:contact@sarawak.news`. Callers pass the other Explore links. For the summary note, pass plain `brand_note` (hub, bantuan, events) or `brand_note_parts=(sentence1, sentence2, …)` to insert `<br class="site-footer-note-break" />` between escaped sentences (AI). The break markup is `FOOTER_NOTE_BREAK` in `python/shell.py` so it cannot drift per site. The analytics loader reads `internal_cookie` from the site's own `data/analytics.json`. On the hub that value is `sn_internal`.
+`render_footer` always emits Contact as `mailto:contact@sarawak.news`. Callers pass the other Explore links (Home, About, plus any site-specific blocks such as Categories). Pass `fleet_site` (`hub`, `ai`, `events`, or `bantuan`) to render a separate **Sarawak News** sister-site nav (`site-footer-fleet`) below the main footer grid, left-aligned on desktop, with its own top divider; links come from `fleet-cross-links.json` (plain `https://` anchors, excluding self, no `rel="nofollow"`). For the summary note, pass plain `brand_note` (hub, bantuan, events) or `brand_note_parts=(sentence1, sentence2, …)` to insert `<br class="site-footer-note-break" />` between escaped sentences (AI). The break markup is `FOOTER_NOTE_BREAK` in `python/shell.py` so it cannot drift per site. The analytics loader reads `internal_cookie` from the site's own `data/analytics.json`. On the hub that value is `sn_internal`.
 
 `css/back-to-top.css` is the control's own rules. The hub also lists `.back-to-top` inside the shared `prefers-reduced-motion` block in `site/style.css`. That shared block stays in the page stylesheet, because it resets other elements too.
 

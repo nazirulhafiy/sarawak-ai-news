@@ -156,8 +156,9 @@ class BuildTest(unittest.TestCase):
         self.assertNotIn('href="https://sarawak.news/"', explore_nav)
         self.assertNotIn('href="https://events.sarawak.news/"', explore_nav)
         self.assertNotIn('href="https://bantuan.sarawak.news/"', explore_nav)
-        self.assertIn('class="site-footer-fleet"', html)
-        self.assertIn('<nav aria-label="Sarawak.News network" class="site-footer-fleet">', html)
+        self.assertIn('<div class="site-footer-fleet">', html)
+        self.assertIn('<nav aria-label="Sarawak News" class="site-footer-fleet-nav">', html)
+        self.assertIn("<h2>Sarawak News</h2>", html)
         self.assertIn('<a class="site-footer-link" href="https://sarawak.news/">Sarawak.News</a>', html)
         self.assertIn(
             '<a class="site-footer-link" href="https://events.sarawak.news/">Events.Sarawak.News</a>',
@@ -167,7 +168,7 @@ class BuildTest(unittest.TestCase):
             '<a class="site-footer-link" href="https://bantuan.sarawak.news/">Bantuan.Sarawak.News</a>',
             html,
         )
-        fleet_block = html.split('class="site-footer-fleet"', 1)[1].split("</nav>", 1)[0]
+        fleet_block = html.split('class="site-footer-fleet-nav"', 1)[1].split("</nav>", 1)[0]
         self.assertLess(
             fleet_block.index("Sarawak.News"),
             fleet_block.index("Events.Sarawak.News"),
@@ -177,7 +178,7 @@ class BuildTest(unittest.TestCase):
             fleet_block.index("Bantuan.Sarawak.News"),
         )
         self.assertNotIn('rel="nofollow"', html.split("site-footer", 1)[1])
-        self.assertNotIn("https://ai.sarawak.news/", html.split('class="site-footer-fleet"', 1)[1])
+        self.assertNotIn("https://ai.sarawak.news/", html.split('class="site-footer-fleet-nav"', 1)[1])
         self.assertIn('class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden', html)
         self.assertIn('class="back-to-top-label">Back to top</span>', html)
         self.assertIn('class="back-to-top-arrow" aria-hidden="true">↑</span>', html)
@@ -322,8 +323,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn("can-scroll-start", js)
         self.assertIn("border-color: var(--sarawak-yellow);", css)
         self.assertIn("button { font: inherit; }", css)
-        self.assertIn(".site-footer-fleet", css)
-        self.assertIn(".site-footer-bottom--fleet", css)
+        self.assertIn(".site-footer-fleet-nav", css)
         self.assertIn(".site-footer-nav .site-footer-link:hover", css)
         self.assertIn(".site-footer-nav .site-footer-categories-title {", css)
         self.assertIn("--footer-nav-inline-padding: 28px", css)
@@ -509,7 +509,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<nav aria-label="Explore" class="site-footer-nav">', about)
         self.assertIn('<a class="site-footer-link" href="/">Home</a>', about)
         self.assertIn('<a class="site-footer-link" href="about.html" aria-current="page">About</a>', about)
-        self.assertIn('class="site-footer-fleet"', about)
+        self.assertIn('class="site-footer-fleet-nav"', about)
         self.assertIn('<a class="site-footer-link" href="https://sarawak.news/">Sarawak.News</a>', about)
         about_explore, _ = about.split('<nav aria-label="Explore" class="site-footer-nav">', 1)[1].split(
             "</nav>", 1
