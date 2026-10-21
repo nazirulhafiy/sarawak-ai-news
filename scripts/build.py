@@ -70,6 +70,11 @@ FOOTER_CREDIT_HTML = (
     'href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>, '
     "an independent publication. Not affiliated with the Sarawak Government."
 )
+FOOTER_NETWORK_LINKS = (
+    NavItem("hub", "https://sarawak.news/", "Sarawak.News"),
+    NavItem("events", "https://events.sarawak.news/", "Events.Sarawak.News"),
+    NavItem("bantuan", "https://bantuan.sarawak.news/", "Bantuan.Sarawak.News"),
+)
 BRIEF_NET_SVG = (ROOT / "site" / "brief-net.svg").read_text(encoding="utf-8").strip()
 
 
@@ -265,6 +270,7 @@ def render_site_footer(active_page: str, site: dict[str, str] | None = None) -> 
         explore_items=(
             NavItem("home", "/", "Home"),
             NavItem("about", "about.html", "About"),
+            *FOOTER_NETWORK_LINKS,
         ),
         credit_html=FOOTER_CREDIT_HTML,
     )

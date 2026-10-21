@@ -149,7 +149,17 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<h2>Explore</h2>', html)
         self.assertIn('<a class="site-footer-link" href="/" aria-current="page">Home</a>', html)
         self.assertIn('<a class="site-footer-link" href="about.html">About</a>', html)
+        self.assertIn('<a class="site-footer-link" href="https://sarawak.news/">Sarawak.News</a>', html)
+        self.assertIn(
+            '<a class="site-footer-link" href="https://events.sarawak.news/">Events.Sarawak.News</a>',
+            html,
+        )
+        self.assertIn(
+            '<a class="site-footer-link" href="https://bantuan.sarawak.news/">Bantuan.Sarawak.News</a>',
+            html,
+        )
         self.assertIn('<a class="site-footer-link" href="mailto:contact@sarawak.news">Contact</a>', html)
+        self.assertNotIn('rel="nofollow"', html.split("site-footer", 1)[1])
         self.assertIn('class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden', html)
         self.assertIn('class="back-to-top-label">Back to top</span>', html)
         self.assertIn('class="back-to-top-arrow" aria-hidden="true">↑</span>', html)
@@ -479,6 +489,8 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<nav aria-label="Explore" class="site-footer-nav">', about)
         self.assertIn('<a class="site-footer-link" href="/">Home</a>', about)
         self.assertIn('<a class="site-footer-link" href="about.html" aria-current="page">About</a>', about)
+        self.assertIn('<a class="site-footer-link" href="https://sarawak.news/">Sarawak.News</a>', about)
+        self.assertNotIn('rel="nofollow"', about.split("site-footer", 1)[1])
         self.assertIn('<a class="site-footer-link" href="mailto:contact@sarawak.news">Contact</a>', about)
         self.assertNotIn('site-footer-categories-title', about)
         self.assertIn('class="about-page"', about)
