@@ -49,9 +49,11 @@ how stories are picked and checked, and contact via contact@sarawak.news
 (mailto only), without adding signup, newsletter, or other product promises.
 The independence note remains in the shared footer.
 
-The generated `dist/items.json` preserves richer fields than the UI currently
-shows, including `why_it_matters`, `confidence`, `caveat`, and `tags`. These
-editorial fields are not displayed on public story cards.
+The generated `dist/items.json` exposes the same reviewed feed the homepage
+renders (`id`, `title`, `url`, `source`, `date`, `section`, `tags`, `note`,
+`why_it_matters`) but omits internal review fields (`confidence`, `caveat`) that
+remain in `data/items.json` only. None of these JSON fields are shown on public
+story cards except indirectly via the on-page summary.
 
 ## Content Scope
 

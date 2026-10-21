@@ -41,6 +41,18 @@ SECTION_FILTERS = (
 
 SITE_URL = "https://ai.sarawak.news/"
 SOCIAL_CARD_PATH = ROOT / "site" / "social-card.png"
+LOGO_MARK_PATH = ROOT / "site" / "icons" / "nav-mark-transparent.svg"
+PUBLIC_ITEM_FIELDS = (
+    "id",
+    "title",
+    "url",
+    "source",
+    "date",
+    "section",
+    "tags",
+    "note",
+    "why_it_matters",
+)
 # Site title, tagline, description, and About lead live only in data/site.json.
 SITE_COPY_FIELDS = ("title", "tagline", "description", "about_lead")
 SITE_INTRODUCTION = (
@@ -57,6 +69,11 @@ FOOTER_CREDIT_HTML = (
     'Built by <a class="site-footer-link site-footer-credit-link" '
     'href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>, '
     "an independent publication. Not affiliated with the Sarawak Government."
+)
+FOOTER_NETWORK_LINKS = (
+    NavItem("hub", "https://sarawak.news/", "Sarawak.News"),
+    NavItem("events", "https://events.sarawak.news/", "Events.Sarawak.News"),
+    NavItem("bantuan", "https://bantuan.sarawak.news/", "Bantuan.Sarawak.News"),
 )
 BRIEF_NET_SVG = (ROOT / "site" / "brief-net.svg").read_text(encoding="utf-8").strip()
 
@@ -84,6 +101,11 @@ def render_analytics_loader(registry: AnalyticsRegistry | None = None) -> str:
 def social_card_url() -> str:
     """Absolute social-card URL with a content-hash query string."""
     return versioned_href(f"{SITE_URL}social-card.png", SOCIAL_CARD_PATH)
+
+
+def organization_logo_url() -> str:
+    """Absolute brand-mark URL with a content-hash query string."""
+    return versioned_href(f"{SITE_URL}icons/nav-mark-transparent.svg", LOGO_MARK_PATH)
 
 
 def load_json(path: Path):
@@ -159,12 +181,15 @@ def reviewed_items() -> list[dict]:
             "tags": item["tags"],
             "note": item["summary"],
             "why_it_matters": item["why_it_matters"],
-            "confidence": item["confidence"],
-            "caveat": item["caveat"],
         }
         for item in sorted(items, key=lambda row: row["date"], reverse=True)
         if item.get("date") and item.get("why_it_matters")
     ]
+
+
+def public_feed_items(items: list[dict]) -> list[dict]:
+    """Subset of reviewed items for dist/items.json (no internal review fields)."""
+    return [{field: item[field] for field in PUBLIC_ITEM_FIELDS} for item in items]
 
 
 def load_feed_items() -> list[dict]:
@@ -245,6 +270,7 @@ def render_site_footer(active_page: str, site: dict[str, str] | None = None) -> 
         explore_items=(
             NavItem("home", "/", "Home"),
             NavItem("about", "about.html", "About"),
+            *FOOTER_NETWORK_LINKS,
         ),
         credit_html=FOOTER_CREDIT_HTML,
     )
@@ -330,33 +356,67 @@ def render_about_body(site: dict[str, str] | None = None) -> str:
 </body>"""
 
 
+def home_structured_data(items: list[dict], site: dict[str, str]) -> dict:
+    page_title = seo_document_title(site)
+    description = site["description"]
+    logo_url = organization_logo_url()
+    return {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": f"{SITE_URL}#organization",
+                "name": site["title"],
+                "url": SITE_URL,
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": logo_url,
+                    "contentUrl": logo_url,
+                },
+            },
+            {
+                "@type": "WebSite",
+                "@id": f"{SITE_URL}#website",
+                "url": SITE_URL,
+                "name": site["title"],
+                "description": description,
+                "publisher": {"@id": f"{SITE_URL}#organization"},
+                "inLanguage": "en",
+            },
+            {
+                "@type": "CollectionPage",
+                "@id": f"{SITE_URL}#collection",
+                "url": SITE_URL,
+                "name": page_title,
+                "description": description,
+                "isPartOf": {"@id": f"{SITE_URL}#website"},
+                "inLanguage": "en",
+            },
+            {
+                "@type": "ItemList",
+                "@id": f"{SITE_URL}#itemlist",
+                "name": page_title,
+                "numberOfItems": len(items),
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": index,
+                        "url": item["url"],
+                        "name": item["title"],
+                    }
+                    for index, item in enumerate(items, 1)
+                ],
+            },
+        ],
+    }
+
+
 def render_index(items: list[dict], site: dict[str, str] | None = None) -> str:
     site = load_site() if site is None else site
     page_title = seo_document_title(site)
     description = site["description"]
     structured_data = json.dumps(
-        {
-            "@context": "https://schema.org",
-            "@graph": [
-                {
-                    "@type": "WebSite",
-                    "@id": f"{SITE_URL}#website",
-                    "url": SITE_URL,
-                    "name": site["title"],
-                    "description": description,
-                    "inLanguage": "en",
-                },
-                {
-                    "@type": "CollectionPage",
-                    "@id": f"{SITE_URL}#collection",
-                    "url": SITE_URL,
-                    "name": page_title,
-                    "description": description,
-                    "isPartOf": {"@id": f"{SITE_URL}#website"},
-                    "inLanguage": "en",
-                },
-            ],
-        },
+        home_structured_data(items, site),
         ensure_ascii=False,
         separators=(",", ":"),
     ).replace("</", "<\\/")
@@ -381,6 +441,7 @@ def render_index(items: list[dict], site: dict[str, str] | None = None) -> str:
   <meta name="twitter:description" content="{esc(description)}" />
   <meta name="twitter:image" content="{esc(social_card_url())}" />
   <link rel="canonical" href="{esc(SITE_URL)}" />
+  <link rel="alternate" type="application/rss+xml" title="{esc(site["title"])}" href="{esc(f"{SITE_URL}feed.xml")}" />
   <title>{esc(page_title)}</title>
   <script type="application/ld+json">{structured_data}</script>
   <script>
@@ -466,6 +527,41 @@ def render_about(site: dict[str, str] | None = None) -> str:
 
 
 
+def rss_pub_date(value: str) -> str:
+    """RFC 822 date for RSS 2.0 (UTC midnight on the story date)."""
+    parsed = datetime.strptime(value, "%Y-%m-%d")
+    return parsed.strftime("%a, %d %b %Y %H:%M:%S +0000")
+
+
+def render_feed_xml(items: list[dict], site: dict[str, str]) -> str:
+    channel_updated = last_updated(items)[0] if items else ""
+    channel_items = []
+    for item in items:
+        channel_items.append(
+            f"""    <item>
+      <title>{esc(item["title"])}</title>
+      <link>{esc(item["url"])}</link>
+      <guid isPermaLink="true">{esc(item["url"])}</guid>
+      <pubDate>{esc(rss_pub_date(item["date"]))}</pubDate>
+      <description>{esc(item["note"])}</description>
+    </item>"""
+        )
+    items_block = "\n".join(channel_items)
+    last_build_date = rss_pub_date(channel_updated) if channel_updated else ""
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>{esc(site["title"])}</title>
+    <link>{esc(SITE_URL)}</link>
+    <description>{esc(site["description"])}</description>
+    <language>en</language>
+    <lastBuildDate>{esc(last_build_date)}</lastBuildDate>
+{items_block}
+  </channel>
+</rss>
+"""
+
+
 def render_category_redirect(section: str, site: dict[str, str] | None = None) -> str:
     """Legacy category URL stub. Main has no filter preselect, so stubs go home."""
     site = load_site() if site is None else site
@@ -535,9 +631,12 @@ def build() -> None:
     shutil.copy2(SOCIAL_CARD_PATH, DIST / "social-card.png")
     copy_site_fonts()
     copy_nav_marks()
-    (DIST / "items.json").write_text(json.dumps(items, indent=2), encoding="utf-8")
+    (DIST / "items.json").write_text(
+        json.dumps(public_feed_items(items), indent=2), encoding="utf-8"
+    )
+    (DIST / "feed.xml").write_text(render_feed_xml(items, site), encoding="utf-8")
     (DIST / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://ai.sarawak.news/sitemap.xml\n", encoding="utf-8")
-    sitemap_urls = [SITE_URL, f"{SITE_URL}about.html"]
+    sitemap_urls = [SITE_URL, f"{SITE_URL}about.html", f"{SITE_URL}feed.xml"]
     sitemap_entries = "\n".join(
         f"  <url>\n    <loc>{esc(url)}</loc>\n    <lastmod>{sitemap_lastmod}</lastmod>\n  </url>"
         for url in sitemap_urls
@@ -547,7 +646,7 @@ def build() -> None:
 {sitemap_entries}
 </urlset>
 """, encoding="utf-8")
-    print(f"Built {DIST / 'index.html'} with {len(items)} feed items")
+    print(f"Built {DIST / 'index.html'} with {len(items)} feed items and feed.xml")
 
 
 if __name__ == "__main__":

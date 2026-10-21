@@ -60,8 +60,10 @@ The current direction is intentionally restrained:
 - Source name highlighted in yellow.
 - On narrow viewports (`max-width: 560px`), each card’s meta row stacks as two lines: the date alone on the first line, then the yellow source chip and category on the second line with a middot separator (`SOURCE · CATEGORY`). Wider viewports keep the single-line `DATE · SOURCE · CATEGORY` meta row.
 - Structured, contained footer rendered by `kit.python.shell.render_footer`: a
-  source summary, a subtle desktop divider, vertical Home/About/Contact links
-  (Contact always uses `mailto:contact@sarawak.news`), and a full-width builder
+  source summary, a subtle desktop divider, vertical Explore links (Home, About,
+  crawlable plain `href`s to `sarawak.news`, `events.sarawak.news`, and
+  `bantuan.sarawak.news`, then Contact via `mailto:contact@sarawak.news`), and a
+  full-width builder
   and independence attribution row. The footer note is two sentences joined by
   the kit’s forced `<br class="site-footer-note-break" />` (`brand_note_parts`
   / `FOOTER_NOTE_BREAK` in `kit.python.shell`). The footer follows the story
@@ -235,8 +237,18 @@ Each story card currently shows date, source, category, title, and summary. Its
 category label exactly matches the corresponding browse filter. On phone-width
 layouts the date sits on its own line above the source chip and category; desktop
 meta order is unchanged. The card does not expose tags, confidence, caveat, or
-why-it-matters copy in the HTML, although those fields are preserved in generated
-JSON for editorial review.
+why-it-matters copy in the HTML. Generated `dist/items.json` still carries
+`why_it_matters` and `tags` for machine readers but omits internal `confidence`
+and `caveat` fields (those stay in `data/items.json` only).
+
+### Discovery and syndication
+
+The homepage `<head>` carries JSON-LD (`Organization` with the versioned hornbill
+mark URL, `WebSite`, `CollectionPage`, and an `ItemList` aligned to the rendered
+story order) plus `<link rel="alternate" type="application/rss+xml">` pointing at
+`feed.xml`. The build writes RSS 2.0 to `dist/feed.xml` (channel metadata from
+`data/site.json`, one `<item>` per reviewed story linking to the original source
+URL) and lists `feed.xml` in `sitemap.xml` alongside `/` and `about.html`.
 
 ## Design Variants
 
