@@ -156,8 +156,12 @@ class BuildTest(unittest.TestCase):
         self.assertNotIn('href="https://sarawak.news/"', explore_nav)
         self.assertNotIn('href="https://events.sarawak.news/"', explore_nav)
         self.assertNotIn('href="https://bantuan.sarawak.news/"', explore_nav)
-        self.assertIn('<div class="site-footer-fleet">', html)
         self.assertIn('<nav aria-label="Sarawak News" class="site-footer-fleet-nav">', html)
+        summary_col = html.split('class="site-footer-summary"', 1)[1].split(
+            'class="site-footer-nav"', 1
+        )[0]
+        self.assertIn("site-footer-fleet-nav", summary_col)
+        self.assertNotIn("\n    <div class=\"site-footer-fleet\">", html)
         self.assertIn("<h2>Sarawak News</h2>", html)
         self.assertIn('<a class="site-footer-link" href="https://sarawak.news/">Sarawak.News</a>', html)
         self.assertIn(

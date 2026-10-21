@@ -972,7 +972,8 @@ html[data-theme="dark"] .site-footer {
   border-left: 1px solid var(--line);
 }
 
-.site-footer-nav h2 {
+.site-footer-nav h2,
+.site-footer-fleet-nav h2 {
   margin: 0 0 12px;
   color: var(--ink);
   font-size: 11px;
@@ -1022,26 +1023,10 @@ html[data-theme="dark"] .site-footer {
   text-decoration-color: var(--sarawak-red);
 }
 
-.site-footer-fleet {
-  display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(180px, 1fr);
-  border-top: 1px solid var(--line);
-}
-
 .site-footer-fleet-nav {
-  grid-column: 1;
-  padding: 22px 28px 24px;
-}
-
-.site-footer-fleet-nav h2 {
-  margin: 0 0 12px;
-  color: var(--ink);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .08em;
-  line-height: 1.4;
-  padding-top: 2px;
-  text-transform: uppercase;
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
 }
 
 .site-footer-fleet-nav ul {
@@ -1125,8 +1110,6 @@ html[data-theme="dark"] .site-footer {
   .site-footer-summary { padding: 24px 20px; }
   .site-footer-nav { --footer-nav-inline-padding: 20px; padding: 24px var(--footer-nav-inline-padding); border-top: 1px solid var(--line); border-left: 0; }
   .site-footer-bottom { padding: 16px 20px; }
-  .site-footer-fleet { grid-template-columns: 1fr; }
-  .site-footer-fleet-nav { padding: 24px 20px; }
 
   .story-card {
     grid-template-columns: 26px minmax(0, 1fr);

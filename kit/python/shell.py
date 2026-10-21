@@ -155,9 +155,9 @@ def render_footer(
     Pass ``brand_note`` for a single escaped paragraph (hub, bantuan, events).
     Pass ``brand_note_parts`` (two or more strings) to insert
     ``<br class="site-footer-note-break" />`` between escaped sentences (AI).
-    Pass ``fleet_site`` (hub, ai, events, or bantuan) to emit a separate
-    sister-site nav row below the main footer grid (label from
-    ``fleet-cross-links.json``).
+    Pass ``fleet_site`` (hub, ai, events, or bantuan) to emit sister-site
+    links in the summary column below the brand note (label from
+    ``fleet-cross-links.json``), separated by a horizontal divider.
     """
     items = list(explore_items)
     if not any(item.href == CONTACT_HREF for item in items):
@@ -171,20 +171,18 @@ def render_footer(
         )
 
     explore = "\n          ".join(link(item) for item in items)
-    fleet_block = ""
+    fleet_in_summary = ""
     if fleet_site is not None:
         fleet_items = fleet_cross_link_items(fleet_site)
         fleet_links = "\n          ".join(link(item) for item in fleet_items)
         section = esc(fleet_section_label())
-        fleet_block = f"""
-    <div class="site-footer-fleet">
-      <nav aria-label="{section}" class="site-footer-fleet-nav">
-        <h2>{section}</h2>
-        <ul>
-          {fleet_links}
-        </ul>
-      </nav>
-    </div>"""
+        fleet_in_summary = f"""
+        <nav aria-label="{section}" class="site-footer-fleet-nav">
+          <h2>{section}</h2>
+          <ul>
+            {fleet_links}
+          </ul>
+        </nav>"""
     note_html = format_footer_note(brand_note, brand_note_parts)
     if credit_html is None:
         credit_html = (
@@ -196,7 +194,7 @@ def render_footer(
     <div class="site-footer-main">
       <div class="site-footer-summary">
         <p class="site-footer-brand">{esc(brand_title)}</p>
-        <p class="site-footer-note">{note_html}</p>
+        <p class="site-footer-note">{note_html}</p>{fleet_in_summary}
       </div>
       <nav aria-label="Explore" class="site-footer-nav">
         <h2>Explore</h2>
@@ -204,7 +202,7 @@ def render_footer(
           {explore}
         </ul>
       </nav>
-    </div>{fleet_block}
+    </div>
     <div class="site-footer-bottom">
       <p>{credit_html}</p>
     </div>
