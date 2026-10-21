@@ -4,11 +4,59 @@
 from __future__ import annotations
 
 import html
+import json
 from collections.abc import Sequence
 from dataclasses import dataclass
+from functools import lru_cache
+from pathlib import Path
 
 CONTACT_HREF = "mailto:contact@sarawak.news"
 CONTACT_LABEL = "Contact"
+
+_FLEET_CROSS_LINKS_JSON = Path(__file__).resolve().parents[1] / "fleet-cross-links.json"
+
+
+@lru_cache(maxsize=1)
+def _fleet_cross_links_payload() -> dict:
+    payload = json.loads(_FLEET_CROSS_LINKS_JSON.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError("fleet-cross-links.json must be an object")
+    return payload
+
+
+@lru_cache(maxsize=1)
+def fleet_section_label() -> str:
+    label = str(_fleet_cross_links_payload().get("section_label", "")).strip()
+    if not label:
+        raise ValueError("fleet-cross-links.json needs section_label")
+    return label
+
+
+@lru_cache(maxsize=1)
+def _fleet_sites() -> tuple[tuple[str, str, str], ...]:
+    sites = _fleet_cross_links_payload().get("sites")
+    if not isinstance(sites, list):
+        raise ValueError("fleet-cross-links.json must contain a sites array")
+    out: list[tuple[str, str, str]] = []
+    for entry in sites:
+        if not isinstance(entry, dict):
+            raise ValueError("fleet-cross-links.json sites entries must be objects")
+        site_id = str(entry.get("id", "")).strip()
+        href = str(entry.get("href", "")).strip()
+        label = str(entry.get("label", "")).strip()
+        if not site_id or not href or not label:
+            raise ValueError("fleet-cross-links.json entries need id, href, and label")
+        out.append((site_id, href, label))
+    return tuple(out)
+
+
+def fleet_cross_link_items(fleet_site: str) -> tuple[NavItem, ...]:
+    """Footer sister-site links for the given fleet id (hub, ai, events, bantuan)."""
+    return tuple(
+        NavItem(site_id, href, label)
+        for site_id, href, label in _fleet_sites()
+        if site_id != fleet_site
+    )
 
 # Forced mid-note line break (AI.Sarawak.News footer). Sites opt in via brand_note_parts.
 FOOTER_NOTE_BREAK = '<br class="site-footer-note-break" />'
@@ -100,12 +148,16 @@ def render_footer(
     explore_items: list[NavItem] | tuple[NavItem, ...],
     brand_note_parts: Sequence[str] | None = None,
     credit_html: str | None = None,
+    fleet_site: str | None = None,
 ) -> str:
     """Render the shared footer. Contact is always the last Explore link.
 
     Pass ``brand_note`` for a single escaped paragraph (hub, bantuan, events).
     Pass ``brand_note_parts`` (two or more strings) to insert
     ``<br class="site-footer-note-break" />`` between escaped sentences (AI).
+    Pass ``fleet_site`` (hub, ai, events, or bantuan) to emit sister-site
+    links in the summary column below the brand note (label from
+    ``fleet-cross-links.json``), separated by a horizontal divider.
     """
     items = list(explore_items)
     if not any(item.href == CONTACT_HREF for item in items):
@@ -119,6 +171,18 @@ def render_footer(
         )
 
     explore = "\n          ".join(link(item) for item in items)
+    fleet_in_summary = ""
+    if fleet_site is not None:
+        fleet_items = fleet_cross_link_items(fleet_site)
+        fleet_links = "\n          ".join(link(item) for item in fleet_items)
+        section = esc(fleet_section_label())
+        fleet_in_summary = f"""
+        <nav aria-label="{section}" class="site-footer-fleet-nav">
+          <h2>{section}</h2>
+          <ul>
+            {fleet_links}
+          </ul>
+        </nav>"""
     note_html = format_footer_note(brand_note, brand_note_parts)
     if credit_html is None:
         credit_html = (
@@ -130,7 +194,7 @@ def render_footer(
     <div class="site-footer-main">
       <div class="site-footer-summary">
         <p class="site-footer-brand">{esc(brand_title)}</p>
-        <p class="site-footer-note">{note_html}</p>
+        <p class="site-footer-note">{note_html}</p>{fleet_in_summary}
       </div>
       <nav aria-label="Explore" class="site-footer-nav">
         <h2>Explore</h2>
