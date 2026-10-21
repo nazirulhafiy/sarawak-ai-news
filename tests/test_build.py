@@ -187,22 +187,40 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<meta name="twitter:card" content="summary_large_image" />', html)
         self.assertIn(f'<meta name="twitter:image" content="{card}" />', html)
         self.assertIn('<link rel="canonical" href="https://ai.sarawak.news/" />', html)
+        self.assertIn(
+            f'<link rel="alternate" type="application/rss+xml" title="{copy["title"]}" '
+            'href="https://ai.sarawak.news/feed.xml" />',
+            html,
+        )
         self.assertIn(f'<meta name="twitter:title" content="{copy["title"]}" />', html)
         self.assertIn(f'<title>{page_title}</title>', html)
         self.assertIn('<script type="application/ld+json">', html)
         social_card = ROOT / "dist" / "social-card.png"
         self.assertTrue(social_card.exists())
         self.assertGreater(social_card.stat().st_size, 1000)
+        self.assertIn('"@type":"Organization"', html)
         self.assertIn('"@type":"WebSite"', html)
         self.assertIn('"@type":"CollectionPage"', html)
+        self.assertIn('"@type":"ItemList"', html)
         structured_data = html.split('<script type="application/ld+json">', 1)[1].split("</script>", 1)[0]
         schema = json.loads(structured_data)
-        self.assertEqual([node["@type"] for node in schema["@graph"]], ["WebSite", "CollectionPage"])
-        website, collection = schema["@graph"]
+        self.assertEqual(
+            [node["@type"] for node in schema["@graph"]],
+            ["Organization", "WebSite", "CollectionPage", "ItemList"],
+        )
+        organization, website, collection, item_list = schema["@graph"]
+        self.assertEqual(organization["name"], copy["title"])
+        self.assertIn("logo", organization)
+        self.assertTrue(organization["logo"]["url"].startswith("https://ai.sarawak.news/icons/nav-mark-transparent.svg?v="))
         self.assertEqual(website["name"], copy["title"])
         self.assertEqual(website["description"], description)
+        self.assertEqual(website["publisher"], {"@id": "https://ai.sarawak.news/#organization"})
         self.assertEqual(collection["name"], page_title)
         self.assertEqual(collection["description"], description)
+        self.assertEqual(item_list["numberOfItems"], expected_items)
+        self.assertEqual(len(item_list["itemListElement"]), expected_items)
+        self.assertEqual(item_list["itemListElement"][0]["position"], 1)
+        self.assertTrue(item_list["itemListElement"][0]["url"].startswith("https://"))
         sitemap = (ROOT / "dist" / "sitemap.xml").read_text()
         self.assertIn(f"<lastmod>{updated_iso[:10]}</lastmod>", sitemap)
         self.assertIn("<loc>https://ai.sarawak.news/about.html</loc>", sitemap)
@@ -227,9 +245,15 @@ class BuildTest(unittest.TestCase):
             self.assertIn(f'href="https://ai.sarawak.news/">Continue to {copy["title"]}</a>', category_html)
             self.assertIn(f'<title>{section_name} stories moved | {copy["title"]}</title>', category_html)
             self.assertNotIn('class="story-card"', category_html)
-        self.assertEqual(sitemap.count("<url>"), 2)
+        self.assertEqual(sitemap.count("<url>"), 3)
         self.assertIn("<loc>https://ai.sarawak.news/</loc>", sitemap)
         self.assertIn("<loc>https://ai.sarawak.news/about.html</loc>", sitemap)
+        self.assertIn("<loc>https://ai.sarawak.news/feed.xml</loc>", sitemap)
+        feed_xml = (ROOT / "dist" / "feed.xml").read_text()
+        ET.fromstring(feed_xml)
+        self.assertIn(f"<title>{copy['title']}</title>", feed_xml)
+        self.assertIn("<link>https://ai.sarawak.news/</link>", feed_xml)
+        self.assertEqual(feed_xml.count("<item>"), expected_items)
         self.assertNotIn('<a class="site-footer-link" href="/policy.html">Policy</a>', html)
         self.assertNotIn('<h2 class="site-footer-categories-title">Categories</h2>', html)
         self.assertNotIn('>Topics</h2>', html)
@@ -400,8 +424,8 @@ class BuildTest(unittest.TestCase):
         self.assertNotIn("Sarawak Digital Economy Research Grant", html)
         self.assertTrue(all(item.get("url") for item in public_items))
         self.assertTrue(all(item.get("why_it_matters") for item in public_items))
-        self.assertTrue(all(item.get("confidence") for item in public_items))
-        self.assertTrue(all(item.get("caveat") for item in public_items))
+        self.assertFalse(any("confidence" in item for item in public_items))
+        self.assertFalse(any("caveat" in item for item in public_items))
 
         about = (ROOT / "dist" / "about.html").read_text()
         about_title = build.about_document_title(copy)

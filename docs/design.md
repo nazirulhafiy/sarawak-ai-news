@@ -235,8 +235,18 @@ Each story card currently shows date, source, category, title, and summary. Its
 category label exactly matches the corresponding browse filter. On phone-width
 layouts the date sits on its own line above the source chip and category; desktop
 meta order is unchanged. The card does not expose tags, confidence, caveat, or
-why-it-matters copy in the HTML, although those fields are preserved in generated
-JSON for editorial review.
+why-it-matters copy in the HTML. Generated `dist/items.json` still carries
+`why_it_matters` and `tags` for machine readers but omits internal `confidence`
+and `caveat` fields (those stay in `data/items.json` only).
+
+### Discovery and syndication
+
+The homepage `<head>` carries JSON-LD (`Organization` with the versioned hornbill
+mark URL, `WebSite`, `CollectionPage`, and an `ItemList` aligned to the rendered
+story order) plus `<link rel="alternate" type="application/rss+xml">` pointing at
+`feed.xml`. The build writes RSS 2.0 to `dist/feed.xml` (channel metadata from
+`data/site.json`, one `<item>` per reviewed story linking to the original source
+URL) and lists `feed.xml` in `sitemap.xml` alongside `/` and `about.html`.
 
 ## Design Variants
 
