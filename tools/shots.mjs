@@ -228,8 +228,18 @@ function deriveName(input) {
 
 const servers = [];
 
+// Analytics/tracker hosts aborted in every context so automated shots never count as visits.
+const TRACKER_RE = /^https?:\/\/([^/]*\.)?(cloudflareinsights\.com|googletagmanager\.com|google-analytics\.com)(:\d+)?\//i;
+const OWN_SITE_RE = /(^|\.)(pcds2030\.com|sarawak\.news|sde2030\.com)$/i;
+
+function withInternal(url) {
+  const u = new URL(url);
+  if (OWN_SITE_RE.test(u.hostname) && u.searchParams.get("internal") !== "1") u.searchParams.set("internal", "1");
+  return u.href;
+}
+
 async function resolveTarget(input) {
-  if (/^https?:\/\//i.test(input)) return input;
+  if (/^https?:\/\//i.test(input)) return withInternal(input);
   const abs = path.resolve(input);
   if (!existsSync(abs)) throw new Error(`URL or path not found: ${input}`);
   if (statSync(abs).isFile()) return pathToFileURL(abs).href;
@@ -368,6 +378,7 @@ async function capture(browser, config, opts, { url, device, theme, label }) {
     colorScheme: theme === "dark" ? "dark" : "light",
     reducedMotion: "reduce",
   });
+  await context.route((u) => TRACKER_RE.test(u.href), (r) => r.abort());
   await context.addInitScript(pageInitScript, {
     theme,
     themeConfig: config.theme,
@@ -424,6 +435,7 @@ function checkCropSize(info, device, scale, opts, config) {
 
 async function composite(browser, before, after) {
   const page = await browser.newPage();
+  await page.route((u) => TRACKER_RE.test(u.href), (r) => r.abort());
   try {
     const result = await page.evaluate(async ({ a, b }) => {
       const load = (src) => new Promise((ok, fail) => {
