@@ -76,15 +76,6 @@
     themeMedia.addEventListener?.("change", (event) => setTheme(event.matches ? "dark" : "light"));
   }
 
-  const siteBar = document.querySelector(".bar");
-  if (siteBar) {
-    function updateStickyBar() {
-      siteBar.classList.toggle("is-scrolled", window.scrollY > 0);
-    }
-    window.addEventListener("scroll", updateStickyBar, { passive: true });
-    updateStickyBar();
-  }
-
 /* sn-kit:back-to-top:begin */
   const backToTop = document.querySelector("[data-back-to-top]");
   if (backToTop) {
