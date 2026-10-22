@@ -31,7 +31,7 @@ The current direction is intentionally restrained:
   wordmark line (`1.15em`). The brand stays on one line (`white-space: nowrap`)
   down to 375px. SVGs are used as supplied — no recolouring. Favicon and footer
   brand text are unchanged.
-  The sticky bar is a full-viewport outer shell (edge-to-edge background and
+  The masthead bar is a full-viewport outer shell (edge-to-edge background and
   scrolled bottom border/shadow) with an inner `max-width: 760px` wrapper that
   keeps the wordmark, Home/About links, theme toggle, and menu aligned to the
   reading column. The tri-colour rule follows the same content rail on viewports
@@ -42,12 +42,11 @@ The current direction is intentionally restrained:
   and the yellow/black segment extends past the mobile theme and menu controls
   to the right viewport edge while the bar background and scrolled shadow stay
   full-bleed.
-  The bar is `position: sticky; top: 0` with a solid page-colour background in
-  light and dark mode so feed content scrolls beneath it. After any scroll,
-  `site/app.js` toggles `.is-scrolled` for a thin bottom edge and subtle
-  shadow. `html` uses `scroll-padding-top` and `overflow-x: clip`, and heroes
-  use `scroll-margin-top`, so in-page anchors clear the sticky bar without a
-  horizontal scrollbar.
+  The bar is `position: static` with a solid page-colour background in light
+  and dark mode so it scrolls with the page. After any scroll, `site/app.js`
+  toggles `.is-scrolled` for a thin bottom edge and subtle shadow. `html` uses
+  `scroll-padding-top` and `overflow-x: clip`, and heroes use `scroll-margin-top`
+  for comfortable in-page anchor offsets without a horizontal scrollbar.
 - Horizontal category filter using the seven canonical production labels, with
   24px between the filter and the first card. When the pill row overflows,
   non-interactive edge hints (48px fade plus chevron on the side that still has
@@ -140,9 +139,9 @@ Behavior:
 - A visually hidden live region reports the current result count.
 - Reloading the page resets the viewport to the top, while ordinary history
   navigation can preserve the reader's position.
-- The masthead sticky state is driven by a passive scroll listener on `.bar`
-  (independent of the category filter), so Home and About both get the scrolled
-  edge treatment.
+- The masthead scrolled edge state is driven by a passive scroll listener on
+  `.bar` (independent of the category filter), so Home and About both get the
+  scrolled edge treatment after the bar has left the viewport top.
 - Markup comes from `kit.python.shell.render_back_to_top`. CSS and JS are owned
   by `kit/css/back-to-top.css` and `kit/js/back-to-top.js`, mirrored into
   `site/style.css` / `site/app.js` between `/* sn-kit:back-to-top:begin|end */`
