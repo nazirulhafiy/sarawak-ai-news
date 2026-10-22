@@ -131,7 +131,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn('x1="80" y1="90" x2="180" y2="60"', html)
         self.assertIn(copy["tagline"], html)
         self.assertIn(f'<h1 id="brief-title">{copy["tagline"]}</h1>', html)
-        self.assertIn("Tracking artificial intelligence developments across Sarawak, bringing AI policy, projects, research and adoption into one source-linked brief.", html)
+        self.assertIn("Each card links to its source.", html)
         self.assertIn("Latest intelligence signals", html)
         self.assertIn('Built by <a class="site-footer-link site-footer-credit-link" href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>, an independent publication. Not affiliated with the Sarawak Government.', html)
         self.assertIn('class="site-footer"', html)
