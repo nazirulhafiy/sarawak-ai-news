@@ -118,16 +118,6 @@ html[data-theme="dark"] .skip-link {
   gap: 0;
 }
 
-.bar::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  background: var(--line);
-}
-
 .brand-lockup,
 .bar-rule-tail {
   align-self: stretch;
