@@ -31,8 +31,8 @@ The current direction is intentionally restrained:
   wordmark line (`1.15em`). The brand stays on one line (`white-space: nowrap`)
   down to 375px. SVGs are used as supplied — no recolouring. Favicon and footer
   brand text are unchanged.
-  The masthead bar is a full-viewport outer shell (edge-to-edge background and
-  bottom hairline rule) with an inner `max-width: 760px` wrapper that
+  The masthead bar is a full-viewport outer shell (edge-to-edge background) with
+  an inner `max-width: 760px` wrapper that
   keeps the wordmark, Home/About links, theme toggle, and menu aligned to the
   reading column. The tri-colour rule follows the same content rail on viewports
   wider than `560px` (tablet and desktop): the red segment anchors the wordmark;
