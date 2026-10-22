@@ -201,7 +201,7 @@ Homepage hierarchy:
 
 1. Brand (`title` from `data/site.json`) and `Home`/`About` navigation.
 2. Hero headline: `tagline` from `data/site.json`.
-3. Brief deck (`p.brief-deck`, max-width `600px`): `Tracking artificial intelligence developments across Sarawak, bringing AI policy, projects, research and adoption into one source-linked brief.`
+3. Brief deck (`p.brief-deck`, max-width `600px`): `Each card links to its source.`
 4. Last updated weekday and date.
 5. Category filters.
 6. Ranked story cards (full reviewed feed).

@@ -55,10 +55,7 @@ PUBLIC_ITEM_FIELDS = (
 )
 # Site title, tagline, description, and About lead live only in data/site.json.
 SITE_COPY_FIELDS = ("title", "tagline", "description", "about_lead")
-SITE_INTRODUCTION = (
-    "Tracking artificial intelligence developments across Sarawak, bringing AI "
-    "policy, projects, research and adoption into one source-linked brief."
-)
+SITE_INTRODUCTION = "Each card links to its source."
 # Footer summary note: two sentences joined by kit FOOTER_NOTE_BREAK.
 FOOTER_BRAND_NOTE_PARTS = (
     "AI news updates are sourced from public reports, news outlets, and official "
