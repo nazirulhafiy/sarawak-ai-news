@@ -8,27 +8,43 @@
   --sn-footer-explore-link-pad-bottom: 12px;
   --sn-footer-mobile-gutter: 18px;
   display: grid;
-  grid-template-columns: minmax(0, var(--sn-footer-col-left)) minmax(var(--sn-footer-col-right), 1fr);
-  align-items: start;
+  grid-template-columns: minmax(0, var(--sn-footer-col-left)) 1px minmax(var(--sn-footer-col-right), 1fr);
+  align-items: stretch;
+}
+
+.site-footer-main.site-footer-main--column-stacks::before {
+  content: "";
+  grid-column: 2;
+  grid-row: 1;
+  align-self: stretch;
+  justify-self: stretch;
+  width: 1px;
+  min-width: 1px;
+  background: var(--line);
+  pointer-events: none;
 }
 
 .site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  align-self: start;
+  align-self: stretch;
 }
 
-.site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-left {
+.site-footer-main.site-footer-main--column-stacks > .site-footer-grid-stack-left {
+  grid-column: 1;
+  grid-row: 1;
   overflow: hidden;
+  border-right: 0;
+  min-height: 100%;
 }
 
-.site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-right {
-  border-left: 1px solid var(--line);
-  height: fit-content;
+.site-footer-main.site-footer-main--column-stacks > .site-footer-grid-stack-right {
+  grid-column: 3;
+  grid-row: 1;
+  border-left: 0;
   position: relative;
-  z-index: 1;
-  background: inherit;
+  min-height: 100%;
 }
 
 .site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand-cell {
@@ -46,7 +62,7 @@
 
 .site-footer-main.site-footer-main--column-stacks .site-footer-grid-fleet {
   margin: var(--sn-footer-fleet-gap) 0 0;
-  padding: var(--sn-footer-fleet-gap) var(--sn-footer-stack-inset) 0;
+  padding: var(--sn-footer-fleet-gap) var(--sn-footer-stack-inset) var(--sn-footer-stack-inset);
   border-top: 1px solid var(--line);
   box-sizing: border-box;
 }
@@ -139,6 +155,10 @@
   .site-footer-main.site-footer-main--column-stacks {
     display: flex;
     flex-direction: column;
+  }
+
+  .site-footer-main.site-footer-main--column-stacks::before {
+    display: none;
   }
 
   .site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-left,

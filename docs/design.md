@@ -64,7 +64,8 @@ The current direction is intentionally restrained:
   `https://` anchors from `kit/fleet-cross-links.json` (no self-link; no
   `rel="nofollow"`). Column-stack geometry and mobile order (brand → Hub → Explore)
   come from the synced `sn-kit:footer-column-stacks` region in `site/style.css`
-  (kit pin `b04e7b2`). Then the full-width builder and independence attribution row.
+  (kit pin `42870cb`, hub #43 divider track). Then the full-width builder and
+  independence attribution row.
   The footer follows the story list with a restrained 40px section gap.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark
   cards, softened borders, brighter text, and preserved Sarawak yellow/red
