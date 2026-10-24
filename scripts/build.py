@@ -265,6 +265,8 @@ def render_site_footer(active_page: str, site: dict[str, str] | None = None) -> 
         ),
         credit_html=FOOTER_CREDIT_HTML,
         fleet_site="ai",
+        layout="column_stacks",
+        fleet_section_label="Hub",
     )
 
 

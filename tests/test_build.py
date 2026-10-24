@@ -135,8 +135,14 @@ class BuildTest(unittest.TestCase):
         self.assertIn("Latest intelligence signals", html)
         self.assertIn('Built by <a class="site-footer-link site-footer-credit-link" href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>, an independent publication. Not affiliated with the Sarawak Government.', html)
         self.assertIn('class="site-footer"', html)
-        self.assertIn('<div class="site-footer-main">', html)
-        self.assertIn('<nav aria-label="Explore" class="site-footer-nav">', html)
+        self.assertIn('site-footer-main site-footer-main--column-stacks', html)
+        self.assertIn('site-footer-grid-brand-cell', html)
+        self.assertIn('site-footer-grid-stack-left', html)
+        self.assertIn('site-footer-grid-stack-right', html)
+        self.assertIn(
+            '<nav aria-label="Explore" class="site-footer-nav site-footer-grid-explore">',
+            html,
+        )
         self.assertIn(f'<p class="site-footer-brand">{copy["title"]}</p>', html)
         self.assertIn('<p class="site-footer-note">', html)
         self.assertIn('<br class="site-footer-note-break" />', html)
@@ -150,19 +156,17 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<a class="site-footer-link" href="/" aria-current="page">Home</a>', html)
         self.assertIn('<a class="site-footer-link" href="about.html">About</a>', html)
         self.assertIn('<a class="site-footer-link" href="mailto:contact@sarawak.news">Contact</a>', html)
-        explore_nav, _ = html.split('<nav aria-label="Explore" class="site-footer-nav">', 1)[1].split(
-            "</nav>", 1
-        )
+        explore_nav, _ = html.split(
+            '<nav aria-label="Explore" class="site-footer-nav site-footer-grid-explore">',
+            1,
+        )[1].split("</nav>", 1)
         self.assertNotIn('href="https://sarawak.news/"', explore_nav)
         self.assertNotIn('href="https://events.sarawak.news/"', explore_nav)
         self.assertNotIn('href="https://bantuan.sarawak.news/"', explore_nav)
-        self.assertIn('<nav aria-label="Sarawak News" class="site-footer-fleet-nav">', html)
-        summary_col = html.split('class="site-footer-summary"', 1)[1].split(
-            'class="site-footer-nav"', 1
-        )[0]
-        self.assertIn("site-footer-fleet-nav", summary_col)
-        self.assertNotIn("\n    <div class=\"site-footer-fleet\">", html)
-        self.assertIn("<h2>Sarawak News</h2>", html)
+        self.assertIn('<nav aria-label="Hub" class="site-footer-fleet-nav">', html)
+        self.assertIn('site-footer-grid-fleet', html)
+        self.assertIn("<h2>Hub</h2>", html)
+        self.assertNotIn('class="site-footer-grid-explore-divider"', html)
         self.assertIn('<a class="site-footer-link" href="https://sarawak.news/">Sarawak.News</a>', html)
         self.assertIn(
             '<a class="site-footer-link" href="https://events.sarawak.news/">Events.Sarawak.News</a>',
@@ -327,14 +331,12 @@ class BuildTest(unittest.TestCase):
         self.assertIn("can-scroll-start", js)
         self.assertIn("border-color: var(--sarawak-yellow);", css)
         self.assertIn("button { font: inherit; }", css)
+        self.assertIn("/* sn-kit:footer-column-stacks:begin */", css)
+        self.assertIn(".site-footer-main.site-footer-main--column-stacks", css)
+        self.assertIn("--sn-footer-stack-inset: 28px", css)
         self.assertIn(".site-footer-fleet-nav", css)
         self.assertIn(".site-footer-nav .site-footer-link:hover", css)
-        self.assertIn(".site-footer-nav .site-footer-categories-title {", css)
-        self.assertIn("--footer-nav-inline-padding: 28px", css)
-        self.assertIn("margin: 22px calc(-1 * var(--footer-nav-inline-padding)) 12px", css)
-        self.assertIn("padding: 18px var(--footer-nav-inline-padding) 0", css)
         self.assertIn("border-top: 1px solid var(--line)", css)
-        self.assertIn(".site-footer-nav .site-footer-categories-title + ul { gap: 5px; }", css)
         self.assertIn("color: var(--sarawak-red);", css)
         self.assertIn("font-weight: 700", css)
         self.assertIn("text-decoration-color: var(--sarawak-red)", css)
@@ -511,12 +513,19 @@ class BuildTest(unittest.TestCase):
         self.assertNotIn('class="about-topics"', about)
         self.assertIn('class="theme-toggle"', about)
         self.assertIn('class="site-footer"', about)
-        self.assertIn('<nav aria-label="Explore" class="site-footer-nav">', about)
+        self.assertIn(
+            '<nav aria-label="Explore" class="site-footer-nav site-footer-grid-explore">',
+            about,
+        )
         self.assertIn('<a class="site-footer-link" href="/">Home</a>', about)
         self.assertIn('<a class="site-footer-link" href="about.html" aria-current="page">About</a>', about)
+        self.assertIn('aria-label="Hub"', about)
         self.assertIn('class="site-footer-fleet-nav"', about)
         self.assertIn('<a class="site-footer-link" href="https://sarawak.news/">Sarawak.News</a>', about)
-        about_explore, _ = about.split('<nav aria-label="Explore" class="site-footer-nav">', 1)[1].split(
+        about_explore, _ = about.split(
+            '<nav aria-label="Explore" class="site-footer-nav site-footer-grid-explore">',
+            1,
+        )[1].split(
             "</nav>", 1
         )
         self.assertNotIn('href="https://sarawak.news/"', about_explore)

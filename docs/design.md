@@ -56,15 +56,16 @@ The current direction is intentionally restrained:
 - Compact black index badges (26px desktop, 24px from 560px down) so the rank stays secondary to the title.
 - Source name highlighted in yellow.
 - On narrow viewports (`max-width: 560px`), each card’s meta row stacks as two lines: the date alone on the first line, then the yellow source chip and category on the second line with a middot separator (`SOURCE · CATEGORY`). Wider viewports keep the single-line `DATE · SOURCE · CATEGORY` meta row.
-- Structured, contained footer rendered by `kit.python.shell.render_footer`: a
-  source summary, a subtle desktop divider, vertical Explore links (Home, About,
-  Contact via `mailto:contact@sarawak.news`), and a `site-footer-fleet-nav` block
-  inside the summary column (divider, heading, and plain `href`s to the other fleet
-  sites from `kit/fleet-cross-links.json`; no self-link; no `rel="nofollow"`), then
-  the full-width builder and independence attribution row. The footer note is two sentences joined by
-  the kit’s forced `<br class="site-footer-note-break" />` (`brand_note_parts`
-  / `FOOTER_NOTE_BREAK` in `kit.python.shell`). The footer follows the story
-  list with a restrained 40px section gap.
+- Structured, contained footer rendered by `kit.python.shell.render_footer` with
+  `layout="column_stacks"` and `fleet_section_label="Hub"`: independent left stack
+  (brand note via `brand_note_parts` / `FOOTER_NOTE_BREAK`, then fleet **Hub** nav)
+  and right stack (Explore: Home, About, Contact via `mailto:contact@sarawak.news`).
+  No footer Categories block (filters live in the main UI). Fleet links are plain
+  `https://` anchors from `kit/fleet-cross-links.json` (no self-link; no
+  `rel="nofollow"`). Column-stack geometry and mobile order (brand → Hub → Explore)
+  come from the synced `sn-kit:footer-column-stacks` region in `site/style.css`
+  (kit pin `b04e7b2`). Then the full-width builder and independence attribution row.
+  The footer follows the story list with a restrained 40px section gap.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark
   cards, softened borders, brighter text, and preserved Sarawak yellow/red
   accents. The selected category filter pill keeps its black fill and white

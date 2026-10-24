@@ -1,0 +1,194 @@
+/* Events-style independent column stacks. Opt in via render_footer(layout="column_stacks").
+   Sites override track and spacing tokens in their own CSS (defaults match Events). */
+.site-footer-main.site-footer-main--column-stacks {
+  --sn-footer-col-left: 1.5fr;
+  --sn-footer-col-right: 180px;
+  --sn-footer-stack-inset: 28px;
+  --sn-footer-fleet-gap: 22px;
+  --sn-footer-explore-link-pad-bottom: 12px;
+  --sn-footer-mobile-gutter: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, var(--sn-footer-col-left)) minmax(var(--sn-footer-col-right), 1fr);
+  align-items: start;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  align-self: start;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-left {
+  overflow: hidden;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-right {
+  border-left: 1px solid var(--line);
+  height: fit-content;
+  position: relative;
+  z-index: 1;
+  background: inherit;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand-cell {
+  padding: var(--sn-footer-stack-inset) var(--sn-footer-stack-inset) 0;
+  min-width: 0;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-summary.site-footer-grid-brand-cell {
+  padding: var(--sn-footer-stack-inset) var(--sn-footer-stack-inset) 0;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand {
+  padding: 0;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-fleet {
+  margin: var(--sn-footer-fleet-gap) 0 0;
+  padding: var(--sn-footer-fleet-gap) var(--sn-footer-stack-inset) 0;
+  border-top: 1px solid var(--line);
+  box-sizing: border-box;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-fleet .site-footer-fleet-nav {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-right .site-footer-grid-categories {
+  margin: 0;
+  padding: 0 var(--sn-footer-stack-inset) var(--sn-footer-stack-inset);
+  box-sizing: border-box;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-right .site-footer-grid-categories h2.site-footer-categories-title {
+  padding-top: var(--sn-footer-fleet-gap);
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-explore.site-footer-nav {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: var(--sn-footer-stack-inset) var(--sn-footer-stack-inset) 0;
+  margin: 0;
+  border: 0;
+  border-left: 0;
+  box-sizing: border-box;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-right .site-footer-grid-explore > h2 {
+  margin: 0 0 12px;
+  padding-top: 2px;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-right .site-footer-grid-explore > ul:first-of-type {
+  margin: 0;
+  padding: 0 0 var(--sn-footer-explore-link-pad-bottom);
+  list-style: none;
+  border-bottom: 0;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-explore-divider {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--line);
+  box-sizing: border-box;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-right .site-footer-grid-explore > ul > li:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-categories h2 {
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  line-height: 1.4;
+  padding-top: 2px;
+  text-transform: uppercase;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-categories h2.site-footer-categories-title {
+  padding: 2px 0 0;
+  border: 0;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-categories ul {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer-main.site-footer-main--column-stacks .site-footer-grid-categories .site-footer-link:hover {
+  color: var(--sarawak-red);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--sarawak-red);
+}
+
+@media (max-width: 560px) {
+  .site-footer-main.site-footer-main--column-stacks {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-left,
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-right,
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand-cell {
+    display: contents;
+  }
+
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand-cell {
+    order: 1;
+    padding: 22px var(--sn-footer-mobile-gutter) 0;
+  }
+
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-fleet {
+    order: 2;
+    margin-top: var(--sn-footer-fleet-gap);
+    margin-left: calc(-1 * var(--sn-footer-mobile-gutter));
+    margin-right: calc(-1 * var(--sn-footer-mobile-gutter));
+    padding: var(--sn-footer-fleet-gap) var(--sn-footer-mobile-gutter) 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-explore {
+    order: 3;
+  }
+
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-categories {
+    order: 4;
+  }
+
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-right .site-footer-grid-categories {
+    padding: 0 var(--sn-footer-mobile-gutter) 22px;
+    border-top: 1px solid var(--line);
+  }
+
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-right .site-footer-grid-categories h2.site-footer-categories-title {
+    padding-top: var(--sn-footer-fleet-gap);
+  }
+
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-explore-divider {
+    display: none;
+  }
+
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-right .site-footer-grid-explore > ul:first-of-type {
+    padding-bottom: 0;
+  }
+
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-explore.site-footer-nav {
+    padding: 22px var(--sn-footer-mobile-gutter) 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 0;
+  }
+}
