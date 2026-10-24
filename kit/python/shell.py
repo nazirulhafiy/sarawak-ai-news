@@ -9,9 +9,12 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 CONTACT_HREF = "mailto:contact@sarawak.news"
 CONTACT_LABEL = "Contact"
+
+FooterLayout = Literal["classic", "column_stacks"]
 
 _FLEET_CROSS_LINKS_JSON = Path(__file__).resolve().parents[1] / "fleet-cross-links.json"
 
@@ -140,56 +143,56 @@ def format_footer_note(
     return esc(brand_note)
 
 
-def render_footer(
-    *,
-    brand_title: str,
-    brand_note: str = "",
-    active: str,
+def _footer_explore_items(
     explore_items: list[NavItem] | tuple[NavItem, ...],
-    brand_note_parts: Sequence[str] | None = None,
-    credit_html: str | None = None,
-    fleet_site: str | None = None,
-) -> str:
-    """Render the shared footer. Contact is always the last Explore link.
-
-    Pass ``brand_note`` for a single escaped paragraph (hub, bantuan, events).
-    Pass ``brand_note_parts`` (two or more strings) to insert
-    ``<br class="site-footer-note-break" />`` between escaped sentences (AI).
-    Pass ``fleet_site`` (hub, ai, events, or bantuan) to emit sister-site
-    links in the summary column below the brand note (label from
-    ``fleet-cross-links.json``), separated by a horizontal divider.
-    """
+) -> list[NavItem]:
     items = list(explore_items)
     if not any(item.href == CONTACT_HREF for item in items):
         items.append(NavItem("contact", CONTACT_HREF, CONTACT_LABEL))
+    return items
 
-    def link(item: NavItem) -> str:
-        current = ' aria-current="page"' if active == item.id else ""
-        return (
-            f'<li><a class="site-footer-link" href="{esc(item.href)}"{current}>'
-            f"{esc(item.label)}</a></li>"
-        )
 
-    explore = "\n          ".join(link(item) for item in items)
-    fleet_in_summary = ""
-    if fleet_site is not None:
-        fleet_items = fleet_cross_link_items(fleet_site)
-        fleet_links = "\n          ".join(link(item) for item in fleet_items)
-        section = esc(fleet_section_label())
-        fleet_in_summary = f"""
+def _footer_link(item: NavItem, active: str) -> str:
+    current = ' aria-current="page"' if active == item.id else ""
+    return (
+        f'<li><a class="site-footer-link" href="{esc(item.href)}"{current}>'
+        f"{esc(item.label)}</a></li>"
+    )
+
+
+def _footer_fleet_nav_html(
+    fleet_site: str,
+    active: str,
+    *,
+    section_label_override: str | None,
+) -> str:
+    fleet_items = fleet_cross_link_items(fleet_site)
+    fleet_links = "\n          ".join(_footer_link(item, active) for item in fleet_items)
+    label = (
+        section_label_override.strip()
+        if section_label_override is not None
+        else fleet_section_label()
+    )
+    section = esc(label)
+    return f"""
         <nav aria-label="{section}" class="site-footer-fleet-nav">
           <h2>{section}</h2>
           <ul>
             {fleet_links}
           </ul>
         </nav>"""
-    note_html = format_footer_note(brand_note, brand_note_parts)
-    if credit_html is None:
-        credit_html = (
-            'Built by <a class="site-footer-link site-footer-credit-link" '
-            'href="https://hafiy.my">hafiy.my</a>, an independent publication. '
-            "Not affiliated with the Sarawak Government."
-        )
+
+
+def _render_footer_classic(
+    *,
+    brand_title: str,
+    note_html: str,
+    active: str,
+    explore_items: list[NavItem],
+    fleet_in_summary: str,
+    credit_html: str,
+) -> str:
+    explore = "\n          ".join(_footer_link(item, active) for item in explore_items)
     return f"""  <footer class="site-footer">
     <div class="site-footer-main">
       <div class="site-footer-summary">
@@ -207,3 +210,124 @@ def render_footer(
       <p>{credit_html}</p>
     </div>
   </footer>"""
+
+
+def _render_footer_column_stacks(
+    *,
+    brand_title: str,
+    note_html: str,
+    active: str,
+    explore_items: list[NavItem],
+    fleet_html: str,
+    extra_nav_right: str | None,
+    credit_html: str,
+) -> str:
+    explore = "\n          ".join(_footer_link(item, active) for item in explore_items)
+    right_tail = ""
+    if extra_nav_right:
+        right_tail = f"""
+        <hr class="site-footer-grid-explore-divider" />
+        <div class="site-footer-categories site-footer-grid-categories">
+          {extra_nav_right}
+        </div>"""
+    fleet_block = ""
+    if fleet_html.strip():
+        fleet_block = f"""
+        <div class="site-footer-grid-fleet">
+          {fleet_html.strip()}
+        </div>"""
+    return f"""  <footer class="site-footer">
+    <div class="site-footer-main site-footer-main--column-stacks">
+      <div class="site-footer-grid-stack site-footer-grid-stack-left">
+        <div class="site-footer-summary site-footer-grid-brand-cell">
+          <div class="site-footer-grid-brand">
+            <p class="site-footer-brand">{esc(brand_title)}</p>
+            <p class="site-footer-note">{note_html}</p>
+          </div>
+        </div>{fleet_block}
+      </div>
+      <div class="site-footer-grid-stack site-footer-grid-stack-right">
+        <nav aria-label="Explore" class="site-footer-nav site-footer-grid-explore">
+          <h2>Explore</h2>
+          <ul>
+            {explore}
+          </ul>
+        </nav>{right_tail}
+      </div>
+    </div>
+    <div class="site-footer-bottom">
+      <p>{credit_html}</p>
+    </div>
+  </footer>"""
+
+
+def render_footer(
+    *,
+    brand_title: str,
+    brand_note: str = "",
+    active: str,
+    explore_items: list[NavItem] | tuple[NavItem, ...],
+    brand_note_parts: Sequence[str] | None = None,
+    credit_html: str | None = None,
+    fleet_site: str | None = None,
+    layout: FooterLayout = "classic",
+    fleet_section_label: str | None = None,
+    extra_nav_right: str | None = None,
+) -> str:
+    """Render the shared footer. Contact is always the last Explore link.
+
+    Pass ``brand_note`` for a single escaped paragraph (hub, bantuan, events).
+    Pass ``brand_note_parts`` (two or more strings) to insert
+    ``<br class="site-footer-note-break" />`` between escaped sentences (AI).
+    Pass ``fleet_site`` (hub, ai, events, or bantuan) to emit sister-site
+    links (label from ``fleet-cross-links.json`` unless ``fleet_section_label``
+    overrides the heading and ``aria-label`` only).
+    Pass ``layout="column_stacks"`` for Events-style independent column stacks
+    (fleet block in the left stack, optional ``extra_nav_right`` HTML for a
+    Categories block after Explore and a full-width ``<hr>`` divider).
+    """
+    if layout not in ("classic", "column_stacks"):
+        raise ValueError('layout must be "classic" or "column_stacks"')
+    if layout == "column_stacks" and extra_nav_right is not None and not extra_nav_right.strip():
+        raise ValueError("extra_nav_right must be omitted or non-empty HTML")
+
+    items = _footer_explore_items(explore_items)
+    note_html = format_footer_note(brand_note, brand_note_parts)
+    if credit_html is None:
+        credit_html = (
+            'Built by <a class="site-footer-link site-footer-credit-link" '
+            'href="https://hafiy.my">hafiy.my</a>, an independent publication. '
+            "Not affiliated with the Sarawak Government."
+        )
+
+    fleet_in_summary = ""
+    fleet_column_html = ""
+    if fleet_site is not None:
+        fleet_nav = _footer_fleet_nav_html(
+            fleet_site,
+            active,
+            section_label_override=fleet_section_label,
+        )
+        if layout == "classic":
+            fleet_in_summary = fleet_nav
+        else:
+            fleet_column_html = fleet_nav
+
+    if layout == "column_stacks":
+        return _render_footer_column_stacks(
+            brand_title=brand_title,
+            note_html=note_html,
+            active=active,
+            explore_items=items,
+            fleet_html=fleet_column_html,
+            extra_nav_right=extra_nav_right,
+            credit_html=credit_html,
+        )
+    return _render_footer_classic(
+        brand_title=brand_title,
+        note_html=note_html,
+        active=active,
+        explore_items=items,
+        fleet_in_summary=fleet_in_summary,
+        credit_html=credit_html,
+    )

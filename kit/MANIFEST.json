@@ -16,6 +16,7 @@
     "assets/icons/nav-mark-transparent.svg",
     "assets/icons/nav-mark-transparent-dark.svg",
     "css/back-to-top.css",
+    "css/footer-column-stacks.css",
     "js/back-to-top.js"
   ],
   "invariants": [
@@ -79,6 +80,11 @@
       "kit": "js/back-to-top.js",
       "site": "site/app.js",
       "marker": "sn-kit:back-to-top"
+    },
+    "footer_column_stacks_css": {
+      "kit": "css/footer-column-stacks.css",
+      "site": "site/style.css",
+      "marker": "sn-kit:footer-column-stacks"
     }
   }
 }
