@@ -62,9 +62,10 @@ The current direction is intentionally restrained:
   and right stack (Explore: Home, About, Contact via `mailto:contact@sarawak.news`).
   No footer Categories block (filters live in the main UI). Fleet links are plain
   `https://` anchors from `kit/fleet-cross-links.json` (no self-link; no
-  `rel="nofollow"`). Column-stack geometry and mobile order (brand → Hub → Explore)
+  `rel="nofollow"`). On AI, short labels are **Sarawak** / **Events** / **Bantuan**
+  (self omitted). Column-stack geometry and mobile order (brand → Hub → Explore)
   come from the synced `sn-kit:footer-column-stacks` region in `site/style.css`
-  (kit pin `42870cb`, hub #43 divider track). Then the full-width builder and
+  (kit pin `17aa0ea`, hub #45 short fleet labels). Then the full-width builder and
   independence attribution row.
   The footer follows the story list with a restrained 40px section gap.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark

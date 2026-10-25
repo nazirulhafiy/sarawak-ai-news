@@ -167,26 +167,27 @@ class BuildTest(unittest.TestCase):
         self.assertIn('site-footer-grid-fleet', html)
         self.assertIn("<h2>Hub</h2>", html)
         self.assertNotIn('class="site-footer-grid-explore-divider"', html)
-        self.assertIn('<a class="site-footer-link" href="https://sarawak.news/">Sarawak.News</a>', html)
+        self.assertIn('<a class="site-footer-link" href="https://sarawak.news/">Sarawak</a>', html)
         self.assertIn(
-            '<a class="site-footer-link" href="https://events.sarawak.news/">Events.Sarawak.News</a>',
+            '<a class="site-footer-link" href="https://events.sarawak.news/">Events</a>',
             html,
         )
         self.assertIn(
-            '<a class="site-footer-link" href="https://bantuan.sarawak.news/">Bantuan.Sarawak.News</a>',
+            '<a class="site-footer-link" href="https://bantuan.sarawak.news/">Bantuan</a>',
             html,
         )
         fleet_block = html.split('class="site-footer-fleet-nav"', 1)[1].split("</nav>", 1)[0]
         self.assertLess(
-            fleet_block.index("Sarawak.News"),
-            fleet_block.index("Events.Sarawak.News"),
+            fleet_block.index(">Sarawak</a>"),
+            fleet_block.index(">Events</a>"),
         )
         self.assertLess(
-            fleet_block.index("Events.Sarawak.News"),
-            fleet_block.index("Bantuan.Sarawak.News"),
+            fleet_block.index(">Events</a>"),
+            fleet_block.index(">Bantuan</a>"),
         )
         self.assertNotIn('rel="nofollow"', html.split("site-footer", 1)[1])
         self.assertNotIn("https://ai.sarawak.news/", html.split('class="site-footer-fleet-nav"', 1)[1])
+        self.assertNotIn(">AI</a>", fleet_block)
         self.assertIn('class="back-to-top" type="button" data-back-to-top aria-label="Back to top" hidden', html)
         self.assertIn('class="back-to-top-label">Back to top</span>', html)
         self.assertIn('class="back-to-top-arrow" aria-hidden="true">↑</span>', html)
@@ -445,8 +446,10 @@ class BuildTest(unittest.TestCase):
         self.assertIn('navigation?.type === "reload"', js)
         self.assertIn('window.scrollY >= 600', js)
         self.assertIn('window.scrollTo({ top: 0', js)
+        # Old category chip labels must stay out of the filter UI (fleet may use short names).
+        category_block = html.split("data-category-filter", 1)[1].split("</section>", 1)[0]
         for label in [">AI<", ">Tech<", ">PCDS 2030<", ">Startups<", ">Energy<", ">Events<"]:
-            self.assertNotIn(label, html)
+            self.assertNotIn(label, category_block)
         public_items = json.loads((ROOT / "dist" / "items.json").read_text())
         self.assertEqual(len(public_items), expected_items)
         self.assertTrue(all(item["date"] for item in public_items))
@@ -521,7 +524,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn('<a class="site-footer-link" href="about.html" aria-current="page">About</a>', about)
         self.assertIn('aria-label="Hub"', about)
         self.assertIn('class="site-footer-fleet-nav"', about)
-        self.assertIn('<a class="site-footer-link" href="https://sarawak.news/">Sarawak.News</a>', about)
+        self.assertIn('<a class="site-footer-link" href="https://sarawak.news/">Sarawak</a>', about)
         about_explore, _ = about.split(
             '<nav aria-label="Explore" class="site-footer-nav site-footer-grid-explore">',
             1,
