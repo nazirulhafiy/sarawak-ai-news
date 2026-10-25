@@ -1,9 +1,9 @@
 {
   "section_label": "Sarawak News",
   "sites": [
-    { "id": "hub", "href": "https://sarawak.news/", "label": "Sarawak.News" },
-    { "id": "ai", "href": "https://ai.sarawak.news/", "label": "AI.Sarawak.News" },
-    { "id": "events", "href": "https://events.sarawak.news/", "label": "Events.Sarawak.News" },
-    { "id": "bantuan", "href": "https://bantuan.sarawak.news/", "label": "Bantuan.Sarawak.News" }
+    { "id": "hub", "href": "https://sarawak.news/", "label": "Sarawak" },
+    { "id": "ai", "href": "https://ai.sarawak.news/", "label": "AI" },
+    { "id": "events", "href": "https://events.sarawak.news/", "label": "Events" },
+    { "id": "bantuan", "href": "https://bantuan.sarawak.news/", "label": "Bantuan" }
   ]
 }
