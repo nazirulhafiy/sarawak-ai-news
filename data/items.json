@@ -1699,5 +1699,25 @@
     "why_it_matters": "A dated DUS winding-up speech puts a funded AI analytics and IoT upgrade on a named Kuching food park with a 2027 completion target.",
     "confidence": "high",
     "caveat": "Publication date verified against the DayakDaily byline (Oct 20, 2026 @ 18:12) and article:published_time 2026-10-20T10:12:09+00:00. Minister Dr Stephen Rundi Utom announced the RM3 million RMK-13 upgrade in his ministerial winding-up speech. The adjacent Rampangi Precision Farming Park progress (68 percent, planting in December) is separate from the RM3 million TKPM upgrade; vendor stack and exact AI analytics products are not named."
+  },
+  {
+    "id": "thestar-softbank-son-kuching-50bil-ai-2026-10-26",
+    "date": "2026-10-26",
+    "source": "The Star",
+    "url": "https://www.thestar.com.my/business/business-news/2026/10/26/softbanks-son-plans-us50bil-malaysia-tech-outlay-pm-says",
+    "title": "Anwar: SoftBank's Son picks Kuching for US$50bil AI plan",
+    "section": "Infrastructure",
+    "tags": [
+      "SoftBank",
+      "Masayoshi Son",
+      "Kuching",
+      "data centres",
+      "AI investment",
+      "Anwar Ibrahim"
+    ],
+    "summary": "Anwar said SoftBank CEO Masayoshi Son chose Kuching for a US$50 billion AI and data centre infrastructure plan spanning Sarawak and Peninsular Malaysia.",
+    "why_it_matters": "Anwar's Melaka speech attributes a US$50 billion SoftBank figure to AI and data centre work in Kuching, adding a named value the Oct 8 SoftBank-Grab-PETROS framework did not disclose.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against The Star article:published_time (2026-10-26T00:00:00.000Z) and the English body. Anwar said in Melaka on 24 Oct that Masayoshi Son chose Sarawak-Kuching and Peninsular Malaysia for US$50bil in AI, new technology and data centres after a videoconference. SoftBank representatives did not immediately respond. SoftBank has not confirmed the figure in this report. Distinct from the Oct 8 SoftBank-Grab-PETROS framework item, which named no investment value."
   }
 ]
