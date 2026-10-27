@@ -1719,5 +1719,24 @@
     "why_it_matters": "Sarawak is one of two places named for the US$50bil, but how much goes there hasn't been said. The 8 Oct SoftBank, Grab and PETROS framework gave no amount.",
     "confidence": "medium",
     "caveat": "Publication date verified against The Star article:published_time (2026-10-26T00:00:00.000Z) and the English body. Anwar said in Melaka on 24 Oct that Masayoshi Son chose Sarawak-Kuching and Peninsular Malaysia for US$50bil in AI, new technology and data centres after a videoconference. SoftBank representatives did not immediately respond. SoftBank has not confirmed the figure in this report. Distinct from the Oct 8 SoftBank-Grab-PETROS framework item, which named no investment value."
+  },
+  {
+    "id": "thestar-premier-sarawak-50bil-ai-data-centre-2026-10-27",
+    "date": "2026-10-27",
+    "source": "The Star",
+    "url": "https://www.thestar.com.my/news/nation/2026/10/26/sarawak-included-in-us50bil-ai-data-centre-investment-says-abang-jo",
+    "title": "Premier: Sarawak part of US$50bil AI and data centre plan",
+    "section": "Infrastructure",
+    "tags": [
+      "Abang Johari Openg",
+      "Tanjung Embang",
+      "data centres",
+      "AI investment",
+      "Sarawak Urban Forum"
+    ],
+    "summary": "Premier Tan Sri Abang Johari Openg said part of a planned US$50bil investment by a global technology company will be in Sarawak for AI and data centre infrastructure, likely at Tanjung Embang, without naming the investor.",
+    "why_it_matters": "This is the Premier's on-record confirmation that Sarawak gets a share of the US$50bil AI and data centre plan, with Tanjung Embang named as the likely site. How much of that figure goes to Sarawak is still unsaid, and he did not name SoftBank.",
+    "confidence": "high",
+    "caveat": "Feed date follows article:published_time 2026-10-26T18:10:00.000Z converted to Asia/Kuching (2026-10-27), matching scripts/audit_dates.py. Visible byline reads Monday, 26 Oct 2026 | 6:10 PM MYT and cXense publishtime is 2026-10-26T18:10:00+0800. Premier quotes match the English body: part of the planned US$50bil (RM204.3bil) will be in Sarawak for AI and data centres, likely Tanjung Embang; investor unnamed. Distinct from the SoftBank-named PM Melaka card (thestar-softbank-son-kuching-50bil-ai-2026-10-26)."
   }
 ]
