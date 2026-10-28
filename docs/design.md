@@ -229,7 +229,7 @@ lede and sections for why Sarawak AI, coverage categories (tags, not separate
 pages), how stories are picked and checked (one short paragraph in
 `scripts/build.py`: daily scan checks public sources; approved items get a short
 original summary and source link — no fixed clock time in the copy), a
-**Related sites** network list (crawlable home + About links from
+**Related sites** network list (crawlable home links only from
 `kit/fleet-cross-links.json` to hub, Events, and Bantuan only), and contact
 (`mailto:contact@sarawak.news` only). It keeps the
 explanation closer to the editorial feed instead of adding dashboard-like
