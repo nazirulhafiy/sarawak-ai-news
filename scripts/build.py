@@ -277,10 +277,8 @@ def render_fleet_network_section(fleet_site: str = FLEET_SITE_ID) -> str:
     items = []
     for link in fleet_cross_link_items(fleet_site):
         href = link.href if link.href.endswith("/") else f"{link.href}/"
-        about = f"{href}about.html"
         items.append(
-            f'      <li><a href="{esc(href)}">{esc(link.label)}</a>'
-            f' · <a href="{esc(about)}">About</a></li>'
+            f'      <li><a href="{esc(href)}">{esc(link.label)}</a></li>'
         )
     return f"""    <section class="about-section" aria-labelledby="about-network">
       <h2 id="about-network">Related sites</h2>
