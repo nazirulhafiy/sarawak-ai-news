@@ -210,13 +210,16 @@ Homepage hierarchy:
 6. Ranked story cards (full reviewed feed).
 7. Independent-publication footer note.
 
-There are no public category archive pages. The sitemap lists only the homepage
-and About. Former category URLs remain as noindex redirect stubs to
-`https://ai.sarawak.news/`.
+There are no public category archive pages. The sitemap lists the homepage,
+About, and `feed.xml` (each with `<lastmod>` from the newest reviewed item).
+`robots.txt` points at that sitemap. Former category URLs remain as noindex
+redirect stubs to `https://ai.sarawak.news/` and are not listed in the sitemap.
+Per-story HTML pages are not built yet (see fleet SEO item-4 proposal).
 
 The masthead contains the brand lockup, compact navigation, theme toggle, and
 color rule. It scrolls with the page and uses a solid background so content does
-not show through the bar. The About page moves
+not show through the bar. About is linked from header nav, footer Explore, and a
+home brief line (`About this brief`). The About page moves
 fuller publication context off the already wordy homepage while keeping the first
 screen focused on the live brief.
 
@@ -225,7 +228,9 @@ The About page uses the same restrained system: the hero opens on
 lede and sections for why Sarawak AI, coverage categories (tags, not separate
 pages), how stories are picked and checked (one short paragraph in
 `scripts/build.py`: daily scan checks public sources; approved items get a short
-original summary and source link — no fixed clock time in the copy), and contact
+original summary and source link — no fixed clock time in the copy), a
+**Related sites** network list (crawlable home + About links from
+`kit/fleet-cross-links.json` to hub, Events, and Bantuan only), and contact
 (`mailto:contact@sarawak.news` only). It keeps the
 explanation closer to the editorial feed instead of adding dashboard-like
 metrics or pills.
