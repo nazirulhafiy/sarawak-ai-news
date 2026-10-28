@@ -24,6 +24,7 @@ from kit.python.analytics_registry import AnalyticsRegistry, load_analytics  # n
 from kit.python.asset_urls import versioned_href  # noqa: E402
 from kit.python.shell import (  # noqa: E402
     NavItem,
+    fleet_cross_link_items,
     render_back_to_top,
     render_footer as kit_render_footer,
     render_header as kit_render_header,
@@ -42,6 +43,7 @@ SECTION_FILTERS = (
 SITE_URL = "https://ai.sarawak.news/"
 SOCIAL_CARD_PATH = ROOT / "site" / "social-card.png"
 LOGO_MARK_PATH = ROOT / "site" / "icons" / "nav-mark-transparent.svg"
+FLEET_SITE_ID = "ai"
 PUBLIC_ITEM_FIELDS = (
     "id",
     "title",
@@ -270,6 +272,25 @@ def render_site_footer(active_page: str, site: dict[str, str] | None = None) -> 
     )
 
 
+def render_fleet_network_section(fleet_site: str = FLEET_SITE_ID) -> str:
+    """Crawlable main-content links to other fleet sites (excludes self)."""
+    items = []
+    for link in fleet_cross_link_items(fleet_site):
+        href = link.href if link.href.endswith("/") else f"{link.href}/"
+        about = f"{href}about.html"
+        items.append(
+            f'      <li><a href="{esc(href)}">{esc(link.label)}</a>'
+            f' · <a href="{esc(about)}">About</a></li>'
+        )
+    return f"""    <section class="about-section" aria-labelledby="about-network">
+      <h2 id="about-network">Related sites</h2>
+      <p>Also on this network:</p>
+      <ul>
+{chr(10).join(items)}
+      </ul>
+    </section>"""
+
+
 def render_compact_body(items: list[dict], site: dict[str, str] | None = None) -> str:
     site = load_site() if site is None else site
     feed = "\n".join(render_compact_signal(item, index) for index, item in enumerate(items, 1))
@@ -286,6 +307,7 @@ def render_compact_body(items: list[dict], site: dict[str, str] | None = None) -
       {BRIEF_NET_SVG}
       <h1 id="brief-title">{esc(site["tagline"])}</h1>
       <p class="brief-deck">{esc(SITE_INTRODUCTION)}</p>
+      <p class="brief-about"><a href="about.html">About this brief</a></p>
       <p class="updated"><span class="updated-label">Last updated</span><time datetime="{esc(updated_iso)}">{esc(updated_compact)}</time></p>
     </header>
 
@@ -338,6 +360,8 @@ def render_about_body(site: dict[str, str] | None = None) -> str:
       <h2 id="about-method-title">How stories are picked and checked</h2>
       <p>Daily scan checks public news and official pages for Sarawak AI developments. Approved items get a short original summary and a link to the source.</p>
     </section>
+
+{render_fleet_network_section()}
 
     <section class="about-section" aria-labelledby="about-contact-title">
       <h2 id="about-contact-title">Contact</h2>
