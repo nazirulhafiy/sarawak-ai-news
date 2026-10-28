@@ -305,7 +305,6 @@ def render_compact_body(items: list[dict], site: dict[str, str] | None = None) -
       {BRIEF_NET_SVG}
       <h1 id="brief-title">{esc(site["tagline"])}</h1>
       <p class="brief-deck">{esc(SITE_INTRODUCTION)}</p>
-      <p class="brief-about"><a href="about.html">About this brief</a></p>
       <p class="updated"><span class="updated-label">Last updated</span><time datetime="{esc(updated_iso)}">{esc(updated_compact)}</time></p>
     </header>
 

@@ -287,7 +287,8 @@ class BuildTest(unittest.TestCase):
         self.assertIn("<loc>https://ai.sarawak.news/</loc>", sitemap)
         self.assertIn("<loc>https://ai.sarawak.news/about.html</loc>", sitemap)
         self.assertIn("<loc>https://ai.sarawak.news/feed.xml</loc>", sitemap)
-        self.assertIn('href="about.html">About this brief</a>', html)
+        self.assertNotIn("brief-about", html)
+        self.assertNotIn("About this brief", html)
         about_html = (ROOT / "dist" / "about.html").read_text()
         self.assertIn('id="about-network"', about_html)
         network = about_html.split('id="about-network"', 1)[1].split("</ul>", 1)[0]
