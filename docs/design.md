@@ -218,8 +218,8 @@ Per-story HTML pages are not built yet (see fleet SEO item-4 proposal).
 
 The masthead contains the brand lockup, compact navigation, theme toggle, and
 color rule. It scrolls with the page and uses a solid background so content does
-not show through the bar. About is linked from header nav, footer Explore, and a
-home brief line (`About this brief`). The About page moves
+not show through the bar. About is linked from header nav and footer Explore
+only (no home brief About line). The About page moves
 fuller publication context off the already wordy homepage while keeping the first
 screen focused on the live brief.
 
