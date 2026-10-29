@@ -1719,5 +1719,24 @@
     "why_it_matters": "Sarawak is one of two places named for the US$50bil, but how much goes there hasn't been said. The 8 Oct SoftBank, Grab and PETROS framework gave no amount.",
     "confidence": "medium",
     "caveat": "Publication date verified against The Star article:published_time (2026-10-26T00:00:00.000Z) and the English body. Anwar said in Melaka on 24 Oct that Masayoshi Son chose Sarawak-Kuching and Peninsular Malaysia for US$50bil in AI, new technology and data centres after a videoconference. SoftBank representatives did not immediately respond. SoftBank has not confirmed the figure in this report. Distinct from the Oct 8 SoftBank-Grab-PETROS framework item, which named no investment value."
+  },
+  {
+    "id": "borneopost-ipg-ai-digitalisation-syllabuses-2026-10-28",
+    "date": "2026-10-28",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/10/28/sarawak-introduces-ai-digitalisation-into-teacher-training-syllabuses-says-caretaker-minister/",
+    "title": "Sarawak adds AI to all IPG teacher-training syllabuses",
+    "section": "Education",
+    "tags": [
+      "IPG",
+      "teacher training",
+      "digitalisation",
+      "Roland Sagah",
+      "iCERI 2026"
+    ],
+    "summary": "State Caretaker Minister for Education, Innovation and Talent Development Dato Sri Roland Sagah Wee Inn said Sarawak is introducing AI and digitalisation into all IPG syllabuses, already starting in schools with too few trained teachers.",
+    "why_it_matters": "A statewide IPG syllabus change puts AI into the teacher pipeline, not only classroom pilots.",
+    "confidence": "high",
+    "caveat": "Publication date verified against The Borneo Post byline (28 October 2026, 7:02 PM) and the English body opened via WebFetch. Automated date audit currently gets HTTP 403 (Cloudflare), same as other live Borneo Post URLs. Sagah spoke after opening iCERI 2026 in Kuching. The article does not name vendors, course modules, or a completion date. The RM50 billion figure in the same piece is annual teacher-salary cost for full education autonomy, not an AI budget."
   }
 ]
