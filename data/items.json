@@ -1738,5 +1738,24 @@
     "why_it_matters": "A statewide IPG syllabus change puts AI into the teacher pipeline, not only classroom pilots.",
     "confidence": "high",
     "caveat": "Publication date verified against The Borneo Post byline (28 October 2026, 7:02 PM) and the English body opened via WebFetch. Automated date audit currently gets HTTP 403 (Cloudflare), same as other live Borneo Post URLs. Sagah spoke after opening iCERI 2026 in Kuching. The article does not name vendors, course modules, or a completion date. The RM50 billion figure in the same piece is annual teacher-salary cost for full education autonomy, not an AI budget."
+  },
+  {
+    "id": "tribune-maxis-ekelas-ai-entrepreneurs-2026-10-30",
+    "date": "2026-10-30",
+    "source": "Sarawak Tribune",
+    "url": "https://www.sarawaktribune.com/sarawak-entrepreneurs-record-20-revenue-growth-through-maxis-programme/",
+    "title": "44 Sarawak entrepreneurs grow revenue 20% after Maxis AI course",
+    "section": "Business",
+    "tags": [
+      "Maxis",
+      "eKelas Usahawan Accelerator",
+      "AI-assisted content creation",
+      "MSME",
+      "KUSKOP"
+    ],
+    "summary": "Maxis's eKelas Usahawan Accelerator signals practical AI adoption for Sarawak MSMEs, with 44 entrepreneurs posting 20 per cent average revenue growth after AI-assisted content creation training.",
+    "why_it_matters": "A named telco accelerator put AI content tools into Sarawak MSME practice and reported measured revenue gains, not only attendance.",
+    "confidence": "high",
+    "caveat": "Publication date verified against the Sarawak Tribune byline (30/10/2026, 12:56 pm) and the English body reopened in Stage B. Figures are programme-reported averages for the latest Sarawak cohort of 44; the nationwide total of 200 entrepreneurs since December 2024 includes Sabah and Sarawak and is not a Sarawak-only count. Vendor AI products used in training are not named beyond AI-assisted content creation and content planning. Borneo Post carried a same-day parallel headline but was Cloudflare-blocked in this run; Tribune English body was used."
   }
 ]
