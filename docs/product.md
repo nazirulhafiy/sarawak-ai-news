@@ -48,8 +48,8 @@ The homepage shows:
   independent-publication attribution row.
 
 The Tracker page (`tracker.html`) lists initiatives from
-`data/initiatives.json`. Status filters, agency pills, and search are
-client-side. Each initiative points at a reviewed `story_id` so the latest
+`data/initiatives.json`. Agency pills and search are client-side. Each
+initiative points at a reviewed `story_id` so the latest
 story date and source links come from `data/items.json`. Validation fails when
 a `story_id` is missing or status is not `Planning`, `Ongoing`, or `Completed`.
 

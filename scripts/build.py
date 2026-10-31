@@ -40,7 +40,6 @@ SECTION_FILTERS = (
     "Business",
 )
 
-INITIATIVE_STATUSES = ("Planning", "Ongoing", "Completed")
 TRACKER_TITLE = "AI initiatives by Sarawak government agencies"
 TRACKER_DECK = "Each initiative links to the ai.sarawak.news story it comes from."
 
@@ -355,7 +354,7 @@ def render_tracker_card(row: dict) -> str:
         )
     date_label = format_tracker_date(row["date"])
     search_text = esc(f"{row['initiative']} {row['agency']} {row['agency_short']}".lower())
-    return f"""<article class="tv2-card" data-agency="{esc(row['agency_slug'])}" data-status="{esc(row['status'])}" data-text="{search_text}">
+    return f"""<article class="tv2-card" data-agency="{esc(row['agency_slug'])}" data-text="{search_text}">
 <button class="tv2-btn" type="button" aria-expanded="false">
 <div class="tv2-top"><span class="tv2-agency" title="{esc(row['agency'])}">{logo_html}<span class="tv2-agency-name">{esc(row['agency_short'])}</span></span><span class="tv2-chev" aria-hidden="true"></span></div>
 <h2>{esc(row['initiative'])}</h2>
@@ -387,22 +386,9 @@ def render_tracker_body(
             continue
         seen.add(slug_key)
         agencies.append((slug_key, row["agency_short"]))
-    counts = {
-        status: sum(1 for row in initiatives if row["status"] == status)
-        for status in INITIATIVE_STATUSES
-    }
     updated_iso, _, updated_compact = last_updated(
         [{"date": row["date"]} for row in initiatives]
     )
-    metrics = [
-        f'<button class="tv2-metric is-active" type="button" data-status="all">'
-        f"<b>{len(initiatives)}</b><span>Initiatives</span></button>"
-    ]
-    for status in INITIATIVE_STATUSES:
-        metrics.append(
-            f'<button class="tv2-metric" type="button" data-status="{esc(status)}">'
-            f"<b>{counts[status]}</b><span>{esc(status)}</span></button>"
-        )
     filters = ['<button class="tv2-filter is-active" type="button" data-agency="all">All</button>']
     for agency_slug, agency_short in agencies:
         filters.append(
@@ -421,10 +407,6 @@ def render_tracker_body(
       <p class="brief-deck">{esc(TRACKER_DECK)}</p>
       <p class="updated"><span class="updated-label">Last updated</span><time datetime="{esc(updated_iso)}">{esc(updated_compact)}</time></p>
     </header>
-
-    <section class="tv2-summary" aria-label="Initiative status counts">
-      {"".join(metrics)}
-    </section>
 
     <section class="tv2-controls" aria-label="Filter initiatives">
       <div class="tv2-filter-area">
@@ -447,25 +429,14 @@ def render_tracker_body(
 {render_site_footer("tracker", site)}
   <script>
     (() => {{
-      let status = "all";
       let agency = "all";
       let query = "";
       const cards = [...document.querySelectorAll(".tv2-card")];
       const run = () => cards.forEach((card) => {{
         card.hidden = !(
-          (status === "all" || card.dataset.status === status) &&
           (agency === "all" || card.dataset.agency === agency) &&
           card.dataset.text.includes(query)
         );
-      }});
-      document.querySelectorAll(".tv2-metric").forEach((button) => {{
-        button.addEventListener("click", () => {{
-          status = button.dataset.status;
-          document.querySelectorAll(".tv2-metric").forEach((other) => {{
-            other.classList.toggle("is-active", other === button);
-          }});
-          run();
-        }});
       }});
       document.querySelectorAll(".tv2-filter").forEach((button) => {{
         button.addEventListener("click", () => {{
