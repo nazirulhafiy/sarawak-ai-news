@@ -19,8 +19,8 @@ The current direction is intentionally restrained:
   a responsive `40px` mobile floor.
 - Supporting introduction at `18px`, giving the hero more generous rhythm while keeping the brief's Sarawak AI coverage concise.
 - Sarawak red, yellow, and black accents.
-- Refined top brand bar with a `16px` wordmark, compact `Home` and `About`
-  links, a theme toggle, compact desktop height, and a Sarawak-color rule.
+- Refined top brand bar with a `16px` wordmark, compact `Home`, `Tracker`, and
+  `About` links, a theme toggle, compact desktop height, and a Sarawak-color rule.
   The home link (`.brand`) starts with Design Bot’s origami line hornbill
   (`#snnav` / hub `#snnav`), then the site `title` from `data/site.json`, with a small gap.
   Canonical mark files live in the vendored `kit/assets/icons/`
@@ -33,8 +33,8 @@ The current direction is intentionally restrained:
   brand text are unchanged.
   The masthead bar is a full-viewport outer shell (edge-to-edge background) with
   an inner `max-width: 760px` wrapper that
-  keeps the wordmark, Home/About links, theme toggle, and menu aligned to the
-  reading column. The tri-colour rule follows the same content rail on viewports
+  keeps the wordmark, Home/Tracker/About links, theme toggle, and menu aligned to
+  the reading column. The tri-colour rule follows the same content rail on viewports
   wider than `560px` (tablet and desktop): the red segment anchors the wordmark;
   yellow and black divide the remaining space on that rail equally.   From
   `560px` down (mobile), the rule extends edge to edge across the viewport:
@@ -59,7 +59,7 @@ The current direction is intentionally restrained:
 - Structured, contained footer rendered by `kit.python.shell.render_footer` with
   `layout="column_stacks"` and `fleet_section_label="Hub"`: independent left stack
   (brand note via `brand_note_parts` / `FOOTER_NOTE_BREAK`, then fleet **Hub** nav)
-  and right stack (Explore: Home, About, Contact via `mailto:contact@sarawak.news`).
+  and right stack (Explore: Home, Tracker, About, Contact via `mailto:contact@sarawak.news`).
   No footer Categories block (filters live in the main UI). Fleet links are plain
   `https://` anchors from `kit/fleet-cross-links.json` (no self-link; no
   `rel="nofollow"`). On AI, short labels are **Sarawak** / **Events** / **Bantuan**
@@ -75,7 +75,7 @@ The current direction is intentionally restrained:
   against dark surfaces.
 - The homepage and supporting routes use a shared 1200x630 social card with
   the site name, current headline, short description, and Sarawak colour rule.
-  Home and About point `og:image` and `twitter:image` at
+  Home, Tracker, and About point `og:image` and `twitter:image` at
   `https://ai.sarawak.news/social-card.png` plus a content-hash query string
   from `versioned_href` in `kit/python/asset_urls.py` (first 12 hex characters
   of the SHA-256 of `site/social-card.png`). The tab favicon stays the inline
@@ -127,7 +127,7 @@ Behavior:
 - The masthead theme toggle is a 36px circular control with a morphing moon/sun
   icon. It follows the system theme by default, persists an explicit choice in
   local storage, and updates its accessible label for the next mode.
-- Home and About links are borderless at rest and use a selected treatment on
+- Home, Tracker, and About links are borderless at rest and use a selected treatment on
   hover: black surface, white text, and a visible border. Footer links turn
   Sarawak red and bold on hover, with the same red underline as the builder
   credit.
@@ -202,7 +202,7 @@ stays high enough for repeated scanning.
 
 Homepage hierarchy:
 
-1. Brand (`title` from `data/site.json`) and `Home`/`About` navigation.
+1. Brand (`title` from `data/site.json`) and `Home`/`Tracker`/`About` navigation.
 2. Hero headline: `tagline` from `data/site.json`.
 3. Brief deck (`p.brief-deck`, max-width `600px`): `Each card links to its source.`
 4. Last updated weekday and date.
@@ -211,17 +211,41 @@ Homepage hierarchy:
 7. Independent-publication footer note.
 
 There are no public category archive pages. The sitemap lists the homepage,
-About, and `feed.xml` (each with `<lastmod>` from the newest reviewed item).
-`robots.txt` points at that sitemap. Former category URLs remain as noindex
-redirect stubs to `https://ai.sarawak.news/` and are not listed in the sitemap.
-Per-story HTML pages are not built yet (see fleet SEO item-4 proposal).
+Tracker, About, and `feed.xml` (each with `<lastmod>` from the newest reviewed
+item). `robots.txt` points at that sitemap. Former category URLs remain as
+noindex redirect stubs to `https://ai.sarawak.news/` and are not listed in the
+sitemap. Per-story HTML pages are not built yet (see fleet SEO item-4 proposal).
 
 The masthead contains the brand lockup, compact navigation, theme toggle, and
 color rule. It scrolls with the page and uses a solid background so content does
-not show through the bar. About is linked from header nav and footer Explore
-only (no home brief About line). The About page moves
+not show through the bar. Tracker and About are linked from header nav and footer
+Explore (no home brief About line). The About page moves
 fuller publication context off the already wordy homepage while keeping the first
 screen focused on the live brief.
+
+### Tracker page
+
+`tracker.html` is generated from `data/initiatives.json`. Each row stores agency,
+short label, initiative name, one-line description (`what`), status
+(`Planning` / `Ongoing` / `Completed`), latest-update evidence copy, optional
+logo filename under `site/logos/`, and a `story_id` into `data/items.json`. Build
+time joins that id for story date, title, outlet name, and original URL. Agencies
+without a logo show a white “Logo pending” tile. The page reuses site colours,
+Geist, light/dark theme, and fleet header/footer.
+
+Layout (v2):
+
+1. Brief hero: “AI initiatives by Sarawak government agencies”, deck, last
+   updated from the newest linked initiative story date.
+2. Four count tiles (Initiatives / Planning / Ongoing / Completed) that filter
+   the card list when clicked.
+3. Round agency filter pills (`All` first, then agencies in data order) plus a
+   search field.
+4. Two-column card grid (one column below `700px`), sorted A–Z by initiative
+   name. Closed card: logo + short-name pill, grey-dot status tag, “Latest
+   update” box with date and evidence. Opened card adds Agency / Latest story
+   facts, the one-line description, and numbered Sources (ai.sarawak.news story
+   first, then the original outlet).
 
 The About page uses the same restrained system: the hero opens on
 `About {title}` from `data/site.json` (no eyebrow label), then the `about_lead`
@@ -250,7 +274,8 @@ mark URL, `WebSite`, `CollectionPage`, and an `ItemList` aligned to the rendered
 story order) plus `<link rel="alternate" type="application/rss+xml">` pointing at
 `feed.xml`. The build writes RSS 2.0 to `dist/feed.xml` (channel metadata from
 `data/site.json`, one `<item>` per reviewed story linking to the original source
-URL) and lists `feed.xml` in `sitemap.xml` alongside `/` and `about.html`.
+URL) and lists `feed.xml` in `sitemap.xml` alongside `/`, `tracker.html`, and
+`about.html`.
 
 ## Design Variants
 
@@ -288,10 +313,10 @@ Recommended adjustments before moving Variant D into production:
 
 ## Design Risks
 
-- On narrow screens, the inline Home and About links are hidden and remain available in an accessible hamburger menu at the far right, immediately after the theme toggle; desktop keeps the inline links. The mobile menu closes after a link selection, an outside tap, or Escape, and touch devices do not retain hover styling after tapping the controls.
+- On narrow screens, the inline Home, Tracker, and About links are hidden and remain available in an accessible hamburger menu at the far right, immediately after the theme toggle; desktop keeps the inline links. The mobile menu closes after a link selection, an outside tap, or Escape, and touch devices do not retain hover styling after tapping the controls.
 - The hamburger and theme controls use equal 36px icon-only touch targets at every breakpoint. The hamburger keeps its 18px, 1.6px-stroke mark while the denser theme glyph is optically balanced at 16px, inspired by OpenClaw’s compact header treatment and with no circular outlines. Keyboard focus remains visibly indicated.
 - The masthead, hero, category filter, story list, and footer share a 760px desktop content rail so their outer edges align; the three-colour rule follows the same rail.
-- On desktop, Home and About sit on the right side of the masthead immediately before the theme control; on mobile they collapse into the hamburger menu.
+- On desktop, Home, Tracker, and About sit on the right side of the masthead immediately before the theme control; on mobile they collapse into the hamburger menu.
 
 - The production UI hides some useful editorial metadata.
 - Variant D is more polished but may imply product features that do not exist

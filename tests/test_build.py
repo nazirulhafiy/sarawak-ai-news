@@ -118,6 +118,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn("white-space: nowrap", css)
         self.assertIn('<nav class="site-nav" id="primary-navigation" aria-label="Primary">', html)
         self.assertIn('<a class="site-nav-link is-active" href="/" aria-current="page">Home</a>', html)
+        self.assertIn('<a class="site-nav-link" href="tracker.html">Tracker</a>', html)
         self.assertIn('<a class="site-nav-link" href="about.html">About</a>', html)
         self.assertIn('<span class="bar-rule-tail" aria-hidden="true"></span>', html)
         updated_iso, _, compact_updated = self.updated_labels()
@@ -154,6 +155,7 @@ class BuildTest(unittest.TestCase):
         )
         self.assertIn('<h2>Explore</h2>', html)
         self.assertIn('<a class="site-footer-link" href="/" aria-current="page">Home</a>', html)
+        self.assertIn('<a class="site-footer-link" href="tracker.html">Tracker</a>', html)
         self.assertIn('<a class="site-footer-link" href="about.html">About</a>', html)
         self.assertIn('<a class="site-footer-link" href="mailto:contact@sarawak.news">Contact</a>', html)
         explore_nav, _ = html.split(
@@ -283,8 +285,9 @@ class BuildTest(unittest.TestCase):
             self.assertIn(f'href="https://ai.sarawak.news/">Continue to {copy["title"]}</a>', category_html)
             self.assertIn(f'<title>{section_name} stories moved | {copy["title"]}</title>', category_html)
             self.assertNotIn('class="story-card"', category_html)
-        self.assertEqual(sitemap.count("<url>"), 3)
+        self.assertEqual(sitemap.count("<url>"), 4)
         self.assertIn("<loc>https://ai.sarawak.news/</loc>", sitemap)
+        self.assertIn("<loc>https://ai.sarawak.news/tracker.html</loc>", sitemap)
         self.assertIn("<loc>https://ai.sarawak.news/about.html</loc>", sitemap)
         self.assertIn("<loc>https://ai.sarawak.news/feed.xml</loc>", sitemap)
         self.assertNotIn("brief-about", html)
@@ -498,6 +501,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn(f'<meta name="twitter:image" content="{card}" />', about)
         self.assertNotIn('<meta name="twitter:card" content="summary" />', about)
         self.assertIn('<a class="site-nav-link" href="/">Home</a>', about)
+        self.assertIn('<a class="site-nav-link" href="tracker.html">Tracker</a>', about)
         self.assertIn('<a class="site-nav-link is-active" href="about.html" aria-current="page">About</a>', about)
         self.assertNotIn("Who runs", about)
         self.assertIn("Why Sarawak AI", about)
@@ -533,6 +537,7 @@ class BuildTest(unittest.TestCase):
             about,
         )
         self.assertIn('<a class="site-footer-link" href="/">Home</a>', about)
+        self.assertIn('<a class="site-footer-link" href="tracker.html">Tracker</a>', about)
         self.assertIn('<a class="site-footer-link" href="about.html" aria-current="page">About</a>', about)
         self.assertIn('aria-label="Hub"', about)
         self.assertIn('class="site-footer-fleet-nav"', about)
@@ -612,6 +617,7 @@ class BuildTest(unittest.TestCase):
         subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT, text=True, capture_output=True, check=True)
         pages = [
             ROOT / "dist" / "index.html",
+            ROOT / "dist" / "tracker.html",
             ROOT / "dist" / "about.html",
         ]
         for page in pages:
@@ -624,11 +630,49 @@ class BuildTest(unittest.TestCase):
             self.assertIn("sn_internal", html)
             self.assertNotIn("plausible.io", html)
             self.assertNotIn("umami", html)
-        for name in ("index.html", "about.html"):
+        for name in ("index.html", "tracker.html", "about.html"):
             self.assertIn(
                 '<meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />',
                 (ROOT / "dist" / name).read_text(),
             )
+
+    def test_tracker_page_matches_v2_shape(self):
+        initiatives = json.loads((ROOT / "data" / "initiatives.json").read_text())
+        items = {item["id"]: item for item in self.reviewed_items()}
+        subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT, text=True, capture_output=True, check=True)
+        html = (ROOT / "dist" / "tracker.html").read_text()
+        css = (ROOT / "dist" / "style.css").read_text()
+        self.assertIn('<a class="site-nav-link is-active" href="tracker.html" aria-current="page">Tracker</a>', html)
+        self.assertIn("AI initiatives by Sarawak government agencies", html)
+        self.assertIn("Each initiative links to the ai.sarawak.news story it comes from.", html)
+        self.assertIn('data-status="all"', html)
+        self.assertIn(">Initiatives</span>", html)
+        self.assertIn(">Planning</span>", html)
+        self.assertIn(">Ongoing</span>", html)
+        self.assertIn(">Completed</span>", html)
+        self.assertIn('data-agency="all">All</button>', html)
+        self.assertIn('aria-label="Search initiatives"', html)
+        self.assertIn('class="tv2-grid"', html)
+        self.assertIn("Logo<br />pending", html)
+        self.assertIn('class="tv2-status"', html)
+        self.assertIn("Latest update", html)
+        self.assertIn(">Sources</h3>", html)
+        self.assertIn("ai.sarawak.news — ", html)
+        self.assertIn(" — original report", html)
+        self.assertIn(".tv2-grid", css)
+        self.assertTrue((ROOT / "dist" / "logos" / "saic.webp").is_file())
+        self.assertTrue((ROOT / "dist" / "logos" / "petros.png").is_file())
+        self.assertTrue((ROOT / "dist" / "logos" / "sdec.jpg").is_file())
+        self.assertEqual(html.count('class="tv2-card"'), len(initiatives))
+        for row in initiatives:
+            story = items[row["story_id"]]
+            self.assertIn(row["initiative"], html)
+            self.assertIn(f'/#{row["story_id"]}', html)
+            self.assertIn(build.esc(story["title"]), html)
+            self.assertIn(story["url"], html)
+        titles = [row["initiative"] for row in initiatives]
+        positions = [html.index(title) for title in sorted(titles, key=str.casefold)]
+        self.assertEqual(positions, sorted(positions))
 
 
 if __name__ == "__main__":

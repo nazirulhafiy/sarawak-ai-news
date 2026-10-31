@@ -40,9 +40,14 @@ SECTION_FILTERS = (
     "Business",
 )
 
+INITIATIVE_STATUSES = ("Planning", "Ongoing", "Completed")
+TRACKER_TITLE = "AI initiatives by Sarawak government agencies"
+TRACKER_DECK = "Each initiative links to the ai.sarawak.news story it comes from."
+
 SITE_URL = "https://ai.sarawak.news/"
 SOCIAL_CARD_PATH = ROOT / "site" / "social-card.png"
 LOGO_MARK_PATH = ROOT / "site" / "icons" / "nav-mark-transparent.svg"
+LOGOS_DIR = ROOT / "site" / "logos"
 FLEET_SITE_ID = "ai"
 PUBLIC_ITEM_FIELDS = (
     "id",
@@ -150,6 +155,12 @@ def format_story_date(value: str) -> str:
     return f"{date.day} {date.strftime('%b %Y')}"
 
 
+def format_tracker_date(value: str) -> str:
+    """Full-month date for Tracker cards (matches v2 mockup)."""
+    date = datetime.strptime(value, "%Y-%m-%d")
+    return f"{date.day} {date.strftime('%B %Y')}"
+
+
 def last_updated(items: list[dict]) -> tuple[str, str, str]:
     dates = [item["date"] for item in items if item.get("date")]
     if not dates:
@@ -242,16 +253,21 @@ def render_category_filter(items: list[dict]) -> str:
     """
 
 
+def primary_nav_items() -> tuple[NavItem, ...]:
+    return (
+        NavItem("home", "/", "Home"),
+        NavItem("tracker", "tracker.html", "Tracker"),
+        NavItem("about", "about.html", "About"),
+    )
+
+
 def render_site_header(active_page: str, site: dict[str, str] | None = None) -> str:
     site = load_site() if site is None else site
     return kit_render_header(
         brand_title=site["title"],
         brand_href="/",
         active=active_page,
-        nav_items=(
-            NavItem("home", "/", "Home"),
-            NavItem("about", "about.html", "About"),
-        ),
+        nav_items=primary_nav_items(),
     )
 
 
@@ -261,15 +277,293 @@ def render_site_footer(active_page: str, site: dict[str, str] | None = None) -> 
         brand_title=site["title"],
         brand_note_parts=FOOTER_BRAND_NOTE_PARTS,
         active=active_page,
-        explore_items=(
-            NavItem("home", "/", "Home"),
-            NavItem("about", "about.html", "About"),
-        ),
+        explore_items=primary_nav_items(),
         credit_html=FOOTER_CREDIT_HTML,
         fleet_site="ai",
         layout="column_stacks",
         fleet_section_label="Hub",
     )
+
+
+def load_initiatives() -> list[dict]:
+    path = DATA / "initiatives.json"
+    if not path.is_file():
+        raise SystemExit(f"missing initiatives file: {path.relative_to(ROOT)}")
+    payload = load_json(path)
+    if not isinstance(payload, list):
+        raise SystemExit("data/initiatives.json must be a JSON array")
+    return payload
+
+
+def enrich_initiatives(initiatives: list[dict], items: list[dict]) -> list[dict]:
+    """Join Tracker rows to reviewed stories for date, title, and source URL."""
+    by_id = {item["id"]: item for item in items}
+    enriched: list[dict] = []
+    for row in initiatives:
+        story_id = row.get("story_id")
+        story = by_id.get(story_id) if isinstance(story_id, str) else None
+        if story is None:
+            raise SystemExit(
+                f"initiative {row.get('initiative')!r} story_id {story_id!r} "
+                "is missing from reviewed items"
+            )
+        agency = str(row["agency"])
+        agency_short = str(row.get("agency_short") or agency)
+        enriched.append(
+            {
+                "agency": agency,
+                "agency_short": agency_short,
+                "agency_slug": slug(agency_short),
+                "initiative": str(row["initiative"]),
+                "what": str(row["what"]),
+                "status": str(row["status"]),
+                "evidence": str(row["evidence"]),
+                "story_id": story_id,
+                "date": story["date"],
+                "story_title": story["title"],
+                "source": story["source"],
+                "original_url": story["url"],
+                "site_link": f"/#{story_id}",
+                "logo": row.get("logo"),
+            }
+        )
+    return enriched
+
+
+def tracker_document_title(site: dict[str, str]) -> str:
+    return f"Tracker | {site['title']}"
+
+
+def tracker_meta_description() -> str:
+    return (
+        "Track Sarawak government AI initiatives with status, latest story dates, "
+        "and source links from ai.sarawak.news."
+    )
+
+
+def render_tracker_card(row: dict) -> str:
+    logo = row.get("logo")
+    if isinstance(logo, str) and logo.strip():
+        logo_html = (
+            f'<span class="tv2-agency-logo">'
+            f'<img src="logos/{esc(logo)}" alt="" width="56" height="20" decoding="async" />'
+            f"</span>"
+        )
+    else:
+        logo_html = (
+            '<span class="tv2-agency-logo is-missing">Logo<br />pending</span>'
+        )
+    date_label = format_tracker_date(row["date"])
+    search_text = esc(f"{row['initiative']} {row['agency']} {row['agency_short']}".lower())
+    return f"""<article class="tv2-card" data-agency="{esc(row['agency_slug'])}" data-status="{esc(row['status'])}" data-text="{search_text}">
+<button class="tv2-btn" type="button" aria-expanded="false">
+<div class="tv2-top"><span class="tv2-agency" title="{esc(row['agency'])}">{logo_html}<span class="tv2-agency-name">{esc(row['agency_short'])}</span></span><span class="tv2-chev" aria-hidden="true"></span></div>
+<h2>{esc(row['initiative'])}</h2>
+<span class="tv2-status">{esc(row['status'])}</span>
+<div class="tv2-box"><div class="tv2-box-head"><span>Latest update</span><span>{esc(date_label)}</span></div><p>{esc(row['evidence'])}</p></div>
+</button>
+<div class="tv2-more">
+<div class="tv2-facts"><div><span>Agency</span><b>{esc(row['agency'])}</b></div><div><span>Latest story</span><b>{esc(date_label)}</b></div></div>
+<p>{esc(row['what'])}</p>
+<div class="tv2-src"><h3>Sources</h3>
+<a href="{esc(row['site_link'])}"><i>1</i>ai.sarawak.news — {esc(row['story_title'])}<em>→</em></a>
+<a href="{esc(row['original_url'])}" target="_blank" rel="noopener noreferrer"><i>2</i>{esc(row['source'])} — original report<em>↗</em></a>
+</div>
+</div>
+</article>"""
+
+
+def render_tracker_body(
+    initiatives: list[dict],
+    site: dict[str, str] | None = None,
+) -> str:
+    site = load_site() if site is None else site
+    rows = sorted(initiatives, key=lambda row: row["initiative"].casefold())
+    agencies: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    for row in initiatives:
+        slug_key = row["agency_slug"]
+        if slug_key in seen:
+            continue
+        seen.add(slug_key)
+        agencies.append((slug_key, row["agency_short"]))
+    counts = {
+        status: sum(1 for row in initiatives if row["status"] == status)
+        for status in INITIATIVE_STATUSES
+    }
+    updated_iso, _, updated_compact = last_updated(
+        [{"date": row["date"]} for row in initiatives]
+    )
+    metrics = [
+        f'<button class="tv2-metric is-active" type="button" data-status="all">'
+        f"<b>{len(initiatives)}</b><span>Initiatives</span></button>"
+    ]
+    for status in INITIATIVE_STATUSES:
+        metrics.append(
+            f'<button class="tv2-metric" type="button" data-status="{esc(status)}">'
+            f"<b>{counts[status]}</b><span>{esc(status)}</span></button>"
+        )
+    filters = ['<button class="tv2-filter is-active" type="button" data-agency="all">All</button>']
+    for agency_slug, agency_short in agencies:
+        filters.append(
+            f'<button class="tv2-filter" type="button" data-agency="{esc(agency_slug)}">'
+            f"{esc(agency_short)}</button>"
+        )
+    cards = "\n".join(render_tracker_card(row) for row in rows)
+    return f"""<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+{render_site_header("tracker", site)}
+
+  <main id="content" class="tracker-page">
+    <header class="brief">
+      <h1 id="brief-title">{esc(TRACKER_TITLE)}</h1>
+      <p class="brief-deck">{esc(TRACKER_DECK)}</p>
+      <p class="updated"><span class="updated-label">Last updated</span><time datetime="{esc(updated_iso)}">{esc(updated_compact)}</time></p>
+    </header>
+
+    <section class="tv2-summary" aria-label="Initiative status counts">
+      {"".join(metrics)}
+    </section>
+
+    <section class="tv2-controls" aria-label="Filter initiatives">
+      <div class="tv2-filter-area">
+        <div class="tv2-filters">{"".join(filters)}</div>
+        <button class="tv2-more-btn" type="button" aria-label="Show more agencies">›</button>
+      </div>
+      <label class="tv2-search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+        <input type="search" aria-label="Search initiatives" />
+      </label>
+    </section>
+
+    <section class="tv2-grid" aria-label="Initiatives">
+      {cards}
+    </section>
+  </main>
+
+{render_back_to_top()}
+
+{render_site_footer("tracker", site)}
+  <script>
+    (() => {{
+      let status = "all";
+      let agency = "all";
+      let query = "";
+      const cards = [...document.querySelectorAll(".tv2-card")];
+      const run = () => cards.forEach((card) => {{
+        card.hidden = !(
+          (status === "all" || card.dataset.status === status) &&
+          (agency === "all" || card.dataset.agency === agency) &&
+          card.dataset.text.includes(query)
+        );
+      }});
+      document.querySelectorAll(".tv2-metric").forEach((button) => {{
+        button.addEventListener("click", () => {{
+          status = button.dataset.status;
+          document.querySelectorAll(".tv2-metric").forEach((other) => {{
+            other.classList.toggle("is-active", other === button);
+          }});
+          run();
+        }});
+      }});
+      document.querySelectorAll(".tv2-filter").forEach((button) => {{
+        button.addEventListener("click", () => {{
+          agency = button.dataset.agency;
+          document.querySelectorAll(".tv2-filter").forEach((other) => {{
+            other.classList.toggle("is-active", other === button);
+          }});
+          run();
+        }});
+      }});
+      const search = document.querySelector(".tv2-search input");
+      if (search) {{
+        search.addEventListener("input", (event) => {{
+          query = event.target.value.toLowerCase();
+          run();
+        }});
+      }}
+      const more = document.querySelector(".tv2-more-btn");
+      if (more) {{
+        more.addEventListener("click", () => {{
+          more.previousElementSibling.scrollBy({{ left: 200, behavior: "smooth" }});
+        }});
+      }}
+      cards.forEach((card) => {{
+        const button = card.querySelector(".tv2-btn");
+        button.addEventListener("click", () => {{
+          const open = card.classList.toggle("is-open");
+          button.setAttribute("aria-expanded", open ? "true" : "false");
+        }});
+      }});
+    }})();
+  </script>
+</body>"""
+
+
+def render_tracker(
+    initiatives: list[dict],
+    site: dict[str, str] | None = None,
+) -> str:
+    site = load_site() if site is None else site
+    tracker_url = f"{SITE_URL}tracker.html"
+    page_title = tracker_document_title(site)
+    description = tracker_meta_description()
+    structured_data = json.dumps(
+        {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "@id": f"{tracker_url}#tracker",
+            "url": tracker_url,
+            "name": page_title,
+            "description": description,
+            "isPartOf": {"@id": f"{SITE_URL}#website"},
+            "inLanguage": "en",
+        },
+        ensure_ascii=False,
+        separators=(",", ":"),
+    ).replace("</", "<\\/")
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="{esc(description)}" />
+  <meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{esc(page_title)}" />
+  <meta property="og:description" content="{esc(description)}" />
+  <meta property="og:url" content="{esc(tracker_url)}" />
+  <meta property="og:site_name" content="{esc(site["title"])}" />
+  <meta property="og:image" content="{esc(social_card_url())}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{esc(page_title)}" />
+  <meta name="twitter:description" content="{esc(description)}" />
+  <meta name="twitter:image" content="{esc(social_card_url())}" />
+  <link rel="canonical" href="{esc(tracker_url)}" />
+  <title>{esc(page_title)}</title>
+  <script type="application/ld+json">{structured_data}</script>
+  <script>
+    document.documentElement.classList.add("js");
+    try {{
+      const storedTheme = localStorage.getItem("sarawak-theme");
+      if (storedTheme === "dark" || (storedTheme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {{
+        document.documentElement.dataset.theme = "dark";
+      }}
+    }} catch (error) {{}}
+  </script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+  <link rel="preload" href="fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
+  {render_analytics_loader()}
+</head>
+{render_tracker_body(initiatives, site)}
+</html>
+"""
 
 
 def render_fleet_network_section(fleet_site: str = FLEET_SITE_ID) -> str:
@@ -626,9 +920,20 @@ def copy_nav_marks() -> None:
         shutil.copy2(mark_src, icons_dist / mark_name)
 
 
+def copy_agency_logos() -> None:
+    """Copy Tracker agency logos into dist/logos/."""
+    if not LOGOS_DIR.is_dir():
+        raise SystemExit(f"missing logos directory: {LOGOS_DIR.relative_to(ROOT)}")
+    target = DIST / "logos"
+    if target.exists():
+        shutil.rmtree(target)
+    shutil.copytree(LOGOS_DIR, target)
+
+
 def build() -> None:
     items = load_feed_items()
     site = load_site()
+    initiatives = enrich_initiatives(load_initiatives(), items)
     sitemap_lastmod = last_updated(items)[0]
     DIST.mkdir(exist_ok=True)
     alternative_dir = DIST / "alternative"
@@ -636,6 +941,9 @@ def build() -> None:
         shutil.rmtree(alternative_dir)
     (DIST / "index.html").write_text(render_index(items, site), encoding="utf-8")
     (DIST / "about.html").write_text(render_about(site), encoding="utf-8")
+    (DIST / "tracker.html").write_text(
+        render_tracker(initiatives, site), encoding="utf-8"
+    )
     for section in SECTION_FILTERS:
         (DIST / f"{slug(section)}.html").write_text(
             render_category_redirect(section, site), encoding="utf-8"
@@ -646,12 +954,18 @@ def build() -> None:
     shutil.copy2(SOCIAL_CARD_PATH, DIST / "social-card.png")
     copy_site_fonts()
     copy_nav_marks()
+    copy_agency_logos()
     (DIST / "items.json").write_text(
         json.dumps(public_feed_items(items), indent=2), encoding="utf-8"
     )
     (DIST / "feed.xml").write_text(render_feed_xml(items, site), encoding="utf-8")
     (DIST / "robots.txt").write_text("User-agent: *\nAllow: /\nSitemap: https://ai.sarawak.news/sitemap.xml\n", encoding="utf-8")
-    sitemap_urls = [SITE_URL, f"{SITE_URL}about.html", f"{SITE_URL}feed.xml"]
+    sitemap_urls = [
+        SITE_URL,
+        f"{SITE_URL}tracker.html",
+        f"{SITE_URL}about.html",
+        f"{SITE_URL}feed.xml",
+    ]
     sitemap_entries = "\n".join(
         f"  <url>\n    <loc>{esc(url)}</loc>\n    <lastmod>{sitemap_lastmod}</lastmod>\n  </url>"
         for url in sitemap_urls
@@ -661,7 +975,10 @@ def build() -> None:
 {sitemap_entries}
 </urlset>
 """, encoding="utf-8")
-    print(f"Built {DIST / 'index.html'} with {len(items)} feed items and feed.xml")
+    print(
+        f"Built {DIST / 'index.html'} with {len(items)} feed items, "
+        f"{len(initiatives)} tracker initiatives, and feed.xml"
+    )
 
 
 if __name__ == "__main__":

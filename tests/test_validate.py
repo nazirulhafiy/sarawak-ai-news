@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
+import initiatives_lib as I  # noqa: E402
 import items_lib as L  # noqa: E402
 
 
@@ -85,6 +86,39 @@ class Validation(unittest.TestCase):
         self.assertTrue(any("duplicate url" in e for e in errs))
 
 
+class InitiativesValidation(unittest.TestCase):
+    def setUp(self):
+        self.item_ids = {"story-real-2026-10-01"}
+        self.good = {
+            "agency": "SAIC",
+            "agency_short": "SAIC",
+            "initiative": "Example initiative",
+            "what": "One-line description.",
+            "status": "Planning",
+            "evidence": "Evidence from the linked story.",
+            "story_id": "story-real-2026-10-01",
+        }
+
+    def test_accepts_valid_initiative(self):
+        self.assertEqual(I.validate_initiative(self.good, self.item_ids), [])
+
+    def test_rejects_unknown_story_id(self):
+        errs = I.validate_initiative(
+            dict(self.good, story_id="missing-story-id"),
+            self.item_ids,
+        )
+        self.assertTrue(any("not a real id" in e for e in errs))
+
+    def test_rejects_bad_status(self):
+        errs = I.validate_initiative(dict(self.good, status="Soon"), self.item_ids)
+        self.assertTrue(any("must be one of" in e for e in errs))
+
+    def test_repo_initiatives_pass(self):
+        initiatives = I.load_json(I.INITIATIVES)
+        errs = I.validate_collection(initiatives, I.load_item_ids())
+        self.assertEqual(errs, [])
+
+
 class ValidateScript(unittest.TestCase):
     def test_cli_passes_on_repo_items(self):
         result = subprocess.run(
@@ -96,6 +130,7 @@ class ValidateScript(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn("OK:", result.stdout)
+        self.assertIn("initiatives", result.stdout)
 
     def test_cli_fails_on_unknown_source(self):
         items = L.load_json(L.ITEMS)

@@ -8,8 +8,10 @@ desk than a general news site: every public item should explain what changed,
 why it matters, where the signal came from, and how confident the brief is.
 
 Current production is a static homepage with a client-side category filter over
-the full reviewed feed, plus an About page generated from reviewed JSON and the
-site's editorial workflow. Former category URLs redirect to the homepage.
+the full reviewed feed, a Tracker page of Sarawak government AI initiatives
+joined to reviewed story ids, plus an About page generated from reviewed JSON
+and the site's editorial workflow. Former category URLs redirect to the
+homepage.
 There is no CMS, database, scraper-to-summary pipeline, account system,
 newsletter sender, or paid product surface. A scheduled daily workflow can
 publish qualifying feed updates after source verification and all required
@@ -31,8 +33,8 @@ The current interface favors fast scanning over deep reading.
 
 The homepage shows:
 
-- Brand bar: site `title` from `data/site.json`, with `Home` and `About`
-  navigation links and a theme toggle.
+- Brand bar: site `title` from `data/site.json`, with `Home`, `Tracker`, and
+  `About` navigation links and a theme toggle.
 - Document title: `Sarawak AI News | {title}` from `data/site.json`.
 - Hero headline: `tagline` from `data/site.json`.
 - Introductory copy describing the source-linked Sarawak AI coverage.
@@ -41,9 +43,15 @@ The homepage shows:
 - Client-side category filters over all ranked story cards, newest first.
 - Source links opening in new tabs.
 - Structured footer with source context, a separated Explore column with
-  vertical Home/About/Contact links (Contact mailto:contact@sarawak.news), sister
-  fleet links in the summary column, and a builder and independent-publication
-  attribution row.
+  vertical Home/Tracker/About/Contact links (Contact mailto:contact@sarawak.news),
+  sister fleet links in the summary column, and a builder and
+  independent-publication attribution row.
+
+The Tracker page (`tracker.html`) lists initiatives from
+`data/initiatives.json`. Status filters, agency pills, and search are
+client-side. Each initiative points at a reviewed `story_id` so the latest
+story date and source links come from `data/items.json`. Validation fails when
+a `story_id` is missing or status is not `Planning`, `Ongoing`, or `Completed`.
 
 The About page explains why Sarawak AI matters, the seven coverage categories,
 how stories are picked and checked, and contact via contact@sarawak.news
