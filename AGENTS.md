@@ -7,6 +7,8 @@ source-attributed regional AI intelligence brief at `ai.sarawak.news`.
 The current app is intentionally small:
 
 - `data/items.json` contains reviewed public feed items.
+- `data/initiatives.json` contains Tracker initiatives; each row points at a
+  reviewed item `story_id` (enforced by `scripts/validate.py`).
 - `data/allowed-sources.json` is the closed set of allowed item `source`
   attribution names (enforced by `scripts/validate.py`).
 - `data/sources.json` contains watched source/search pages for candidate discovery.
@@ -39,8 +41,10 @@ python3 -m unittest discover -s tests -v
 ```
 
 `scripts/validate.py` fails when any published item in `data/items.json` has a
-missing `source` or a name outside `data/allowed-sources.json`. Add a new
-attribution name to that allowlist before publishing from a new outlet.
+missing `source` or a name outside `data/allowed-sources.json`, or when any
+Tracker row in `data/initiatives.json` has a missing/unknown `story_id` or a
+status other than `Planning`, `Ongoing`, or `Completed`. Add a new attribution
+name to that allowlist before publishing from a new outlet.
 
 For content/data changes, also run:
 

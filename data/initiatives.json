@@ -1,0 +1,163 @@
+[
+  {
+    "agency": "SAIC",
+    "agency_short": "SAIC",
+    "initiative": "Sarawak AI Blueprint 2026–2030",
+    "what": "State plan for how Sarawak builds and uses AI, on five pillars.",
+    "status": "Planning",
+    "evidence": "21 Oct story: the Blueprint is still being developed; no final text published yet.",
+    "story_id": "borneopost-saic-ceo-ai-blueprint-economy-2026-10-21",
+    "logo": "saic.webp"
+  },
+  {
+    "agency": "SAIC",
+    "agency_short": "SAIC",
+    "initiative": "Sarawak AI Grid",
+    "what": "Plan to spread AI computing from Sarawak data centres to everyone over the internet.",
+    "status": "Planning",
+    "evidence": "21 Oct story reports intended AI Grid access, with no live rollout date.",
+    "story_id": "borneopost-saic-ceo-ai-blueprint-economy-2026-10-21",
+    "logo": "saic.webp"
+  },
+  {
+    "agency": "SAIC",
+    "agency_short": "SAIC",
+    "initiative": "Sarawak Quantum Safe Centre (with IBM Malaysia)",
+    "what": "Centre to help prepare systems for future quantum-computing security risks.",
+    "status": "Planning",
+    "evidence": "SAIC and IBM 'plan to establish' it; no launch date, budget or site stated.",
+    "story_id": "edge-saic-ibm-quantum-safe-centre-2026-10-06",
+    "logo": "saic.webp"
+  },
+  {
+    "agency": "SAIC",
+    "agency_short": "SAIC",
+    "initiative": "BEACON data platform (with Business Events Sarawak)",
+    "what": "Central data-intelligence platform for business events.",
+    "status": "Planning",
+    "evidence": "Memorandum of collaboration exchanged 24 Sep; no funding or delivery timetable.",
+    "story_id": "borneopost-beacon-saic-moc-2026-09-24",
+    "logo": "saic.webp"
+  },
+  {
+    "agency": "SAIC",
+    "agency_short": "SAIC",
+    "initiative": "AI Talent Hub (with TEGAS)",
+    "what": "Hub for local AI model building, AI Builders Clubs and commercialisation training.",
+    "status": "Planning",
+    "evidence": "Story describes an announced direction, not an operating hub; no launch date.",
+    "story_id": "sarawaktribune-ai-talent-hub-2026-08-23",
+    "logo": "saic.webp"
+  },
+  {
+    "agency": "SAIC",
+    "agency_short": "SAIC",
+    "initiative": "Agentic AI for government communications (with UKAS)",
+    "what": "UKAS exploring AI tools with SAIC, incl. a proposed staff workshop.",
+    "status": "Planning",
+    "evidence": "Courtesy visit and discussion only; no system or timetable announced.",
+    "story_id": "sarawaktribune-ukas-ai-tools-2026-08-20",
+    "logo": "saic.webp"
+  },
+  {
+    "agency": "SAINS",
+    "agency_short": "SAINS",
+    "initiative": "Panacea voice AI for civil-servant ICT support (with 8nabler)",
+    "what": "Voice AI helpdesk for government staff IT support.",
+    "status": "Ongoing",
+    "evidence": "MoU signed; story reports call volumes from a pilot window, wider rollout not confirmed.",
+    "story_id": "tribune-sains-8nabler-voice-ai-2026-09-11"
+  },
+  {
+    "agency": "SAINS",
+    "agency_short": "SAINS",
+    "initiative": "Sovereign AI infrastructure MoU (with Infinitix, Taiwan)",
+    "what": "Collaboration on local AI infrastructure, knowledge transfer and services.",
+    "status": "Planning",
+    "evidence": "MoU framework only; scope, investment and milestones not announced.",
+    "story_id": "borneopost-sains-infinitix-sovereign-ai-2026-07-08"
+  },
+  {
+    "agency": "SAINS",
+    "agency_short": "SAINS",
+    "initiative": "Digital and AI transformation MoU (with EY Malaysia)",
+    "what": "Explore AI adoption, skills and governance across the public sector.",
+    "status": "Planning",
+    "evidence": "Framework to explore opportunities; no budget, projects or timetable.",
+    "story_id": "ukas-sains-ey-malaysia-mou-2026-10-07"
+  },
+  {
+    "agency": "PETROS",
+    "agency_short": "PETROS",
+    "initiative": "AI and digital infrastructure platform (with SoftBank and Grab)",
+    "what": "Phased roadmap for AI compute, robotics and local workforce in Sarawak.",
+    "status": "Planning",
+    "evidence": "Framework agreement signed 8 Oct; parties still to assess roadmap and scope; no site or value.",
+    "story_id": "dayakdaily-softbank-grab-petros-ai-2026-10-08",
+    "logo": "petros.png"
+  },
+  {
+    "agency": "SDEC",
+    "agency_short": "SDEC",
+    "initiative": "Host WITSA Global AI Summit 2027 in Kuching",
+    "what": "Kuching to host the global AI summit alongside IDECS 2027.",
+    "status": "Planning",
+    "evidence": "Story says hosting the 2027 summit is planned.",
+    "story_id": "tribune-sdec-witsa-ai-awards-2026-09-04",
+    "logo": "sdec.jpg"
+  },
+  {
+    "agency": "Sarawak Government",
+    "agency_short": "Sarawak Government",
+    "initiative": "Kuching AI Data Campus, Tanjung Embang",
+    "what": "Physical base (power, water, AI computing) for the AI Grid.",
+    "status": "Planning",
+    "evidence": "Announced at IDECS 2026; no site size, budget, builder or construction start stated.",
+    "story_id": "thestar-kuching-ai-data-campus-2026-10-06"
+  },
+  {
+    "agency": "Sarawak Government",
+    "agency_short": "Sarawak Government",
+    "initiative": "Sovereign AI platform",
+    "what": "Locally hosted AI computing for state agencies.",
+    "status": "Completed",
+    "evidence": "Story says the platform has launched (Aug 2026); operator and use cases not disclosed.",
+    "story_id": "borneopost-sovereign-ai-platform-2026-08-17"
+  },
+  {
+    "agency": "Sarawak Government",
+    "agency_short": "Sarawak Government",
+    "initiative": "Sarawak Data Governance Framework",
+    "what": "Shared rules for secure, reliable government data, a base for responsible AI.",
+    "status": "Completed",
+    "evidence": "Story says the framework has launched; agency follow-through not yet reported.",
+    "story_id": "borneopost-data-governance-ai-2026-07-08"
+  },
+  {
+    "agency": "Ministry of Education, Innovation and Talent Development",
+    "agency_short": "MEITD",
+    "initiative": "AI and digitalisation in all IPG teacher-training syllabuses",
+    "what": "Adding AI to teacher-training courses.",
+    "status": "Ongoing",
+    "evidence": "Minister said it is being introduced and has started in schools; no completion date.",
+    "story_id": "borneopost-ipg-ai-digitalisation-syllabuses-2026-10-28"
+  },
+  {
+    "agency": "Ministry of Public Health, Housing and Local Government",
+    "agency_short": "MPHLG",
+    "initiative": "Kuching Smart City and Digital Connectivity (RM550m, with MCMC)",
+    "what": "AI and data-driven city services, digital twin and operations centre for Greater Kuching.",
+    "status": "Planning",
+    "evidence": "MoU exchanged; build timeline and operators not stated.",
+    "story_id": "dayakdaily-kuching-smart-city-ai-2026-10-15"
+  },
+  {
+    "agency": "Ministry of Food Industry, Commodities and Regional Development",
+    "agency_short": "M-FICORD",
+    "initiative": "RM3m AI analytics upgrade, Rampangi food park",
+    "what": "AI analytics, monitoring and fertigation at Kuching's Rampangi park.",
+    "status": "Planning",
+    "evidence": "RM3m allocated under RMK-13 for an upgrade due by 2027.",
+    "story_id": "dayakdaily-rampangi-ai-farming-2026-10-20"
+  }
+]
