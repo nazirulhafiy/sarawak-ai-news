@@ -66,7 +66,8 @@
     "what": "Voice AI helpdesk for government staff IT support.",
     "status": "Ongoing",
     "evidence": "MoU signed; story reports call volumes from a pilot window, wider rollout not confirmed.",
-    "story_id": "tribune-sains-8nabler-voice-ai-2026-09-11"
+    "story_id": "tribune-sains-8nabler-voice-ai-2026-09-11",
+    "logo": "sains.jpg"
   },
   {
     "agency": "SAINS",
@@ -75,7 +76,8 @@
     "what": "Collaboration on local AI infrastructure, knowledge transfer and services.",
     "status": "Planning",
     "evidence": "MoU framework only; scope, investment and milestones not announced.",
-    "story_id": "borneopost-sains-infinitix-sovereign-ai-2026-07-08"
+    "story_id": "borneopost-sains-infinitix-sovereign-ai-2026-07-08",
+    "logo": "sains.jpg"
   },
   {
     "agency": "SAINS",
@@ -84,7 +86,8 @@
     "what": "Explore AI adoption, skills and governance across the public sector.",
     "status": "Planning",
     "evidence": "Framework to explore opportunities; no budget, projects or timetable.",
-    "story_id": "ukas-sains-ey-malaysia-mou-2026-10-07"
+    "story_id": "ukas-sains-ey-malaysia-mou-2026-10-07",
+    "logo": "sains.jpg"
   },
   {
     "agency": "PETROS",
@@ -113,7 +116,8 @@
     "what": "Physical base (power, water, AI computing) for the AI Grid.",
     "status": "Planning",
     "evidence": "Announced at IDECS 2026; no site size, budget, builder or construction start stated.",
-    "story_id": "thestar-kuching-ai-data-campus-2026-10-06"
+    "story_id": "thestar-kuching-ai-data-campus-2026-10-06",
+    "logo": "sarawak-government.svg"
   },
   {
     "agency": "Sarawak Government",
@@ -122,7 +126,8 @@
     "what": "Locally hosted AI computing for state agencies.",
     "status": "Completed",
     "evidence": "Story says the platform has launched (Aug 2026); operator and use cases not disclosed.",
-    "story_id": "borneopost-sovereign-ai-platform-2026-08-17"
+    "story_id": "borneopost-sovereign-ai-platform-2026-08-17",
+    "logo": "sarawak-government.svg"
   },
   {
     "agency": "Sarawak Government",
@@ -131,7 +136,8 @@
     "what": "Shared rules for secure, reliable government data, a base for responsible AI.",
     "status": "Completed",
     "evidence": "Story says the framework has launched; agency follow-through not yet reported.",
-    "story_id": "borneopost-data-governance-ai-2026-07-08"
+    "story_id": "borneopost-data-governance-ai-2026-07-08",
+    "logo": "sarawak-government.svg"
   },
   {
     "agency": "Ministry of Education, Innovation and Talent Development",
@@ -140,7 +146,8 @@
     "what": "Adding AI to teacher-training courses.",
     "status": "Ongoing",
     "evidence": "Minister said it is being introduced and has started in schools; no completion date.",
-    "story_id": "borneopost-ipg-ai-digitalisation-syllabuses-2026-10-28"
+    "story_id": "borneopost-ipg-ai-digitalisation-syllabuses-2026-10-28",
+    "logo": "meitd-black.png"
   },
   {
     "agency": "Ministry of Public Health, Housing and Local Government",
@@ -149,7 +156,8 @@
     "what": "AI and data-driven city services, digital twin and operations centre for Greater Kuching.",
     "status": "Planning",
     "evidence": "MoU exchanged; build timeline and operators not stated.",
-    "story_id": "dayakdaily-kuching-smart-city-ai-2026-10-15"
+    "story_id": "dayakdaily-kuching-smart-city-ai-2026-10-15",
+    "logo": "mphlg.jpg"
   },
   {
     "agency": "Ministry of Food Industry, Commodities and Regional Development",
@@ -158,6 +166,7 @@
     "what": "AI analytics, monitoring and fertigation at Kuching's Rampangi park.",
     "status": "Planning",
     "evidence": "RM3m allocated under RMK-13 for an upgrade due by 2027.",
-    "story_id": "dayakdaily-rampangi-ai-farming-2026-10-20"
+    "story_id": "dayakdaily-rampangi-ai-farming-2026-10-20",
+    "logo": "mficord.jpg"
   }
 ]
