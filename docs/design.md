@@ -241,9 +241,11 @@ Layout (v2):
    search field.
 3. Two-column card grid (one column below `700px`), sorted A–Z by initiative
    name. Closed card: logo + short-name pill, grey-dot status tag, “Latest
-   update” box with date and evidence. Opened card adds Agency / Latest story
-   facts, the one-line description, and numbered Sources (ai.sarawak.news story
-   first, then the original outlet).
+   update” box with date and evidence. Opened card order under the status tag:
+   Agency / Latest story facts, then the Latest update box, then the one-line
+   description, then numbered Sources. Each source link is “Source name, news
+   title” (ai.sarawak.news story first, then the original outlet with the same
+   story title).
 
 The About page uses the same restrained system: the hero opens on
 `About {title}` from `data/site.json` (no eyebrow label), then the `about_lead`

@@ -359,14 +359,14 @@ def render_tracker_card(row: dict) -> str:
 <div class="tv2-top"><span class="tv2-agency" title="{esc(row['agency'])}">{logo_html}<span class="tv2-agency-name">{esc(row['agency_short'])}</span></span><span class="tv2-chev" aria-hidden="true"></span></div>
 <h2>{esc(row['initiative'])}</h2>
 <span class="tv2-status">{esc(row['status'])}</span>
+<div class="tv2-facts"><div><span>Agency</span><b>{esc(row['agency'])}</b></div><div><span>Latest story</span><b>{esc(date_label)}</b></div></div>
 <div class="tv2-box"><div class="tv2-box-head"><span>Latest update</span><span>{esc(date_label)}</span></div><p>{esc(row['evidence'])}</p></div>
 </button>
 <div class="tv2-more">
-<div class="tv2-facts"><div><span>Agency</span><b>{esc(row['agency'])}</b></div><div><span>Latest story</span><b>{esc(date_label)}</b></div></div>
 <p>{esc(row['what'])}</p>
 <div class="tv2-src"><h3>Sources</h3>
-<a href="{esc(row['site_link'])}"><i>1</i>ai.sarawak.news — {esc(row['story_title'])}<em>→</em></a>
-<a href="{esc(row['original_url'])}" target="_blank" rel="noopener noreferrer"><i>2</i>{esc(row['source'])} — original report<em>↗</em></a>
+<a href="{esc(row['site_link'])}"><i>1</i>ai.sarawak.news, {esc(row['story_title'])}<em>→</em></a>
+<a href="{esc(row['original_url'])}" target="_blank" rel="noopener noreferrer"><i>2</i>{esc(row['source'])}, {esc(row['story_title'])}<em>↗</em></a>
 </div>
 </div>
 </article>"""
