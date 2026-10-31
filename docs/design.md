@@ -368,6 +368,9 @@ the registry (`true` here).
   beacon.
 - Internal traffic: `?internal=1` sets first-party `sn_internal=1`
   (`path=/`, `max-age=31536000` ≈ 1 year, `SameSite=Lax`, `Secure` on https).
+  The same set path also accepts `1` followed by exactly one trailing `` ` ``,
+  `.`, `)`, or `]` (for example `?internal=1%60` or `?internal=1.`); values
+  such as `10`, `1x`, two trailing backticks, or `2` do not match.
   `?internal=0` clears the primary and every listed legacy cookie. While
   internal, GA4 gets `traffic_type: 'internal'` and the CF beacon is skipped.
   Agents and screenshot checks should open
