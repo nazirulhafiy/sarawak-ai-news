@@ -577,6 +577,7 @@ class BuildTest(unittest.TestCase):
         self.assertIn("sn_internal", loader)
         self.assertIn("31536000", loader)
         self.assertIn("get('internal')", loader)
+        self.assertIn("/^1[`.)\\]]?$/.test(q.get('internal')||'')", loader)
         self.assertIn("traffic_type", loader)
         self.assertIn("'internal'", loader)
         self.assertIn("createElement('script')", loader)
@@ -585,6 +586,26 @@ class BuildTest(unittest.TestCase):
         self.assertIn("spa:true", loader)
         self.assertNotIn('<script async src="https://www.googletagmanager.com/gtag/js', loader)
         self.assertIn("H.indexOf(h)<0", loader)
+
+    def test_internal_query_accepts_one_trailing_stray(self):
+        """Mirror the loader regex: 1, or 1 + one of ` . ) ]."""
+        import re
+        from urllib.parse import parse_qs
+
+        loader = build.render_analytics_loader()
+        self.assertIn("/^1[`.)\\]]?$/.test(q.get('internal')||'')", loader)
+        pattern = re.compile(r"^1[`.)\]]?$")
+        accept = ("1", "1`", "1.", "1)", "1]")
+        reject = ("10", "1x", "1``", "2", "1 ", "", "11", "1[")
+        for value in accept:
+            self.assertTrue(pattern.fullmatch(value), value)
+        for value in reject:
+            self.assertIsNone(pattern.fullmatch(value), value)
+        # URLSearchParams decoding used by the loader (?internal=1%60 → 1`).
+        self.assertEqual(parse_qs("internal=1%60")["internal"][0], "1`")
+        self.assertTrue(pattern.fullmatch(parse_qs("internal=1%60")["internal"][0]))
+        self.assertTrue(pattern.fullmatch(parse_qs("internal=1.")["internal"][0]))
+        self.assertIsNone(pattern.fullmatch(parse_qs("internal=10")["internal"][0]))
 
     def test_published_pages_include_shared_analytics_loader(self):
         loader = build.render_analytics_loader()

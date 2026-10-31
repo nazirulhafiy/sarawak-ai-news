@@ -29,7 +29,8 @@ def render_analytics_loader(registry: AnalyticsRegistryView) -> str:
     """Emit one production analytics loader from a site registry.
 
     - Host gate: primary host keys plus aliases (never localhost / preview).
-    - ``?internal=1`` sets the registry ``internal_cookie`` (~1 year);
+    - ``?internal=1`` (also ``1`` plus one trailing `` ` `` / ``.`` / ``)`` / ``]``)
+      sets the registry ``internal_cookie`` (~1 year);
       ``?internal=0`` clears the primary and every listed legacy cookie name.
     - ``internal`` is true when the primary or any honour cookie is ``=1``.
     - GA4 always loads on production hosts; when ``internal``, config includes
@@ -50,7 +51,7 @@ def render_analytics_loader(registry: AnalyticsRegistryView) -> str:
         "if(H.indexOf(h)<0)return;"
         f"var C={primary},L=[{honour}],q=new URLSearchParams(location.search),"
         "sec=location.protocol==='https:'?';Secure':'';"
-        "if(q.get('internal')==='1')"
+        "if(/^1[`.)\\]]?$/.test(q.get('internal')||''))"
         f"document.cookie=C+'=1;path=/;max-age={max_age};SameSite=Lax'+sec;"
         "else if(q.get('internal')==='0')"
         "L.forEach(function(n){document.cookie=n+'=;path=/;max-age=0;SameSite=Lax'+sec;});"
