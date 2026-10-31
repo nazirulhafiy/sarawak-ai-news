@@ -656,9 +656,10 @@ class BuildTest(unittest.TestCase):
         self.assertIn('class="tv2-status"', html)
         self.assertIn("Latest update", html)
         self.assertIn(">Sources</h3>", html)
-        self.assertIn("ai.sarawak.news, ", html)
-        self.assertNotIn(" — original report", html)
+        self.assertNotIn("ai.sarawak.news, ", html)
         self.assertNotIn("ai.sarawak.news — ", html)
+        self.assertNotIn(" — original report", html)
+        self.assertNotIn('class="tv2-src"><h3>Sources</h3>\n<a href="/#', html)
         # Agency / Latest story facts sit under status in the toggle button (open-only).
         self.assertIn('class="tv2-status"', html)
         status_idx = html.index('class="tv2-status"')
@@ -687,9 +688,10 @@ class BuildTest(unittest.TestCase):
         for row in initiatives:
             story = items[row["story_id"]]
             self.assertIn(row["initiative"], html)
-            self.assertIn(f'/#{row["story_id"]}', html)
+            self.assertNotIn(f'href="/#{row["story_id"]}"', html)
             self.assertIn(build.esc(story["title"]), html)
             self.assertIn(story["url"], html)
+            self.assertIn(f"{build.esc(story['source'])}, {build.esc(story['title'])}", html)
         titles = [row["initiative"] for row in initiatives]
         positions = [html.index(title) for title in sorted(titles, key=str.casefold)]
         self.assertEqual(positions, sorted(positions))

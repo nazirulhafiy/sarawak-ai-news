@@ -365,8 +365,7 @@ def render_tracker_card(row: dict) -> str:
 <div class="tv2-more">
 <p>{esc(row['what'])}</p>
 <div class="tv2-src"><h3>Sources</h3>
-<a href="{esc(row['site_link'])}"><i>1</i>ai.sarawak.news, {esc(row['story_title'])}<em>→</em></a>
-<a href="{esc(row['original_url'])}" target="_blank" rel="noopener noreferrer"><i>2</i>{esc(row['source'])}, {esc(row['story_title'])}<em>↗</em></a>
+<a href="{esc(row['original_url'])}" target="_blank" rel="noopener noreferrer"><i>1</i>{esc(row['source'])}, {esc(row['story_title'])}<em>↗</em></a>
 </div>
 </div>
 </article>"""

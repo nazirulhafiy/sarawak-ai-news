@@ -243,9 +243,8 @@ Layout (v2):
    name. Closed card: logo + short-name pill, grey-dot status tag, “Latest
    update” box with date and evidence. Opened card order under the status tag:
    Agency / Latest story facts, then the Latest update box, then the one-line
-   description, then numbered Sources. Each source link is “Source name, news
-   title” (ai.sarawak.news story first, then the original outlet with the same
-   story title).
+   description, then numbered Sources. Each source link is the original outlet
+   only (“Source name, news title”); no ai.sarawak.news row in Sources.
 
 The About page uses the same restrained system: the hero opens on
 `About {title}` from `data/site.json` (no eyebrow label), then the `about_lead`
