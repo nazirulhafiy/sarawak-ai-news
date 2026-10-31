@@ -237,11 +237,9 @@ Layout (v2):
 
 1. Brief hero: “AI initiatives by Sarawak government agencies”, deck, last
    updated from the newest linked initiative story date.
-2. Four count tiles (Initiatives / Planning / Ongoing / Completed) that filter
-   the card list when clicked.
-3. Round agency filter pills (`All` first, then agencies in data order) plus a
+2. Round agency filter pills (`All` first, then agencies in data order) plus a
    search field.
-4. Two-column card grid (one column below `700px`), sorted A–Z by initiative
+3. Two-column card grid (one column below `700px`), sorted A–Z by initiative
    name. Closed card: logo + short-name pill, grey-dot status tag, “Latest
    update” box with date and evidence. Opened card adds Agency / Latest story
    facts, the one-line description, and numbered Sources (ai.sarawak.news story
