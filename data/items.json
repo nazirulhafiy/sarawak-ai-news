@@ -1757,5 +1757,24 @@
     "why_it_matters": "A named telco accelerator put AI content tools into Sarawak MSME practice and reported measured revenue gains, not only attendance.",
     "confidence": "high",
     "caveat": "Publication date verified against the Sarawak Tribune byline (30/10/2026, 12:56 pm) and the English body reopened in Stage B. Figures are programme-reported averages for the latest Sarawak cohort of 44; the nationwide total of 200 entrepreneurs since December 2024 includes Sabah and Sarawak and is not a Sarawak-only count. Vendor AI products used in training are not named beyond AI-assisted content creation and content planning. Borneo Post carried a same-day parallel headline but was Cloudflare-blocked in this run; Tribune English body was used."
+  },
+  {
+    "id": "dayakdaily-reverse-dnn-false-data-2026-11-02",
+    "date": "2026-11-02",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/sarawak-explores-reverse-deep-neural-network-tech-to-detect-manipulated-false-data/",
+    "title": "Sarawak explores reverse DNN to detect false data",
+    "section": "Policy",
+    "tags": [
+      "Reverse DNN",
+      "false data",
+      "SAINS",
+      "Unimas",
+      "information security"
+    ],
+    "summary": "Sarawak's reverse-DNN exploration signals interest in false-data detection, with Premier Abang Johari citing Unimas talks on machine data flows.",
+    "why_it_matters": "A named reverse-DNN method for false-data detection moves Sarawak AI talk into information-integrity tooling, with Unimas in the conversation.",
+    "confidence": "medium",
+    "caveat": "Publication date verified against DayakDaily article:published_time (2026-11-02T07:20:18+00:00 / 15:20 +08) and the English body reopened in Stage B. Remarks were at the SAINS 35th anniversary dinner on 1 Nov 2026 at Wisma Melayu, Kuching, citing a UKAS report. The Premier said he could not personally verify what he had read and framed reverse DNN as emerging technology that could become available in the future. No MoU, budget, vendor, or deployment timetable is stated. SAINS sovereign AI is mentioned only as adjacent context; that platform is already covered by a 17 Aug 2026 card. UKAS Malay sibling https://ukas.sarawak.gov.my/web/subpage/news_view/52248 covers the same reverse-DNN remarks."
   }
 ]
