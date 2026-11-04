@@ -100,10 +100,22 @@ Required item fields:
 - `title`: source article title.
 - `section`: one of the production category sections.
 - `tags`: short topical labels for internal/product use.
-- `summary`: one-sentence strategic signal shown publicly.
-- `why_it_matters`: editorial rationale, currently preserved in JSON.
+- `summary`: one factual sentence (14–38 words) stating what happened,
+  who did it, and the result, using only facts the source states. Do not
+  frame, interpret, or stretch the article into a "strategic signal".
+  Strategic context belongs in `why_it_matters`, not the summary.
+- `why_it_matters`: editorial rationale and strategic context; currently
+  preserved in JSON.
 - `confidence`: confidence level for the reviewed item.
 - `caveat`: source or verification caveat.
+
+Internal (non-public) review field used during drafting and Stage B:
+
+- `summary_evidence`: 1–3 short word-for-word quotes from the article that
+  back every claim in `summary`. Not shown on public cards; omit from the
+  committed public item once the claim-by-claim check has passed (or keep
+  only in run notes). See `docs/automation.md` (Editorial Gate / summary
+  accuracy).
 
 Production category sections are defined in `scripts/build.py`. The same
 canonical label is shown in the homepage filter and on matching story cards:
@@ -126,8 +138,13 @@ are emitted as noindex redirect stubs to the homepage so old links do not 404.
 2. Review `dist/candidates.md` and source articles manually, including whether
    each source is reporting, analysis, commentary, or an announcement.
 3. Add only approved items to `data/items.json`.
-4. Keep summaries short, original, strategic, and focused on the Sarawak signal
-   rather than phrases such as "the publication reports" or "the article says".
+4. Write `summary` as one original factual sentence (14–38 words): what
+   happened, who did it, and the result, using only facts the source states.
+   Every claim must be traceable to the article. Do not infer benefits, add
+   features, or squeeze in framing or "strategic" words to pass checks.
+   Strategic context goes in `why_it_matters`. Avoid phrases such as "the
+   publication reports" or "the article says". Capture `summary_evidence`
+   (1–3 short word-for-word quotes) before finalising the summary.
 5. Keep source URL, confidence, caveat, and why-it-matters fields. Use the caveat
    to distinguish analysis from new programmes or implementation milestones.
 6. Run build, unit tests, summary audit, and a targeted date audit using

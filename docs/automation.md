@@ -162,7 +162,8 @@ unscreened candidate.
 
 Stage B must treat Stage A summaries and recommendations as non-authoritative.
 It must independently reopen and verify every candidate URL. The
-English-language gate and the editorial gate do not change.
+English-language gate, the editorial gate, and the summary accuracy rule do
+not change.
 
 ### Preconditions
 
@@ -197,7 +198,7 @@ After the English-language gate, verify:
 
 - a meaningful Sarawak connection;
 - central AI relevance or a clear future-economy technical function;
-- support for every proposed factual statement;
+- support for every proposed factual statement (see Summary accuracy below);
 - a distinct development not already covered; and
 - enough substance to justify a public story.
 
@@ -250,42 +251,65 @@ Every new item must contain:
 - `title`
 - `section`
 - `tags`
-- one original sentence in `summary`
+- one original factual sentence in `summary` (14–38 words)
 - `why_it_matters`
 - `confidence`
 - `caveat`
 
+### Summary accuracy
+
+`summary` is one factual sentence stating what happened, who did it, and the
+result, using only facts the source states. Strategic interpretation belongs
+in `why_it_matters`, not the summary. "Strategic" framing words are no longer
+required in `summary` and must not be forced in to pass checks.
+
+Accuracy rule: every claim in the summary must be traceable to the source
+text — no inferred benefits, added features, paraphrases that change meaning,
+or framing words squeezed in for audit compliance.
+
+Before writing or finalising a summary, Stage B must record a non-public
+field `summary_evidence`: 1–3 short word-for-word quotes from the article
+that back the summary. Before committing, Stage B must reopen the article
+and compare the summary claim by claim against those quotes. If any claim is
+unsupported, Stage B must stop and report `blocked` rather than publish.
+
 Do not copy a full article body. Keep `tags`, `why_it_matters`, `confidence`,
-`caveat`, and `Source note` content out of public story cards.
+`caveat`, `summary_evidence`, and `Source note` content out of public story
+cards.
 
 ### Required Verification
 
 When at least one story qualifies, the Cloud Agent must:
 
-1. Validate JSON, required fields, unique IDs, and unique URLs. Run
+1. For every new or edited summary: reopen the article, compare the summary
+   claim by claim against `summary_evidence`, and stop with `blocked` if any
+   claim is unsupported. Do not commit an unsupported summary.
+2. Validate JSON, required fields, unique IDs, and unique URLs. Run
    `python3 scripts/validate.py` so every item `source` is in
    `data/allowed-sources.json` (fail rather than invent or near-miss a name).
-2. Run `python3 -m unittest discover -s tests -v`.
-3. Run `python3 scripts/audit_dates.py`.
-4. Run `python3 scripts/audit_dates.py --item-id <id>` for every added or
+3. Run `python3 -m unittest discover -s tests -v`.
+4. Run `python3 scripts/audit_dates.py`.
+5. Run `python3 scripts/audit_dates.py --item-id <id>` for every added or
    edited item.
-5. Run `python3 scripts/audit_summaries.py`.
-6. Run `python3 scripts/build.py`.
-7. Start a local preview of `dist/`.
-8. Use the available primary browser first. Verify newest-story order,
+6. Run `python3 scripts/audit_summaries.py`.
+7. Run `python3 scripts/build.py`.
+8. Start a local preview of `dist/`.
+9. Use the available primary browser first. Verify newest-story order,
    category counts, filtering, desktop and mobile layout, and console output.
-9. Use a precise browser tool only when the primary browser cannot provide an
-   exact viewport, DOM, screenshot, or console check. Record the reason.
-   When opening or screenshotting the **live** site (not local `dist/`), use
-   `https://ai.sarawak.news/?internal=1` so GA4 marks the session as internal
-   and the Cloudflare Web Analytics beacon is skipped (see `AGENTS.md`
-   Analytics and `tools/shots.config.json`).
-10. Confirm that public cards expose no internal editorial metadata.
-11. Run `git diff --check`.
-12. Inspect the final diff and staged paths.
+10. Use a precise browser tool only when the primary browser cannot provide an
+    exact viewport, DOM, screenshot, or console check. Record the reason.
+    When opening or screenshotting the **live** site (not local `dist/`), use
+    `https://ai.sarawak.news/?internal=1` so GA4 marks the session as internal
+    and the Cloudflare Web Analytics beacon is skipped (see `AGENTS.md`
+    Analytics and `tools/shots.config.json`).
+11. Confirm that public cards expose no internal editorial metadata
+    (including `summary_evidence`).
+12. Run `git diff --check`.
+13. Inspect the final diff and staged paths.
 
-A source-access warning, browser failure, test failure, audit failure, build
-failure, unexpected diff, or uncertain publication state blocks publication.
+A source-access warning, unsupported summary claim, browser failure, test
+failure, audit failure, build failure, unexpected diff, or uncertain
+publication state blocks publication.
 
 ### Publication
 

@@ -24,6 +24,7 @@ The current app is intentionally small:
 
 ## Project Rules
 - Do not republish full article bodies.
+- Summary accuracy: every `summary` claim must be traceable to the source (`docs/automation.md` Summary accuracy; field `summary_evidence`).
 - Maintain source URL, caveat, confidence, and why-it-matters fields for every item.
 - Treat ingestion output as internal review material until a human checks the source.
 - Keep the build dependency-free unless there is a clear reason to add tooling.
