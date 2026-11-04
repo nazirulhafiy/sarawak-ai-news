@@ -1757,5 +1757,24 @@
     "why_it_matters": "A named telco accelerator put AI content tools into Sarawak MSME practice and reported measured revenue gains, not only attendance.",
     "confidence": "high",
     "caveat": "Publication date verified against the Sarawak Tribune byline (30/10/2026, 12:56 pm) and the English body reopened in Stage B. Figures are programme-reported averages for the latest Sarawak cohort of 44; the nationwide total of 200 entrepreneurs since December 2024 includes Sabah and Sarawak and is not a Sarawak-only count. Vendor AI products used in training are not named beyond AI-assisted content creation and content planning. Borneo Post carried a same-day parallel headline but was Cloudflare-blocked in this run; Tribune English body was used."
+  },
+  {
+    "id": "borneopost-sk-limbang-teachla-bot-bronze-2026-11-03",
+    "date": "2026-11-03",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/11/03/sk-limbang-wins-bronze-at-ai-digital-innovation-competition/",
+    "title": "SK Limbang's TeachLA Bot SB-01 wins national AI bronze",
+    "section": "Education",
+    "tags": [
+      "TeachLA Bot SB-01",
+      "SK Limbang",
+      "SKeL TRINOVA",
+      "AI Digital Innovation Competition",
+      "computer vision"
+    ],
+    "summary": "SK Limbang Team SKeL TRINOVA's TeachLA Bot SB-01 bronze at the AI Digital Innovation Competition signals a wheeled schoolbag AI chatbot and computer-vision learning assistant.",
+    "why_it_matters": "A named primary-school AI learning robot from SK Limbang taking national bronze shows Sarawak pupils building a concrete AI and robotics prototype, not only using classroom tools.",
+    "confidence": "high",
+    "caveat": "Publication date verified against The Borneo Post byline (November 3, 2026, Tuesday at 10:58 AM Sarawak) and the English body reopened via browser WebFetch in Stage B (curl Cloudflare 403). Body names Team SKeL TRINOVA pupils Aisyah Ayudia Hasbollah, Yamaniyyah Yusry and Aleeesya Darwisya Mohammad Fadzli; TeachLA Bot SB-01 as a wheeled schoolbag platform with AI chatbot, computer vision Human Follow, Arduino motors and a digital face; WTCKL presentation Oct 30–Nov 1 at the National Digital Education Policy Convention 2026; bronze / third place. No school-wide rollout or commercial deployment is stated. No English alternate outlet found in Google News 7d."
   }
 ]
