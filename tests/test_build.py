@@ -481,6 +481,11 @@ class BuildTest(unittest.TestCase):
         self.assertTrue(all(item.get("why_it_matters") for item in public_items))
         self.assertFalse(any("confidence" in item for item in public_items))
         self.assertFalse(any("caveat" in item for item in public_items))
+        self.assertFalse(any("summary_evidence" in item for item in public_items))
+        self.assertNotIn("summary_evidence", (ROOT / "dist" / "items.json").read_text())
+        self.assertNotIn("summary_evidence", html)
+        self.assertNotIn("summary_evidence", (ROOT / "dist" / "feed.xml").read_text())
+        self.assertNotIn("summary_evidence", (ROOT / "dist" / "sitemap.xml").read_text())
 
         about = (ROOT / "dist" / "about.html").read_text()
         about_title = build.about_document_title(copy)
@@ -682,6 +687,30 @@ class BuildTest(unittest.TestCase):
         titles = [row["initiative"] for row in initiatives]
         positions = [html.index(title) for title in sorted(titles, key=str.casefold)]
         self.assertEqual(positions, sorted(positions))
+
+    def test_summary_evidence_never_emitted_in_public_feed(self):
+        """Internal audit quotes stay out of dist/items.json and PUBLIC_ITEM_FIELDS."""
+        self.assertNotIn("summary_evidence", build.PUBLIC_ITEM_FIELDS)
+        feed_row = {
+            "id": "demo",
+            "title": "Demo",
+            "url": "https://example.com/demo",
+            "source": "Example",
+            "date": "2026-11-04",
+            "section": "AI",
+            "tags": ["ai"],
+            "note": "A short public summary note for the card.",
+            "why_it_matters": "Why it matters stays public.",
+            "summary_evidence": ["Verbatim quote from the source article."],
+            "confidence": "high",
+            "caveat": "internal only",
+        }
+        public = build.public_feed_items([feed_row])
+        self.assertEqual(len(public), 1)
+        self.assertNotIn("summary_evidence", public[0])
+        self.assertNotIn("confidence", public[0])
+        self.assertNotIn("caveat", public[0])
+        self.assertEqual(set(public[0]), set(build.PUBLIC_ITEM_FIELDS))
 
 
 if __name__ == "__main__":
