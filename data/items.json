@@ -1776,5 +1776,29 @@
     "why_it_matters": "A named primary-school AI learning robot from SK Limbang taking national bronze shows Sarawak pupils building a concrete AI and robotics prototype, not only using classroom tools.",
     "confidence": "high",
     "caveat": "Publication date verified against The Borneo Post byline (November 3, 2026, Tuesday at 10:58 AM Sarawak) and the English body reopened via browser WebFetch in Stage B (curl Cloudflare 403). Body names Team SKeL TRINOVA pupils Aisyah Ayudia Hasbollah, Yamaniyyah Yusry and Aleeesya Darwisya Mohammad Fadzli; TeachLA Bot SB-01 as a wheeled schoolbag platform with AI chatbot, computer vision Human Follow, Arduino motors and a digital face; WTCKL presentation Oct 30–Nov 1 at the National Digital Education Policy Convention 2026; bronze / third place. No school-wide rollout or commercial deployment is stated. No English alternate outlet found in Google News 7d."
+  },
+  {
+    "id": "borneopost-adam-ai-civil-servants-2026-11-04",
+    "date": "2026-11-04",
+    "source": "The Borneo Post",
+    "url": "https://www.theborneopost.com/2026/11/04/adam-ai-to-enhance-capabilities-of-sarawak-civil-servants-says-abang-johari/",
+    "title": "Premier: ADAM AI helps Sarawak civil servants with official work",
+    "section": "Public Services",
+    "tags": [
+      "ADAM AI",
+      "civil service",
+      "Sovereign AI Infrastructure Platform",
+      "Abang Johari",
+      "Civil Service Day 2026"
+    ],
+    "summary": "At Civil Service Day 2026, Caretaker Premier Datuk Patinggi Tan Sri Abang Johari Tun Openg said ADAM AI helps Sarawak civil servants access authorised government information, support policy research and analysis, and prepare official documents.",
+    "summary_evidence": [
+      "ADAM AI provides officers with tools to access authorised government information, support policy research and analysis, and improve the preparation of official documents.",
+      "Caretaker Premier Datuk Patinggi Tan Sri Abang Johari Tun Openg said ADAM AI was developed specifically for civil servants",
+      "he said in his keynote address at the Civil Service Day 2026 celebration at Borneo Convention Centre Kuching (BCCK) here today."
+    ],
+    "why_it_matters": "A named on-duty AI assistant for Sarawak civil servants shows the Sovereign AI platform turning into day-to-day government tools, not only infrastructure talk.",
+    "confidence": "high",
+    "caveat": "Publication date verified against The Borneo Post byline (November 4, 2026, Wednesday at 3:33 PM Sarawak) and the English body reopened via browser WebFetch in Stage B (curl Cloudflare 403). Body names ADAM AI for authorised government information, policy research and analysis, and official-document preparation; tagline Intelligence for Every Civil Servant; Sovereign AI Infrastructure Platform launched in August. No statewide rollout count, vendor stack, or new launch date beyond the Civil Service Day remarks. Sarawak Tribune carried a same-day parallel English report."
   }
 ]
