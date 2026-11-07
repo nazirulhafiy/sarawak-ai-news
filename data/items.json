@@ -1800,5 +1800,54 @@
     "why_it_matters": "A named on-duty AI assistant for Sarawak civil servants shows the Sovereign AI platform turning into day-to-day government tools, not only infrastructure talk.",
     "confidence": "high",
     "caveat": "Publication date verified against The Borneo Post byline (November 4, 2026, Wednesday at 3:33 PM Sarawak) and the English body reopened via browser WebFetch in Stage B (curl Cloudflare 403). Body names ADAM AI for authorised government information, policy research and analysis, and official-document preparation; tagline Intelligence for Every Civil Servant; Sovereign AI Infrastructure Platform launched in August. No statewide rollout count, vendor stack, or new launch date beyond the Civil Service Day remarks. Sarawak Tribune carried a same-day parallel English report."
+  },
+  {
+    "id": "tvs-pantau-ai-construction-defects-2026-11-06",
+    "date": "2026-11-06",
+    "source": "TVS",
+    "url": "https://www.tvsarawak.my/2026/11/06/ai-to-tackle-construction-industry-challenges/",
+    "title": "Garuda Qualities wins CENTEXS pitch with Pantau AI defect system",
+    "section": "Education",
+    "tags": [
+      "Pantau AI",
+      "CENTEXS",
+      "construction",
+      "Gamuda",
+      "Google Cloud",
+      "Yayasan Gamuda"
+    ],
+    "summary": "Garuda Qualities won the Innovation Pitch Day: AI and Cloud for Construction at CENTEXS Kuching with Pantau AI, a proposed system for site inspectors to record, track and manage building defects.",
+    "summary_evidence": [
+      "Garuda Qualities won the competition with Pantau AI, a proposed system designed to help construction teams record, track and manage building defects.",
+      "The Garuda Qualities team presents Pantau AI, an AI-powered construction defect management solution.",
+      "The Certificate in AI and Cloud for Construction, organised by Yayasan Gamuda in partnership with Gamuda Berhad and Google Cloud, with support from CENTEXS"
+    ],
+    "why_it_matters": "A named construction defect AI from a CENTEXS Kuching pitch shows Sarawak training programmes turning into industry tools, not only classroom certificates.",
+    "confidence": "high",
+    "caveat": "Publication date verified against the TVS English byline (November 6, 2026, 4:19 PM). Pantau AI is a pitch-day proposed system from the first Certificate in AI and Cloud for Construction cohort, not a statewide procurement or live deployment. Omni AI and Team Ichiban placed behind Garuda Qualities. English body reopened in Stage B."
+  },
+  {
+    "id": "theedge-ai-grid-campus-january-start-2026-11-07",
+    "date": "2026-11-07",
+    "source": "The Edge Malaysia",
+    "url": "https://theedgemalaysia.com/node/824925",
+    "title": "Premier: AI grid campus at Tanjung Embang to start in January",
+    "section": "Infrastructure",
+    "tags": [
+      "AI grid campus",
+      "Tanjung Embang",
+      "Petros",
+      "Abang Johari",
+      "January start"
+    ],
+    "summary": "Premier Tan Sri Abang Johari Tun Openg said Sarawak's AI grid campus at Tanjung Embang would start in January after the state budget is passed, with Petros as developer.",
+    "summary_evidence": [
+      "When do you plan to start work on the AI grid campus? Next year, January … the moment [the Sarawak state] budget is passed.",
+      "The developer [of the AI Grid campus] is Petros (Petroleum Sarawak Bhd).",
+      "Another one is our international airport. And then surrounding it, we will build what we call an AI grid campus."
+    ],
+    "why_it_matters": "A January start date and a named Petros developer role turn the long-running Tanjung Embang AI grid campus plan into a timed build commitment, beyond SoftBank framework talk already on the site.",
+    "confidence": "high",
+    "caveat": "Online page dated Saturday 07 Nov 2026; The Edge notes the piece first appeared in The Edge Malaysia Weekly on November 2–8, 2026. Interview conducted a week after the 2027 budget tabling. Start is contingent on the state budget being passed. SoftBank–Grab–Petros framework restated in the same interview is already published separately (dayakdaily-softbank-grab-petros-ai-2026-10-08) and is not the new fact on this card. English body reopened in Stage B."
   }
 ]
