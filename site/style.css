@@ -1553,8 +1553,13 @@ html[data-theme="dark"] .tv2-filter.is-active {
   display: grid;
   gap: 12px;
 }
-.tv2-facts {
+.tv2-btn .tv2-facts {
+  display: none;
+}
+.tv2-card.is-open .tv2-btn .tv2-facts {
   display: grid;
+}
+.tv2-facts {
   grid-template-columns: 1fr 1fr;
   border: 1px solid var(--line);
   border-radius: 6px;
