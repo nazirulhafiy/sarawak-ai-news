@@ -260,8 +260,30 @@ def primary_nav_items() -> tuple[NavItem, ...]:
     )
 
 
-def render_site_header(active_page: str, site: dict[str, str] | None = None) -> str:
+def absolute_nav_items() -> tuple[NavItem, ...]:
+    """Root-absolute nav hrefs for pages that may be served under nested paths."""
+    return (
+        NavItem("home", "/", "Home"),
+        NavItem("tracker", "/tracker.html", "Tracker"),
+        NavItem("about", "/about.html", "About"),
+    )
+
+
+def render_site_header(
+    active_page: str,
+    site: dict[str, str] | None = None,
+    *,
+    absolute_assets: bool = False,
+) -> str:
     site = load_site() if site is None else site
+    if absolute_assets:
+        return kit_render_header(
+            brand_title=site["title"],
+            brand_href="/",
+            active=active_page,
+            nav_items=absolute_nav_items(),
+            mark_dir="/icons",
+        )
     return kit_render_header(
         brand_title=site["title"],
         brand_href="/",
@@ -270,13 +292,18 @@ def render_site_header(active_page: str, site: dict[str, str] | None = None) -> 
     )
 
 
-def render_site_footer(active_page: str, site: dict[str, str] | None = None) -> str:
+def render_site_footer(
+    active_page: str,
+    site: dict[str, str] | None = None,
+    *,
+    absolute_assets: bool = False,
+) -> str:
     site = load_site() if site is None else site
     return kit_render_footer(
         brand_title=site["title"],
         brand_note_parts=FOOTER_BRAND_NOTE_PARTS,
         active=active_page,
-        explore_items=primary_nav_items(),
+        explore_items=absolute_nav_items() if absolute_assets else primary_nav_items(),
         credit_html=FOOTER_CREDIT_HTML,
         fleet_site="ai",
         layout="column_stacks",
@@ -806,6 +833,66 @@ def render_about(site: dict[str, str] | None = None) -> str:
 """
 
 
+NOT_FOUND_HEADING = "Page not found"
+NOT_FOUND_MESSAGE = "The page you're looking for doesn't exist or has moved."
+
+
+def not_found_document_title(site: dict[str, str]) -> str:
+    return f"{NOT_FOUND_HEADING} | {site['title']}"
+
+
+def render_not_found_body(site: dict[str, str] | None = None) -> str:
+    site = load_site() if site is None else site
+    return f"""<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+{render_site_header("404", site, absolute_assets=True)}
+
+  <main id="content" class="about-page not-found-page">
+    <header class="about-hero">
+      <h1>{esc(NOT_FOUND_HEADING)}</h1>
+      <p class="about-lede">{esc(NOT_FOUND_MESSAGE)}</p>
+      <p class="category-return"><a href="/">Home</a></p>
+    </header>
+  </main>
+
+{render_site_footer("404", site, absolute_assets=True)}
+</body>"""
+
+
+def render_not_found(site: dict[str, str] | None = None) -> str:
+    """GitHub Pages 404 page with root-absolute asset and nav URLs for nested paths."""
+    site = load_site() if site is None else site
+    page_title = not_found_document_title(site)
+    description = NOT_FOUND_MESSAGE
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="{esc(description)}" />
+  <meta name="robots" content="noindex" />
+  <title>{esc(page_title)}</title>
+  <script>
+    document.documentElement.classList.add("js");
+    try {{
+      const storedTheme = localStorage.getItem("sarawak-theme");
+      if (storedTheme === "dark" || (storedTheme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {{
+        document.documentElement.dataset.theme = "dark";
+      }}
+    }} catch (error) {{}}
+  </script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+  <link rel="preload" href="/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/style.css" />
+  <script src="/app.js" defer></script>
+  {render_analytics_loader()}
+</head>
+{render_not_found_body(site)}
+</html>
+"""
+
+
 
 def rss_pub_date(value: str) -> str:
     """RFC 822 date for RSS 2.0 (UTC midnight on the story date)."""
@@ -915,6 +1002,7 @@ def build() -> None:
     (DIST / "tracker.html").write_text(
         render_tracker(initiatives, site), encoding="utf-8"
     )
+    (DIST / "404.html").write_text(render_not_found(site), encoding="utf-8")
     for section in SECTION_FILTERS:
         (DIST / f"{slug(section)}.html").write_text(
             render_category_redirect(section, site), encoding="utf-8"

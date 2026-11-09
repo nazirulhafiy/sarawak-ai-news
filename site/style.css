@@ -443,6 +443,11 @@ html[data-theme="dark"] .brief-net {
   animation: hero-reveal .85s cubic-bezier(.22, 1, .36, 1) both;
 }
 
+/* 404 keeps full-contrast copy; skip the about-hero fade-in. */
+.not-found-page .about-hero {
+  animation: none;
+}
+
 .category-hero {
   padding: 58px 0 40px;
   border-bottom: 1px solid var(--line);

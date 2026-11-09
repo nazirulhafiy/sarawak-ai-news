@@ -624,6 +624,7 @@ class BuildTest(unittest.TestCase):
             ROOT / "dist" / "index.html",
             ROOT / "dist" / "tracker.html",
             ROOT / "dist" / "about.html",
+            ROOT / "dist" / "404.html",
         ]
         for page in pages:
             html = page.read_text()
@@ -640,6 +641,32 @@ class BuildTest(unittest.TestCase):
                 '<meta name="google-site-verification" content="5Ro7_ZjEKgT00hwHzOx0paD1Cme1tLYEGdttr_CwHvo" />',
                 (ROOT / "dist" / name).read_text(),
             )
+
+    def test_not_found_page_ships_with_absolute_assets(self):
+        subprocess.run([sys.executable, "scripts/build.py"], cwd=ROOT, text=True, capture_output=True, check=True)
+        path = ROOT / "dist" / "404.html"
+        self.assertTrue(path.is_file())
+        html = path.read_text()
+        self.assertIn("<h1>Page not found</h1>", html)
+        self.assertIn(
+            "The page you&#x27;re looking for doesn&#x27;t exist or has moved.",
+            html,
+        )
+        self.assertIn('class="about-page not-found-page"', html)
+        css = (ROOT / "dist" / "style.css").read_text()
+        self.assertIn(".not-found-page .about-hero {\n  animation: none;\n}", css)
+        self.assertIn('<meta name="robots" content="noindex" />', html)
+        self.assertIn('href="/style.css"', html)
+        self.assertIn('src="/app.js"', html)
+        self.assertIn('href="/fonts/Geist-Variable.woff2"', html)
+        self.assertIn('src="/icons/nav-mark-transparent.svg"', html)
+        self.assertIn('href="/tracker.html"', html)
+        self.assertIn('href="/about.html"', html)
+        self.assertIn('<p class="category-return"><a href="/">Home</a></p>', html)
+        self.assertNotIn("404.html", (ROOT / "dist" / "sitemap.xml").read_text())
+        self.assertEqual(html.count("data-sn-analytics-loader"), 1)
+        self.assertNotIn("gtag('event'", html)
+        self.assertNotIn("synthetic", html.lower())
 
     def test_tracker_page_matches_v2_shape(self):
         initiatives = json.loads((ROOT / "data" / "initiatives.json").read_text())
