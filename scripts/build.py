@@ -848,7 +848,7 @@ def render_not_found_body(site: dict[str, str] | None = None) -> str:
 
 {render_site_header("404", site, absolute_assets=True)}
 
-  <main id="content" class="about-page">
+  <main id="content" class="about-page not-found-page">
     <header class="about-hero">
       <h1>{esc(NOT_FOUND_HEADING)}</h1>
       <p class="about-lede">{esc(NOT_FOUND_MESSAGE)}</p>

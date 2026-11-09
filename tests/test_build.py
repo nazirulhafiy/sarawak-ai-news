@@ -652,6 +652,9 @@ class BuildTest(unittest.TestCase):
             "The page you&#x27;re looking for doesn&#x27;t exist or has moved.",
             html,
         )
+        self.assertIn('class="about-page not-found-page"', html)
+        css = (ROOT / "dist" / "style.css").read_text()
+        self.assertIn(".not-found-page .about-hero {\n  animation: none;\n}", css)
         self.assertIn('<meta name="robots" content="noindex" />', html)
         self.assertIn('href="/style.css"', html)
         self.assertIn('src="/app.js"', html)
