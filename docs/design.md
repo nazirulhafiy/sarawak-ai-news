@@ -216,6 +216,18 @@ item). `robots.txt` points at that sitemap. Former category URLs remain as
 noindex redirect stubs to `https://ai.sarawak.news/` and are not listed in the
 sitemap. Per-story HTML pages are not built yet (see fleet SEO item-4 proposal).
 
+### 404 page
+
+`scripts/build.py` writes `dist/404.html` for GitHub Pages custom 404 handling.
+The page reuses the production header, footer, Geist, and theme toggle. Body
+copy is short and neutral: an `h1` of “Page not found”, one line that the page
+does not exist or has moved, and a Home link. Asset, font, script, nav-mark, and
+in-site nav hrefs are root-absolute (`/style.css`, `/app.js`, `/fonts/…`,
+`/icons/…`, `/`, `/tracker.html`, `/about.html`) so nested missing paths still
+load chrome. The head includes `<meta name="robots" content="noindex">` and the
+shared analytics loader (no extra synthetic events). `404.html` is not listed in
+`sitemap.xml`.
+
 The masthead contains the brand lockup, compact navigation, theme toggle, and
 color rule. It scrolls with the page and uses a solid background so content does
 not show through the bar. Tracker and About are linked from header nav and footer

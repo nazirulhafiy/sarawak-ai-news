@@ -130,6 +130,8 @@ canonical label is shown in the homepage filter and on matching story cards:
 
 There are no separate category archive pages. Legacy `/{section}.html` paths
 are emitted as noindex redirect stubs to the homepage so old links do not 404.
+Unknown paths use the custom `404.html` GitHub Pages page (site chrome, short
+“Page not found” copy, root-absolute assets, `noindex`, not in the sitemap).
 
 ## Editorial Workflow
 
