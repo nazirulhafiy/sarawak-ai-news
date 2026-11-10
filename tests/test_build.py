@@ -359,7 +359,14 @@ class BuildTest(unittest.TestCase):
             "padding: var(--sn-footer-fleet-gap) var(--sn-footer-mobile-gutter) var(--sn-footer-fleet-gap)",
             kit_css,
         )
-        self.assertIn("padding: 22px var(--sn-footer-mobile-gutter);", kit_css)
+        self.assertIn(
+            "padding: 22px var(--sn-footer-mobile-gutter) var(--sn-footer-fleet-gap);",
+            kit_css,
+        )
+        self.assertIn(
+            "padding: 0 var(--sn-footer-mobile-gutter) var(--sn-footer-fleet-gap);",
+            kit_css,
+        )
         self.assertIn(
             ".site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand",
             kit_css,

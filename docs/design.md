@@ -65,12 +65,12 @@ The current direction is intentionally restrained:
   `rel="nofollow"`). On AI, short labels are **Sarawak** / **Events** / **Bantuan**
   (self omitted). Column-stack geometry and mobile order (brand → Hub → Explore)
   come from the synced `sn-kit:footer-column-stacks` region in `site/style.css`
-  (kit pin `2d93428`, hub PR #51 mobile gutter + column bottom pad). On viewports
-  `max-width: 560px`, kit pads `.site-footer-grid-brand` with `--sn-footer-mobile-gutter`,
-  zeros Hub’s negative horizontal margins, and sets Hub/Explore
-  `padding-bottom` to match the gap above each column heading
-  (`--sn-footer-fleet-gap` / `22px`) so the last link clears the next divider.
-  Desktop column-stack geometry is unchanged. Then the full-width builder and
+  (kit pin `6b6f81e`, hub PR #51 tip — mobile gutter + column bottom pad). On
+  viewports `max-width: 560px`, kit pads `.site-footer-grid-brand` with
+  `--sn-footer-mobile-gutter`, zeros Hub’s negative horizontal margins, and sets
+  Hub/Explore/Categories `padding-bottom` to `--sn-footer-fleet-gap` so the gap
+  under the last link matches the gap above the column heading. Desktop
+  column-stack geometry is unchanged. Then the full-width builder and
   independence attribution row.
   The footer follows the story list with a restrained 40px section gap.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark

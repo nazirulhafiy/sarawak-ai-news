@@ -198,7 +198,7 @@
   }
 
   .site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-right .site-footer-grid-categories {
-    padding: 0 var(--sn-footer-mobile-gutter) 22px;
+    padding: 0 var(--sn-footer-mobile-gutter) var(--sn-footer-fleet-gap);
     border-top: 1px solid var(--line);
   }
 
@@ -215,8 +215,8 @@
   }
 
   .site-footer-main.site-footer-main--column-stacks .site-footer-grid-explore.site-footer-nav {
-    /* bottom matches top so Contact (last Explore link) clears the credit divider */
-    padding: 22px var(--sn-footer-mobile-gutter);
+    /* bottom uses fleet-gap so Contact clears the next divider when the token is overridden */
+    padding: 22px var(--sn-footer-mobile-gutter) var(--sn-footer-fleet-gap);
     border-top: 1px solid var(--line);
     border-bottom: 0;
   }
