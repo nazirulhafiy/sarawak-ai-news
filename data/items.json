@@ -1849,5 +1849,30 @@
     "why_it_matters": "A January start date and a named Petros developer role turn the long-running Tanjung Embang AI grid campus plan into a timed build commitment, beyond SoftBank framework talk already on the site.",
     "confidence": "high",
     "caveat": "Online page dated Saturday 07 Nov 2026; The Edge notes the piece first appeared in The Edge Malaysia Weekly on November 2–8, 2026. Interview conducted a week after the 2027 budget tabling. Start is contingent on the state budget being passed. SoftBank–Grab–Petros framework restated in the same interview is already published separately (dayakdaily-softbank-grab-petros-ai-2026-10-08) and is not the new fact on this card. English body reopened in Stage B."
+  },
+  {
+    "id": "theedge-softbank-grab-petros-185bil-seed-2026-11-09",
+    "date": "2026-11-09",
+    "source": "The Edge Malaysia",
+    "url": "https://theedgemalaysia.com/node/825069",
+    "title": "SoftBank, Grab and PETROS lock in US$1.85bil AI seed capital",
+    "section": "Infrastructure",
+    "tags": [
+      "SoftBank",
+      "Grab",
+      "PETROS",
+      "seed capital",
+      "AI infrastructure",
+      "joint development agreement"
+    ],
+    "summary": "SoftBank Group Corp, Grab Holdings Ltd and Petroleum Sarawak Bhd (PETROS) agreed on US$1850 million in initial combined seed capital for AI infrastructure, with US$1 billion for Sarawak and US$850 million for Peninsular Malaysia.",
+    "summary_evidence": [
+      "SoftBank Group Corp, Grab Holdings Ltd and Petroleum Sarawak Bhd (PETROS) have agreed on plans for US$1.85 billion in initial combined seed capital to build AI infrastructure across Sarawak and Peninsular Malaysia in partnership with global hyperscalers.",
+      "Of the proposed initial investment of US$1.85 billion, US$1 billion will be invested in Sarawak and the other US$850 million in Peninsula Malaysia.",
+      "Building on the framework agreement signed in Kuching, Malaysia, on Oct 8, 2026, the three companies signed a joint development agreement (JDA), marking the next phase of the partnership to advance plans to develop AI infrastructure in the state."
+    ],
+    "why_it_matters": "The Oct 8 SoftBank-Grab-PETROS framework now has a named US$1.85 billion seed and a joint development agreement, with US$1 billion earmarked for Sarawak AI infrastructure rather than another US$50 billion confirmation.",
+    "confidence": "high",
+    "caveat": "Amounts and the joint development agreement are taken from The Edge Malaysia report of the companies' joint statement (Nov 9). Deployment is staged and subject to milestones and closing conditions."
   }
 ]
