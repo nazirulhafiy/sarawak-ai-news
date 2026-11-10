@@ -4,6 +4,7 @@ from scripts.audit_summaries import (
     SUMMARY_EVIDENCE_REQUIRED_FROM,
     find_strategic_term_warnings,
     find_summary_issues,
+    sentence_count,
 )
 
 
@@ -53,6 +54,74 @@ class AuditSummariesTest(unittest.TestCase):
         issues = find_summary_issues(items)
         self.assertTrue(any("one sentence" in issue.reason for issue in issues))
         self.assertTrue(any("hype" in issue.reason for issue in issues))
+
+    def test_sentence_count_keeps_decimals_as_one_sentence(self):
+        self.assertEqual(sentence_count("The stake is valued near 1.85 after the round."), 1)
+        self.assertEqual(
+            sentence_count(
+                "SoftBank’s US$1.85 billion seed into Grab and Petros signals a larger "
+                "regional AI infrastructure bet tied to Sarawak energy assets."
+            ),
+            1,
+        )
+        self.assertEqual(
+            sentence_count(
+                "The RM2.4bil facility expands compute capacity for public-sector AI "
+                "workloads across Sarawak’s digital-economy roadmap this year."
+            ),
+            1,
+        )
+        self.assertEqual(
+            sentence_count(
+                "Uptake rose 3.5% after the statewide AI screening rollout gave clinics "
+                "a clearer early-intervention pathway for children."
+            ),
+            1,
+        )
+
+    def test_sentence_count_keeps_abbreviation_periods_as_one_sentence(self):
+        self.assertEqual(
+            sentence_count(
+                "Sarawak Digitech Sdn. Bhd. and Acme Corp. will pilot Dr. Lee’s AI "
+                "tool for public-service case triage across two agencies."
+            ),
+            1,
+        )
+        self.assertEqual(
+            sentence_count(
+                "The brief cites, e.g., PCDS talent programmes and, i.e., workforce "
+                "pathways that position Sarawak for regional AI adoption."
+            ),
+            1,
+        )
+
+    def test_decimal_and_currency_summaries_pass_audit(self):
+        for summary in (
+            (
+                "SoftBank’s US$1.85 billion seed into Grab and Petros signals a larger "
+                "regional AI infrastructure bet tied to Sarawak energy assets."
+            ),
+            (
+                "The RM2.4bil facility expands compute capacity for public-sector AI "
+                "workloads across Sarawak’s digital-economy roadmap this year."
+            ),
+            (
+                "Uptake rose 3.5% after the statewide AI screening rollout gave clinics "
+                "a clearer early-intervention pathway for children."
+            ),
+        ):
+            with self.subTest(summary=summary[:32]):
+                self.assertEqual(find_summary_issues([_item(summary=summary)]), [])
+
+    def test_real_two_sentence_summary_still_fails(self):
+        summary = (
+            "SoftBank’s US$1.85 billion seed into Grab and Petros signals a larger "
+            "regional AI infrastructure bet. The deal also frames Sarawak energy "
+            "assets as part of that compute push."
+        )
+        self.assertEqual(sentence_count(summary), 2)
+        issues = find_summary_issues([_item(summary=summary)])
+        self.assertTrue(any("one sentence" in issue.reason for issue in issues))
 
     def test_missing_strategic_terms_is_warning_only(self):
         summary = (
