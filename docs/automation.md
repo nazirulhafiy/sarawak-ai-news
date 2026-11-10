@@ -262,6 +262,10 @@ Every new item must contain:
 result, using only facts the source states. Strategic interpretation belongs
 in `why_it_matters`, not the summary. "Strategic" framing words are no longer
 required in `summary` and must not be forced in to pass checks.
+`scripts/audit_summaries.py` counts sentences without treating decimal periods
+(e.g. `1.85`, `US$1.85 billion`, `RM2.4bil`, `3.5%`) or common abbreviation
+periods (`Bhd.`, `Sdn.`, `Corp.`, `Dr.`, `e.g.`, `i.e.`) as sentence ends;
+genuine sentence-ending punctuation still fails a multi-sentence summary.
 
 Accuracy rule: every claim in the summary must be traceable to the source
 text — no inferred benefits, added features, paraphrases that change meaning,

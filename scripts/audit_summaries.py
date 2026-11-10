@@ -72,8 +72,33 @@ def word_count(text: str) -> int:
     return len(re.findall(r"\b[\w’'-]+\b", text))
 
 
+# Periods in these tokens are not sentence ends (Bhd., Sdn., Corp., Dr., e.g., i.e.).
+_ABBREVIATION_PERIOD = re.compile(
+    r"\b(?:Bhd|Sdn|Corp|Dr|Mr|Mrs|Ms|Prof|Inc|Ltd|vs|etc|e\.g|i\.e)\.",
+    re.IGNORECASE,
+)
+_DECIMAL_PERIOD = re.compile(r"(?<=\d)\.(?=\d)")
+_PERIOD_PLACEHOLDER = "\0"
+
+
+def _protect_non_sentence_periods(text: str) -> str:
+    """Replace decimal and common abbreviation periods so they are not split points."""
+    protected = _DECIMAL_PERIOD.sub(_PERIOD_PLACEHOLDER, text)
+    chars = list(protected)
+    for match in _ABBREVIATION_PERIOD.finditer(protected):
+        for index in range(match.start(), match.end()):
+            if chars[index] == ".":
+                chars[index] = _PERIOD_PLACEHOLDER
+    return "".join(chars)
+
+
 def sentence_count(text: str) -> int:
-    return len([part for part in re.split(r"[.!?]+\s*", text.strip()) if part])
+    """Count sentences; decimal and common abbreviation periods are not boundaries."""
+    stripped = text.strip()
+    if not stripped:
+        return 0
+    protected = _protect_non_sentence_periods(stripped)
+    return len([part for part in re.split(r"[.!?]+\s*", protected) if part])
 
 
 def requires_summary_evidence(item: dict) -> bool:
