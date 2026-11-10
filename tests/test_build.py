@@ -348,8 +348,29 @@ class BuildTest(unittest.TestCase):
         self.assertIn("border-color: var(--sarawak-yellow);", css)
         self.assertIn("button { font: inherit; }", css)
         self.assertIn("/* sn-kit:footer-column-stacks:begin */", css)
+        self.assertIn("/* sn-kit:footer-column-stacks:end */", css)
         self.assertIn(".site-footer-main.site-footer-main--column-stacks", css)
         self.assertIn("--sn-footer-stack-inset: 28px", css)
+        # Kit mobile stacked columns: Hub/Explore bottom pad matches heading gap.
+        begin = css.index("/* sn-kit:footer-column-stacks:begin */")
+        end = css.index("/* sn-kit:footer-column-stacks:end */")
+        kit_css = css[begin:end]
+        self.assertIn(
+            "padding: var(--sn-footer-fleet-gap) var(--sn-footer-mobile-gutter) var(--sn-footer-fleet-gap)",
+            kit_css,
+        )
+        self.assertIn(
+            "padding: 22px var(--sn-footer-mobile-gutter) var(--sn-footer-fleet-gap);",
+            kit_css,
+        )
+        self.assertIn(
+            "padding: 0 var(--sn-footer-mobile-gutter) var(--sn-footer-fleet-gap);",
+            kit_css,
+        )
+        self.assertIn(
+            ".site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand",
+            kit_css,
+        )
         self.assertIn(".site-footer-fleet-nav", css)
         self.assertIn(".site-footer-nav .site-footer-link:hover", css)
         self.assertIn("border-top: 1px solid var(--line)", css)

@@ -167,17 +167,25 @@
     display: contents;
   }
 
-  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand-cell {
+  /* brand-cell uses display:contents above, so move gutter onto .site-footer-grid-brand */
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand {
     order: 1;
     padding: 22px var(--sn-footer-mobile-gutter) 0;
+    box-sizing: border-box;
+  }
+
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand-cell {
+    order: 1;
+    padding: 0;
   }
 
   .site-footer-main.site-footer-main--column-stacks .site-footer-grid-fleet {
     order: 2;
     margin-top: var(--sn-footer-fleet-gap);
-    margin-left: calc(-1 * var(--sn-footer-mobile-gutter));
-    margin-right: calc(-1 * var(--sn-footer-mobile-gutter));
-    padding: var(--sn-footer-fleet-gap) var(--sn-footer-mobile-gutter) 0;
+    margin-left: 0;
+    margin-right: 0;
+    /* bottom matches top so last fleet link clears the next divider */
+    padding: var(--sn-footer-fleet-gap) var(--sn-footer-mobile-gutter) var(--sn-footer-fleet-gap);
     border-top: 1px solid var(--line);
   }
 
@@ -190,7 +198,7 @@
   }
 
   .site-footer-main.site-footer-main--column-stacks .site-footer-grid-stack-right .site-footer-grid-categories {
-    padding: 0 var(--sn-footer-mobile-gutter) 22px;
+    padding: 0 var(--sn-footer-mobile-gutter) var(--sn-footer-fleet-gap);
     border-top: 1px solid var(--line);
   }
 
@@ -207,7 +215,8 @@
   }
 
   .site-footer-main.site-footer-main--column-stacks .site-footer-grid-explore.site-footer-nav {
-    padding: 22px var(--sn-footer-mobile-gutter) 0;
+    /* bottom uses fleet-gap so Contact clears the next divider when the token is overridden */
+    padding: 22px var(--sn-footer-mobile-gutter) var(--sn-footer-fleet-gap);
     border-top: 1px solid var(--line);
     border-bottom: 0;
   }
