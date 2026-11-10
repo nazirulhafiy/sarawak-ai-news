@@ -1231,6 +1231,33 @@ html[data-theme="dark"] .site-footer {
   text-decoration-color: var(--sarawak-red);
 }
 
+/* Restrained BETA beside Hub Events/Bantuan only (matches sister header/card badges). */
+.site-footer-grid-fleet .site-footer-fleet-nav li:has(> .site-beta) {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0;
+}
+
+.site-footer-grid-fleet .site-beta {
+  display: inline-block;
+  flex: 0 0 auto;
+  margin-left: 0.42em;
+  padding: 0.14em 0.36em 0.12em;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  vertical-align: 0.12em;
+}
+
 .site-footer-bottom {
   padding: 16px 28px;
   border-top: 1px solid var(--line);

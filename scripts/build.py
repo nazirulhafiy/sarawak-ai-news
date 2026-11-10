@@ -73,6 +73,12 @@ FOOTER_CREDIT_HTML = (
     'href="https://hafiy.my" target="_blank" rel="noopener noreferrer">hafiy.my</a>, '
     "an independent publication. Not affiliated with the Sarawak Government."
 )
+# Restrained BETA beside Hub footer Events/Bantuan only (kit fleet markup unchanged).
+SITE_BETA_BADGE = '<span class="site-beta" aria-label="Beta">BETA</span>'
+FOOTER_HUB_BETA_HREFS = (
+    "https://events.sarawak.news/",
+    "https://bantuan.sarawak.news/",
+)
 BRIEF_NET_SVG = (ROOT / "site" / "brief-net.svg").read_text(encoding="utf-8").strip()
 
 
@@ -292,6 +298,36 @@ def render_site_header(
     )
 
 
+def inject_footer_hub_beta(footer_html: str) -> str:
+    """Append site-local BETA badges after Events and Bantuan Hub fleet links."""
+    fleet_marker = 'class="site-footer-grid-fleet"'
+    if fleet_marker not in footer_html:
+        return footer_html
+    before, rest = footer_html.split(fleet_marker, 1)
+    # Fleet cell ends at the next sibling stack or footer bottom; keep scope tight.
+    fleet_end = rest.find('class="site-footer-grid-stack-right"')
+    if fleet_end < 0:
+        fleet_end = rest.find('class="site-footer-bottom"')
+    if fleet_end < 0:
+        return footer_html
+    fleet_chunk, after = rest[:fleet_end], rest[fleet_end:]
+    for href in FOOTER_HUB_BETA_HREFS:
+        needle = f'<a class="site-footer-link" href="{href}">'
+        idx = fleet_chunk.find(needle)
+        if idx < 0:
+            continue
+        close = fleet_chunk.find("</a>", idx)
+        if close < 0:
+            continue
+        insert_at = close + len("</a>")
+        if fleet_chunk.startswith(SITE_BETA_BADGE, insert_at):
+            continue
+        fleet_chunk = (
+            fleet_chunk[:insert_at] + SITE_BETA_BADGE + fleet_chunk[insert_at:]
+        )
+    return before + fleet_marker + fleet_chunk + after
+
+
 def render_site_footer(
     active_page: str,
     site: dict[str, str] | None = None,
@@ -299,15 +335,17 @@ def render_site_footer(
     absolute_assets: bool = False,
 ) -> str:
     site = load_site() if site is None else site
-    return kit_render_footer(
-        brand_title=site["title"],
-        brand_note_parts=FOOTER_BRAND_NOTE_PARTS,
-        active=active_page,
-        explore_items=absolute_nav_items() if absolute_assets else primary_nav_items(),
-        credit_html=FOOTER_CREDIT_HTML,
-        fleet_site="ai",
-        layout="column_stacks",
-        fleet_section_label="Hub",
+    return inject_footer_hub_beta(
+        kit_render_footer(
+            brand_title=site["title"],
+            brand_note_parts=FOOTER_BRAND_NOTE_PARTS,
+            active=active_page,
+            explore_items=absolute_nav_items() if absolute_assets else primary_nav_items(),
+            credit_html=FOOTER_CREDIT_HTML,
+            fleet_site="ai",
+            layout="column_stacks",
+            fleet_section_label="Hub",
+        )
     )
 
 
