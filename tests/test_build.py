@@ -348,8 +348,20 @@ class BuildTest(unittest.TestCase):
         self.assertIn("border-color: var(--sarawak-yellow);", css)
         self.assertIn("button { font: inherit; }", css)
         self.assertIn("/* sn-kit:footer-column-stacks:begin */", css)
+        self.assertIn("/* sn-kit:footer-column-stacks:end */", css)
         self.assertIn(".site-footer-main.site-footer-main--column-stacks", css)
         self.assertIn("--sn-footer-stack-inset: 28px", css)
+        # Site-local mobile gutter fix (after kit markers): brand box + Hub margins.
+        kit_end = css.index("/* sn-kit:footer-column-stacks:end */")
+        mobile_override = css[kit_end:]
+        self.assertIn(
+            ".site-footer-summary.site-footer-grid-brand-cell",
+            mobile_override,
+        )
+        self.assertIn("display: flex", mobile_override)
+        self.assertIn("margin-left: 0", mobile_override)
+        self.assertIn("margin-right: 0", mobile_override)
+        self.assertIn("var(--sn-footer-mobile-gutter)", mobile_override)
         self.assertIn(".site-footer-fleet-nav", css)
         self.assertIn(".site-footer-nav .site-footer-link:hover", css)
         self.assertIn("border-top: 1px solid var(--line)", css)

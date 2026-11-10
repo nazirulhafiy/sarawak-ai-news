@@ -65,8 +65,11 @@ The current direction is intentionally restrained:
   `rel="nofollow"`). On AI, short labels are **Sarawak** / **Events** / **Bantuan**
   (self omitted). Column-stack geometry and mobile order (brand → Hub → Explore)
   come from the synced `sn-kit:footer-column-stacks` region in `site/style.css`
-  (kit pin `17aa0ea`, hub #45 short fleet labels). Then the full-width builder and
-  independence attribution row.
+  (kit pin `17aa0ea`, hub #45 short fleet labels). On viewports `max-width: 560px`,
+  a site-local override (after the kit marker region) restores the brand-cell box
+  and drops Hub’s negative horizontal margins so brand and Hub share Explore’s
+  `--sn-footer-mobile-gutter` left inset; desktop column-stack geometry is
+  unchanged. Then the full-width builder and independence attribution row.
   The footer follows the story list with a restrained 40px section gap.
 - Optional dark mode using the same hierarchy: near-black canvas, lifted dark
   cards, softened borders, brighter text, and preserved Sarawak yellow/red

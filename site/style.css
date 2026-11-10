@@ -1112,6 +1112,27 @@ html[data-theme="dark"] .back-to-top:hover{border-color:#f7c948}
 }
 /* sn-kit:footer-column-stacks:end */
 
+/* Mobile: brand + Hub must share Explore’s --sn-footer-mobile-gutter.
+   Kit sets brand-cell to display:contents (padding ignored) and fleet to
+   margin ±gutter + padding gutter (net flush). The summary+brand-cell rule
+   also keeps desktop 28px inset at higher specificity — restate gutter here.
+   Override only ≤560px. */
+@media (max-width: 560px) {
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand-cell,
+  .site-footer-main.site-footer-main--column-stacks .site-footer-summary.site-footer-grid-brand-cell {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+    padding: 22px var(--sn-footer-mobile-gutter) 0;
+  }
+
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-fleet {
+    margin-left: 0;
+    margin-right: 0;
+    padding: var(--sn-footer-fleet-gap) var(--sn-footer-mobile-gutter) 0;
+  }
+}
+
 footer {
   margin-top: 40px;
 }
