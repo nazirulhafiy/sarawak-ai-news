@@ -171,11 +171,13 @@ class BuildTest(unittest.TestCase):
         self.assertNotIn('class="site-footer-grid-explore-divider"', html)
         self.assertIn('<a class="site-footer-link" href="https://sarawak.news/">Sarawak</a>', html)
         self.assertIn(
-            '<a class="site-footer-link" href="https://events.sarawak.news/">Events</a>',
+            '<a class="site-footer-link" href="https://events.sarawak.news/">Events</a>'
+            '<span class="site-beta" aria-label="Beta">BETA</span>',
             html,
         )
         self.assertIn(
-            '<a class="site-footer-link" href="https://bantuan.sarawak.news/">Bantuan</a>',
+            '<a class="site-footer-link" href="https://bantuan.sarawak.news/">Bantuan</a>'
+            '<span class="site-beta" aria-label="Beta">BETA</span>',
             html,
         )
         fleet_block = html.split('class="site-footer-fleet-nav"', 1)[1].split("</nav>", 1)[0]
@@ -186,6 +188,12 @@ class BuildTest(unittest.TestCase):
         self.assertLess(
             fleet_block.index(">Events</a>"),
             fleet_block.index(">Bantuan</a>"),
+        )
+        self.assertEqual(fleet_block.count('class="site-beta"'), 2)
+        self.assertNotIn(
+            'href="https://sarawak.news/">Sarawak</a>'
+            '<span class="site-beta"',
+            fleet_block,
         )
         self.assertNotIn('rel="nofollow"', html.split("site-footer", 1)[1])
         self.assertNotIn("https://ai.sarawak.news/", html.split('class="site-footer-fleet-nav"', 1)[1])
@@ -372,6 +380,7 @@ class BuildTest(unittest.TestCase):
             kit_css,
         )
         self.assertIn(".site-footer-fleet-nav", css)
+        self.assertIn(".site-footer-grid-fleet .site-beta", css)
         self.assertIn(".site-footer-nav .site-footer-link:hover", css)
         self.assertIn("border-top: 1px solid var(--line)", css)
         self.assertIn("color: var(--sarawak-red);", css)

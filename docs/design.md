@@ -63,7 +63,12 @@ The current direction is intentionally restrained:
   No footer Categories block (filters live in the main UI). Fleet links are plain
   `https://` anchors from `kit/fleet-cross-links.json` (no self-link; no
   `rel="nofollow"`). On AI, short labels are **Sarawak** / **Events** / **Bantuan**
-  (self omitted). Column-stack geometry and mobile order (brand → Hub → Explore)
+  (self omitted). Beside **Events** and **Bantuan** only, `scripts/build.py`
+  injects a small restrained `BETA` label (`.site-beta`, `aria-label="Beta"`)
+  after each kit fleet anchor inside `.site-footer-grid-fleet` — hairline
+  `--line` border, muted uppercase 9px tracking, 3px radius, `white-space:
+  nowrap` — matching Bantuan/Events header badges and hub card BETAs. **Sarawak**
+  (and self **AI**, already omitted) stay unmarked. Column-stack geometry and mobile order (brand → Hub → Explore)
   come from the synced `sn-kit:footer-column-stacks` region in `site/style.css`
   (kit pin `6b6f81e`, hub PR #51 tip — mobile gutter + column bottom pad). On
   viewports `max-width: 560px`, kit pads `.site-footer-grid-brand` with
