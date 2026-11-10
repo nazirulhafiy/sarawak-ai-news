@@ -1065,17 +1065,25 @@ html[data-theme="dark"] .back-to-top:hover{border-color:#f7c948}
     display: contents;
   }
 
-  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand-cell {
+  /* brand-cell uses display:contents above, so move gutter onto .site-footer-grid-brand */
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand {
     order: 1;
     padding: 22px var(--sn-footer-mobile-gutter) 0;
+    box-sizing: border-box;
+  }
+
+  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand-cell {
+    order: 1;
+    padding: 0;
   }
 
   .site-footer-main.site-footer-main--column-stacks .site-footer-grid-fleet {
     order: 2;
     margin-top: var(--sn-footer-fleet-gap);
-    margin-left: calc(-1 * var(--sn-footer-mobile-gutter));
-    margin-right: calc(-1 * var(--sn-footer-mobile-gutter));
-    padding: var(--sn-footer-fleet-gap) var(--sn-footer-mobile-gutter) 0;
+    margin-left: 0;
+    margin-right: 0;
+    /* bottom matches top so last fleet link clears the next divider */
+    padding: var(--sn-footer-fleet-gap) var(--sn-footer-mobile-gutter) var(--sn-footer-fleet-gap);
     border-top: 1px solid var(--line);
   }
 
@@ -1105,33 +1113,13 @@ html[data-theme="dark"] .back-to-top:hover{border-color:#f7c948}
   }
 
   .site-footer-main.site-footer-main--column-stacks .site-footer-grid-explore.site-footer-nav {
-    padding: 22px var(--sn-footer-mobile-gutter) 0;
+    /* bottom matches top so Contact (last Explore link) clears the credit divider */
+    padding: 22px var(--sn-footer-mobile-gutter);
     border-top: 1px solid var(--line);
     border-bottom: 0;
   }
 }
 /* sn-kit:footer-column-stacks:end */
-
-/* Mobile: brand + Hub must share Explore’s --sn-footer-mobile-gutter.
-   Kit sets brand-cell to display:contents (padding ignored) and fleet to
-   margin ±gutter + padding gutter (net flush). The summary+brand-cell rule
-   also keeps desktop 28px inset at higher specificity — restate gutter here.
-   Override only ≤560px. */
-@media (max-width: 560px) {
-  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand-cell,
-  .site-footer-main.site-footer-main--column-stacks .site-footer-summary.site-footer-grid-brand-cell {
-    display: flex;
-    flex-direction: column;
-    order: 1;
-    padding: 22px var(--sn-footer-mobile-gutter) 0;
-  }
-
-  .site-footer-main.site-footer-main--column-stacks .site-footer-grid-fleet {
-    margin-left: 0;
-    margin-right: 0;
-    padding: var(--sn-footer-fleet-gap) var(--sn-footer-mobile-gutter) 0;
-  }
-}
 
 footer {
   margin-top: 40px;

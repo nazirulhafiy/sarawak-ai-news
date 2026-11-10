@@ -351,17 +351,19 @@ class BuildTest(unittest.TestCase):
         self.assertIn("/* sn-kit:footer-column-stacks:end */", css)
         self.assertIn(".site-footer-main.site-footer-main--column-stacks", css)
         self.assertIn("--sn-footer-stack-inset: 28px", css)
-        # Site-local mobile gutter fix (after kit markers): brand box + Hub margins.
-        kit_end = css.index("/* sn-kit:footer-column-stacks:end */")
-        mobile_override = css[kit_end:]
+        # Kit mobile stacked columns: Hub/Explore bottom pad matches heading gap.
+        begin = css.index("/* sn-kit:footer-column-stacks:begin */")
+        end = css.index("/* sn-kit:footer-column-stacks:end */")
+        kit_css = css[begin:end]
         self.assertIn(
-            ".site-footer-summary.site-footer-grid-brand-cell",
-            mobile_override,
+            "padding: var(--sn-footer-fleet-gap) var(--sn-footer-mobile-gutter) var(--sn-footer-fleet-gap)",
+            kit_css,
         )
-        self.assertIn("display: flex", mobile_override)
-        self.assertIn("margin-left: 0", mobile_override)
-        self.assertIn("margin-right: 0", mobile_override)
-        self.assertIn("var(--sn-footer-mobile-gutter)", mobile_override)
+        self.assertIn("padding: 22px var(--sn-footer-mobile-gutter);", kit_css)
+        self.assertIn(
+            ".site-footer-main.site-footer-main--column-stacks .site-footer-grid-brand",
+            kit_css,
+        )
         self.assertIn(".site-footer-fleet-nav", css)
         self.assertIn(".site-footer-nav .site-footer-link:hover", css)
         self.assertIn("border-top: 1px solid var(--line)", css)
