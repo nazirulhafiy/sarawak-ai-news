@@ -1,5 +1,29 @@
 [
   {
+    "id": "thestar-kuching-traffic-ai-2026-11-12",
+    "date": "2026-11-12",
+    "source": "The Star",
+    "url": "https://www.thestar.com.my/news/nation/2026/11/11/sarawak-govt-planning-kuching-traffic-with-ai-says-premier",
+    "title": "Sarawak govt planning Kuching traffic with AI, says Premier",
+    "section": "Infrastructure",
+    "tags": [
+      "Kuching",
+      "integrated traffic model",
+      "AI simulation",
+      "road planning",
+      "Abang Johari"
+    ],
+    "summary": "Premier Tan Sri Abang Johari Openg said Sarawak is using AI simulation on planning data to 2030 to plan an integrated traffic model for Kuching and surrounding areas.",
+    "summary_evidence": [
+      "Sarawak is using artificial intelligence to plan an integrated traffic model in Kuching and its surrounding areas, says Tan Sri Abang Johari Openg.",
+      "The Premier said the state's planning data up to 2030 was used in AI simulation to predict new housing areas and the road infrastructure required to connect them.",
+      "The integrated model will help us to develop housing areas and road networks near Kuching,"
+    ],
+    "why_it_matters": "Puts a named AI simulation and integrated traffic model for Greater Kuching on the public record, tying 2030 planning data to road and housing layout rather than another SoftBank-style compute announcement.",
+    "confidence": "high",
+    "caveat": "Feed date follows The Star article:published_time as resolved by audit_dates.py in Asia/Kuching (2026-11-12). Visible byline reads Wednesday, 11 Nov 2026, 4:33 PM MYT; URL path is /2026/11/11/. Taken from the Premier's remarks after the Jalan Batu Kawa-Jalan Stephen Yong road launch."
+  },
+  {
     "id": "sarawaktribune-ai-productivity-2025-11-12",
     "date": "2025-11-12",
     "source": "Sarawak Tribune",
