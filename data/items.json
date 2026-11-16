@@ -1,5 +1,29 @@
 [
   {
+    "id": "dayakdaily-pntr-intelligence-sarawak-2026-11-16",
+    "date": "2026-11-16",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/sea-based-pntr-group-expands-into-swak-launches-new-regional-ai-solutions-unit-pntr-intelligence/",
+    "title": "PNTR Group expands into Sarawak, launches PNTR Intelligence AI unit",
+    "section": "Business",
+    "tags": [
+      "PNTR Intelligence",
+      "PNTR Group",
+      "AI solutions",
+      "Michael King",
+      "Sarawak expansion"
+    ],
+    "summary": "PNTR Group today announced its expansion into Sarawak and the launch of PNTR Intelligence, a regional AI solutions unit led in Malaysia by managing consultant Dr Michael King.",
+    "summary_evidence": [
+      "PNTR Group, a Southeast Asia-based strategic communications and advisory firm, today announced its expansion into Sarawak and the launch of PNTR Intelligence, a new regional AI solutions unit.",
+      "According to a press release, Dr Michael King has been appointed to lead the Group’s advisory practice in Sarawak and PNTR Intelligence in Malaysia as its managing consultant and associate director.",
+      "With PNTR Intelligence, we are expanding beyond our traditional strategic communications and advisory services to deliver practical, AI-powered solutions for our clients,"
+    ],
+    "why_it_matters": "Puts a named private AI solutions unit on the Sarawak map for energy, resources and public-sector clients, separate from SoftBank campus and SAIC infrastructure stories.",
+    "confidence": "high",
+    "caveat": "Taken from DayakDaily's 16 Nov 2026 report of a PNTR Group press release. No client contracts, product demos or SAIC link are stated."
+  },
+  {
     "id": "thestar-kuching-traffic-ai-2026-11-12",
     "date": "2026-11-12",
     "source": "The Star",
