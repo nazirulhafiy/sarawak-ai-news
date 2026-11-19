@@ -1,5 +1,30 @@
 [
   {
+    "id": "dayakdaily-softbank-samajaya-chip-foundry-2026-11-18",
+    "date": "2026-11-18",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/new-era-for-the-world-swaks-us1-bln-chip-venture-eyes-2028-start-work-underway-at-taiyo-yuden/",
+    "title": "SoftBank, PETROS and Grab agree Samajaya chip foundry targeting 2028",
+    "section": "Infrastructure",
+    "tags": [
+      "SoftBank",
+      "PETROS",
+      "Grab",
+      "Samajaya",
+      "semiconductor foundry",
+      "2028"
+    ],
+    "summary": "Premier Tan Sri Abang Johari Tun Openg said SoftBank, PETROS and Grab signed an agreement to form a company for a Samajaya semiconductor foundry, with SoftBank holding 80 percent and operations targeted for 2028.",
+    "summary_evidence": [
+      "The three parties have signed an agreement to establish the company, with SoftBank holding an 80 per cent stake, while Petros and Grab will each hold 10 per cent.",
+      "Abang Johari said the investment would fund a semiconductor foundry in Samajaya to produce high-end chips for emerging technologies, including artificial intelligence (AI) and autonomous systems.",
+      "Abang Johari indicated that the venture was targeting 2028 to begin operations, adding that work had already started at Taiyo Yuden in Samajaya."
+    ],
+    "why_it_matters": "The Nov 9 SoftBank-Grab-PETROS AI infrastructure seed now has a named Samajaya semiconductor foundry company, an 80/10/10 ownership split, and a 2028 operations target.",
+    "confidence": "high",
+    "caveat": "Taken from DayakDaily's 18 Nov 2026 report of the Premier's Lawas remarks. Foundry framing and 2028 start come from those remarks; the companies' Nov 9 joint statement described AI infrastructure seed capital. Same US$1 billion SoftBank-led seed amount is already published separately."
+  },
+  {
     "id": "dayakdaily-pntr-intelligence-sarawak-2026-11-16",
     "date": "2026-11-16",
     "source": "DayakDaily",
