@@ -186,8 +186,10 @@ Publication is allowed only when the original visible headline and substantive
 article body are English. Browser translation and English metadata do not
 qualify.
 
-The public title and URL must match the verified English source page. A second
-corroborating URL is optional and must not be required.
+The public URL must match the verified English source page. For the card
+`title`, use the outlet's own visible headline unchanged when it passes every
+title check in Card title below; otherwise rewrite. A second corroborating URL
+is optional and must not be required.
 
 If language, source access, date, or canonical URL cannot be verified, Stage B
 must reject that candidate and make no unsupported claim.
@@ -230,6 +232,30 @@ The Star's "Kuching AI Data Campus to drive Sarawak's AI push" (IDECS26
 opening speech), published even though the 3 May / 20 May campus plan was
 already on the site. Plain re-reports that add no new context stay under the
 normal duplicate rule.
+
+### Card title
+
+Prefer the source outlet's own visible headline as the card `title`, unchanged,
+when it already passes every title check. Only rewrite when it fails any check.
+If rewriting, use a news-style headline (who is doing what, where), as today.
+Record in the decision log which path was used and why.
+
+A source headline may be used as-is only when it is all of:
+
+- English;
+- plain facts (no opening quote or opinion line, e.g. `'New era for the
+  world': ...`);
+- free of outlet shorthand (`S'wak`, `bln`, `govt`);
+- free of leaders named by a bare name;
+- fit for one line on desktop; and
+- accurate on who/where/how much (e.g. does not read as a new amount when that
+  amount is already on the site) and clear about what is new.
+
+Example: DayakDaily's `'New era for the world': S'wak's US$1 bln chip venture
+eyes 2028 start, work underway at Taiyo Yuden` fails (quote, shorthand, too
+long), so the rewritten title on
+`dayakdaily-softbank-samajaya-chip-foundry-2026-11-18` stays. Do not change
+already-published cards for this rule alone.
 
 Organiser-requested stories: when an event organiser or company asks Nazirul
 to feature their event or announcement, it may be published from their own
@@ -288,28 +314,31 @@ When at least one story qualifies, the Cloud Agent must:
 1. For every new or edited summary: reopen the article, compare the summary
    claim by claim against `summary_evidence`, and stop with `blocked` if any
    claim is unsupported. Do not commit an unsupported summary.
-2. Validate JSON, required fields, unique IDs, and unique URLs. Run
+2. For every new or edited card `title`: confirm the source-headline-as-is path
+   or the rewrite path under Card title, and that the decision log records
+   which path was used and why.
+3. Validate JSON, required fields, unique IDs, and unique URLs. Run
    `python3 scripts/validate.py` so every item `source` is in
    `data/allowed-sources.json` (fail rather than invent or near-miss a name).
-3. Run `python3 -m unittest discover -s tests -v`.
-4. Run `python3 scripts/audit_dates.py`.
-5. Run `python3 scripts/audit_dates.py --item-id <id>` for every added or
+4. Run `python3 -m unittest discover -s tests -v`.
+5. Run `python3 scripts/audit_dates.py`.
+6. Run `python3 scripts/audit_dates.py --item-id <id>` for every added or
    edited item.
-6. Run `python3 scripts/audit_summaries.py`.
-7. Run `python3 scripts/build.py`.
-8. Start a local preview of `dist/`.
-9. Use the available primary browser first. Verify newest-story order,
-   category counts, filtering, desktop and mobile layout, and console output.
-10. Use a precise browser tool only when the primary browser cannot provide an
+7. Run `python3 scripts/audit_summaries.py`.
+8. Run `python3 scripts/build.py`.
+9. Start a local preview of `dist/`.
+10. Use the available primary browser first. Verify newest-story order,
+    category counts, filtering, desktop and mobile layout, and console output.
+11. Use a precise browser tool only when the primary browser cannot provide an
     exact viewport, DOM, screenshot, or console check. Record the reason.
     When opening or screenshotting the **live** site (not local `dist/`), use
     `https://ai.sarawak.news/?internal=1` so GA4 marks the session as internal
     and the Cloudflare Web Analytics beacon is skipped (see `AGENTS.md`
     Analytics and `tools/shots.config.json`).
-11. Confirm that public cards expose no internal editorial metadata
+12. Confirm that public cards expose no internal editorial metadata
     (including `summary_evidence`).
-12. Run `git diff --check`.
-13. Inspect the final diff and staged paths.
+13. Run `git diff --check`.
+14. Inspect the final diff and staged paths.
 
 A source-access warning, unsupported summary claim, browser failure, test
 failure, audit failure, build failure, unexpected diff, or uncertain
@@ -347,6 +376,8 @@ The Cloud Agent result must state:
 - candidate count and published item IDs;
 - story date range;
 - English-page verification for each candidate;
+- for each published item, whether the card title used the source headline or
+  a rewrite, and why (also in the decision log);
 - validation commands and results;
 - browser used and any fallback reason;
 - commit and remote branch hashes when published;
