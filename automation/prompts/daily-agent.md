@@ -81,11 +81,16 @@ Run this stage only after Stage A produced a valid non-empty manifest.
 2. Independently reopen and verify every candidate URL.
 3. Apply the English-language gate and the editorial gate in
    `docs/automation.md` before writing summaries or editing files.
-4. Write each `summary` as one factual sentence (14–38 words): what happened,
+4. Card `title`: try the outlet's own visible headline first. Keep it unchanged
+   when it passes every title check in `docs/automation.md` (Card title). If
+   it fails any check, write a news-style title (who is doing what, where).
+   Record in the decision log which path was used and why. Do not rewrite
+   already-published titles for this rule alone.
+5. Write each `summary` as one factual sentence (14–38 words): what happened,
    who did it, and the result, using only facts the source states. Strategic
    context belongs in `why_it_matters`. "Strategic" framing words are no
    longer required and must not be forced into the summary to pass checks.
-5. Accuracy rule: every claim in the summary must be traceable to the source
+6. Accuracy rule: every claim in the summary must be traceable to the source
    text — no inferred benefits, added features, or framing words squeezed in
    for audit compliance. Record non-public `summary_evidence` (1–3 short
    word-for-word quotes from the article that back the summary). Before
@@ -93,20 +98,21 @@ Run this stage only after Stage A produced a valid non-empty manifest.
    against those quotes. If anything is unsupported, stop and return
    `blocked` rather than publish. Do not put `summary_evidence` on public
    cards.
-6. Preserve unrelated work and stop when an approved publication path is
+7. Preserve unrelated work and stop when an approved publication path is
    already dirty.
-7. Change only `README.md`, `data/items.json`, and `data/site.json`. Do not
+8. Change only `README.md`, `data/items.json`, and `data/site.json`. Do not
    edit `data/allowed-sources.json` in a content run; if a correct outlet name
    is missing from the allowlist, return `blocked` for Nazirul.
-8. Complete every required command and browser check in the contract, including
-   `python3 scripts/validate.py`.
+9. Complete every required command and browser check in the contract, including
+   the Card title publish check and `python3 scripts/validate.py`.
    When opening or screenshotting the live site, use
    `https://ai.sarawak.news/?internal=1` (GA4 internal + skip Cloudflare beacon).
-9. If no candidate qualifies, make no changes, commit, or push.
-10. Publish only in the supplied publication mode and only after all checks
+10. If no candidate qualifies, make no changes, commit, or push.
+11. Publish only in the supplied publication mode and only after all checks
     pass.
-11. Return the exact result contract defined in `docs/automation.md`, including
-    Stage A and Stage B outcomes.
+12. Return the exact result contract defined in `docs/automation.md`, including
+    Stage A and Stage B outcomes and, for each published item, title path
+    (source headline or rewrite) and why.
 
 Do not claim success from a local commit alone. Verify the intended remote
 branch hash. On any uncertain result, return `blocked` with the exact reason.
