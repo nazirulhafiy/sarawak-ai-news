@@ -187,9 +187,10 @@ article body are English. Browser translation and English metadata do not
 qualify.
 
 The public URL must match the verified English source page. For the card
-`title`, use the outlet's own visible headline unchanged when it passes every
-title check in Card title below; otherwise rewrite. A second corroborating URL
-is optional and must not be required.
+`title`, always start from the outlet's own visible headline and follow Card
+title below (unchanged when it passes every check; otherwise the smallest
+edits needed to pass — never a fresh title from scratch). A second
+corroborating URL is optional and must not be required.
 
 If language, source access, date, or canonical URL cannot be verified, Stage B
 must reject that candidate and make no unsupported claim.
@@ -235,26 +236,44 @@ normal duplicate rule.
 
 ### Card title
 
-Prefer the source outlet's own visible headline as the card `title`, unchanged,
-when it already passes every title check. Only rewrite when it fails any check.
-If rewriting, use a news-style headline (who is doing what, where), as today.
-Record in the decision log which path was used and why.
+Always start from the source outlet's own visible headline as the card
+`title`. Never write a fresh title from scratch. Record in the decision log
+whether the title was used unchanged or light-edited, and why.
+
+1. If the source headline passes every title check below, use it unchanged.
+2. If it fails any check, make the smallest edits needed to pass: spell out
+   shorthand (`S'wak` → Sarawak, `bln` → billion, `Govt` → Government, and
+   similar), trim filler, swap or drop a word so it fits one line on desktop,
+   add the missing key fact if the line does not say what is new, and remove
+   opening quotes or opinion framing. Keep the outlet's remaining wording.
+3. Short forms are allowed only when spelling them out would push the title
+   past one line on desktop and no other trim works.
+4. Malay-language headlines: translate to English as closely as possible to
+   the original wording (still starting from that headline, not inventing a
+   new one).
 
 A source headline may be used as-is only when it is all of:
 
 - English;
 - plain facts (no opening quote or opinion line, e.g. `'New era for the
   world': ...`);
-- free of outlet shorthand (`S'wak`, `bln`, `govt`);
+- free of outlet shorthand (`S'wak`, `bln`, `govt`) unless a short form is
+  allowed under point 3 above;
 - free of leaders named by a bare name;
 - fit for one line on desktop; and
 - accurate on who/where/how much (e.g. does not read as a new amount when that
   amount is already on the site) and clear about what is new.
 
-Example: DayakDaily's `'New era for the world': S'wak's US$1 bln chip venture
-eyes 2028 start, work underway at Taiyo Yuden` fails (quote, shorthand, too
-long), so the rewritten title on
-`dayakdaily-softbank-samajaya-chip-foundry-2026-11-18` stays. Do not change
+Example (24 Nov 2026): DayakDaily
+`S'wak looks to power AI revolution with renewable energy, homegrown
+semiconductor tech` fails (shorthand, filler, vague on the chip type), so the
+light edit on `dayakdaily-smd-gan-ai-programme-2026-11-23` is
+`Sarawak looks to power AI with renewable energy and homegrown GaN chips`.
+
+Earlier example: DayakDaily's `'New era for the world': S'wak's US$1 bln chip
+venture eyes 2028 start, work underway at Taiyo Yuden` fails (quote,
+shorthand, too long). The published title on
+`dayakdaily-softbank-samajaya-chip-foundry-2026-11-18` stays; do not change
 already-published cards for this rule alone.
 
 Organiser-requested stories: when an event organiser or company asks Nazirul
@@ -314,9 +333,9 @@ When at least one story qualifies, the Cloud Agent must:
 1. For every new or edited summary: reopen the article, compare the summary
    claim by claim against `summary_evidence`, and stop with `blocked` if any
    claim is unsupported. Do not commit an unsupported summary.
-2. For every new or edited card `title`: confirm the source-headline-as-is path
-   or the rewrite path under Card title, and that the decision log records
-   which path was used and why.
+2. For every new or edited card `title`: confirm the unchanged path or the
+   light-edit path under Card title, and that the decision log records which
+   path was used and why.
 3. Validate JSON, required fields, unique IDs, and unique URLs. Run
    `python3 scripts/validate.py` so every item `source` is in
    `data/allowed-sources.json` (fail rather than invent or near-miss a name).
@@ -376,8 +395,8 @@ The Cloud Agent result must state:
 - candidate count and published item IDs;
 - story date range;
 - English-page verification for each candidate;
-- for each published item, whether the card title used the source headline or
-  a rewrite, and why (also in the decision log);
+- for each published item, whether the card title used the source headline
+  unchanged or a light edit, and why (also in the decision log);
 - validation commands and results;
 - browser used and any fallback reason;
 - commit and remote branch hashes when published;
