@@ -1,5 +1,30 @@
 [
   {
+    "id": "dayakdaily-smd-gan-ai-programme-2026-11-23",
+    "date": "2026-11-23",
+    "source": "DayakDaily",
+    "url": "https://dayakdaily.com/swak-looks-to-power-ai-revolution-with-renewable-energy-homegrown-semiconductor-tech/",
+    "title": "SMD Semiconductor ties Sarawak GaN power chips to AI data centres",
+    "section": "Infrastructure",
+    "tags": [
+      "SMD Semiconductor",
+      "keteq.GaN",
+      "AZAM Sarawak",
+      "US Embassy",
+      "AI for Business",
+      "power semiconductor"
+    ],
+    "summary": "At the US-Sarawak AI for Business Programme 2026 in Kuching, SMD Semiconductor CEO Dato Shariman Jamil said the company is building homegrown power chips such as keteq GaN for AI data centres and renewable energy.",
+    "summary_evidence": [
+      "Speaking at the US–Sarawak AI for Business Programme 2026 hosted at SMD Semiconductor today, chief executive officer (CEO) Dato Shariman Jamil noted that while software and governance determine how AI is used, physical hardware and reliable, energy-efficient power systems form the essential foundation that keeps AI running, said a press release issued by SMD Semiconductor.",
+      "Among its recent milestones is keteq.GaN, Sarawak’s first locally designed Gallium Nitride (GaN) power semiconductor chip, unveiled in October 2026.",
+      "Engineered for high-efficiency power conversion and management, keteq.GaN targets AI data centre infrastructure, renewable energy systems, energy storage, smart grids, and industrial power electronics, connecting Sarawak’s clean energy strengths with the growing power demands of AI computing."
+    ],
+    "why_it_matters": "The AZAM and US Embassy AI for Business programme puts SMD’s keteq.GaN pitch in front of local enterprises, linking Sarawak-made power chips to AI data centre demand.",
+    "confidence": "high",
+    "caveat": "Taken from DayakDaily’s 23 Nov 2026 report of an SMD Semiconductor press release on the US–Sarawak AI for Business Programme. keteq.GaN’s October 2026 unveil was previously screened and is not on the site as its own card."
+  },
+  {
     "id": "dayakdaily-softbank-samajaya-chip-foundry-2026-11-18",
     "date": "2026-11-18",
     "source": "DayakDaily",
