@@ -81,11 +81,17 @@ Run this stage only after Stage A produced a valid non-empty manifest.
 2. Independently reopen and verify every candidate URL.
 3. Apply the English-language gate and the editorial gate in
    `docs/automation.md` before writing summaries or editing files.
-4. Card `title`: try the outlet's own visible headline first. Keep it unchanged
-   when it passes every title check in `docs/automation.md` (Card title). If
-   it fails any check, write a news-style title (who is doing what, where).
-   Record in the decision log which path was used and why. Do not rewrite
-   already-published titles for this rule alone.
+4. Card `title`: always start from the outlet's own visible headline; never
+   write a fresh title from scratch. Keep it unchanged when it passes every
+   title check in `docs/automation.md` (Card title). If it fails any check,
+   make the smallest edits needed to pass (spell out shorthand, trim filler,
+   fit one desktop line, add the missing key fact, drop quote/opinion
+   framing) while keeping the outlet's remaining wording. Short forms only
+   when spelling out would break the one-line desktop fit and no other trim
+   works. Malay headlines: translate to English as closely as possible to the
+   original. Record in the decision log which path was used
+   (unchanged or light edit) and why. Do not rewrite already-published titles
+   for this rule alone.
 5. Write each `summary` as one factual sentence (14–38 words): what happened,
    who did it, and the result, using only facts the source states. Strategic
    context belongs in `why_it_matters`. "Strategic" framing words are no
@@ -112,7 +118,7 @@ Run this stage only after Stage A produced a valid non-empty manifest.
     pass.
 12. Return the exact result contract defined in `docs/automation.md`, including
     Stage A and Stage B outcomes and, for each published item, title path
-    (source headline or rewrite) and why.
+    (unchanged source headline or light edit) and why.
 
 Do not claim success from a local commit alone. Verify the intended remote
 branch hash. On any uncertain result, return `blocked` with the exact reason.
