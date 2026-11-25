@@ -1,5 +1,30 @@
 [
   {
+    "id": "sarawakdaily-ikc-saic-keynote-2026-11-24",
+    "date": "2026-11-24",
+    "source": "Sarawak Daily",
+    "url": "https://sarawakdaily.com/kuching-conference-ai-knowledge-institutions/",
+    "title": "Kuching Conference Examines AI's Role in Knowledge Institutions",
+    "section": "Research",
+    "tags": [
+      "SAIC",
+      "International Knowledge Conference",
+      "Pustaka Negeri Sarawak",
+      "Patrick Then",
+      "GLAM",
+      "sustainable AI"
+    ],
+    "summary": "At the International Knowledge Conference 2026 in Kuching, Sarawak Artificial Intelligence Centre CEO Professor Dr Patrick Then keynoted on the importance of sustainable AI development.",
+    "summary_evidence": [
+      "The second presentation was delivered by Professor Dr Patrick Then, chief executive officer of the Sarawak Artificial Intelligence Centre.",
+      "He highlighted the importance of sustainable AI development in supporting future innovation and digital transformation.",
+      "Hosted by Pustaka Negeri Sarawak, or Sarawak State Library, the conference runs from 23 to 25 November at The Waterfront Hotel in Kuching."
+    ],
+    "why_it_matters": "A Pustaka-hosted regional GLAM conference put SAIC’s sustainable-AI message in front of knowledge professionals from Malaysia, Indonesia, the Philippines and Brunei.",
+    "confidence": "high",
+    "caveat": "Taken from Sarawak Daily’s 24 Nov 2026 report of IKC 2026 keynotes. The piece also covers a UNIMAS Faculty of Computer Science and Information Technology keynote; this card centres on the SAIC CEO remarks."
+  },
+  {
     "id": "dayakdaily-smd-gan-ai-programme-2026-11-23",
     "date": "2026-11-23",
     "source": "DayakDaily",
