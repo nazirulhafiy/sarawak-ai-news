@@ -88,10 +88,11 @@ Run this stage only after Stage A produced a valid non-empty manifest.
    fit one desktop line, add the missing key fact, drop quote/opinion
    framing) while keeping the outlet's remaining wording. Short forms only
    when spelling out would break the one-line desktop fit and no other trim
-   works. Malay headlines: translate to English as closely as possible to the
-   original. Record in the decision log which path was used
-   (unchanged or light edit) and why. Do not rewrite already-published titles
-   for this rule alone.
+   works. Require sentence case: capitalise only the first word, proper
+   nouns, acronyms, and official names — not Title Case. Malay headlines:
+   translate to English as closely as possible to the original. Record in
+   the decision log which path was used (unchanged or light edit) and why.
+   Do not rewrite already-published titles for this rule alone.
 5. Write each `summary` as one factual sentence (14–38 words): what happened,
    who did it, and the result, using only facts the source states. Strategic
    context belongs in `why_it_matters`. "Strategic" framing words are no
