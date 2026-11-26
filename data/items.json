@@ -1,5 +1,30 @@
 [
   {
+    "id": "tvs-bim-ready-sarawak-2026-11-25",
+    "date": "2026-11-25",
+    "source": "TVS",
+    "url": "https://www.tvsarawak.my/2026/11/25/bim-key-driver-of-sarawak-constructions-digital-transformation/",
+    "title": "BIM key driver of Sarawak construction's digital transformation",
+    "section": "Infrastructure",
+    "tags": [
+      "BIM",
+      "JKR Sarawak",
+      "Agentic AI",
+      "Digital Twin",
+      "KUTS",
+      "Pertubuhan BIM Malaysia"
+    ],
+    "summary": "At the BIM Ready Sarawak seminar in Kuching, Public Works director Datu Dr Cassidy Morris said Building Information Modelling is a key driver of digital transformation in Sarawak's construction sector.",
+    "summary_evidence": [
+      "Building Information Modelling (BIM) serves as a crucial catalyst in accelerating digital transformation within Sarawak's construction sector, paving the way for smarter and more efficient project delivery.",
+      "Director of Public Works Sarawak, Datu Dr Cassidy Morris, said the adoption of BIM holds significant potential to elevate project planning, strengthen multidisciplinary coordination and boost overall operational efficiency across the industry.",
+      "He made the remarks while officiating the BIM Ready Sarawak – Transforming Construction for Smarter Project Delivery seminar, organised by Pertubuhan BIM Malaysia (PBM) at a hotel here on Wednesday."
+    ],
+    "why_it_matters": "JKR Sarawak used the PBM seminar to push BIM standards alongside agentic AI in project delivery, Digital Twin handover, and a KUTS implementation case study.",
+    "confidence": "high",
+    "caveat": "Taken from TVS's 25 Nov 2026 report of the BIM Ready Sarawak seminar. Agentic AI and Digital Twin appear as session topics; the piece does not announce a new statewide BIM mandate or funding figure."
+  },
+  {
     "id": "sarawakdaily-ikc-saic-keynote-2026-11-24",
     "date": "2026-11-24",
     "source": "Sarawak Daily",
